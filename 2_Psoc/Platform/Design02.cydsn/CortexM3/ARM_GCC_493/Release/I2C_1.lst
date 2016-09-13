@@ -1,0 +1,1709 @@
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"I2C_1.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.I2C_1_Init,"ax",%progbits
+  19              		.align	1
+  20              		.global	I2C_1_Init
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	I2C_1_Init, %function
+  24              	I2C_1_Init:
+  25              	.LFB0:
+  26              		.file 1 ".\\Generated_Source\\PSoC5\\I2C_1.c"
+   1:.\Generated_Source\PSoC5/I2C_1.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/I2C_1.c **** * File Name: I2C_1.c
+   3:.\Generated_Source\PSoC5/I2C_1.c **** * Version 3.50
+   4:.\Generated_Source\PSoC5/I2C_1.c **** *
+   5:.\Generated_Source\PSoC5/I2C_1.c **** * Description:
+   6:.\Generated_Source\PSoC5/I2C_1.c **** *  This file provides the source code of APIs for the I2C component.
+   7:.\Generated_Source\PSoC5/I2C_1.c **** *  The actual protocol and operation code resides in the interrupt service
+   8:.\Generated_Source\PSoC5/I2C_1.c **** *  routine file.
+   9:.\Generated_Source\PSoC5/I2C_1.c **** *
+  10:.\Generated_Source\PSoC5/I2C_1.c **** *******************************************************************************
+  11:.\Generated_Source\PSoC5/I2C_1.c **** * Copyright 2008-2015, Cypress Semiconductor Corporation. All rights reserved.
+  12:.\Generated_Source\PSoC5/I2C_1.c **** * You may use this file only in accordance with the license, terms, conditions,
+  13:.\Generated_Source\PSoC5/I2C_1.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  14:.\Generated_Source\PSoC5/I2C_1.c **** * the software package with which this file was provided.
+  15:.\Generated_Source\PSoC5/I2C_1.c **** *******************************************************************************/
+  16:.\Generated_Source\PSoC5/I2C_1.c **** 
+  17:.\Generated_Source\PSoC5/I2C_1.c **** #include "I2C_1_PVT.h"
+  18:.\Generated_Source\PSoC5/I2C_1.c **** 
+  19:.\Generated_Source\PSoC5/I2C_1.c **** 
+  20:.\Generated_Source\PSoC5/I2C_1.c **** /**********************************
+  21:.\Generated_Source\PSoC5/I2C_1.c **** *      System variables
+  22:.\Generated_Source\PSoC5/I2C_1.c **** **********************************/
+  23:.\Generated_Source\PSoC5/I2C_1.c **** 
+  24:.\Generated_Source\PSoC5/I2C_1.c **** uint8 I2C_1_initVar = 0u; /* Defines if component was initialized */
+  25:.\Generated_Source\PSoC5/I2C_1.c **** 
+  26:.\Generated_Source\PSoC5/I2C_1.c **** volatile uint8 I2C_1_state;  /* Current state of I2C FSM */
+  27:.\Generated_Source\PSoC5/I2C_1.c **** 
+  28:.\Generated_Source\PSoC5/I2C_1.c **** 
+  29:.\Generated_Source\PSoC5/I2C_1.c **** /*******************************************************************************
+  30:.\Generated_Source\PSoC5/I2C_1.c **** * Function Name: I2C_1_Init
+  31:.\Generated_Source\PSoC5/I2C_1.c **** ********************************************************************************
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 2
+
+
+  32:.\Generated_Source\PSoC5/I2C_1.c **** *
+  33:.\Generated_Source\PSoC5/I2C_1.c **** * Summary:
+  34:.\Generated_Source\PSoC5/I2C_1.c **** *  Initializes I2C registers with initial values provided from customizer.
+  35:.\Generated_Source\PSoC5/I2C_1.c **** *
+  36:.\Generated_Source\PSoC5/I2C_1.c **** * Parameters:
+  37:.\Generated_Source\PSoC5/I2C_1.c **** *  None.
+  38:.\Generated_Source\PSoC5/I2C_1.c **** *
+  39:.\Generated_Source\PSoC5/I2C_1.c **** * Return:
+  40:.\Generated_Source\PSoC5/I2C_1.c **** *  None.
+  41:.\Generated_Source\PSoC5/I2C_1.c **** *
+  42:.\Generated_Source\PSoC5/I2C_1.c **** * Global variables:
+  43:.\Generated_Source\PSoC5/I2C_1.c **** *  None.
+  44:.\Generated_Source\PSoC5/I2C_1.c **** *
+  45:.\Generated_Source\PSoC5/I2C_1.c **** * Reentrant:
+  46:.\Generated_Source\PSoC5/I2C_1.c **** *  No.
+  47:.\Generated_Source\PSoC5/I2C_1.c **** *
+  48:.\Generated_Source\PSoC5/I2C_1.c **** *******************************************************************************/
+  49:.\Generated_Source\PSoC5/I2C_1.c **** void I2C_1_Init(void) 
+  50:.\Generated_Source\PSoC5/I2C_1.c **** {
+  27              		.loc 1 50 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  51:.\Generated_Source\PSoC5/I2C_1.c **** #if (I2C_1_FF_IMPLEMENTED)
+  52:.\Generated_Source\PSoC5/I2C_1.c ****     /* Configure fixed function block */
+  53:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_CFG_REG  = I2C_1_DEFAULT_CFG;
+  31              		.loc 1 53 0
+  32 0000 114B     		ldr	r3, .L2
+  33 0002 0222     		movs	r2, #2
+  50:.\Generated_Source\PSoC5/I2C_1.c **** #if (I2C_1_FF_IMPLEMENTED)
+  34              		.loc 1 50 0
+  35 0004 10B5     		push	{r4, lr}
+  36              		.cfi_def_cfa_offset 8
+  37              		.cfi_offset 4, -8
+  38              		.cfi_offset 14, -4
+  39              		.loc 1 53 0
+  40 0006 1A70     		strb	r2, [r3]
+  54:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_XCFG_REG = I2C_1_DEFAULT_XCFG;
+  41              		.loc 1 54 0
+  42 0008 8122     		movs	r2, #129
+  43 000a 03F80E2C 		strb	r2, [r3, #-14]
+  55:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_ADDR_REG = I2C_1_DEFAULT_ADDR;
+  44              		.loc 1 55 0
+  45 000e 0822     		movs	r2, #8
+  46 0010 03F80C2C 		strb	r2, [r3, #-12]
+  56:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_CLKDIV1_REG = LO8(I2C_1_DEFAULT_DIVIDE_FACTOR);
+  57:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_CLKDIV2_REG = HI8(I2C_1_DEFAULT_DIVIDE_FACTOR);
+  47              		.loc 1 57 0
+  48 0014 0024     		movs	r4, #0
+  56:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_CLKDIV1_REG = LO8(I2C_1_DEFAULT_DIVIDE_FACTOR);
+  49              		.loc 1 56 0
+  50 0016 0D22     		movs	r2, #13
+  51 0018 5A71     		strb	r2, [r3, #5]
+  52              		.loc 1 57 0
+  53 001a 9C71     		strb	r4, [r3, #6]
+  58:.\Generated_Source\PSoC5/I2C_1.c **** 
+  59:.\Generated_Source\PSoC5/I2C_1.c **** #else
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 3
+
+
+  60:.\Generated_Source\PSoC5/I2C_1.c ****     uint8 intState;
+  61:.\Generated_Source\PSoC5/I2C_1.c **** 
+  62:.\Generated_Source\PSoC5/I2C_1.c ****     /* Configure control and interrupt sources */
+  63:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_CFG_REG      = I2C_1_DEFAULT_CFG;
+  64:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_INT_MASK_REG = I2C_1_DEFAULT_INT_MASK;
+  65:.\Generated_Source\PSoC5/I2C_1.c **** 
+  66:.\Generated_Source\PSoC5/I2C_1.c ****     /* Enable interrupt generation in status */
+  67:.\Generated_Source\PSoC5/I2C_1.c ****     intState = CyEnterCriticalSection();
+  68:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_INT_ENABLE_REG |= I2C_1_INTR_ENABLE;
+  69:.\Generated_Source\PSoC5/I2C_1.c ****     CyExitCriticalSection(intState);
+  70:.\Generated_Source\PSoC5/I2C_1.c **** 
+  71:.\Generated_Source\PSoC5/I2C_1.c ****     /* Configure bit counter */
+  72:.\Generated_Source\PSoC5/I2C_1.c ****     #if (I2C_1_MODE_SLAVE_ENABLED)
+  73:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_PERIOD_REG = I2C_1_DEFAULT_PERIOD;
+  74:.\Generated_Source\PSoC5/I2C_1.c ****     #endif  /* (I2C_1_MODE_SLAVE_ENABLED) */
+  75:.\Generated_Source\PSoC5/I2C_1.c **** 
+  76:.\Generated_Source\PSoC5/I2C_1.c ****     /* Configure clock generator */
+  77:.\Generated_Source\PSoC5/I2C_1.c ****     #if (I2C_1_MODE_MASTER_ENABLED)
+  78:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_MCLK_PRD_REG = I2C_1_DEFAULT_MCLK_PRD;
+  79:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_MCLK_CMP_REG = I2C_1_DEFAULT_MCLK_CMP;
+  80:.\Generated_Source\PSoC5/I2C_1.c ****     #endif /* (I2C_1_MODE_MASTER_ENABLED) */
+  81:.\Generated_Source\PSoC5/I2C_1.c **** #endif /* (I2C_1_FF_IMPLEMENTED) */
+  82:.\Generated_Source\PSoC5/I2C_1.c **** 
+  83:.\Generated_Source\PSoC5/I2C_1.c **** #if (I2C_1_TIMEOUT_ENABLED)
+  84:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_TimeoutInit();
+  85:.\Generated_Source\PSoC5/I2C_1.c **** #endif /* (I2C_1_TIMEOUT_ENABLED) */
+  86:.\Generated_Source\PSoC5/I2C_1.c **** 
+  87:.\Generated_Source\PSoC5/I2C_1.c ****     /* Configure internal interrupt */
+  88:.\Generated_Source\PSoC5/I2C_1.c ****     CyIntDisable    (I2C_1_ISR_NUMBER);
+  54              		.loc 1 88 0
+  55 001c 0B4B     		ldr	r3, .L2+4
+  56 001e 4FF40042 		mov	r2, #32768
+  57 0022 1A60     		str	r2, [r3]
+  89:.\Generated_Source\PSoC5/I2C_1.c ****     CyIntSetPriority(I2C_1_ISR_NUMBER, I2C_1_ISR_PRIORITY);
+  58              		.loc 1 89 0
+  59 0024 0F20     		movs	r0, #15
+  60 0026 0721     		movs	r1, #7
+  61 0028 FFF7FEFF 		bl	CyIntSetPriority
+  62              	.LVL0:
+  90:.\Generated_Source\PSoC5/I2C_1.c ****     #if (I2C_1_INTERN_I2C_INTR_HANDLER)
+  91:.\Generated_Source\PSoC5/I2C_1.c ****         (void) CyIntSetVector(I2C_1_ISR_NUMBER, &I2C_1_ISR);
+  63              		.loc 1 91 0
+  64 002c 0F20     		movs	r0, #15
+  65 002e 0849     		ldr	r1, .L2+8
+  66 0030 FFF7FEFF 		bl	CyIntSetVector
+  67              	.LVL1:
+  92:.\Generated_Source\PSoC5/I2C_1.c ****     #endif /* (I2C_1_INTERN_I2C_INTR_HANDLER) */
+  93:.\Generated_Source\PSoC5/I2C_1.c **** 
+  94:.\Generated_Source\PSoC5/I2C_1.c ****     /* Set FSM to default state */
+  95:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_state = I2C_1_SM_IDLE;
+  68              		.loc 1 95 0
+  69 0034 074B     		ldr	r3, .L2+12
+  70 0036 1022     		movs	r2, #16
+  71 0038 1A70     		strb	r2, [r3]
+  96:.\Generated_Source\PSoC5/I2C_1.c **** 
+  97:.\Generated_Source\PSoC5/I2C_1.c **** #if (I2C_1_MODE_SLAVE_ENABLED)
+  98:.\Generated_Source\PSoC5/I2C_1.c ****     /* Clear status and buffers index */
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 4
+
+
+  99:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_slStatus = 0u;
+ 100:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_slRdBufIndex = 0u;
+ 101:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_slWrBufIndex = 0u;
+ 102:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 103:.\Generated_Source\PSoC5/I2C_1.c ****     /* Configure matched address */
+ 104:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_SlaveSetAddress(I2C_1_DEFAULT_ADDR);
+ 105:.\Generated_Source\PSoC5/I2C_1.c **** #endif /* (I2C_1_MODE_SLAVE_ENABLED) */
+ 106:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 107:.\Generated_Source\PSoC5/I2C_1.c **** #if (I2C_1_MODE_MASTER_ENABLED)
+ 108:.\Generated_Source\PSoC5/I2C_1.c ****     /* Clear status and buffers index */
+ 109:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_mstrStatus = 0u;
+  72              		.loc 1 109 0
+  73 003a 074B     		ldr	r3, .L2+16
+  74 003c 1C70     		strb	r4, [r3]
+ 110:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_mstrRdBufIndex = 0u;
+  75              		.loc 1 110 0
+  76 003e 074B     		ldr	r3, .L2+20
+  77 0040 1C70     		strb	r4, [r3]
+ 111:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_mstrWrBufIndex = 0u;
+  78              		.loc 1 111 0
+  79 0042 074B     		ldr	r3, .L2+24
+  80 0044 1C70     		strb	r4, [r3]
+  81 0046 10BD     		pop	{r4, pc}
+  82              	.L3:
+  83              		.align	2
+  84              	.L2:
+  85 0048 D6490040 		.word	1073760726
+  86 004c 80E100E0 		.word	-536813184
+  87 0050 00000000 		.word	I2C_1_ISR
+  88 0054 00000000 		.word	I2C_1_state
+  89 0058 00000000 		.word	I2C_1_mstrStatus
+  90 005c 00000000 		.word	I2C_1_mstrRdBufIndex
+  91 0060 00000000 		.word	I2C_1_mstrWrBufIndex
+  92              		.cfi_endproc
+  93              	.LFE0:
+  94              		.size	I2C_1_Init, .-I2C_1_Init
+  95              		.section	.text.I2C_1_Enable,"ax",%progbits
+  96              		.align	1
+  97              		.global	I2C_1_Enable
+  98              		.thumb
+  99              		.thumb_func
+ 100              		.type	I2C_1_Enable, %function
+ 101              	I2C_1_Enable:
+ 102              	.LFB1:
+ 112:.\Generated_Source\PSoC5/I2C_1.c **** #endif /* (I2C_1_MODE_MASTER_ENABLED) */
+ 113:.\Generated_Source\PSoC5/I2C_1.c **** }
+ 114:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 115:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 116:.\Generated_Source\PSoC5/I2C_1.c **** /*******************************************************************************
+ 117:.\Generated_Source\PSoC5/I2C_1.c **** * Function Name: I2C_1_Enable
+ 118:.\Generated_Source\PSoC5/I2C_1.c **** ********************************************************************************
+ 119:.\Generated_Source\PSoC5/I2C_1.c **** *
+ 120:.\Generated_Source\PSoC5/I2C_1.c **** * Summary:
+ 121:.\Generated_Source\PSoC5/I2C_1.c **** *  Enables I2C operations.
+ 122:.\Generated_Source\PSoC5/I2C_1.c **** *
+ 123:.\Generated_Source\PSoC5/I2C_1.c **** * Parameters:
+ 124:.\Generated_Source\PSoC5/I2C_1.c **** *  None.
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 5
+
+
+ 125:.\Generated_Source\PSoC5/I2C_1.c **** *
+ 126:.\Generated_Source\PSoC5/I2C_1.c **** * Return:
+ 127:.\Generated_Source\PSoC5/I2C_1.c **** *  None.
+ 128:.\Generated_Source\PSoC5/I2C_1.c **** *
+ 129:.\Generated_Source\PSoC5/I2C_1.c **** * Global variables:
+ 130:.\Generated_Source\PSoC5/I2C_1.c **** *  None.
+ 131:.\Generated_Source\PSoC5/I2C_1.c **** *
+ 132:.\Generated_Source\PSoC5/I2C_1.c **** *******************************************************************************/
+ 133:.\Generated_Source\PSoC5/I2C_1.c **** void I2C_1_Enable(void) 
+ 134:.\Generated_Source\PSoC5/I2C_1.c **** {
+ 103              		.loc 1 134 0
+ 104              		.cfi_startproc
+ 105              		@ args = 0, pretend = 0, frame = 0
+ 106              		@ frame_needed = 0, uses_anonymous_args = 0
+ 107 0000 08B5     		push	{r3, lr}
+ 108              		.cfi_def_cfa_offset 8
+ 109              		.cfi_offset 3, -8
+ 110              		.cfi_offset 14, -4
+ 135:.\Generated_Source\PSoC5/I2C_1.c **** #if (I2C_1_FF_IMPLEMENTED)
+ 136:.\Generated_Source\PSoC5/I2C_1.c ****     uint8 intState;
+ 137:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 138:.\Generated_Source\PSoC5/I2C_1.c ****     /* Enable power to block */
+ 139:.\Generated_Source\PSoC5/I2C_1.c ****     intState = CyEnterCriticalSection();
+ 111              		.loc 1 139 0
+ 112 0002 FFF7FEFF 		bl	CyEnterCriticalSection
+ 113              	.LVL2:
+ 140:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_ACT_PWRMGR_REG  |= I2C_1_ACT_PWR_EN;
+ 114              		.loc 1 140 0
+ 115 0006 064A     		ldr	r2, .L5
+ 116 0008 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 117 000a 43F00403 		orr	r3, r3, #4
+ 118 000e 1370     		strb	r3, [r2]
+ 141:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_STBY_PWRMGR_REG |= I2C_1_STBY_PWR_EN;
+ 119              		.loc 1 141 0
+ 120 0010 137C     		ldrb	r3, [r2, #16]	@ zero_extendqisi2
+ 121 0012 43F00403 		orr	r3, r3, #4
+ 122 0016 1374     		strb	r3, [r2, #16]
+ 142:.\Generated_Source\PSoC5/I2C_1.c ****     CyExitCriticalSection(intState);
+ 143:.\Generated_Source\PSoC5/I2C_1.c **** #else
+ 144:.\Generated_Source\PSoC5/I2C_1.c ****     #if (I2C_1_MODE_SLAVE_ENABLED)
+ 145:.\Generated_Source\PSoC5/I2C_1.c ****         /* Enable bit counter */
+ 146:.\Generated_Source\PSoC5/I2C_1.c ****         uint8 intState = CyEnterCriticalSection();
+ 147:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_COUNTER_AUX_CTL_REG |= I2C_1_CNT7_ENABLE;
+ 148:.\Generated_Source\PSoC5/I2C_1.c ****         CyExitCriticalSection(intState);
+ 149:.\Generated_Source\PSoC5/I2C_1.c ****     #endif /* (I2C_1_MODE_SLAVE_ENABLED) */
+ 150:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 151:.\Generated_Source\PSoC5/I2C_1.c ****     /* Enable slave or master bits */
+ 152:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_CFG_REG |= I2C_1_ENABLE_MS;
+ 153:.\Generated_Source\PSoC5/I2C_1.c **** #endif /* (I2C_1_FF_IMPLEMENTED) */
+ 154:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 155:.\Generated_Source\PSoC5/I2C_1.c **** #if (I2C_1_TIMEOUT_ENABLED)
+ 156:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_TimeoutEnable();
+ 157:.\Generated_Source\PSoC5/I2C_1.c **** #endif /* (I2C_1_TIMEOUT_ENABLED) */
+ 158:.\Generated_Source\PSoC5/I2C_1.c **** }
+ 123              		.loc 1 158 0
+ 124 0018 BDE80840 		pop	{r3, lr}
+ 125              		.cfi_restore 14
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 6
+
+
+ 126              		.cfi_restore 3
+ 127              		.cfi_def_cfa_offset 0
+ 142:.\Generated_Source\PSoC5/I2C_1.c ****     CyExitCriticalSection(intState);
+ 128              		.loc 1 142 0
+ 129 001c FFF7FEBF 		b	CyExitCriticalSection
+ 130              	.LVL3:
+ 131              	.L6:
+ 132              		.align	2
+ 133              	.L5:
+ 134 0020 A5430040 		.word	1073759141
+ 135              		.cfi_endproc
+ 136              	.LFE1:
+ 137              		.size	I2C_1_Enable, .-I2C_1_Enable
+ 138              		.section	.text.I2C_1_Start,"ax",%progbits
+ 139              		.align	1
+ 140              		.global	I2C_1_Start
+ 141              		.thumb
+ 142              		.thumb_func
+ 143              		.type	I2C_1_Start, %function
+ 144              	I2C_1_Start:
+ 145              	.LFB2:
+ 159:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 160:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 161:.\Generated_Source\PSoC5/I2C_1.c **** /*******************************************************************************
+ 162:.\Generated_Source\PSoC5/I2C_1.c **** * Function Name: I2C_1_Start
+ 163:.\Generated_Source\PSoC5/I2C_1.c **** ********************************************************************************
+ 164:.\Generated_Source\PSoC5/I2C_1.c **** *
+ 165:.\Generated_Source\PSoC5/I2C_1.c **** * Summary:
+ 166:.\Generated_Source\PSoC5/I2C_1.c **** *  Starts the I2C hardware. Enables Active mode power template bits or clock
+ 167:.\Generated_Source\PSoC5/I2C_1.c **** *  gating as appropriate. It is required to be executed before I2C bus
+ 168:.\Generated_Source\PSoC5/I2C_1.c **** *  operation.
+ 169:.\Generated_Source\PSoC5/I2C_1.c **** *
+ 170:.\Generated_Source\PSoC5/I2C_1.c **** * Parameters:
+ 171:.\Generated_Source\PSoC5/I2C_1.c **** *  None.
+ 172:.\Generated_Source\PSoC5/I2C_1.c **** *
+ 173:.\Generated_Source\PSoC5/I2C_1.c **** * Return:
+ 174:.\Generated_Source\PSoC5/I2C_1.c **** *  None.
+ 175:.\Generated_Source\PSoC5/I2C_1.c **** *
+ 176:.\Generated_Source\PSoC5/I2C_1.c **** * Side Effects:
+ 177:.\Generated_Source\PSoC5/I2C_1.c **** *  This component automatically enables its interrupt.  If I2C is enabled !
+ 178:.\Generated_Source\PSoC5/I2C_1.c **** *  without the interrupt enabled, it can lock up the I2C bus.
+ 179:.\Generated_Source\PSoC5/I2C_1.c **** *
+ 180:.\Generated_Source\PSoC5/I2C_1.c **** * Global variables:
+ 181:.\Generated_Source\PSoC5/I2C_1.c **** *  I2C_1_initVar - This variable is used to check the initial
+ 182:.\Generated_Source\PSoC5/I2C_1.c **** *                             configuration, modified on the first
+ 183:.\Generated_Source\PSoC5/I2C_1.c **** *                             function call.
+ 184:.\Generated_Source\PSoC5/I2C_1.c **** *
+ 185:.\Generated_Source\PSoC5/I2C_1.c **** * Reentrant:
+ 186:.\Generated_Source\PSoC5/I2C_1.c **** *  No.
+ 187:.\Generated_Source\PSoC5/I2C_1.c **** *
+ 188:.\Generated_Source\PSoC5/I2C_1.c **** *******************************************************************************/
+ 189:.\Generated_Source\PSoC5/I2C_1.c **** void I2C_1_Start(void) 
+ 190:.\Generated_Source\PSoC5/I2C_1.c **** {
+ 146              		.loc 1 190 0
+ 147              		.cfi_startproc
+ 148              		@ args = 0, pretend = 0, frame = 0
+ 149              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 7
+
+
+ 150 0000 10B5     		push	{r4, lr}
+ 151              		.cfi_def_cfa_offset 8
+ 152              		.cfi_offset 4, -8
+ 153              		.cfi_offset 14, -4
+ 191:.\Generated_Source\PSoC5/I2C_1.c ****     if (0u == I2C_1_initVar)
+ 154              		.loc 1 191 0
+ 155 0002 074C     		ldr	r4, .L10
+ 156 0004 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 157 0006 1BB9     		cbnz	r3, .L8
+ 192:.\Generated_Source\PSoC5/I2C_1.c ****     {
+ 193:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_Init();
+ 158              		.loc 1 193 0
+ 159 0008 FFF7FEFF 		bl	I2C_1_Init
+ 160              	.LVL4:
+ 194:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_initVar = 1u; /* Component initialized */
+ 161              		.loc 1 194 0
+ 162 000c 0123     		movs	r3, #1
+ 163 000e 2370     		strb	r3, [r4]
+ 164              	.L8:
+ 195:.\Generated_Source\PSoC5/I2C_1.c ****     }
+ 196:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 197:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_Enable();
+ 165              		.loc 1 197 0
+ 166 0010 FFF7FEFF 		bl	I2C_1_Enable
+ 167              	.LVL5:
+ 198:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_EnableInt();
+ 168              		.loc 1 198 0
+ 169 0014 034B     		ldr	r3, .L10+4
+ 170 0016 4FF40042 		mov	r2, #32768
+ 171 001a 1A60     		str	r2, [r3]
+ 172 001c 10BD     		pop	{r4, pc}
+ 173              	.L11:
+ 174 001e 00BF     		.align	2
+ 175              	.L10:
+ 176 0020 00000000 		.word	.LANCHOR0
+ 177 0024 00E100E0 		.word	-536813312
+ 178              		.cfi_endproc
+ 179              	.LFE2:
+ 180              		.size	I2C_1_Start, .-I2C_1_Start
+ 181              		.section	.text.I2C_1_Stop,"ax",%progbits
+ 182              		.align	1
+ 183              		.global	I2C_1_Stop
+ 184              		.thumb
+ 185              		.thumb_func
+ 186              		.type	I2C_1_Stop, %function
+ 187              	I2C_1_Stop:
+ 188              	.LFB3:
+ 199:.\Generated_Source\PSoC5/I2C_1.c **** }
+ 200:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 201:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 202:.\Generated_Source\PSoC5/I2C_1.c **** /*******************************************************************************
+ 203:.\Generated_Source\PSoC5/I2C_1.c **** * Function Name: I2C_1_Stop
+ 204:.\Generated_Source\PSoC5/I2C_1.c **** ********************************************************************************
+ 205:.\Generated_Source\PSoC5/I2C_1.c **** *
+ 206:.\Generated_Source\PSoC5/I2C_1.c **** * Summary:
+ 207:.\Generated_Source\PSoC5/I2C_1.c **** *  Disables I2C hardware and disables I2C interrupt. Disables Active mode power
+ 208:.\Generated_Source\PSoC5/I2C_1.c **** *  template bits or clock gating as appropriate.
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 8
+
+
+ 209:.\Generated_Source\PSoC5/I2C_1.c **** *
+ 210:.\Generated_Source\PSoC5/I2C_1.c **** * Parameters:
+ 211:.\Generated_Source\PSoC5/I2C_1.c **** *  None.
+ 212:.\Generated_Source\PSoC5/I2C_1.c **** *
+ 213:.\Generated_Source\PSoC5/I2C_1.c **** * Return:
+ 214:.\Generated_Source\PSoC5/I2C_1.c **** *  None.
+ 215:.\Generated_Source\PSoC5/I2C_1.c **** *
+ 216:.\Generated_Source\PSoC5/I2C_1.c **** *******************************************************************************/
+ 217:.\Generated_Source\PSoC5/I2C_1.c **** void I2C_1_Stop(void) 
+ 218:.\Generated_Source\PSoC5/I2C_1.c **** {
+ 189              		.loc 1 218 0
+ 190              		.cfi_startproc
+ 191              		@ args = 0, pretend = 0, frame = 0
+ 192              		@ frame_needed = 0, uses_anonymous_args = 0
+ 193 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 194              		.cfi_def_cfa_offset 32
+ 195              		.cfi_offset 3, -32
+ 196              		.cfi_offset 4, -28
+ 197              		.cfi_offset 5, -24
+ 198              		.cfi_offset 6, -20
+ 199              		.cfi_offset 7, -16
+ 200              		.cfi_offset 8, -12
+ 201              		.cfi_offset 9, -8
+ 202              		.cfi_offset 14, -4
+ 219:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_DisableInt();
+ 203              		.loc 1 219 0
+ 204 0004 224B     		ldr	r3, .L13
+ 205              	.LBB2:
+ 220:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 221:.\Generated_Source\PSoC5/I2C_1.c **** #if (I2C_1_TIMEOUT_ENABLED)
+ 222:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_TimeoutStop();
+ 223:.\Generated_Source\PSoC5/I2C_1.c **** #endif  /* End (I2C_1_TIMEOUT_ENABLED) */
+ 224:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 225:.\Generated_Source\PSoC5/I2C_1.c **** #if (I2C_1_FF_IMPLEMENTED)
+ 226:.\Generated_Source\PSoC5/I2C_1.c ****     {
+ 227:.\Generated_Source\PSoC5/I2C_1.c ****         uint8 intState;
+ 228:.\Generated_Source\PSoC5/I2C_1.c ****         uint16 blockResetCycles;
+ 229:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 230:.\Generated_Source\PSoC5/I2C_1.c ****         /* Store registers effected by block disable */
+ 231:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_backup.addr    = I2C_1_ADDR_REG;
+ 206              		.loc 1 231 0
+ 207 0006 DFF8A880 		ldr	r8, .L13+32
+ 208              	.LBE2:
+ 219:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_DisableInt();
+ 209              		.loc 1 219 0
+ 210 000a 4FF40049 		mov	r9, #32768
+ 211 000e C3F80090 		str	r9, [r3]
+ 212              	.LBB3:
+ 213              		.loc 1 231 0
+ 214 0012 98F80030 		ldrb	r3, [r8]	@ zero_extendqisi2
+ 215 0016 1F4C     		ldr	r4, .L13+4
+ 232:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_backup.clkDiv1 = I2C_1_CLKDIV1_REG;
+ 216              		.loc 1 232 0
+ 217 0018 1F4F     		ldr	r7, .L13+8
+ 231:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_backup.clkDiv1 = I2C_1_CLKDIV1_REG;
+ 218              		.loc 1 231 0
+ 219 001a E370     		strb	r3, [r4, #3]
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 9
+
+
+ 220              		.loc 1 232 0
+ 221 001c 3B78     		ldrb	r3, [r7]	@ zero_extendqisi2
+ 233:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_backup.clkDiv2 = I2C_1_CLKDIV2_REG;
+ 222              		.loc 1 233 0
+ 223 001e 1F4E     		ldr	r6, .L13+12
+ 232:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_backup.clkDiv1 = I2C_1_CLKDIV1_REG;
+ 224              		.loc 1 232 0
+ 225 0020 2371     		strb	r3, [r4, #4]
+ 226              		.loc 1 233 0
+ 227 0022 3378     		ldrb	r3, [r6]	@ zero_extendqisi2
+ 234:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 235:.\Generated_Source\PSoC5/I2C_1.c ****         /* Calculate number of cycles to reset block */
+ 236:.\Generated_Source\PSoC5/I2C_1.c ****         blockResetCycles = ((uint16) ((uint16) I2C_1_CLKDIV2_REG << 8u) | I2C_1_CLKDIV1_REG) + 1u;
+ 237:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 238:.\Generated_Source\PSoC5/I2C_1.c ****         /* Disable block */
+ 239:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_CFG_REG &= (uint8) ~I2C_1_CFG_EN_SLAVE;
+ 228              		.loc 1 239 0
+ 229 0024 1E4D     		ldr	r5, .L13+16
+ 233:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_backup.clkDiv2 = I2C_1_CLKDIV2_REG;
+ 230              		.loc 1 233 0
+ 231 0026 6371     		strb	r3, [r4, #5]
+ 236:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 232              		.loc 1 236 0
+ 233 0028 3078     		ldrb	r0, [r6]	@ zero_extendqisi2
+ 234 002a 3B78     		ldrb	r3, [r7]	@ zero_extendqisi2
+ 235              	.LVL6:
+ 236              		.loc 1 239 0
+ 237 002c 2A78     		ldrb	r2, [r5]	@ zero_extendqisi2
+ 236:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 238              		.loc 1 236 0
+ 239 002e 43EA0020 		orr	r0, r3, r0, lsl #8
+ 240              	.LVL7:
+ 241              		.loc 1 239 0
+ 242 0032 02F0FE02 		and	r2, r2, #254
+ 236:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 243              		.loc 1 236 0
+ 244 0036 0130     		adds	r0, r0, #1
+ 245              		.loc 1 239 0
+ 246 0038 2A70     		strb	r2, [r5]
+ 240:.\Generated_Source\PSoC5/I2C_1.c ****         /* Wait for block reset before disable power */
+ 241:.\Generated_Source\PSoC5/I2C_1.c ****         CyDelayCycles((uint32) blockResetCycles);
+ 247              		.loc 1 241 0
+ 248 003a 80B2     		uxth	r0, r0
+ 249 003c FFF7FEFF 		bl	CyDelayCycles
+ 250              	.LVL8:
+ 242:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 243:.\Generated_Source\PSoC5/I2C_1.c ****         /* Disable power to block */
+ 244:.\Generated_Source\PSoC5/I2C_1.c ****         intState = CyEnterCriticalSection();
+ 251              		.loc 1 244 0
+ 252 0040 FFF7FEFF 		bl	CyEnterCriticalSection
+ 253              	.LVL9:
+ 245:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_ACT_PWRMGR_REG  &= (uint8) ~I2C_1_ACT_PWR_EN;
+ 254              		.loc 1 245 0
+ 255 0044 174A     		ldr	r2, .L13+20
+ 256 0046 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 257 0048 03F0FB03 		and	r3, r3, #251
+ 258 004c 1370     		strb	r3, [r2]
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 10
+
+
+ 246:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_STBY_PWRMGR_REG &= (uint8) ~I2C_1_STBY_PWR_EN;
+ 259              		.loc 1 246 0
+ 260 004e 137C     		ldrb	r3, [r2, #16]	@ zero_extendqisi2
+ 261 0050 03F0FB03 		and	r3, r3, #251
+ 262 0054 1374     		strb	r3, [r2, #16]
+ 247:.\Generated_Source\PSoC5/I2C_1.c ****         CyExitCriticalSection(intState);
+ 263              		.loc 1 247 0
+ 264 0056 FFF7FEFF 		bl	CyExitCriticalSection
+ 265              	.LVL10:
+ 248:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 249:.\Generated_Source\PSoC5/I2C_1.c ****         /* Enable block */
+ 250:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_CFG_REG |= (uint8) I2C_1_ENABLE_MS;
+ 266              		.loc 1 250 0
+ 267 005a 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 268              	.LBE3:
+ 251:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 252:.\Generated_Source\PSoC5/I2C_1.c ****         /* Restore registers effected by block disable. Ticket ID#198004 */
+ 253:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_ADDR_REG    = I2C_1_backup.addr;
+ 254:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_ADDR_REG    = I2C_1_backup.addr;
+ 255:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_CLKDIV1_REG = I2C_1_backup.clkDiv1;
+ 256:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_CLKDIV2_REG = I2C_1_backup.clkDiv2;
+ 257:.\Generated_Source\PSoC5/I2C_1.c ****     }
+ 258:.\Generated_Source\PSoC5/I2C_1.c **** #else
+ 259:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 260:.\Generated_Source\PSoC5/I2C_1.c ****     /* Disable slave or master bits */
+ 261:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_CFG_REG &= (uint8) ~I2C_1_ENABLE_MS;
+ 262:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 263:.\Generated_Source\PSoC5/I2C_1.c **** #if (I2C_1_MODE_SLAVE_ENABLED)
+ 264:.\Generated_Source\PSoC5/I2C_1.c ****     {
+ 265:.\Generated_Source\PSoC5/I2C_1.c ****         /* Disable bit counter */
+ 266:.\Generated_Source\PSoC5/I2C_1.c ****         uint8 intState = CyEnterCriticalSection();
+ 267:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_COUNTER_AUX_CTL_REG &= (uint8) ~I2C_1_CNT7_ENABLE;
+ 268:.\Generated_Source\PSoC5/I2C_1.c ****         CyExitCriticalSection(intState);
+ 269:.\Generated_Source\PSoC5/I2C_1.c ****     }
+ 270:.\Generated_Source\PSoC5/I2C_1.c **** #endif /* (I2C_1_MODE_SLAVE_ENABLED) */
+ 271:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 272:.\Generated_Source\PSoC5/I2C_1.c ****     /* Clear interrupt source register */
+ 273:.\Generated_Source\PSoC5/I2C_1.c ****     (void) I2C_1_CSR_REG;
+ 274:.\Generated_Source\PSoC5/I2C_1.c **** #endif /* (I2C_1_FF_IMPLEMENTED) */
+ 275:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 276:.\Generated_Source\PSoC5/I2C_1.c ****     /* Disable interrupt on stop (enabled by write transaction) */
+ 277:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_DISABLE_INT_ON_STOP;
+ 278:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_ClearPendingInt();
+ 279:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 280:.\Generated_Source\PSoC5/I2C_1.c ****     /* Reset FSM to default state */
+ 281:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_state = I2C_1_SM_IDLE;
+ 269              		.loc 1 281 0
+ 270 005c 1022     		movs	r2, #16
+ 271              	.LBB4:
+ 250:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 272              		.loc 1 250 0
+ 273 005e 43F00203 		orr	r3, r3, #2
+ 274 0062 2B70     		strb	r3, [r5]
+ 253:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_ADDR_REG    = I2C_1_backup.addr;
+ 275              		.loc 1 253 0
+ 276 0064 E378     		ldrb	r3, [r4, #3]	@ zero_extendqisi2
+ 277 0066 88F80030 		strb	r3, [r8]
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 11
+
+
+ 254:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_CLKDIV1_REG = I2C_1_backup.clkDiv1;
+ 278              		.loc 1 254 0
+ 279 006a E378     		ldrb	r3, [r4, #3]	@ zero_extendqisi2
+ 280 006c 88F80030 		strb	r3, [r8]
+ 255:.\Generated_Source\PSoC5/I2C_1.c ****         I2C_1_CLKDIV2_REG = I2C_1_backup.clkDiv2;
+ 281              		.loc 1 255 0
+ 282 0070 2379     		ldrb	r3, [r4, #4]	@ zero_extendqisi2
+ 283 0072 3B70     		strb	r3, [r7]
+ 256:.\Generated_Source\PSoC5/I2C_1.c ****     }
+ 284              		.loc 1 256 0
+ 285 0074 6379     		ldrb	r3, [r4, #5]	@ zero_extendqisi2
+ 286 0076 3370     		strb	r3, [r6]
+ 287              	.LBE4:
+ 277:.\Generated_Source\PSoC5/I2C_1.c ****     I2C_1_ClearPendingInt();
+ 288              		.loc 1 277 0
+ 289 0078 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 290 007a 03F0EF03 		and	r3, r3, #239
+ 291 007e 2B70     		strb	r3, [r5]
+ 278:.\Generated_Source\PSoC5/I2C_1.c **** 
+ 292              		.loc 1 278 0
+ 293 0080 094B     		ldr	r3, .L13+24
+ 294 0082 C3F80090 		str	r9, [r3]
+ 295              		.loc 1 281 0
+ 296 0086 094B     		ldr	r3, .L13+28
+ 297 0088 1A70     		strb	r2, [r3]
+ 298 008a BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 299              	.L14:
+ 300 008e 00BF     		.align	2
+ 301              	.L13:
+ 302 0090 80E100E0 		.word	-536813184
+ 303 0094 00000000 		.word	I2C_1_backup
+ 304 0098 DB490040 		.word	1073760731
+ 305 009c DC490040 		.word	1073760732
+ 306 00a0 D6490040 		.word	1073760726
+ 307 00a4 A5430040 		.word	1073759141
+ 308 00a8 80E200E0 		.word	-536812928
+ 309 00ac 00000000 		.word	I2C_1_state
+ 310 00b0 CA490040 		.word	1073760714
+ 311              		.cfi_endproc
+ 312              	.LFE3:
+ 313              		.size	I2C_1_Stop, .-I2C_1_Stop
+ 314              		.comm	I2C_1_state,1,1
+ 315              		.global	I2C_1_initVar
+ 316              		.bss
+ 317              		.set	.LANCHOR0,. + 0
+ 318              		.type	I2C_1_initVar, %object
+ 319              		.size	I2C_1_initVar, 1
+ 320              	I2C_1_initVar:
+ 321 0000 00       		.space	1
+ 322              		.text
+ 323              	.Letext0:
+ 324              		.file 2 ".\\Generated_Source\\PSoC5\\cytypes.h"
+ 325              		.file 3 ".\\Generated_Source\\PSoC5\\I2C_1.h"
+ 326              		.file 4 ".\\Generated_Source\\PSoC5\\I2C_1_PVT.h"
+ 327              		.file 5 ".\\Generated_Source\\PSoC5\\CyLib.h"
+ 328              		.section	.debug_info,"",%progbits
+ 329              	.Ldebug_info0:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 12
+
+
+ 330 0000 CE020000 		.4byte	0x2ce
+ 331 0004 0400     		.2byte	0x4
+ 332 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 333 000a 04       		.byte	0x4
+ 334 000b 01       		.uleb128 0x1
+ 335 000c 1C010000 		.4byte	.LASF39
+ 336 0010 01       		.byte	0x1
+ 337 0011 A7020000 		.4byte	.LASF40
+ 338 0015 00000000 		.4byte	.LASF41
+ 339 0019 20000000 		.4byte	.Ldebug_ranges0+0x20
+ 340 001d 00000000 		.4byte	0
+ 341 0021 00000000 		.4byte	.Ldebug_line0
+ 342 0025 02       		.uleb128 0x2
+ 343 0026 01       		.byte	0x1
+ 344 0027 06       		.byte	0x6
+ 345 0028 25030000 		.4byte	.LASF0
+ 346 002c 02       		.uleb128 0x2
+ 347 002d 01       		.byte	0x1
+ 348 002e 08       		.byte	0x8
+ 349 002f AA010000 		.4byte	.LASF1
+ 350 0033 02       		.uleb128 0x2
+ 351 0034 02       		.byte	0x2
+ 352 0035 05       		.byte	0x5
+ 353 0036 EB020000 		.4byte	.LASF2
+ 354 003a 02       		.uleb128 0x2
+ 355 003b 02       		.byte	0x2
+ 356 003c 07       		.byte	0x7
+ 357 003d D0000000 		.4byte	.LASF3
+ 358 0041 02       		.uleb128 0x2
+ 359 0042 04       		.byte	0x4
+ 360 0043 05       		.byte	0x5
+ 361 0044 10030000 		.4byte	.LASF4
+ 362 0048 02       		.uleb128 0x2
+ 363 0049 04       		.byte	0x4
+ 364 004a 07       		.byte	0x7
+ 365 004b BD010000 		.4byte	.LASF5
+ 366 004f 02       		.uleb128 0x2
+ 367 0050 08       		.byte	0x8
+ 368 0051 05       		.byte	0x5
+ 369 0052 99020000 		.4byte	.LASF6
+ 370 0056 02       		.uleb128 0x2
+ 371 0057 08       		.byte	0x8
+ 372 0058 07       		.byte	0x7
+ 373 0059 05010000 		.4byte	.LASF7
+ 374 005d 03       		.uleb128 0x3
+ 375 005e 04       		.byte	0x4
+ 376 005f 05       		.byte	0x5
+ 377 0060 696E7400 		.ascii	"int\000"
+ 378 0064 02       		.uleb128 0x2
+ 379 0065 04       		.byte	0x4
+ 380 0066 07       		.byte	0x7
+ 381 0067 28020000 		.4byte	.LASF8
+ 382 006b 04       		.uleb128 0x4
+ 383 006c F5020000 		.4byte	.LASF9
+ 384 0070 02       		.byte	0x2
+ 385 0071 A1       		.byte	0xa1
+ 386 0072 2C000000 		.4byte	0x2c
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 13
+
+
+ 387 0076 04       		.uleb128 0x4
+ 388 0077 05020000 		.4byte	.LASF10
+ 389 007b 02       		.byte	0x2
+ 390 007c A2       		.byte	0xa2
+ 391 007d 3A000000 		.4byte	0x3a
+ 392 0081 04       		.uleb128 0x4
+ 393 0082 0C020000 		.4byte	.LASF11
+ 394 0086 02       		.byte	0x2
+ 395 0087 A3       		.byte	0xa3
+ 396 0088 48000000 		.4byte	0x48
+ 397 008c 02       		.uleb128 0x2
+ 398 008d 04       		.byte	0x4
+ 399 008e 04       		.byte	0x4
+ 400 008f FF000000 		.4byte	.LASF12
+ 401 0093 02       		.uleb128 0x2
+ 402 0094 08       		.byte	0x8
+ 403 0095 04       		.byte	0x4
+ 404 0096 F3010000 		.4byte	.LASF13
+ 405 009a 02       		.uleb128 0x2
+ 406 009b 01       		.byte	0x1
+ 407 009c 08       		.byte	0x8
+ 408 009d C8020000 		.4byte	.LASF14
+ 409 00a1 05       		.uleb128 0x5
+ 410 00a2 B8010000 		.4byte	.LASF15
+ 411 00a6 02       		.byte	0x2
+ 412 00a7 4B01     		.2byte	0x14b
+ 413 00a9 AD000000 		.4byte	0xad
+ 414 00ad 06       		.uleb128 0x6
+ 415 00ae 6B000000 		.4byte	0x6b
+ 416 00b2 05       		.uleb128 0x5
+ 417 00b3 85000000 		.4byte	.LASF16
+ 418 00b7 02       		.byte	0x2
+ 419 00b8 4D01     		.2byte	0x14d
+ 420 00ba BE000000 		.4byte	0xbe
+ 421 00be 06       		.uleb128 0x6
+ 422 00bf 81000000 		.4byte	0x81
+ 423 00c3 05       		.uleb128 0x5
+ 424 00c4 83020000 		.4byte	.LASF17
+ 425 00c8 02       		.byte	0x2
+ 426 00c9 5D01     		.2byte	0x15d
+ 427 00cb CF000000 		.4byte	0xcf
+ 428 00cf 07       		.uleb128 0x7
+ 429 00d0 04       		.byte	0x4
+ 430 00d1 D5000000 		.4byte	0xd5
+ 431 00d5 08       		.uleb128 0x8
+ 432 00d6 02       		.uleb128 0x2
+ 433 00d7 04       		.byte	0x4
+ 434 00d8 07       		.byte	0x7
+ 435 00d9 90020000 		.4byte	.LASF18
+ 436 00dd 09       		.uleb128 0x9
+ 437 00de 06       		.byte	0x6
+ 438 00df 03       		.byte	0x3
+ 439 00e0 76       		.byte	0x76
+ 440 00e1 2E010000 		.4byte	0x12e
+ 441 00e5 0A       		.uleb128 0xa
+ 442 00e6 19030000 		.4byte	.LASF19
+ 443 00ea 03       		.byte	0x3
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 14
+
+
+ 444 00eb 78       		.byte	0x78
+ 445 00ec 6B000000 		.4byte	0x6b
+ 446 00f0 00       		.byte	0
+ 447 00f1 0A       		.uleb128 0xa
+ 448 00f2 DA020000 		.4byte	.LASF20
+ 449 00f6 03       		.byte	0x3
+ 450 00f7 7B       		.byte	0x7b
+ 451 00f8 6B000000 		.4byte	0x6b
+ 452 00fc 01       		.byte	0x1
+ 453 00fd 0B       		.uleb128 0xb
+ 454 00fe 63666700 		.ascii	"cfg\000"
+ 455 0102 03       		.byte	0x3
+ 456 0103 7C       		.byte	0x7c
+ 457 0104 6B000000 		.4byte	0x6b
+ 458 0108 02       		.byte	0x2
+ 459 0109 0A       		.uleb128 0xa
+ 460 010a CF010000 		.4byte	.LASF21
+ 461 010e 03       		.byte	0x3
+ 462 010f 7D       		.byte	0x7d
+ 463 0110 6B000000 		.4byte	0x6b
+ 464 0114 03       		.byte	0x3
+ 465 0115 0A       		.uleb128 0xa
+ 466 0116 5C020000 		.4byte	.LASF22
+ 467 011a 03       		.byte	0x3
+ 468 011b 7E       		.byte	0x7e
+ 469 011c 6B000000 		.4byte	0x6b
+ 470 0120 04       		.byte	0x4
+ 471 0121 0A       		.uleb128 0xa
+ 472 0122 64020000 		.4byte	.LASF23
+ 473 0126 03       		.byte	0x3
+ 474 0127 7F       		.byte	0x7f
+ 475 0128 6B000000 		.4byte	0x6b
+ 476 012c 05       		.byte	0x5
+ 477 012d 00       		.byte	0
+ 478 012e 04       		.uleb128 0x4
+ 479 012f 8B000000 		.4byte	.LASF24
+ 480 0133 03       		.byte	0x3
+ 481 0134 89       		.byte	0x89
+ 482 0135 DD000000 		.4byte	0xdd
+ 483 0139 0C       		.uleb128 0xc
+ 484 013a E3000000 		.4byte	.LASF25
+ 485 013e 01       		.byte	0x1
+ 486 013f 31       		.byte	0x31
+ 487 0140 00000000 		.4byte	.LFB0
+ 488 0144 64000000 		.4byte	.LFE0-.LFB0
+ 489 0148 01       		.uleb128 0x1
+ 490 0149 9C       		.byte	0x9c
+ 491 014a 76010000 		.4byte	0x176
+ 492 014e 0D       		.uleb128 0xd
+ 493 014f 2C000000 		.4byte	.LVL0
+ 494 0153 78020000 		.4byte	0x278
+ 495 0157 66010000 		.4byte	0x166
+ 496 015b 0E       		.uleb128 0xe
+ 497 015c 01       		.uleb128 0x1
+ 498 015d 51       		.byte	0x51
+ 499 015e 01       		.uleb128 0x1
+ 500 015f 37       		.byte	0x37
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 15
+
+
+ 501 0160 0E       		.uleb128 0xe
+ 502 0161 01       		.uleb128 0x1
+ 503 0162 50       		.byte	0x50
+ 504 0163 01       		.uleb128 0x1
+ 505 0164 3F       		.byte	0x3f
+ 506 0165 00       		.byte	0
+ 507 0166 0F       		.uleb128 0xf
+ 508 0167 34000000 		.4byte	.LVL1
+ 509 016b 8E020000 		.4byte	0x28e
+ 510 016f 0E       		.uleb128 0xe
+ 511 0170 01       		.uleb128 0x1
+ 512 0171 50       		.byte	0x50
+ 513 0172 01       		.uleb128 0x1
+ 514 0173 3F       		.byte	0x3f
+ 515 0174 00       		.byte	0
+ 516 0175 00       		.byte	0
+ 517 0176 0C       		.uleb128 0xc
+ 518 0177 CD020000 		.4byte	.LASF26
+ 519 017b 01       		.byte	0x1
+ 520 017c 85       		.byte	0x85
+ 521 017d 00000000 		.4byte	.LFB1
+ 522 0181 24000000 		.4byte	.LFE1-.LFB1
+ 523 0185 01       		.uleb128 0x1
+ 524 0186 9C       		.byte	0x9c
+ 525 0187 AD010000 		.4byte	0x1ad
+ 526 018b 10       		.uleb128 0x10
+ 527 018c 1F020000 		.4byte	.LASF29
+ 528 0190 01       		.byte	0x1
+ 529 0191 88       		.byte	0x88
+ 530 0192 6B000000 		.4byte	0x6b
+ 531 0196 00000000 		.4byte	.LLST0
+ 532 019a 11       		.uleb128 0x11
+ 533 019b 06000000 		.4byte	.LVL2
+ 534 019f A8020000 		.4byte	0x2a8
+ 535 01a3 12       		.uleb128 0x12
+ 536 01a4 20000000 		.4byte	.LVL3
+ 537 01a8 B3020000 		.4byte	0x2b3
+ 538 01ac 00       		.byte	0
+ 539 01ad 0C       		.uleb128 0xc
+ 540 01ae DF020000 		.4byte	.LASF27
+ 541 01b2 01       		.byte	0x1
+ 542 01b3 BD       		.byte	0xbd
+ 543 01b4 00000000 		.4byte	.LFB2
+ 544 01b8 28000000 		.4byte	.LFE2-.LFB2
+ 545 01bc 01       		.uleb128 0x1
+ 546 01bd 9C       		.byte	0x9c
+ 547 01be D5010000 		.4byte	0x1d5
+ 548 01c2 11       		.uleb128 0x11
+ 549 01c3 0C000000 		.4byte	.LVL4
+ 550 01c7 39010000 		.4byte	0x139
+ 551 01cb 11       		.uleb128 0x11
+ 552 01cc 14000000 		.4byte	.LVL5
+ 553 01d0 76010000 		.4byte	0x176
+ 554 01d4 00       		.byte	0
+ 555 01d5 0C       		.uleb128 0xc
+ 556 01d6 FA010000 		.4byte	.LASF28
+ 557 01da 01       		.byte	0x1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 16
+
+
+ 558 01db D9       		.byte	0xd9
+ 559 01dc 00000000 		.4byte	.LFB3
+ 560 01e0 B4000000 		.4byte	.LFE3-.LFB3
+ 561 01e4 01       		.uleb128 0x1
+ 562 01e5 9C       		.byte	0x9c
+ 563 01e6 2A020000 		.4byte	0x22a
+ 564 01ea 13       		.uleb128 0x13
+ 565 01eb 00000000 		.4byte	.Ldebug_ranges0+0
+ 566 01ef 10       		.uleb128 0x10
+ 567 01f0 1F020000 		.4byte	.LASF29
+ 568 01f4 01       		.byte	0x1
+ 569 01f5 E3       		.byte	0xe3
+ 570 01f6 6B000000 		.4byte	0x6b
+ 571 01fa 13000000 		.4byte	.LLST1
+ 572 01fe 10       		.uleb128 0x10
+ 573 01ff EE000000 		.4byte	.LASF30
+ 574 0203 01       		.byte	0x1
+ 575 0204 E4       		.byte	0xe4
+ 576 0205 76000000 		.4byte	0x76
+ 577 0209 26000000 		.4byte	.LLST2
+ 578 020d 11       		.uleb128 0x11
+ 579 020e 40000000 		.4byte	.LVL8
+ 580 0212 C4020000 		.4byte	0x2c4
+ 581 0216 11       		.uleb128 0x11
+ 582 0217 44000000 		.4byte	.LVL9
+ 583 021b A8020000 		.4byte	0x2a8
+ 584 021f 11       		.uleb128 0x11
+ 585 0220 5A000000 		.4byte	.LVL10
+ 586 0224 B3020000 		.4byte	0x2b3
+ 587 0228 00       		.byte	0
+ 588 0229 00       		.byte	0
+ 589 022a 14       		.uleb128 0x14
+ 590 022b E5010000 		.4byte	.LASF31
+ 591 022f 01       		.byte	0x1
+ 592 0230 18       		.byte	0x18
+ 593 0231 6B000000 		.4byte	0x6b
+ 594 0235 05       		.uleb128 0x5
+ 595 0236 03       		.byte	0x3
+ 596 0237 00000000 		.4byte	I2C_1_initVar
+ 597 023b 15       		.uleb128 0x15
+ 598 023c C3000000 		.4byte	.LASF32
+ 599 0240 04       		.byte	0x4
+ 600 0241 21       		.byte	0x21
+ 601 0242 2E010000 		.4byte	0x12e
+ 602 0246 14       		.uleb128 0x14
+ 603 0247 13020000 		.4byte	.LASF33
+ 604 024b 01       		.byte	0x1
+ 605 024c 1A       		.byte	0x1a
+ 606 024d AD000000 		.4byte	0xad
+ 607 0251 05       		.uleb128 0x5
+ 608 0252 03       		.byte	0x3
+ 609 0253 00000000 		.4byte	I2C_1_state
+ 610 0257 15       		.uleb128 0x15
+ 611 0258 D4010000 		.4byte	.LASF34
+ 612 025c 04       		.byte	0x4
+ 613 025d 27       		.byte	0x27
+ 614 025e AD000000 		.4byte	0xad
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 17
+
+
+ 615 0262 15       		.uleb128 0x15
+ 616 0263 9F000000 		.4byte	.LASF35
+ 617 0267 04       		.byte	0x4
+ 618 0268 2D       		.byte	0x2d
+ 619 0269 AD000000 		.4byte	0xad
+ 620 026d 15       		.uleb128 0x15
+ 621 026e FB020000 		.4byte	.LASF36
+ 622 0272 04       		.byte	0x4
+ 623 0273 32       		.byte	0x32
+ 624 0274 AD000000 		.4byte	0xad
+ 625 0278 16       		.uleb128 0x16
+ 626 0279 4B020000 		.4byte	.LASF37
+ 627 027d 05       		.byte	0x5
+ 628 027e 8C       		.byte	0x8c
+ 629 027f 8E020000 		.4byte	0x28e
+ 630 0283 17       		.uleb128 0x17
+ 631 0284 6B000000 		.4byte	0x6b
+ 632 0288 17       		.uleb128 0x17
+ 633 0289 6B000000 		.4byte	0x6b
+ 634 028d 00       		.byte	0
+ 635 028e 18       		.uleb128 0x18
+ 636 028f B4000000 		.4byte	.LASF42
+ 637 0293 05       		.byte	0x5
+ 638 0294 89       		.byte	0x89
+ 639 0295 C3000000 		.4byte	0xc3
+ 640 0299 A8020000 		.4byte	0x2a8
+ 641 029d 17       		.uleb128 0x17
+ 642 029e 6B000000 		.4byte	0x6b
+ 643 02a2 17       		.uleb128 0x17
+ 644 02a3 C3000000 		.4byte	0xc3
+ 645 02a7 00       		.byte	0
+ 646 02a8 19       		.uleb128 0x19
+ 647 02a9 6C020000 		.4byte	.LASF43
+ 648 02ad 05       		.byte	0x5
+ 649 02ae 7E       		.byte	0x7e
+ 650 02af 6B000000 		.4byte	0x6b
+ 651 02b3 16       		.uleb128 0x16
+ 652 02b4 35020000 		.4byte	.LASF38
+ 653 02b8 05       		.byte	0x5
+ 654 02b9 7F       		.byte	0x7f
+ 655 02ba C4020000 		.4byte	0x2c4
+ 656 02be 17       		.uleb128 0x17
+ 657 02bf 6B000000 		.4byte	0x6b
+ 658 02c3 00       		.byte	0
+ 659 02c4 1A       		.uleb128 0x1a
+ 660 02c5 77000000 		.4byte	.LASF44
+ 661 02c9 05       		.byte	0x5
+ 662 02ca 7A       		.byte	0x7a
+ 663 02cb 17       		.uleb128 0x17
+ 664 02cc 81000000 		.4byte	0x81
+ 665 02d0 00       		.byte	0
+ 666 02d1 00       		.byte	0
+ 667              		.section	.debug_abbrev,"",%progbits
+ 668              	.Ldebug_abbrev0:
+ 669 0000 01       		.uleb128 0x1
+ 670 0001 11       		.uleb128 0x11
+ 671 0002 01       		.byte	0x1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 18
+
+
+ 672 0003 25       		.uleb128 0x25
+ 673 0004 0E       		.uleb128 0xe
+ 674 0005 13       		.uleb128 0x13
+ 675 0006 0B       		.uleb128 0xb
+ 676 0007 03       		.uleb128 0x3
+ 677 0008 0E       		.uleb128 0xe
+ 678 0009 1B       		.uleb128 0x1b
+ 679 000a 0E       		.uleb128 0xe
+ 680 000b 55       		.uleb128 0x55
+ 681 000c 17       		.uleb128 0x17
+ 682 000d 11       		.uleb128 0x11
+ 683 000e 01       		.uleb128 0x1
+ 684 000f 10       		.uleb128 0x10
+ 685 0010 17       		.uleb128 0x17
+ 686 0011 00       		.byte	0
+ 687 0012 00       		.byte	0
+ 688 0013 02       		.uleb128 0x2
+ 689 0014 24       		.uleb128 0x24
+ 690 0015 00       		.byte	0
+ 691 0016 0B       		.uleb128 0xb
+ 692 0017 0B       		.uleb128 0xb
+ 693 0018 3E       		.uleb128 0x3e
+ 694 0019 0B       		.uleb128 0xb
+ 695 001a 03       		.uleb128 0x3
+ 696 001b 0E       		.uleb128 0xe
+ 697 001c 00       		.byte	0
+ 698 001d 00       		.byte	0
+ 699 001e 03       		.uleb128 0x3
+ 700 001f 24       		.uleb128 0x24
+ 701 0020 00       		.byte	0
+ 702 0021 0B       		.uleb128 0xb
+ 703 0022 0B       		.uleb128 0xb
+ 704 0023 3E       		.uleb128 0x3e
+ 705 0024 0B       		.uleb128 0xb
+ 706 0025 03       		.uleb128 0x3
+ 707 0026 08       		.uleb128 0x8
+ 708 0027 00       		.byte	0
+ 709 0028 00       		.byte	0
+ 710 0029 04       		.uleb128 0x4
+ 711 002a 16       		.uleb128 0x16
+ 712 002b 00       		.byte	0
+ 713 002c 03       		.uleb128 0x3
+ 714 002d 0E       		.uleb128 0xe
+ 715 002e 3A       		.uleb128 0x3a
+ 716 002f 0B       		.uleb128 0xb
+ 717 0030 3B       		.uleb128 0x3b
+ 718 0031 0B       		.uleb128 0xb
+ 719 0032 49       		.uleb128 0x49
+ 720 0033 13       		.uleb128 0x13
+ 721 0034 00       		.byte	0
+ 722 0035 00       		.byte	0
+ 723 0036 05       		.uleb128 0x5
+ 724 0037 16       		.uleb128 0x16
+ 725 0038 00       		.byte	0
+ 726 0039 03       		.uleb128 0x3
+ 727 003a 0E       		.uleb128 0xe
+ 728 003b 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 19
+
+
+ 729 003c 0B       		.uleb128 0xb
+ 730 003d 3B       		.uleb128 0x3b
+ 731 003e 05       		.uleb128 0x5
+ 732 003f 49       		.uleb128 0x49
+ 733 0040 13       		.uleb128 0x13
+ 734 0041 00       		.byte	0
+ 735 0042 00       		.byte	0
+ 736 0043 06       		.uleb128 0x6
+ 737 0044 35       		.uleb128 0x35
+ 738 0045 00       		.byte	0
+ 739 0046 49       		.uleb128 0x49
+ 740 0047 13       		.uleb128 0x13
+ 741 0048 00       		.byte	0
+ 742 0049 00       		.byte	0
+ 743 004a 07       		.uleb128 0x7
+ 744 004b 0F       		.uleb128 0xf
+ 745 004c 00       		.byte	0
+ 746 004d 0B       		.uleb128 0xb
+ 747 004e 0B       		.uleb128 0xb
+ 748 004f 49       		.uleb128 0x49
+ 749 0050 13       		.uleb128 0x13
+ 750 0051 00       		.byte	0
+ 751 0052 00       		.byte	0
+ 752 0053 08       		.uleb128 0x8
+ 753 0054 15       		.uleb128 0x15
+ 754 0055 00       		.byte	0
+ 755 0056 27       		.uleb128 0x27
+ 756 0057 19       		.uleb128 0x19
+ 757 0058 00       		.byte	0
+ 758 0059 00       		.byte	0
+ 759 005a 09       		.uleb128 0x9
+ 760 005b 13       		.uleb128 0x13
+ 761 005c 01       		.byte	0x1
+ 762 005d 0B       		.uleb128 0xb
+ 763 005e 0B       		.uleb128 0xb
+ 764 005f 3A       		.uleb128 0x3a
+ 765 0060 0B       		.uleb128 0xb
+ 766 0061 3B       		.uleb128 0x3b
+ 767 0062 0B       		.uleb128 0xb
+ 768 0063 01       		.uleb128 0x1
+ 769 0064 13       		.uleb128 0x13
+ 770 0065 00       		.byte	0
+ 771 0066 00       		.byte	0
+ 772 0067 0A       		.uleb128 0xa
+ 773 0068 0D       		.uleb128 0xd
+ 774 0069 00       		.byte	0
+ 775 006a 03       		.uleb128 0x3
+ 776 006b 0E       		.uleb128 0xe
+ 777 006c 3A       		.uleb128 0x3a
+ 778 006d 0B       		.uleb128 0xb
+ 779 006e 3B       		.uleb128 0x3b
+ 780 006f 0B       		.uleb128 0xb
+ 781 0070 49       		.uleb128 0x49
+ 782 0071 13       		.uleb128 0x13
+ 783 0072 38       		.uleb128 0x38
+ 784 0073 0B       		.uleb128 0xb
+ 785 0074 00       		.byte	0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 20
+
+
+ 786 0075 00       		.byte	0
+ 787 0076 0B       		.uleb128 0xb
+ 788 0077 0D       		.uleb128 0xd
+ 789 0078 00       		.byte	0
+ 790 0079 03       		.uleb128 0x3
+ 791 007a 08       		.uleb128 0x8
+ 792 007b 3A       		.uleb128 0x3a
+ 793 007c 0B       		.uleb128 0xb
+ 794 007d 3B       		.uleb128 0x3b
+ 795 007e 0B       		.uleb128 0xb
+ 796 007f 49       		.uleb128 0x49
+ 797 0080 13       		.uleb128 0x13
+ 798 0081 38       		.uleb128 0x38
+ 799 0082 0B       		.uleb128 0xb
+ 800 0083 00       		.byte	0
+ 801 0084 00       		.byte	0
+ 802 0085 0C       		.uleb128 0xc
+ 803 0086 2E       		.uleb128 0x2e
+ 804 0087 01       		.byte	0x1
+ 805 0088 3F       		.uleb128 0x3f
+ 806 0089 19       		.uleb128 0x19
+ 807 008a 03       		.uleb128 0x3
+ 808 008b 0E       		.uleb128 0xe
+ 809 008c 3A       		.uleb128 0x3a
+ 810 008d 0B       		.uleb128 0xb
+ 811 008e 3B       		.uleb128 0x3b
+ 812 008f 0B       		.uleb128 0xb
+ 813 0090 27       		.uleb128 0x27
+ 814 0091 19       		.uleb128 0x19
+ 815 0092 11       		.uleb128 0x11
+ 816 0093 01       		.uleb128 0x1
+ 817 0094 12       		.uleb128 0x12
+ 818 0095 06       		.uleb128 0x6
+ 819 0096 40       		.uleb128 0x40
+ 820 0097 18       		.uleb128 0x18
+ 821 0098 9742     		.uleb128 0x2117
+ 822 009a 19       		.uleb128 0x19
+ 823 009b 01       		.uleb128 0x1
+ 824 009c 13       		.uleb128 0x13
+ 825 009d 00       		.byte	0
+ 826 009e 00       		.byte	0
+ 827 009f 0D       		.uleb128 0xd
+ 828 00a0 898201   		.uleb128 0x4109
+ 829 00a3 01       		.byte	0x1
+ 830 00a4 11       		.uleb128 0x11
+ 831 00a5 01       		.uleb128 0x1
+ 832 00a6 31       		.uleb128 0x31
+ 833 00a7 13       		.uleb128 0x13
+ 834 00a8 01       		.uleb128 0x1
+ 835 00a9 13       		.uleb128 0x13
+ 836 00aa 00       		.byte	0
+ 837 00ab 00       		.byte	0
+ 838 00ac 0E       		.uleb128 0xe
+ 839 00ad 8A8201   		.uleb128 0x410a
+ 840 00b0 00       		.byte	0
+ 841 00b1 02       		.uleb128 0x2
+ 842 00b2 18       		.uleb128 0x18
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 21
+
+
+ 843 00b3 9142     		.uleb128 0x2111
+ 844 00b5 18       		.uleb128 0x18
+ 845 00b6 00       		.byte	0
+ 846 00b7 00       		.byte	0
+ 847 00b8 0F       		.uleb128 0xf
+ 848 00b9 898201   		.uleb128 0x4109
+ 849 00bc 01       		.byte	0x1
+ 850 00bd 11       		.uleb128 0x11
+ 851 00be 01       		.uleb128 0x1
+ 852 00bf 31       		.uleb128 0x31
+ 853 00c0 13       		.uleb128 0x13
+ 854 00c1 00       		.byte	0
+ 855 00c2 00       		.byte	0
+ 856 00c3 10       		.uleb128 0x10
+ 857 00c4 34       		.uleb128 0x34
+ 858 00c5 00       		.byte	0
+ 859 00c6 03       		.uleb128 0x3
+ 860 00c7 0E       		.uleb128 0xe
+ 861 00c8 3A       		.uleb128 0x3a
+ 862 00c9 0B       		.uleb128 0xb
+ 863 00ca 3B       		.uleb128 0x3b
+ 864 00cb 0B       		.uleb128 0xb
+ 865 00cc 49       		.uleb128 0x49
+ 866 00cd 13       		.uleb128 0x13
+ 867 00ce 02       		.uleb128 0x2
+ 868 00cf 17       		.uleb128 0x17
+ 869 00d0 00       		.byte	0
+ 870 00d1 00       		.byte	0
+ 871 00d2 11       		.uleb128 0x11
+ 872 00d3 898201   		.uleb128 0x4109
+ 873 00d6 00       		.byte	0
+ 874 00d7 11       		.uleb128 0x11
+ 875 00d8 01       		.uleb128 0x1
+ 876 00d9 31       		.uleb128 0x31
+ 877 00da 13       		.uleb128 0x13
+ 878 00db 00       		.byte	0
+ 879 00dc 00       		.byte	0
+ 880 00dd 12       		.uleb128 0x12
+ 881 00de 898201   		.uleb128 0x4109
+ 882 00e1 00       		.byte	0
+ 883 00e2 11       		.uleb128 0x11
+ 884 00e3 01       		.uleb128 0x1
+ 885 00e4 9542     		.uleb128 0x2115
+ 886 00e6 19       		.uleb128 0x19
+ 887 00e7 31       		.uleb128 0x31
+ 888 00e8 13       		.uleb128 0x13
+ 889 00e9 00       		.byte	0
+ 890 00ea 00       		.byte	0
+ 891 00eb 13       		.uleb128 0x13
+ 892 00ec 0B       		.uleb128 0xb
+ 893 00ed 01       		.byte	0x1
+ 894 00ee 55       		.uleb128 0x55
+ 895 00ef 17       		.uleb128 0x17
+ 896 00f0 00       		.byte	0
+ 897 00f1 00       		.byte	0
+ 898 00f2 14       		.uleb128 0x14
+ 899 00f3 34       		.uleb128 0x34
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 22
+
+
+ 900 00f4 00       		.byte	0
+ 901 00f5 03       		.uleb128 0x3
+ 902 00f6 0E       		.uleb128 0xe
+ 903 00f7 3A       		.uleb128 0x3a
+ 904 00f8 0B       		.uleb128 0xb
+ 905 00f9 3B       		.uleb128 0x3b
+ 906 00fa 0B       		.uleb128 0xb
+ 907 00fb 49       		.uleb128 0x49
+ 908 00fc 13       		.uleb128 0x13
+ 909 00fd 3F       		.uleb128 0x3f
+ 910 00fe 19       		.uleb128 0x19
+ 911 00ff 02       		.uleb128 0x2
+ 912 0100 18       		.uleb128 0x18
+ 913 0101 00       		.byte	0
+ 914 0102 00       		.byte	0
+ 915 0103 15       		.uleb128 0x15
+ 916 0104 34       		.uleb128 0x34
+ 917 0105 00       		.byte	0
+ 918 0106 03       		.uleb128 0x3
+ 919 0107 0E       		.uleb128 0xe
+ 920 0108 3A       		.uleb128 0x3a
+ 921 0109 0B       		.uleb128 0xb
+ 922 010a 3B       		.uleb128 0x3b
+ 923 010b 0B       		.uleb128 0xb
+ 924 010c 49       		.uleb128 0x49
+ 925 010d 13       		.uleb128 0x13
+ 926 010e 3F       		.uleb128 0x3f
+ 927 010f 19       		.uleb128 0x19
+ 928 0110 3C       		.uleb128 0x3c
+ 929 0111 19       		.uleb128 0x19
+ 930 0112 00       		.byte	0
+ 931 0113 00       		.byte	0
+ 932 0114 16       		.uleb128 0x16
+ 933 0115 2E       		.uleb128 0x2e
+ 934 0116 01       		.byte	0x1
+ 935 0117 3F       		.uleb128 0x3f
+ 936 0118 19       		.uleb128 0x19
+ 937 0119 03       		.uleb128 0x3
+ 938 011a 0E       		.uleb128 0xe
+ 939 011b 3A       		.uleb128 0x3a
+ 940 011c 0B       		.uleb128 0xb
+ 941 011d 3B       		.uleb128 0x3b
+ 942 011e 0B       		.uleb128 0xb
+ 943 011f 27       		.uleb128 0x27
+ 944 0120 19       		.uleb128 0x19
+ 945 0121 3C       		.uleb128 0x3c
+ 946 0122 19       		.uleb128 0x19
+ 947 0123 01       		.uleb128 0x1
+ 948 0124 13       		.uleb128 0x13
+ 949 0125 00       		.byte	0
+ 950 0126 00       		.byte	0
+ 951 0127 17       		.uleb128 0x17
+ 952 0128 05       		.uleb128 0x5
+ 953 0129 00       		.byte	0
+ 954 012a 49       		.uleb128 0x49
+ 955 012b 13       		.uleb128 0x13
+ 956 012c 00       		.byte	0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 23
+
+
+ 957 012d 00       		.byte	0
+ 958 012e 18       		.uleb128 0x18
+ 959 012f 2E       		.uleb128 0x2e
+ 960 0130 01       		.byte	0x1
+ 961 0131 3F       		.uleb128 0x3f
+ 962 0132 19       		.uleb128 0x19
+ 963 0133 03       		.uleb128 0x3
+ 964 0134 0E       		.uleb128 0xe
+ 965 0135 3A       		.uleb128 0x3a
+ 966 0136 0B       		.uleb128 0xb
+ 967 0137 3B       		.uleb128 0x3b
+ 968 0138 0B       		.uleb128 0xb
+ 969 0139 27       		.uleb128 0x27
+ 970 013a 19       		.uleb128 0x19
+ 971 013b 49       		.uleb128 0x49
+ 972 013c 13       		.uleb128 0x13
+ 973 013d 3C       		.uleb128 0x3c
+ 974 013e 19       		.uleb128 0x19
+ 975 013f 01       		.uleb128 0x1
+ 976 0140 13       		.uleb128 0x13
+ 977 0141 00       		.byte	0
+ 978 0142 00       		.byte	0
+ 979 0143 19       		.uleb128 0x19
+ 980 0144 2E       		.uleb128 0x2e
+ 981 0145 00       		.byte	0
+ 982 0146 3F       		.uleb128 0x3f
+ 983 0147 19       		.uleb128 0x19
+ 984 0148 03       		.uleb128 0x3
+ 985 0149 0E       		.uleb128 0xe
+ 986 014a 3A       		.uleb128 0x3a
+ 987 014b 0B       		.uleb128 0xb
+ 988 014c 3B       		.uleb128 0x3b
+ 989 014d 0B       		.uleb128 0xb
+ 990 014e 27       		.uleb128 0x27
+ 991 014f 19       		.uleb128 0x19
+ 992 0150 49       		.uleb128 0x49
+ 993 0151 13       		.uleb128 0x13
+ 994 0152 3C       		.uleb128 0x3c
+ 995 0153 19       		.uleb128 0x19
+ 996 0154 00       		.byte	0
+ 997 0155 00       		.byte	0
+ 998 0156 1A       		.uleb128 0x1a
+ 999 0157 2E       		.uleb128 0x2e
+ 1000 0158 01       		.byte	0x1
+ 1001 0159 3F       		.uleb128 0x3f
+ 1002 015a 19       		.uleb128 0x19
+ 1003 015b 03       		.uleb128 0x3
+ 1004 015c 0E       		.uleb128 0xe
+ 1005 015d 3A       		.uleb128 0x3a
+ 1006 015e 0B       		.uleb128 0xb
+ 1007 015f 3B       		.uleb128 0x3b
+ 1008 0160 0B       		.uleb128 0xb
+ 1009 0161 27       		.uleb128 0x27
+ 1010 0162 19       		.uleb128 0x19
+ 1011 0163 3C       		.uleb128 0x3c
+ 1012 0164 19       		.uleb128 0x19
+ 1013 0165 00       		.byte	0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 24
+
+
+ 1014 0166 00       		.byte	0
+ 1015 0167 00       		.byte	0
+ 1016              		.section	.debug_loc,"",%progbits
+ 1017              	.Ldebug_loc0:
+ 1018              	.LLST0:
+ 1019 0000 06000000 		.4byte	.LVL2
+ 1020 0004 1F000000 		.4byte	.LVL3-1
+ 1021 0008 0100     		.2byte	0x1
+ 1022 000a 50       		.byte	0x50
+ 1023 000b 00000000 		.4byte	0
+ 1024 000f 00000000 		.4byte	0
+ 1025              	.LLST1:
+ 1026 0013 44000000 		.4byte	.LVL9
+ 1027 0017 59000000 		.4byte	.LVL10-1
+ 1028 001b 0100     		.2byte	0x1
+ 1029 001d 50       		.byte	0x50
+ 1030 001e 00000000 		.4byte	0
+ 1031 0022 00000000 		.4byte	0
+ 1032              	.LLST2:
+ 1033 0026 2C000000 		.4byte	.LVL6
+ 1034 002a 32000000 		.4byte	.LVL7
+ 1035 002e 1000     		.2byte	0x10
+ 1036 0030 70       		.byte	0x70
+ 1037 0031 00       		.sleb128 0
+ 1038 0032 08       		.byte	0x8
+ 1039 0033 FF       		.byte	0xff
+ 1040 0034 1A       		.byte	0x1a
+ 1041 0035 38       		.byte	0x38
+ 1042 0036 24       		.byte	0x24
+ 1043 0037 73       		.byte	0x73
+ 1044 0038 00       		.sleb128 0
+ 1045 0039 08       		.byte	0x8
+ 1046 003a FF       		.byte	0xff
+ 1047 003b 1A       		.byte	0x1a
+ 1048 003c 21       		.byte	0x21
+ 1049 003d 23       		.byte	0x23
+ 1050 003e 01       		.uleb128 0x1
+ 1051 003f 9F       		.byte	0x9f
+ 1052 0040 00000000 		.4byte	0
+ 1053 0044 00000000 		.4byte	0
+ 1054              		.section	.debug_aranges,"",%progbits
+ 1055 0000 34000000 		.4byte	0x34
+ 1056 0004 0200     		.2byte	0x2
+ 1057 0006 00000000 		.4byte	.Ldebug_info0
+ 1058 000a 04       		.byte	0x4
+ 1059 000b 00       		.byte	0
+ 1060 000c 0000     		.2byte	0
+ 1061 000e 0000     		.2byte	0
+ 1062 0010 00000000 		.4byte	.LFB0
+ 1063 0014 64000000 		.4byte	.LFE0-.LFB0
+ 1064 0018 00000000 		.4byte	.LFB1
+ 1065 001c 24000000 		.4byte	.LFE1-.LFB1
+ 1066 0020 00000000 		.4byte	.LFB2
+ 1067 0024 28000000 		.4byte	.LFE2-.LFB2
+ 1068 0028 00000000 		.4byte	.LFB3
+ 1069 002c B4000000 		.4byte	.LFE3-.LFB3
+ 1070 0030 00000000 		.4byte	0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 25
+
+
+ 1071 0034 00000000 		.4byte	0
+ 1072              		.section	.debug_ranges,"",%progbits
+ 1073              	.Ldebug_ranges0:
+ 1074 0000 06000000 		.4byte	.LBB2
+ 1075 0004 0A000000 		.4byte	.LBE2
+ 1076 0008 12000000 		.4byte	.LBB3
+ 1077 000c 5C000000 		.4byte	.LBE3
+ 1078 0010 5E000000 		.4byte	.LBB4
+ 1079 0014 78000000 		.4byte	.LBE4
+ 1080 0018 00000000 		.4byte	0
+ 1081 001c 00000000 		.4byte	0
+ 1082 0020 00000000 		.4byte	.LFB0
+ 1083 0024 64000000 		.4byte	.LFE0
+ 1084 0028 00000000 		.4byte	.LFB1
+ 1085 002c 24000000 		.4byte	.LFE1
+ 1086 0030 00000000 		.4byte	.LFB2
+ 1087 0034 28000000 		.4byte	.LFE2
+ 1088 0038 00000000 		.4byte	.LFB3
+ 1089 003c B4000000 		.4byte	.LFE3
+ 1090 0040 00000000 		.4byte	0
+ 1091 0044 00000000 		.4byte	0
+ 1092              		.section	.debug_line,"",%progbits
+ 1093              	.Ldebug_line0:
+ 1094 0000 FD000000 		.section	.debug_str,"MS",%progbits,1
+ 1094      02006900 
+ 1094      00000201 
+ 1094      FB0E0D00 
+ 1094      01010101 
+ 1095              	.LASF41:
+ 1096 0000 443A5C53 		.ascii	"D:\\START_UP\\COMPANY_STARTUP\\3_platform_based_dev"
+ 1096      54415254 
+ 1096      5F55505C 
+ 1096      434F4D50 
+ 1096      414E595F 
+ 1097 0030 656C6F70 		.ascii	"elopments\\PSOC_PROJECTS\\platform\\platform\\Psoc_"
+ 1097      6D656E74 
+ 1097      735C5053 
+ 1097      4F435F50 
+ 1097      524F4A45 
+ 1098 005f 506C6174 		.ascii	"Platform\\Design02.cydsn\000"
+ 1098      666F726D 
+ 1098      5C446573 
+ 1098      69676E30 
+ 1098      322E6379 
+ 1099              	.LASF44:
+ 1100 0077 43794465 		.ascii	"CyDelayCycles\000"
+ 1100      6C617943 
+ 1100      79636C65 
+ 1100      7300
+ 1101              	.LASF16:
+ 1102 0085 72656733 		.ascii	"reg32\000"
+ 1102      3200
+ 1103              	.LASF24:
+ 1104 008b 4932435F 		.ascii	"I2C_1_BACKUP_STRUCT\000"
+ 1104      315F4241 
+ 1104      434B5550 
+ 1104      5F535452 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 26
+
+
+ 1104      55435400 
+ 1105              	.LASF35:
+ 1106 009f 4932435F 		.ascii	"I2C_1_mstrRdBufIndex\000"
+ 1106      315F6D73 
+ 1106      74725264 
+ 1106      42756649 
+ 1106      6E646578 
+ 1107              	.LASF42:
+ 1108 00b4 4379496E 		.ascii	"CyIntSetVector\000"
+ 1108      74536574 
+ 1108      56656374 
+ 1108      6F7200
+ 1109              	.LASF32:
+ 1110 00c3 4932435F 		.ascii	"I2C_1_backup\000"
+ 1110      315F6261 
+ 1110      636B7570 
+ 1110      00
+ 1111              	.LASF3:
+ 1112 00d0 73686F72 		.ascii	"short unsigned int\000"
+ 1112      7420756E 
+ 1112      7369676E 
+ 1112      65642069 
+ 1112      6E7400
+ 1113              	.LASF25:
+ 1114 00e3 4932435F 		.ascii	"I2C_1_Init\000"
+ 1114      315F496E 
+ 1114      697400
+ 1115              	.LASF30:
+ 1116 00ee 626C6F63 		.ascii	"blockResetCycles\000"
+ 1116      6B526573 
+ 1116      65744379 
+ 1116      636C6573 
+ 1116      00
+ 1117              	.LASF12:
+ 1118 00ff 666C6F61 		.ascii	"float\000"
+ 1118      7400
+ 1119              	.LASF7:
+ 1120 0105 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1120      206C6F6E 
+ 1120      6720756E 
+ 1120      7369676E 
+ 1120      65642069 
+ 1121              	.LASF39:
+ 1122 011c 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 1122      4320342E 
+ 1122      392E3320 
+ 1122      32303135 
+ 1122      30333033 
+ 1123 014f 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 1123      20726576 
+ 1123      6973696F 
+ 1123      6E203232 
+ 1123      31323230 
+ 1124 0182 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 1124      66756E63 
+ 1124      74696F6E 
+ 1124      2D736563 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 27
+
+
+ 1124      74696F6E 
+ 1125              	.LASF1:
+ 1126 01aa 756E7369 		.ascii	"unsigned char\000"
+ 1126      676E6564 
+ 1126      20636861 
+ 1126      7200
+ 1127              	.LASF15:
+ 1128 01b8 72656738 		.ascii	"reg8\000"
+ 1128      00
+ 1129              	.LASF5:
+ 1130 01bd 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1130      20756E73 
+ 1130      69676E65 
+ 1130      6420696E 
+ 1130      7400
+ 1131              	.LASF21:
+ 1132 01cf 61646472 		.ascii	"addr\000"
+ 1132      00
+ 1133              	.LASF34:
+ 1134 01d4 4932435F 		.ascii	"I2C_1_mstrStatus\000"
+ 1134      315F6D73 
+ 1134      74725374 
+ 1134      61747573 
+ 1134      00
+ 1135              	.LASF31:
+ 1136 01e5 4932435F 		.ascii	"I2C_1_initVar\000"
+ 1136      315F696E 
+ 1136      69745661 
+ 1136      7200
+ 1137              	.LASF13:
+ 1138 01f3 646F7562 		.ascii	"double\000"
+ 1138      6C6500
+ 1139              	.LASF28:
+ 1140 01fa 4932435F 		.ascii	"I2C_1_Stop\000"
+ 1140      315F5374 
+ 1140      6F7000
+ 1141              	.LASF10:
+ 1142 0205 75696E74 		.ascii	"uint16\000"
+ 1142      313600
+ 1143              	.LASF11:
+ 1144 020c 75696E74 		.ascii	"uint32\000"
+ 1144      333200
+ 1145              	.LASF33:
+ 1146 0213 4932435F 		.ascii	"I2C_1_state\000"
+ 1146      315F7374 
+ 1146      61746500 
+ 1147              	.LASF29:
+ 1148 021f 696E7453 		.ascii	"intState\000"
+ 1148      74617465 
+ 1148      00
+ 1149              	.LASF8:
+ 1150 0228 756E7369 		.ascii	"unsigned int\000"
+ 1150      676E6564 
+ 1150      20696E74 
+ 1150      00
+ 1151              	.LASF38:
+ 1152 0235 43794578 		.ascii	"CyExitCriticalSection\000"
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 28
+
+
+ 1152      69744372 
+ 1152      69746963 
+ 1152      616C5365 
+ 1152      6374696F 
+ 1153              	.LASF37:
+ 1154 024b 4379496E 		.ascii	"CyIntSetPriority\000"
+ 1154      74536574 
+ 1154      5072696F 
+ 1154      72697479 
+ 1154      00
+ 1155              	.LASF22:
+ 1156 025c 636C6B44 		.ascii	"clkDiv1\000"
+ 1156      69763100 
+ 1157              	.LASF23:
+ 1158 0264 636C6B44 		.ascii	"clkDiv2\000"
+ 1158      69763200 
+ 1159              	.LASF43:
+ 1160 026c 4379456E 		.ascii	"CyEnterCriticalSection\000"
+ 1160      74657243 
+ 1160      72697469 
+ 1160      63616C53 
+ 1160      65637469 
+ 1161              	.LASF17:
+ 1162 0283 63796973 		.ascii	"cyisraddress\000"
+ 1162      72616464 
+ 1162      72657373 
+ 1162      00
+ 1163              	.LASF18:
+ 1164 0290 73697A65 		.ascii	"sizetype\000"
+ 1164      74797065 
+ 1164      00
+ 1165              	.LASF6:
+ 1166 0299 6C6F6E67 		.ascii	"long long int\000"
+ 1166      206C6F6E 
+ 1166      6720696E 
+ 1166      7400
+ 1167              	.LASF40:
+ 1168 02a7 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\I2C_1.c\000"
+ 1168      6E657261 
+ 1168      7465645F 
+ 1168      536F7572 
+ 1168      63655C50 
+ 1169              	.LASF14:
+ 1170 02c8 63686172 		.ascii	"char\000"
+ 1170      00
+ 1171              	.LASF26:
+ 1172 02cd 4932435F 		.ascii	"I2C_1_Enable\000"
+ 1172      315F456E 
+ 1172      61626C65 
+ 1172      00
+ 1173              	.LASF20:
+ 1174 02da 78636667 		.ascii	"xcfg\000"
+ 1174      00
+ 1175              	.LASF27:
+ 1176 02df 4932435F 		.ascii	"I2C_1_Start\000"
+ 1176      315F5374 
+ 1176      61727400 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvF8664.s 			page 29
+
+
+ 1177              	.LASF2:
+ 1178 02eb 73686F72 		.ascii	"short int\000"
+ 1178      7420696E 
+ 1178      7400
+ 1179              	.LASF9:
+ 1180 02f5 75696E74 		.ascii	"uint8\000"
+ 1180      3800
+ 1181              	.LASF36:
+ 1182 02fb 4932435F 		.ascii	"I2C_1_mstrWrBufIndex\000"
+ 1182      315F6D73 
+ 1182      74725772 
+ 1182      42756649 
+ 1182      6E646578 
+ 1183              	.LASF4:
+ 1184 0310 6C6F6E67 		.ascii	"long int\000"
+ 1184      20696E74 
+ 1184      00
+ 1185              	.LASF19:
+ 1186 0319 656E6162 		.ascii	"enableState\000"
+ 1186      6C655374 
+ 1186      61746500 
+ 1187              	.LASF0:
+ 1188 0325 7369676E 		.ascii	"signed char\000"
+ 1188      65642063 
+ 1188      68617200 
+ 1189              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

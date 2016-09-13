@@ -1,0 +1,36 @@
+//EEPROM MAPPING
+// 1st byte is for EEPROM FLAGING 0xFF first INI, 0xAA alredy initialised
+// 2nd BYTE TELLS ABOUT TOTAL DATA VALUES, total eeprom values to be cosiderd for checksum
+// 3th byte system version
+// 4ed byte eep checksum value (from 1st byte , total (2nd byte of eeprom))
+
+// 5th byte system status (maintainance, mode etc)
+// 6th byte system usage time 0
+// 7th byte system usage time 1 
+// 8th byte syatem shutdown satus
+// 9th byte system reserved 0xFF
+// 10th byte system reserved 0xFF
+// 11th byte Application calibrations 
+
+
+// System behavior
+
+1) on system reset
+
+	gpio_end_reset();  // make all gpio to proper reset state
+	update syatem status to eepram // proper shutdon 0xAA 
+	EEPRAM_to_EEPROM_WR();
+	enable watchdog and wait for reset
+2) on system shut down
+
+3) on system startup
+
+
+
+#//PWM
+void get_pwm(unsigned char dutycycle) // pass 10 bit duty cycle
+// need update
+#//ADC
+adc_chn0_data to adc_chnN_data gives adc data 
+
+4) on system running

@@ -1,0 +1,722 @@
+[p LITE_MODE AUTOSTATIC PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F690 ]
+[d frameptr 6 ]
+"4 C:\Program Files\Microchip\xc8\v1.31\sources\common\abdiv.c
+[v ___abdiv __abdiv `(c  1 e 1 0 ]
+"4 C:\Program Files\Microchip\xc8\v1.31\sources\common\abmod.c
+[v ___abmod __abmod `(c  1 e 1 0 ]
+"33 C:\Program Files\Microchip\xc8\v1.31\sources\common\abtoft.c
+[v ___abtoft __abtoft `(f  1 e 3 0 ]
+"6 C:\Program Files\Microchip\xc8\v1.31\sources\common\aldiv.c
+[v ___aldiv __aldiv `(l  1 e 4 0 ]
+"5 C:\Program Files\Microchip\xc8\v1.31\sources\common\almod.c
+[v ___almod __almod `(l  1 e 4 0 ]
+"42 C:\Program Files\Microchip\xc8\v1.31\sources\common\altoft.c
+[v ___altoft __altoft `(f  1 e 3 0 ]
+"6 C:\Program Files\Microchip\xc8\v1.31\sources\common\atdiv.c
+[v ___atdiv __atdiv `(m  1 e 3 0 ]
+"6 C:\Program Files\Microchip\xc8\v1.31\sources\common\atmod.c
+[v ___atmod __atmod `(m  1 e 3 0 ]
+"37 C:\Program Files\Microchip\xc8\v1.31\sources\common\attoft.c
+[v ___attoft __attoft `(f  1 e 3 0 ]
+"6 C:\Program Files\Microchip\xc8\v1.31\sources\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"6 C:\Program Files\Microchip\xc8\v1.31\sources\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+"32 C:\Program Files\Microchip\xc8\v1.31\sources\common\awtoft.c
+[v ___awtoft __awtoft `(f  1 e 3 0 ]
+"4 C:\Program Files\Microchip\xc8\v1.31\sources\common\bmul.c
+[v ___bmul __bmul `(uc  1 e 1 0 ]
+"62 C:\Program Files\Microchip\xc8\v1.31\sources\common\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 C:\Program Files\Microchip\xc8\v1.31\sources\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"4 C:\Program Files\Microchip\xc8\v1.31\sources\common\ftge.c
+[v ___ftge __ftge `(b  1 e 0 0 ]
+"51 C:\Program Files\Microchip\xc8\v1.31\sources\common\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 3 0 ]
+"15 C:\Program Files\Microchip\xc8\v1.31\sources\common\ftneg.c
+[v ___ftneg __ftneg `(f  1 e 3 0 ]
+"18 C:\Program Files\Microchip\xc8\v1.31\sources\common\ftsub.c
+[v ___ftsub __ftsub `(f  1 e 3 0 ]
+"44 C:\Program Files\Microchip\xc8\v1.31\sources\common\fttol.c
+[v ___fttol __fttol `(l  1 e 4 0 ]
+"4 C:\Program Files\Microchip\xc8\v1.31\sources\common\lbdiv.c
+[v ___lbdiv __lbdiv `(uc  1 e 1 0 ]
+"4 C:\Program Files\Microchip\xc8\v1.31\sources\common\lbmod.c
+[v ___lbmod __lbmod `(uc  1 e 1 0 ]
+"27 C:\Program Files\Microchip\xc8\v1.31\sources\common\lbtoft.c
+[v ___lbtoft __lbtoft `(f  1 e 3 0 ]
+"6 C:\Program Files\Microchip\xc8\v1.31\sources\common\lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+"6 C:\Program Files\Microchip\xc8\v1.31\sources\common\llmod.c
+[v ___llmod __llmod `(ul  1 e 4 0 ]
+"35 C:\Program Files\Microchip\xc8\v1.31\sources\common\lltoft.c
+[v ___lltoft __lltoft `(f  1 e 3 0 ]
+"9 C:\Program Files\Microchip\xc8\v1.31\sources\common\lmul.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"6 C:\Program Files\Microchip\xc8\v1.31\sources\common\ltdiv.c
+[v ___ltdiv __ltdiv `(um  1 e 3 0 ]
+"6 C:\Program Files\Microchip\xc8\v1.31\sources\common\ltmod.c
+[v ___ltmod __ltmod `(um  1 e 3 0 ]
+"30 C:\Program Files\Microchip\xc8\v1.31\sources\common\lttoft.c
+[v ___lttoft __lttoft `(f  1 e 3 0 ]
+"6 C:\Program Files\Microchip\xc8\v1.31\sources\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"6 C:\Program Files\Microchip\xc8\v1.31\sources\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+"28 C:\Program Files\Microchip\xc8\v1.31\sources\common\lwtoft.c
+[v ___lwtoft __lwtoft `(f  1 e 3 0 ]
+"9 C:\Program Files\Microchip\xc8\v1.31\sources\common\tmul.c
+[v ___tmul __tmul `(um  1 e 3 0 ]
+"3 C:\Program Files\Microchip\xc8\v1.31\sources\common\wmul.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"6 C:\Program Files\Microchip\xc8\v1.31\sources\pic\eeprom.c
+[v _eecpymem eecpymem `(v  1 e 0 0 ]
+"24
+[v _memcpyee memcpyee `(v  1 e 0 0 ]
+"48
+[v ___eetoc __eetoc `(uc  1 e 1 0 ]
+"56
+[v ___eetoi __eetoi `(ui  1 e 2 0 ]
+"64
+[v ___eetom __eetom `(um  1 e 3 0 ]
+"72
+[v ___eetol __eetol `(ul  1 e 4 0 ]
+"80
+[v ___ctoee __ctoee `(uc  1 e 1 0 ]
+"87
+[v ___itoee __itoee `(ui  1 e 2 0 ]
+"94
+[v ___mtoee __mtoee `(um  1 e 3 0 ]
+"101
+[v ___ltoee __ltoee `(ul  1 e 4 0 ]
+"108
+[v ___eetoft __eetoft `(f  1 e 3 0 ]
+"116
+[v ___eetofl __eetofl `(d  1 e 3 0 ]
+"124
+[v ___fttoee __fttoee `(f  1 e 3 0 ]
+"131
+[v ___fltoee __fltoee `(d  1 e 3 0 ]
+"49 C:\Program Files\Microchip\xc8\v1.31\sources\pic\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 3 0 ]
+"9 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/adc.c
+[v _Adc_Isr Adc_Isr `T(v  1 e 0 0 ]
+"19
+[v _Adc_Ini Adc_Ini `T(v  1 e 0 0 ]
+"76
+[v _adc_updator adc_updator `(v  1 e 0 0 ]
+"4 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/dio.c
+[v _Dio_Ini Dio_Ini `T(v  1 e 0 0 ]
+"115
+[v _Api_Led_Control Api_Led_Control `(v  1 e 0 0 ]
+"125
+[v _Led_Manager Led_Manager `(v  1 e 0 0 ]
+"160
+[v _Switch_Manager Switch_Manager `(v  1 e 0 0 ]
+"190
+[v _Api_Get_Switch_Status Api_Get_Switch_Status `(uc  1 e 1 0 ]
+"203
+[v _Dio_Read Dio_Read `(uc  1 e 1 0 ]
+"238
+[v _Dio_Write Dio_Write `(v  1 e 0 0 ]
+"32 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/eep.c
+[v _Eep_Ini Eep_Ini `T(v  1 e 0 0 ]
+"39
+[v _Eep_Isr Eep_Isr `T(v  1 e 0 0 ]
+"48
+[v _Eep_Manager Eep_Manager `(v  1 e 0 0 ]
+"111
+[v _RAM_to_EEP RAM_to_EEP `T(v  1 e 0 0 ]
+"166
+[v _EEP_WRITE EEP_WRITE `(v  1 e 0 0 ]
+"176
+[v _EEP_READ EEP_READ `(uc  1 e 1 0 ]
+"185
+[v _EEP_to_RAM EEP_to_RAM `T(v  1 e 0 0 ]
+"208
+[v _check_eep_checksum check_eep_checksum `(uc  1 e 1 0 ]
+"256
+[v _usage_time_ini usage_time_ini `T(v  1 e 0 0 ]
+"277
+[v _Api_usege_timer_start_stop Api_usege_timer_start_stop `(v  1 e 0 0 ]
+"289
+[v _usege_timer usege_timer `(v  1 e 0 0 ]
+"36 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/os.c
+[v _main main `(v  1 e 0 0 ]
+"86
+[v _Kernel_Pre_Emptiv_Timer_ISR Kernel_Pre_Emptiv_Timer_ISR `T(v  1 e 0 0 ]
+"92
+[v _Kernel_Co_Op_Timer_ISR Kernel_Co_Op_Timer_ISR `T(v  1 e 0 0 ]
+"138
+[v _Kernel_StartStop_Task_Func Kernel_StartStop_Task_Func `(v  1 e 0 0 ]
+"146
+[v _Kernel_vRunContainer Kernel_vRunContainer `(v  1 e 0 0 ]
+"157
+[v _Kernel_bSetTimer Kernel_bSetTimer `(v  1 e 0 0 ]
+"223
+[v _Kernel_boStopTimer Kernel_boStopTimer `(v  1 e 0 0 ]
+"253
+[v _Kernel_boResetTimer Kernel_boResetTimer `(v  1 e 0 0 ]
+"271
+[v _Sw_Timer_Updator Sw_Timer_Updator `(v  1 e 0 0 ]
+"311
+[v _Os_Ini Os_Ini `T(v  1 e 0 0 ]
+"4 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/pwm.c
+[v _Pwm_Ini Pwm_Ini `T(v  1 e 0 0 ]
+"29
+[v _Api_Get_Pwm Api_Get_Pwm `(v  1 e 0 0 ]
+"9 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/sevlb.c
+[v _clear_bit_position clear_bit_position `(uc  1 e 1 0 ]
+"13
+[v _set_bit_position set_bit_position `(uc  1 e 1 0 ]
+"17
+[v _update_bit_position update_bit_position `(uc  1 e 1 0 ]
+"21
+[v _get_bit_value get_bit_value `(uc  1 e 1 0 ]
+"27
+[v _srvb_between srvb_between `(uc  1 e 1 0 ]
+"32
+[v _num_to_string num_to_string `(v  1 e 0 0 ]
+"62
+[v _srvb_add_s8_s16_s16 srvb_add_s8_s16_s16 `(c  1 e 1 0 ]
+"81
+[v _srvb_add_s16_s16_s16 srvb_add_s16_s16_s16 `(i  1 e 2 0 ]
+"89
+[v _srvb_sub_s8_s16_s16 srvb_sub_s8_s16_s16 `(c  1 e 1 0 ]
+"110
+[v _srvb_mul_div_u16_u16_u16_u16 srvb_mul_div_u16_u16_u16_u16 `(ui  1 e 2 0 ]
+"123
+[v _srvb_mul_div_u8_u16_u16_u16 srvb_mul_div_u8_u16_u16_u16 `(uc  1 e 1 0 ]
+"137
+[v _srvb_mul_div_s16_s16_s16_s16 srvb_mul_div_s16_s16_s16_s16 `(i  1 e 2 0 ]
+"161
+[v _srvb_mul_div_s8_s16_s16_s16 srvb_mul_div_s8_s16_s16_s16 `(c  1 e 1 0 ]
+"187
+[v _hyst_delta_minus_s10s10s10u8 hyst_delta_minus_s10s10s10u8 `(uc  1 e 1 0 ]
+"220
+[v _delay_ms delay_ms `(v  1 e 0 0 ]
+"5 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/system.c
+[v _isr isr `II(v  1 e 0 0 ]
+"72
+[v _Systm_Ini_Proc_1 Systm_Ini_Proc_1 `(v  1 e 0 0 ]
+"113
+[v _Systm_Ini_Proc_2 Systm_Ini_Proc_2 `(v  1 e 0 0 ]
+"118
+[v _System_Status_Indicator System_Status_Indicator `(v  1 e 0 0 ]
+"12 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/uart.c
+[v _Uart_Ini Uart_Ini `T(v  1 e 0 0 ]
+"44
+[v _Uart_Isr Uart_Isr `T(v  1 e 0 0 ]
+"78
+[v _Uart_Manager Uart_Manager `(v  1 e 0 0 ]
+"94
+[v _Api_Uart_Read_Rx Api_Uart_Read_Rx `(v  1 e 0 0 ]
+"119
+[v _Api_Uart_Tx Api_Uart_Tx `(uc  1 e 1 0 ]
+"53 C:\Program Files\Microchip\xc8\v1.31\include\pic16f690.h
+[v _TMR0 TMR0 `VEuc  1 e 1 @1 ]
+"158
+[v _PORTA PORTA `VEuc  1 e 1 @5 ]
+"207
+[v _PORTB PORTB `VEuc  1 e 1 @6 ]
+"245
+[v _PORTC PORTC `VEuc  1 e 1 @7 ]
+"480
+[v _TMR1 TMR1 `VEus  1 e 2 @14 ]
+"568
+[v _TMR2 TMR2 `VEuc  1 e 1 @17 ]
+"574
+[v _T2CON T2CON `VEuc  1 e 1 @18 ]
+"725
+[v _CCPR1L CCPR1L `VEuc  1 e 1 @21 ]
+"737
+[v _CCP1CON CCP1CON `VEuc  1 e 1 @23 ]
+"1041
+[v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
+"1047
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @31 ]
+[s S266 . 1 `uc 1 PS 1 0 :3:0 
+`uc 1 PSA 1 0 :1:3 
+`uc 1 T0SE 1 0 :1:4 
+`uc 1 T0CS 1 0 :1:5 
+`uc 1 INTEDG 1 0 :1:6 
+`uc 1 nRABPU 1 0 :1:7 
+]
+"1161
+[s S273 . 1 `uc 1 PS0 1 0 :1:0 
+`uc 1 PS1 1 0 :1:1 
+`uc 1 PS2 1 0 :1:2 
+]
+[u S277 . 1 `S266 1 . 1 0 `S273 1 . 1 0 ]
+[v _OPTION_REGbits OPTION_REGbits `VES277  1 e 1 @129 ]
+"1503
+[v _OSCCON OSCCON `VEuc  1 e 1 @143 ]
+"1618
+[v _PR2 PR2 `VEuc  1 e 1 @146 ]
+"2540
+[v _ADRESL ADRESL `VEuc  1 e 1 @158 ]
+"2546
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @159 ]
+"2587
+[v _EEDAT EEDAT `VEuc  1 e 1 @268 ]
+"2592
+[v _EEDATA EEDATA `VEuc  1 e 1 @268 ]
+"2598
+[v _EEADR EEADR `VEuc  1 e 1 @269 ]
+"2936
+[v _ANSEL ANSEL `VEuc  1 e 1 @286 ]
+"2997
+[v _ANSELH ANSELH `VEuc  1 e 1 @287 ]
+"3034
+[v _EECON1 EECON1 `VEuc  1 e 1 @396 ]
+"3078
+[v _EECON2 EECON2 `VEuc  1 e 1 @397 ]
+"3084
+[v _PSTRCON PSTRCON `VEuc  1 e 1 @413 ]
+"3204
+[v _ADFM ADFM `VEb  1 e 0 @255 ]
+"3206
+[v _ADIE ADIE `VEb  1 e 0 @1126 ]
+"3208
+[v _ADIF ADIF `VEb  1 e 0 @102 ]
+"3210
+[v _ADON ADON `VEb  1 e 0 @248 ]
+"3212
+[v _ANS0 ANS0 `VEb  1 e 0 @2288 ]
+"3214
+[v _ANS1 ANS1 `VEb  1 e 0 @2289 ]
+"3222
+[v _ANS3 ANS3 `VEb  1 e 0 @2291 ]
+"3224
+[v _ANS4 ANS4 `VEb  1 e 0 @2292 ]
+"3226
+[v _ANS5 ANS5 `VEb  1 e 0 @2293 ]
+"3320
+[v _CARRY CARRY `VEb  1 e 0 @24 ]
+"3334
+[v _CHS0 CHS0 `VEb  1 e 0 @250 ]
+"3336
+[v _CHS1 CHS1 `VEb  1 e 0 @251 ]
+"3370
+[v _EEIE EEIE `VEb  1 e 0 @1132 ]
+"3372
+[v _EEIF EEIF `VEb  1 e 0 @108 ]
+"3378
+[v _GIE GIE `VEb  1 e 0 @95 ]
+"3380
+[v _GO GO `VEb  1 e 0 @249 ]
+"3386
+[v _HTS HTS `VEb  1 e 0 @1146 ]
+"3400
+[v _INTF INTF `VEb  1 e 0 @89 ]
+"3490
+[v _PEIE PEIE `VEb  1 e 0 @94 ]
+"3528
+[v _RABIF RABIF `VEb  1 e 0 @88 ]
+"3558
+[v _RCIF RCIF `VEb  1 e 0 @101 ]
+"3560
+[v _RD RD `VEb  1 e 0 @3168 ]
+"3628
+[v _T0IE T0IE `VEb  1 e 0 @93 ]
+"3630
+[v _T0IF T0IF `VEb  1 e 0 @90 ]
+"3646
+[v _T1OSCEN T1OSCEN `VEb  1 e 0 @131 ]
+"3656
+[v _TMR1CS TMR1CS `VEb  1 e 0 @129 ]
+"3660
+[v _TMR1IE TMR1IE `VEb  1 e 0 @1120 ]
+"3662
+[v _TMR1IF TMR1IF `VEb  1 e 0 @96 ]
+"3664
+[v _TMR1ON TMR1ON `VEb  1 e 0 @128 ]
+"3668
+[v _TMR2IF TMR2IF `VEb  1 e 0 @97 ]
+"3670
+[v _TMR2ON TMR2ON `VEb  1 e 0 @146 ]
+"3680
+[v _TRISA0 TRISA0 `VEb  1 e 0 @1064 ]
+"3682
+[v _TRISA1 TRISA1 `VEb  1 e 0 @1065 ]
+"3684
+[v _TRISA2 TRISA2 `VEb  1 e 0 @1066 ]
+"3686
+[v _TRISA3 TRISA3 `VEb  1 e 0 @1067 ]
+"3688
+[v _TRISA4 TRISA4 `VEb  1 e 0 @1068 ]
+"3690
+[v _TRISA5 TRISA5 `VEb  1 e 0 @1069 ]
+"3692
+[v _TRISB4 TRISB4 `VEb  1 e 0 @1076 ]
+"3694
+[v _TRISB5 TRISB5 `VEb  1 e 0 @1077 ]
+"3696
+[v _TRISB6 TRISB6 `VEb  1 e 0 @1078 ]
+"3698
+[v _TRISB7 TRISB7 `VEb  1 e 0 @1079 ]
+"3700
+[v _TRISC0 TRISC0 `VEb  1 e 0 @1080 ]
+"3702
+[v _TRISC1 TRISC1 `VEb  1 e 0 @1081 ]
+"3704
+[v _TRISC2 TRISC2 `VEb  1 e 0 @1082 ]
+"3706
+[v _TRISC3 TRISC3 `VEb  1 e 0 @1083 ]
+"3708
+[v _TRISC4 TRISC4 `VEb  1 e 0 @1084 ]
+"3710
+[v _TRISC5 TRISC5 `VEb  1 e 0 @1085 ]
+"3712
+[v _TRISC6 TRISC6 `VEb  1 e 0 @1086 ]
+"3714
+[v _TRISC7 TRISC7 `VEb  1 e 0 @1087 ]
+"3742
+[v _VCFG VCFG `VEb  1 e 0 @254 ]
+"3794
+[v _WR WR `VEb  1 e 0 @3169 ]
+"3796
+[v _WREN WREN `VEb  1 e 0 @3170 ]
+"7 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/adc.c
+[v _adc_chn0_data adc_chn0_data `ui  1 e 2 0 ]
+[v _adc_chn1_data adc_chn1_data `ui  1 e 2 0 ]
+[v _adc_chn2_data adc_chn2_data `ui  1 e 2 0 ]
+[v _adc_chn3_data adc_chn3_data `ui  1 e 2 0 ]
+[s S49 . 15 `[3]uc 1 Led_u8_st_Led_Status_Comp 3 0 `[3]uc 1 Led_u8_st_Led_Status 3 3 `[3]uc 1 Switch_u8_st_Current_Status 3 6 `[3]uc 1 Switch_u8_st_Stable_Status 3 9 `[3]uc 1 Switch_u8_st_Deb_Count 3 12 ]
+"3 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/dio.c
+[v _Dio Dio `S49  1 e 15 0 ]
+"13 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/dio.h
+[v _Switch_Matrix Switch_Matrix `DCC[3][2]uc  1 e 6 0 ]
+"20
+[v _Led_Matrix Led_Matrix `DCC[3][2]uc  1 e 6 0 ]
+"4 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/eep.c
+[v _EEPRAM_APP_DATA EEPRAM_APP_DATA `[2]uc  1 e 2 0 ]
+"5
+[v _EEPRAM_SYSTEM_DATA EEPRAM_SYSTEM_DATA `[6]uc  1 e 6 0 ]
+"6
+[v _usage_time usage_time `ui  1 e 2 0 ]
+"7
+[v _maintainace_status maintainace_status `uc  1 e 1 0 ]
+"8
+[v _start_stop_tmr_val start_stop_tmr_val `uc  1 e 1 0 ]
+[s S123 . 4 `uc 1 State 1 0 `uc 1 Index 1 1 `uc 1 Eep_Data 1 2 `uc 1 Ram_Eep_State 1 3 ]
+"20
+[v _Eep_Mgr Eep_Mgr `S123  1 e 4 0 ]
+"16 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/eep_config.h
+[v _eep0 eep0 `DCCuc  1 e 1 @8448 ]
+"17
+[v _eep1 eep1 `DCCuc  1 e 1 @8449 ]
+"18
+[v _eep2 eep2 `DCCuc  1 e 1 @8450 ]
+"19
+[v _eep3 eep3 `DCCuc  1 e 1 @8451 ]
+"34
+[v _eep4 eep4 `DCCuc  1 e 1 @8452 ]
+"35
+[v _eep5 eep5 `DCCuc  1 e 1 @8453 ]
+"36
+[v _eep6 eep6 `DCCuc  1 e 1 @8454 ]
+"37
+[v _eep7 eep7 `DCCuc  1 e 1 @8455 ]
+"38
+[v _eep8 eep8 `DCCuc  1 e 1 @8456 ]
+"39
+[v _eep10 eep10 `DCCuc  1 e 1 @8457 ]
+"46
+[v _abc11 abc11 `DCCuc  1 e 1 @8458 ]
+"47
+[v _abc12 abc12 `DCCuc  1 e 1 @8459 ]
+"4 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/os.c
+[v _BACKGROUND_TASK BACKGROUND_TASK `DCCuc  1 e 1 0 ]
+[s S251 . 4 `uc 1 Lock 1 0 `VEuc 1 TimerValue 1 1 `uc 1 TimerValueBk 1 2 `*.27(v 1 cb 1 3 ]
+"5
+[v _Kernel_stTimer Kernel_stTimer `VE[2]S251  1 e 8 0 ]
+[s S256 . 30 `[6]*.25DCC*.4(v 1 Os_ms_Task_Ptr 12 0 `[6]uc 1 Os_ms_Task_Func_Num 6 12 `VE[6]uc 1 Os_ms_Task_Sts 6 18 `[6]uc 1 Os_ms_Task_Func_Mask 6 24 ]
+"7
+[v _Nano_Os Nano_Os `VES256  1 e 30 0 ]
+"34
+[v _i i `uc  1 e 1 0 ]
+"35
+[v _Os_Task_Ptr_Temp Os_Task_Ptr_Temp `*.27(v  1 e 1 0 ]
+"35 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/os.h
+[v _Kernel_vHWReset Kernel_vHWReset `DCC[3]*.27(v  1 s 3 Kernel_vHWReset ]
+"51
+[v _Os_10ms_Task Os_10ms_Task `DCC[3]*.27(v  1 s 3 Os_10ms_Task ]
+"65
+[v _Os_50ms_Task Os_50ms_Task `DCC[2]*.27(v  1 s 2 Os_50ms_Task ]
+"76
+[v _Os_100ms_Task Os_100ms_Task `DCC[2]*.27(v  1 s 2 Os_100ms_Task ]
+"84
+[v _Os_200ms_Task Os_200ms_Task `DCC[3]*.27(v  1 s 3 Os_200ms_Task ]
+"92
+[v _Os_1000ms_Task Os_1000ms_Task `DCC[2]*.27(v  1 s 2 Os_1000ms_Task ]
+"102
+[v _Os_Back_Ground_Task Os_Back_Ground_Task `DCC[3]*.27(v  1 s 3 Os_Back_Ground_Task ]
+"879 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/pic16f690.h
+[v _TXREG TXREG `VEuc  1 e 1 @25 ]
+"885
+[v _RCREG RCREG `VEuc  1 e 1 @26 ]
+"2367
+[v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
+"3254
+[v _BRG16 BRG16 `VEb  1 e 0 @1243 ]
+"3272
+[v _BRGH BRGH `VEb  1 e 0 @1218 ]
+"3346
+[v _CREN CREN `VEb  1 e 0 @196 ]
+"3464
+[v _OERR OERR `VEb  1 e 0 @193 ]
+"3556
+[v _RCIE RCIE `VEb  1 e 0 @1125 ]
+"3588
+[v _SPEN SPEN `VEb  1 e 0 @199 ]
+"3624
+[v _SYNC SYNC `VEb  1 e 0 @1220 ]
+"3732
+[v _TXEN TXEN `VEb  1 e 0 @1221 ]
+"3736
+[v _TXIF TXIF `VEb  1 e 0 @100 ]
+"3 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/system.c
+[v _Sys_u8_st_Globle_System_Status Sys_u8_st_Globle_System_Status `uc  1 e 1 0 ]
+[s S515 . 12 `uc 1 com_status 1 0 `uc 1 rx_period 1 1 `*.4uc 1 rx_data_ptr 1 2 `[8]uc 1 RX_DATA 8 3 `uc 1 rx_period_max 1 11 ]
+"8 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/uart.c
+[s S521 . 11 `uc 1 com_satus 1 0 `[8]uc 1 TX_DATA 8 1 `uc 1 data_length 1 9 `uc 1 data_index 1 10 ]
+[s S526 . 23 `S515 1 Uart_Rx 12 0 `S521 1 Uart_Tx 11 12 ]
+[v _Uart_Net_Mgr Uart_Net_Mgr `S526  1 e 23 0 ]
+"36 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/os.c
+[v _main main `(v  1 e 0 0 ]
+{
+"85
+} 0
+"271
+[v _Sw_Timer_Updator Sw_Timer_Updator `(v  1 e 0 0 ]
+{
+"274
+[v Sw_Timer_Updator@i i `uc  1 a 1 6 ]
+"292
+} 0
+"118 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/system.c
+[v _System_Status_Indicator System_Status_Indicator `(v  1 e 0 0 ]
+{
+"130
+} 0
+"94 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/uart.c
+[v _Api_Uart_Read_Rx Api_Uart_Read_Rx `(v  1 e 0 0 ]
+{
+"117
+} 0
+"78
+[v _Uart_Manager Uart_Manager `(v  1 e 0 0 ]
+{
+"92
+} 0
+"48 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/eep.c
+[v _Eep_Manager Eep_Manager `(v  1 e 0 0 ]
+{
+"50
+[v Eep_Manager@temp_data temp_data `uc  1 a 1 7 ]
+"94
+} 0
+"160 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/dio.c
+[v _Switch_Manager Switch_Manager `(v  1 e 0 0 ]
+{
+"163
+[v Switch_Manager@i i `uc  1 a 1 8 ]
+"162
+[v Switch_Manager@u8_st_temp_switch_ststus u8_st_temp_switch_ststus `uc  1 a 1 7 ]
+"189
+} 0
+"125
+[v _Led_Manager Led_Manager `(v  1 e 0 0 ]
+{
+"128
+[v Led_Manager@i i `uc  1 a 1 16 ]
+"127
+[v Led_Manager@u8_temp_led u8_temp_led `uc  1 a 1 15 ]
+"158
+} 0
+"76 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/adc.c
+[v _adc_updator adc_updator `(v  1 e 0 0 ]
+{
+"79
+[v adc_updator@temp_data temp_data `ui  1 a 2 0 ]
+"78
+[v adc_updator@adc_no adc_no `uc  1 s 1 adc_no ]
+"139
+} 0
+"289 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/eep.c
+[v _usege_timer usege_timer `(v  1 e 0 0 ]
+{
+"292
+[v usege_timer@usage_time_res_count usage_time_res_count `uc  1 s 1 usage_time_res_count ]
+"317
+} 0
+"115 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/dio.c
+[v _Api_Led_Control Api_Led_Control `(v  1 e 0 0 ]
+{
+[v Api_Led_Control@led_no led_no `uc  1 a 1 wreg ]
+[v Api_Led_Control@led_no led_no `uc  1 a 1 wreg ]
+[v Api_Led_Control@led_status led_status `uc  1 p 1 6 ]
+"117
+[v Api_Led_Control@led_no led_no `uc  1 a 1 0 ]
+"122
+} 0
+"238
+[v _Dio_Write Dio_Write `(v  1 e 0 0 ]
+{
+[v Dio_Write@port_no port_no `uc  1 a 1 wreg ]
+[v Dio_Write@port_no port_no `uc  1 a 1 wreg ]
+[v Dio_Write@pin_no pin_no `uc  1 p 1 6 ]
+[v Dio_Write@bit_value bit_value `uc  1 p 1 7 ]
+[v Dio_Write@port_no port_no `uc  1 a 1 5 ]
+"273
+} 0
+"203
+[v _Dio_Read Dio_Read `(uc  1 e 1 0 ]
+{
+[v Dio_Read@port_no port_no `uc  1 a 1 wreg ]
+"205
+[v Dio_Read@temp_port_data temp_port_data `uc  1 a 1 3 ]
+"203
+[v Dio_Read@port_no port_no `uc  1 a 1 wreg ]
+[v Dio_Read@pin_no pin_no `uc  1 p 1 6 ]
+[v Dio_Read@port_no port_no `uc  1 a 1 2 ]
+"237
+} 0
+"146 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/os.c
+[v _Kernel_vRunContainer Kernel_vRunContainer `(v  1 e 0 0 ]
+{
+[v Kernel_vRunContainer@afpContainerArray afpContainerArray `*.25DCC*.4(v  1 p 2 12 ]
+"154
+} 0
+"72 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/system.c
+[v _Systm_Ini_Proc_1 Systm_Ini_Proc_1 `(v  1 e 0 0 ]
+{
+"111
+} 0
+"113
+[v _Systm_Ini_Proc_2 Systm_Ini_Proc_2 `(v  1 e 0 0 ]
+{
+"117
+} 0
+"220 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/sevlb.c
+[v _delay_ms delay_ms `(v  1 e 0 0 ]
+{
+"222
+[v delay_ms@i i `uc  1 a 1 1 ]
+"220
+[v delay_ms@delay_count delay_count `ui  1 p 2 6 ]
+"230
+} 0
+"256 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/eep.c
+[v _usage_time_ini usage_time_ini `T(v  1 e 0 0 ]
+{
+"259
+[v usage_time_ini@maint_time maint_time `ui  1 a 2 6 ]
+"275
+} 0
+"12 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/uart.c
+[v _Uart_Ini Uart_Ini `T(v  1 e 0 0 ]
+{
+"40
+} 0
+"4 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/pwm.c
+[v _Pwm_Ini Pwm_Ini `T(v  1 e 0 0 ]
+{
+"21
+} 0
+"13 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/sevlb.c
+[v _set_bit_position set_bit_position `(uc  1 e 1 0 ]
+{
+[v set_bit_position@number1 number1 `uc  1 a 1 wreg ]
+[v set_bit_position@number1 number1 `uc  1 a 1 wreg ]
+[v set_bit_position@bit_position bit_position `uc  1 p 1 6 ]
+"15
+[v set_bit_position@number1 number1 `uc  1 a 1 0 ]
+"16
+} 0
+"311 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/os.c
+[v _Os_Ini Os_Ini `T(v  1 e 0 0 ]
+{
+"342
+} 0
+"32 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/eep.c
+[v _Eep_Ini Eep_Ini `T(v  1 e 0 0 ]
+{
+"36
+} 0
+"185
+[v _EEP_to_RAM EEP_to_RAM `T(v  1 e 0 0 ]
+{
+[v EEP_to_RAM@eep_error_stetegy eep_error_stetegy `uc  1 a 1 wreg ]
+"193
+[v EEP_to_RAM@i_191 i `uc  1 a 1 10 ]
+[v EEP_to_RAM@j_192 j `uc  1 a 1 8 ]
+"187
+[v EEP_to_RAM@i i `uc  1 a 1 9 ]
+"188
+[v EEP_to_RAM@j j `uc  1 a 1 7 ]
+"187
+[v EEP_to_RAM@temp_data temp_data `uc  1 a 1 6 ]
+"185
+[v EEP_to_RAM@eep_error_stetegy eep_error_stetegy `uc  1 a 1 wreg ]
+"189
+[v EEP_to_RAM@eep_error_stetegy eep_error_stetegy `uc  1 a 1 5 ]
+"206
+} 0
+"208
+[v _check_eep_checksum check_eep_checksum `(uc  1 e 1 0 ]
+{
+"219
+[v check_eep_checksum@i i `uc  1 a 1 3 ]
+"210
+[v check_eep_checksum@checksum_data checksum_data `uc  1 a 1 2 ]
+"253
+} 0
+"176
+[v _EEP_READ EEP_READ `(uc  1 e 1 0 ]
+{
+[v EEP_READ@Index Index `uc  1 a 1 wreg ]
+"178
+[v EEP_READ@temp_data temp_data `uc  1 a 1 1 ]
+"176
+[v EEP_READ@Index Index `uc  1 a 1 wreg ]
+"179
+[v EEP_READ@Index Index `uc  1 a 1 0 ]
+"183
+} 0
+"4 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/dio.c
+[v _Dio_Ini Dio_Ini `T(v  1 e 0 0 ]
+{
+"114
+} 0
+"19 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/adc.c
+[v _Adc_Ini Adc_Ini `T(v  1 e 0 0 ]
+{
+"73
+} 0
+"5 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/system.c
+[v _isr isr `II(v  1 e 0 0 ]
+{
+"68
+} 0
+"44 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/uart.c
+[v _Uart_Isr Uart_Isr `T(v  1 e 0 0 ]
+{
+"77
+} 0
+"92 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/os.c
+[v _Kernel_Co_Op_Timer_ISR Kernel_Co_Op_Timer_ISR `T(v  1 e 0 0 ]
+{
+"120
+[v Kernel_Co_Op_Timer_ISR@i i `uc  1 a 1 1 ]
+"94
+[v Kernel_Co_Op_Timer_ISR@ms10_ctr ms10_ctr `uc  1 s 1 ms10_ctr ]
+[v Kernel_Co_Op_Timer_ISR@ms50_ctr ms50_ctr `uc  1 s 1 ms50_ctr ]
+[v Kernel_Co_Op_Timer_ISR@ms200_ctr ms200_ctr `uc  1 s 1 ms200_ctr ]
+"137
+} 0

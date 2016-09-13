@@ -1,0 +1,1053 @@
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHivvml.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"UART_1_PM.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.UART_1_SaveConfig,"ax",%progbits
+  19              		.align	1
+  20              		.global	UART_1_SaveConfig
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	UART_1_SaveConfig, %function
+  24              	UART_1_SaveConfig:
+  25              	.LFB0:
+  26              		.file 1 ".\\Generated_Source\\PSoC5\\UART_1_PM.c"
+   1:.\Generated_Source\PSoC5/UART_1_PM.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/UART_1_PM.c **** * File Name: UART_1_PM.c
+   3:.\Generated_Source\PSoC5/UART_1_PM.c **** * Version 2.30
+   4:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+   5:.\Generated_Source\PSoC5/UART_1_PM.c **** * Description:
+   6:.\Generated_Source\PSoC5/UART_1_PM.c **** *  This file provides Sleep/WakeUp APIs functionality.
+   7:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+   8:.\Generated_Source\PSoC5/UART_1_PM.c **** * Note:
+   9:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+  10:.\Generated_Source\PSoC5/UART_1_PM.c **** ********************************************************************************
+  11:.\Generated_Source\PSoC5/UART_1_PM.c **** * Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  12:.\Generated_Source\PSoC5/UART_1_PM.c **** * You may use this file only in accordance with the license, terms, conditions,
+  13:.\Generated_Source\PSoC5/UART_1_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  14:.\Generated_Source\PSoC5/UART_1_PM.c **** * the software package with which this file was provided.
+  15:.\Generated_Source\PSoC5/UART_1_PM.c **** *******************************************************************************/
+  16:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+  17:.\Generated_Source\PSoC5/UART_1_PM.c **** #include "UART_1.h"
+  18:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+  19:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+  20:.\Generated_Source\PSoC5/UART_1_PM.c **** /***************************************
+  21:.\Generated_Source\PSoC5/UART_1_PM.c **** * Local data allocation
+  22:.\Generated_Source\PSoC5/UART_1_PM.c **** ***************************************/
+  23:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+  24:.\Generated_Source\PSoC5/UART_1_PM.c **** static UART_1_BACKUP_STRUCT  UART_1_backup =
+  25:.\Generated_Source\PSoC5/UART_1_PM.c **** {
+  26:.\Generated_Source\PSoC5/UART_1_PM.c ****     /* enableState - disabled */
+  27:.\Generated_Source\PSoC5/UART_1_PM.c ****     0u,
+  28:.\Generated_Source\PSoC5/UART_1_PM.c **** };
+  29:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+  30:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+  31:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHivvml.s 			page 2
+
+
+  32:.\Generated_Source\PSoC5/UART_1_PM.c **** /*******************************************************************************
+  33:.\Generated_Source\PSoC5/UART_1_PM.c **** * Function Name: UART_1_SaveConfig
+  34:.\Generated_Source\PSoC5/UART_1_PM.c **** ********************************************************************************
+  35:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+  36:.\Generated_Source\PSoC5/UART_1_PM.c **** * Summary:
+  37:.\Generated_Source\PSoC5/UART_1_PM.c **** *  Saves the current user configuration.
+  38:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+  39:.\Generated_Source\PSoC5/UART_1_PM.c **** * Parameters:
+  40:.\Generated_Source\PSoC5/UART_1_PM.c **** *  None.
+  41:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+  42:.\Generated_Source\PSoC5/UART_1_PM.c **** * Return:
+  43:.\Generated_Source\PSoC5/UART_1_PM.c **** *  None.
+  44:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+  45:.\Generated_Source\PSoC5/UART_1_PM.c **** * Global Variables:
+  46:.\Generated_Source\PSoC5/UART_1_PM.c **** *  UART_1_backup - modified when non-retention registers are saved.
+  47:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+  48:.\Generated_Source\PSoC5/UART_1_PM.c **** * Reentrant:
+  49:.\Generated_Source\PSoC5/UART_1_PM.c **** *  No.
+  50:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+  51:.\Generated_Source\PSoC5/UART_1_PM.c **** *******************************************************************************/
+  52:.\Generated_Source\PSoC5/UART_1_PM.c **** void UART_1_SaveConfig(void)
+  53:.\Generated_Source\PSoC5/UART_1_PM.c **** {
+  27              		.loc 1 53 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 7047     		bx	lr
+  33              		.cfi_endproc
+  34              	.LFE0:
+  35              		.size	UART_1_SaveConfig, .-UART_1_SaveConfig
+  36              		.section	.text.UART_1_RestoreConfig,"ax",%progbits
+  37              		.align	1
+  38              		.global	UART_1_RestoreConfig
+  39              		.thumb
+  40              		.thumb_func
+  41              		.type	UART_1_RestoreConfig, %function
+  42              	UART_1_RestoreConfig:
+  43              	.LFB1:
+  54:.\Generated_Source\PSoC5/UART_1_PM.c ****     #if (CY_UDB_V0)
+  55:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+  56:.\Generated_Source\PSoC5/UART_1_PM.c ****         #if(UART_1_CONTROL_REG_REMOVED == 0u)
+  57:.\Generated_Source\PSoC5/UART_1_PM.c ****             UART_1_backup.cr = UART_1_CONTROL_REG;
+  58:.\Generated_Source\PSoC5/UART_1_PM.c ****         #endif /* End UART_1_CONTROL_REG_REMOVED */
+  59:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+  60:.\Generated_Source\PSoC5/UART_1_PM.c ****         #if( (UART_1_RX_ENABLED) || (UART_1_HD_ENABLED) )
+  61:.\Generated_Source\PSoC5/UART_1_PM.c ****             UART_1_backup.rx_period = UART_1_RXBITCTR_PERIOD_REG;
+  62:.\Generated_Source\PSoC5/UART_1_PM.c ****             UART_1_backup.rx_mask = UART_1_RXSTATUS_MASK_REG;
+  63:.\Generated_Source\PSoC5/UART_1_PM.c ****             #if (UART_1_RXHW_ADDRESS_ENABLED)
+  64:.\Generated_Source\PSoC5/UART_1_PM.c ****                 UART_1_backup.rx_addr1 = UART_1_RXADDRESS1_REG;
+  65:.\Generated_Source\PSoC5/UART_1_PM.c ****                 UART_1_backup.rx_addr2 = UART_1_RXADDRESS2_REG;
+  66:.\Generated_Source\PSoC5/UART_1_PM.c ****             #endif /* End UART_1_RXHW_ADDRESS_ENABLED */
+  67:.\Generated_Source\PSoC5/UART_1_PM.c ****         #endif /* End UART_1_RX_ENABLED | UART_1_HD_ENABLED*/
+  68:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+  69:.\Generated_Source\PSoC5/UART_1_PM.c ****         #if(UART_1_TX_ENABLED)
+  70:.\Generated_Source\PSoC5/UART_1_PM.c ****             #if(UART_1_TXCLKGEN_DP)
+  71:.\Generated_Source\PSoC5/UART_1_PM.c ****                 UART_1_backup.tx_clk_ctr = UART_1_TXBITCLKGEN_CTR_REG;
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHivvml.s 			page 3
+
+
+  72:.\Generated_Source\PSoC5/UART_1_PM.c ****                 UART_1_backup.tx_clk_compl = UART_1_TXBITCLKTX_COMPLETE_REG;
+  73:.\Generated_Source\PSoC5/UART_1_PM.c ****             #else
+  74:.\Generated_Source\PSoC5/UART_1_PM.c ****                 UART_1_backup.tx_period = UART_1_TXBITCTR_PERIOD_REG;
+  75:.\Generated_Source\PSoC5/UART_1_PM.c ****             #endif /*End UART_1_TXCLKGEN_DP */
+  76:.\Generated_Source\PSoC5/UART_1_PM.c ****             UART_1_backup.tx_mask = UART_1_TXSTATUS_MASK_REG;
+  77:.\Generated_Source\PSoC5/UART_1_PM.c ****         #endif /*End UART_1_TX_ENABLED */
+  78:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+  79:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+  80:.\Generated_Source\PSoC5/UART_1_PM.c ****     #else /* CY_UDB_V1 */
+  81:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+  82:.\Generated_Source\PSoC5/UART_1_PM.c ****         #if(UART_1_CONTROL_REG_REMOVED == 0u)
+  83:.\Generated_Source\PSoC5/UART_1_PM.c ****             UART_1_backup.cr = UART_1_CONTROL_REG;
+  84:.\Generated_Source\PSoC5/UART_1_PM.c ****         #endif /* End UART_1_CONTROL_REG_REMOVED */
+  85:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+  86:.\Generated_Source\PSoC5/UART_1_PM.c ****     #endif  /* End CY_UDB_V0 */
+  87:.\Generated_Source\PSoC5/UART_1_PM.c **** }
+  88:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+  89:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+  90:.\Generated_Source\PSoC5/UART_1_PM.c **** /*******************************************************************************
+  91:.\Generated_Source\PSoC5/UART_1_PM.c **** * Function Name: UART_1_RestoreConfig
+  92:.\Generated_Source\PSoC5/UART_1_PM.c **** ********************************************************************************
+  93:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+  94:.\Generated_Source\PSoC5/UART_1_PM.c **** * Summary:
+  95:.\Generated_Source\PSoC5/UART_1_PM.c **** *  Restores the current user configuration.
+  96:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+  97:.\Generated_Source\PSoC5/UART_1_PM.c **** * Parameters:
+  98:.\Generated_Source\PSoC5/UART_1_PM.c **** *  None.
+  99:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+ 100:.\Generated_Source\PSoC5/UART_1_PM.c **** * Return:
+ 101:.\Generated_Source\PSoC5/UART_1_PM.c **** *  None.
+ 102:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+ 103:.\Generated_Source\PSoC5/UART_1_PM.c **** * Global Variables:
+ 104:.\Generated_Source\PSoC5/UART_1_PM.c **** *  UART_1_backup - used when non-retention registers are restored.
+ 105:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+ 106:.\Generated_Source\PSoC5/UART_1_PM.c **** * Reentrant:
+ 107:.\Generated_Source\PSoC5/UART_1_PM.c **** *  No.
+ 108:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+ 109:.\Generated_Source\PSoC5/UART_1_PM.c **** *******************************************************************************/
+ 110:.\Generated_Source\PSoC5/UART_1_PM.c **** void UART_1_RestoreConfig(void)
+ 111:.\Generated_Source\PSoC5/UART_1_PM.c **** {
+  44              		.loc 1 111 0
+  45              		.cfi_startproc
+  46              		@ args = 0, pretend = 0, frame = 0
+  47              		@ frame_needed = 0, uses_anonymous_args = 0
+  48              		@ link register save eliminated.
+  49 0000 7047     		bx	lr
+  50              		.cfi_endproc
+  51              	.LFE1:
+  52              		.size	UART_1_RestoreConfig, .-UART_1_RestoreConfig
+  53              		.section	.text.UART_1_Sleep,"ax",%progbits
+  54              		.align	1
+  55              		.global	UART_1_Sleep
+  56              		.thumb
+  57              		.thumb_func
+  58              		.type	UART_1_Sleep, %function
+  59              	UART_1_Sleep:
+  60              	.LFB2:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHivvml.s 			page 4
+
+
+ 112:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+ 113:.\Generated_Source\PSoC5/UART_1_PM.c ****     #if (CY_UDB_V0)
+ 114:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+ 115:.\Generated_Source\PSoC5/UART_1_PM.c ****         #if(UART_1_CONTROL_REG_REMOVED == 0u)
+ 116:.\Generated_Source\PSoC5/UART_1_PM.c ****             UART_1_CONTROL_REG = UART_1_backup.cr;
+ 117:.\Generated_Source\PSoC5/UART_1_PM.c ****         #endif /* End UART_1_CONTROL_REG_REMOVED */
+ 118:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+ 119:.\Generated_Source\PSoC5/UART_1_PM.c ****         #if( (UART_1_RX_ENABLED) || (UART_1_HD_ENABLED) )
+ 120:.\Generated_Source\PSoC5/UART_1_PM.c ****             UART_1_RXBITCTR_PERIOD_REG = UART_1_backup.rx_period;
+ 121:.\Generated_Source\PSoC5/UART_1_PM.c ****             UART_1_RXSTATUS_MASK_REG = UART_1_backup.rx_mask;
+ 122:.\Generated_Source\PSoC5/UART_1_PM.c ****             #if (UART_1_RXHW_ADDRESS_ENABLED)
+ 123:.\Generated_Source\PSoC5/UART_1_PM.c ****                 UART_1_RXADDRESS1_REG = UART_1_backup.rx_addr1;
+ 124:.\Generated_Source\PSoC5/UART_1_PM.c ****                 UART_1_RXADDRESS2_REG = UART_1_backup.rx_addr2;
+ 125:.\Generated_Source\PSoC5/UART_1_PM.c ****             #endif /* End UART_1_RXHW_ADDRESS_ENABLED */
+ 126:.\Generated_Source\PSoC5/UART_1_PM.c ****         #endif  /* End (UART_1_RX_ENABLED) || (UART_1_HD_ENABLED) */
+ 127:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+ 128:.\Generated_Source\PSoC5/UART_1_PM.c ****         #if(UART_1_TX_ENABLED)
+ 129:.\Generated_Source\PSoC5/UART_1_PM.c ****             #if(UART_1_TXCLKGEN_DP)
+ 130:.\Generated_Source\PSoC5/UART_1_PM.c ****                 UART_1_TXBITCLKGEN_CTR_REG = UART_1_backup.tx_clk_ctr;
+ 131:.\Generated_Source\PSoC5/UART_1_PM.c ****                 UART_1_TXBITCLKTX_COMPLETE_REG = UART_1_backup.tx_clk_compl;
+ 132:.\Generated_Source\PSoC5/UART_1_PM.c ****             #else
+ 133:.\Generated_Source\PSoC5/UART_1_PM.c ****                 UART_1_TXBITCTR_PERIOD_REG = UART_1_backup.tx_period;
+ 134:.\Generated_Source\PSoC5/UART_1_PM.c ****             #endif /*End UART_1_TXCLKGEN_DP */
+ 135:.\Generated_Source\PSoC5/UART_1_PM.c ****             UART_1_TXSTATUS_MASK_REG = UART_1_backup.tx_mask;
+ 136:.\Generated_Source\PSoC5/UART_1_PM.c ****         #endif /*End UART_1_TX_ENABLED */
+ 137:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+ 138:.\Generated_Source\PSoC5/UART_1_PM.c ****     #else /* CY_UDB_V1 */
+ 139:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+ 140:.\Generated_Source\PSoC5/UART_1_PM.c ****         #if(UART_1_CONTROL_REG_REMOVED == 0u)
+ 141:.\Generated_Source\PSoC5/UART_1_PM.c ****             UART_1_CONTROL_REG = UART_1_backup.cr;
+ 142:.\Generated_Source\PSoC5/UART_1_PM.c ****         #endif /* End UART_1_CONTROL_REG_REMOVED */
+ 143:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+ 144:.\Generated_Source\PSoC5/UART_1_PM.c ****     #endif  /* End CY_UDB_V0 */
+ 145:.\Generated_Source\PSoC5/UART_1_PM.c **** }
+ 146:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+ 147:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+ 148:.\Generated_Source\PSoC5/UART_1_PM.c **** /*******************************************************************************
+ 149:.\Generated_Source\PSoC5/UART_1_PM.c **** * Function Name: UART_1_Sleep
+ 150:.\Generated_Source\PSoC5/UART_1_PM.c **** ********************************************************************************
+ 151:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+ 152:.\Generated_Source\PSoC5/UART_1_PM.c **** * Summary:
+ 153:.\Generated_Source\PSoC5/UART_1_PM.c **** *  Stops and saves the user configuration. Should be called
+ 154:.\Generated_Source\PSoC5/UART_1_PM.c **** *  just prior to entering sleep.
+ 155:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+ 156:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+ 157:.\Generated_Source\PSoC5/UART_1_PM.c **** * Parameters:
+ 158:.\Generated_Source\PSoC5/UART_1_PM.c **** *  None.
+ 159:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+ 160:.\Generated_Source\PSoC5/UART_1_PM.c **** * Return:
+ 161:.\Generated_Source\PSoC5/UART_1_PM.c **** *  None.
+ 162:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+ 163:.\Generated_Source\PSoC5/UART_1_PM.c **** * Global Variables:
+ 164:.\Generated_Source\PSoC5/UART_1_PM.c **** *  UART_1_backup - modified when non-retention registers are saved.
+ 165:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+ 166:.\Generated_Source\PSoC5/UART_1_PM.c **** * Reentrant:
+ 167:.\Generated_Source\PSoC5/UART_1_PM.c **** *  No.
+ 168:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHivvml.s 			page 5
+
+
+ 169:.\Generated_Source\PSoC5/UART_1_PM.c **** *******************************************************************************/
+ 170:.\Generated_Source\PSoC5/UART_1_PM.c **** void UART_1_Sleep(void)
+ 171:.\Generated_Source\PSoC5/UART_1_PM.c **** {
+  61              		.loc 1 171 0
+  62              		.cfi_startproc
+  63              		@ args = 0, pretend = 0, frame = 0
+  64              		@ frame_needed = 0, uses_anonymous_args = 0
+  65              		@ link register save eliminated.
+ 172:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+ 173:.\Generated_Source\PSoC5/UART_1_PM.c ****     #if(UART_1_RX_ENABLED || UART_1_HD_ENABLED)
+ 174:.\Generated_Source\PSoC5/UART_1_PM.c ****         if((UART_1_RXSTATUS_ACTL_REG  & UART_1_INT_ENABLE) != 0u)
+  66              		.loc 1 174 0
+  67 0000 064B     		ldr	r3, .L7
+  68 0002 074A     		ldr	r2, .L7+4
+  69 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  70 0006 03F01003 		and	r3, r3, #16
+  71 000a 03F0FF01 		and	r1, r3, #255
+  72 000e 13B1     		cbz	r3, .L4
+ 175:.\Generated_Source\PSoC5/UART_1_PM.c ****         {
+ 176:.\Generated_Source\PSoC5/UART_1_PM.c ****             UART_1_backup.enableState = 1u;
+  73              		.loc 1 176 0
+  74 0010 0123     		movs	r3, #1
+  75 0012 1370     		strb	r3, [r2]
+  76 0014 00E0     		b	.L5
+  77              	.L4:
+ 177:.\Generated_Source\PSoC5/UART_1_PM.c ****         }
+ 178:.\Generated_Source\PSoC5/UART_1_PM.c ****         else
+ 179:.\Generated_Source\PSoC5/UART_1_PM.c ****         {
+ 180:.\Generated_Source\PSoC5/UART_1_PM.c ****             UART_1_backup.enableState = 0u;
+  78              		.loc 1 180 0
+  79 0016 1170     		strb	r1, [r2]
+  80              	.L5:
+ 181:.\Generated_Source\PSoC5/UART_1_PM.c ****         }
+ 182:.\Generated_Source\PSoC5/UART_1_PM.c ****     #else
+ 183:.\Generated_Source\PSoC5/UART_1_PM.c ****         if((UART_1_TXSTATUS_ACTL_REG  & UART_1_INT_ENABLE) !=0u)
+ 184:.\Generated_Source\PSoC5/UART_1_PM.c ****         {
+ 185:.\Generated_Source\PSoC5/UART_1_PM.c ****             UART_1_backup.enableState = 1u;
+ 186:.\Generated_Source\PSoC5/UART_1_PM.c ****         }
+ 187:.\Generated_Source\PSoC5/UART_1_PM.c ****         else
+ 188:.\Generated_Source\PSoC5/UART_1_PM.c ****         {
+ 189:.\Generated_Source\PSoC5/UART_1_PM.c ****             UART_1_backup.enableState = 0u;
+ 190:.\Generated_Source\PSoC5/UART_1_PM.c ****         }
+ 191:.\Generated_Source\PSoC5/UART_1_PM.c ****     #endif /* End UART_1_RX_ENABLED || UART_1_HD_ENABLED*/
+ 192:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+ 193:.\Generated_Source\PSoC5/UART_1_PM.c ****     UART_1_Stop();
+  81              		.loc 1 193 0
+  82 0018 FFF7FEBF 		b	UART_1_Stop
+  83              	.LVL0:
+  84              	.L8:
+  85              		.align	2
+  86              	.L7:
+  87 001c 96640040 		.word	1073767574
+  88 0020 00000000 		.word	.LANCHOR0
+  89              		.cfi_endproc
+  90              	.LFE2:
+  91              		.size	UART_1_Sleep, .-UART_1_Sleep
+  92              		.section	.text.UART_1_Wakeup,"ax",%progbits
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHivvml.s 			page 6
+
+
+  93              		.align	1
+  94              		.global	UART_1_Wakeup
+  95              		.thumb
+  96              		.thumb_func
+  97              		.type	UART_1_Wakeup, %function
+  98              	UART_1_Wakeup:
+  99              	.LFB3:
+ 194:.\Generated_Source\PSoC5/UART_1_PM.c ****     UART_1_SaveConfig();
+ 195:.\Generated_Source\PSoC5/UART_1_PM.c **** }
+ 196:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+ 197:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+ 198:.\Generated_Source\PSoC5/UART_1_PM.c **** /*******************************************************************************
+ 199:.\Generated_Source\PSoC5/UART_1_PM.c **** * Function Name: UART_1_Wakeup
+ 200:.\Generated_Source\PSoC5/UART_1_PM.c **** ********************************************************************************
+ 201:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+ 202:.\Generated_Source\PSoC5/UART_1_PM.c **** * Summary:
+ 203:.\Generated_Source\PSoC5/UART_1_PM.c **** *  Restores and enables the user configuration. Should be called
+ 204:.\Generated_Source\PSoC5/UART_1_PM.c **** *  just after awaking from sleep.
+ 205:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+ 206:.\Generated_Source\PSoC5/UART_1_PM.c **** * Parameters:
+ 207:.\Generated_Source\PSoC5/UART_1_PM.c **** *  None.
+ 208:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+ 209:.\Generated_Source\PSoC5/UART_1_PM.c **** * Return:
+ 210:.\Generated_Source\PSoC5/UART_1_PM.c **** *  None.
+ 211:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+ 212:.\Generated_Source\PSoC5/UART_1_PM.c **** * Global Variables:
+ 213:.\Generated_Source\PSoC5/UART_1_PM.c **** *  UART_1_backup - used when non-retention registers are restored.
+ 214:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+ 215:.\Generated_Source\PSoC5/UART_1_PM.c **** * Reentrant:
+ 216:.\Generated_Source\PSoC5/UART_1_PM.c **** *  No.
+ 217:.\Generated_Source\PSoC5/UART_1_PM.c **** *
+ 218:.\Generated_Source\PSoC5/UART_1_PM.c **** *******************************************************************************/
+ 219:.\Generated_Source\PSoC5/UART_1_PM.c **** void UART_1_Wakeup(void)
+ 220:.\Generated_Source\PSoC5/UART_1_PM.c **** {
+ 100              		.loc 1 220 0
+ 101              		.cfi_startproc
+ 102              		@ args = 0, pretend = 0, frame = 0
+ 103              		@ frame_needed = 0, uses_anonymous_args = 0
+ 104 0000 08B5     		push	{r3, lr}
+ 105              		.cfi_def_cfa_offset 8
+ 106              		.cfi_offset 3, -8
+ 107              		.cfi_offset 14, -4
+ 221:.\Generated_Source\PSoC5/UART_1_PM.c ****     UART_1_RestoreConfig();
+ 222:.\Generated_Source\PSoC5/UART_1_PM.c ****     #if( (UART_1_RX_ENABLED) || (UART_1_HD_ENABLED) )
+ 223:.\Generated_Source\PSoC5/UART_1_PM.c ****         UART_1_ClearRxBuffer();
+ 108              		.loc 1 223 0
+ 109 0002 FFF7FEFF 		bl	UART_1_ClearRxBuffer
+ 110              	.LVL1:
+ 224:.\Generated_Source\PSoC5/UART_1_PM.c ****     #endif /* End (UART_1_RX_ENABLED) || (UART_1_HD_ENABLED) */
+ 225:.\Generated_Source\PSoC5/UART_1_PM.c ****     #if(UART_1_TX_ENABLED || UART_1_HD_ENABLED)
+ 226:.\Generated_Source\PSoC5/UART_1_PM.c ****         UART_1_ClearTxBuffer();
+ 111              		.loc 1 226 0
+ 112 0006 FFF7FEFF 		bl	UART_1_ClearTxBuffer
+ 113              	.LVL2:
+ 227:.\Generated_Source\PSoC5/UART_1_PM.c ****     #endif /* End UART_1_TX_ENABLED || UART_1_HD_ENABLED */
+ 228:.\Generated_Source\PSoC5/UART_1_PM.c **** 
+ 229:.\Generated_Source\PSoC5/UART_1_PM.c ****     if(UART_1_backup.enableState != 0u)
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHivvml.s 			page 7
+
+
+ 114              		.loc 1 229 0
+ 115 000a 044B     		ldr	r3, .L11
+ 116 000c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 117 000e 1BB1     		cbz	r3, .L9
+ 230:.\Generated_Source\PSoC5/UART_1_PM.c ****     {
+ 231:.\Generated_Source\PSoC5/UART_1_PM.c ****         UART_1_Enable();
+ 232:.\Generated_Source\PSoC5/UART_1_PM.c ****     }
+ 233:.\Generated_Source\PSoC5/UART_1_PM.c **** }
+ 118              		.loc 1 233 0
+ 119 0010 BDE80840 		pop	{r3, lr}
+ 120              		.cfi_remember_state
+ 121              		.cfi_restore 14
+ 122              		.cfi_restore 3
+ 123              		.cfi_def_cfa_offset 0
+ 231:.\Generated_Source\PSoC5/UART_1_PM.c ****     }
+ 124              		.loc 1 231 0
+ 125 0014 FFF7FEBF 		b	UART_1_Enable
+ 126              	.LVL3:
+ 127              	.L9:
+ 128              		.cfi_restore_state
+ 129 0018 08BD     		pop	{r3, pc}
+ 130              	.L12:
+ 131 001a 00BF     		.align	2
+ 132              	.L11:
+ 133 001c 00000000 		.word	.LANCHOR0
+ 134              		.cfi_endproc
+ 135              	.LFE3:
+ 136              		.size	UART_1_Wakeup, .-UART_1_Wakeup
+ 137              		.bss
+ 138              		.set	.LANCHOR0,. + 0
+ 139              		.type	UART_1_backup, %object
+ 140              		.size	UART_1_backup, 3
+ 141              	UART_1_backup:
+ 142 0000 000000   		.space	3
+ 143              		.text
+ 144              	.Letext0:
+ 145              		.file 2 ".\\Generated_Source\\PSoC5\\cytypes.h"
+ 146              		.file 3 ".\\Generated_Source\\PSoC5\\UART_1.h"
+ 147              		.section	.debug_info,"",%progbits
+ 148              	.Ldebug_info0:
+ 149 0000 87010000 		.4byte	0x187
+ 150 0004 0400     		.2byte	0x4
+ 151 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 152 000a 04       		.byte	0x4
+ 153 000b 01       		.uleb128 0x1
+ 154 000c 5B000000 		.4byte	.LASF27
+ 155 0010 01       		.byte	0x1
+ 156 0011 19010000 		.4byte	.LASF28
+ 157 0015 89010000 		.4byte	.LASF29
+ 158 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 159 001d 00000000 		.4byte	0
+ 160 0021 00000000 		.4byte	.Ldebug_line0
+ 161 0025 02       		.uleb128 0x2
+ 162 0026 01       		.byte	0x1
+ 163 0027 06       		.byte	0x6
+ 164 0028 92020000 		.4byte	.LASF0
+ 165 002c 02       		.uleb128 0x2
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHivvml.s 			page 8
+
+
+ 166 002d 01       		.byte	0x1
+ 167 002e 08       		.byte	0x8
+ 168 002f E9000000 		.4byte	.LASF1
+ 169 0033 02       		.uleb128 0x2
+ 170 0034 02       		.byte	0x2
+ 171 0035 05       		.byte	0x5
+ 172 0036 31020000 		.4byte	.LASF2
+ 173 003a 02       		.uleb128 0x2
+ 174 003b 02       		.byte	0x2
+ 175 003c 07       		.byte	0x7
+ 176 003d 1F000000 		.4byte	.LASF3
+ 177 0041 02       		.uleb128 0x2
+ 178 0042 04       		.byte	0x4
+ 179 0043 05       		.byte	0x5
+ 180 0044 5D020000 		.4byte	.LASF4
+ 181 0048 02       		.uleb128 0x2
+ 182 0049 04       		.byte	0x4
+ 183 004a 07       		.byte	0x7
+ 184 004b 53010000 		.4byte	.LASF5
+ 185 004f 02       		.uleb128 0x2
+ 186 0050 08       		.byte	0x8
+ 187 0051 05       		.byte	0x5
+ 188 0052 09020000 		.4byte	.LASF6
+ 189 0056 02       		.uleb128 0x2
+ 190 0057 08       		.byte	0x8
+ 191 0058 07       		.byte	0x7
+ 192 0059 72010000 		.4byte	.LASF7
+ 193 005d 03       		.uleb128 0x3
+ 194 005e 04       		.byte	0x4
+ 195 005f 05       		.byte	0x5
+ 196 0060 696E7400 		.ascii	"int\000"
+ 197 0064 02       		.uleb128 0x2
+ 198 0065 04       		.byte	0x4
+ 199 0066 07       		.byte	0x7
+ 200 0067 65010000 		.4byte	.LASF8
+ 201 006b 04       		.uleb128 0x4
+ 202 006c 13010000 		.4byte	.LASF12
+ 203 0070 02       		.byte	0x2
+ 204 0071 A1       		.byte	0xa1
+ 205 0072 2C000000 		.4byte	0x2c
+ 206 0076 02       		.uleb128 0x2
+ 207 0077 04       		.byte	0x4
+ 208 0078 04       		.byte	0x4
+ 209 0079 55000000 		.4byte	.LASF9
+ 210 007d 02       		.uleb128 0x2
+ 211 007e 08       		.byte	0x8
+ 212 007f 04       		.byte	0x4
+ 213 0080 3E010000 		.4byte	.LASF10
+ 214 0084 02       		.uleb128 0x2
+ 215 0085 01       		.byte	0x1
+ 216 0086 08       		.byte	0x8
+ 217 0087 17020000 		.4byte	.LASF11
+ 218 008b 05       		.uleb128 0x5
+ 219 008c F7000000 		.4byte	.LASF13
+ 220 0090 02       		.byte	0x2
+ 221 0091 4B01     		.2byte	0x14b
+ 222 0093 97000000 		.4byte	0x97
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHivvml.s 			page 9
+
+
+ 223 0097 06       		.uleb128 0x6
+ 224 0098 6B000000 		.4byte	0x6b
+ 225 009c 02       		.uleb128 0x2
+ 226 009d 04       		.byte	0x4
+ 227 009e 07       		.byte	0x7
+ 228 009f 00020000 		.4byte	.LASF14
+ 229 00a3 07       		.uleb128 0x7
+ 230 00a4 1C020000 		.4byte	.LASF30
+ 231 00a8 03       		.byte	0x3
+ 232 00a9 03       		.byte	0x3
+ 233 00aa 45       		.byte	0x45
+ 234 00ab D4000000 		.4byte	0xd4
+ 235 00af 08       		.uleb128 0x8
+ 236 00b0 66020000 		.4byte	.LASF15
+ 237 00b4 03       		.byte	0x3
+ 238 00b5 47       		.byte	0x47
+ 239 00b6 6B000000 		.4byte	0x6b
+ 240 00ba 00       		.byte	0
+ 241 00bb 08       		.uleb128 0x8
+ 242 00bc 15000000 		.4byte	.LASF16
+ 243 00c0 03       		.byte	0x3
+ 244 00c1 4D       		.byte	0x4d
+ 245 00c2 6B000000 		.4byte	0x6b
+ 246 00c6 01       		.byte	0x1
+ 247 00c7 08       		.uleb128 0x8
+ 248 00c8 08010000 		.4byte	.LASF17
+ 249 00cc 03       		.byte	0x3
+ 250 00cd 59       		.byte	0x59
+ 251 00ce 6B000000 		.4byte	0x6b
+ 252 00d2 02       		.byte	0x2
+ 253 00d3 00       		.byte	0
+ 254 00d4 04       		.uleb128 0x4
+ 255 00d5 9E020000 		.4byte	.LASF18
+ 256 00d9 03       		.byte	0x3
+ 257 00da 64       		.byte	0x64
+ 258 00db A3000000 		.4byte	0xa3
+ 259 00df 09       		.uleb128 0x9
+ 260 00e0 80020000 		.4byte	.LASF19
+ 261 00e4 01       		.byte	0x1
+ 262 00e5 34       		.byte	0x34
+ 263 00e6 01       		.byte	0x1
+ 264 00e7 09       		.uleb128 0x9
+ 265 00e8 00000000 		.4byte	.LASF20
+ 266 00ec 01       		.byte	0x1
+ 267 00ed 6E       		.byte	0x6e
+ 268 00ee 01       		.byte	0x1
+ 269 00ef 0A       		.uleb128 0xa
+ 270 00f0 DF000000 		.4byte	0xdf
+ 271 00f4 00000000 		.4byte	.LFB0
+ 272 00f8 02000000 		.4byte	.LFE0-.LFB0
+ 273 00fc 01       		.uleb128 0x1
+ 274 00fd 9C       		.byte	0x9c
+ 275 00fe 0A       		.uleb128 0xa
+ 276 00ff E7000000 		.4byte	0xe7
+ 277 0103 00000000 		.4byte	.LFB1
+ 278 0107 02000000 		.4byte	.LFE1-.LFB1
+ 279 010b 01       		.uleb128 0x1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHivvml.s 			page 10
+
+
+ 280 010c 9C       		.byte	0x9c
+ 281 010d 0B       		.uleb128 0xb
+ 282 010e 3B020000 		.4byte	.LASF21
+ 283 0112 01       		.byte	0x1
+ 284 0113 AA       		.byte	0xaa
+ 285 0114 00000000 		.4byte	.LFB2
+ 286 0118 24000000 		.4byte	.LFE2-.LFB2
+ 287 011c 01       		.uleb128 0x1
+ 288 011d 9C       		.byte	0x9c
+ 289 011e 2C010000 		.4byte	0x12c
+ 290 0122 0C       		.uleb128 0xc
+ 291 0123 1C000000 		.4byte	.LVL0
+ 292 0127 6E010000 		.4byte	0x16e
+ 293 012b 00       		.byte	0
+ 294 012c 0B       		.uleb128 0xb
+ 295 012d 45010000 		.4byte	.LASF22
+ 296 0131 01       		.byte	0x1
+ 297 0132 DB       		.byte	0xdb
+ 298 0133 00000000 		.4byte	.LFB3
+ 299 0137 20000000 		.4byte	.LFE3-.LFB3
+ 300 013b 01       		.uleb128 0x1
+ 301 013c 9C       		.byte	0x9c
+ 302 013d 5D010000 		.4byte	0x15d
+ 303 0141 0D       		.uleb128 0xd
+ 304 0142 06000000 		.4byte	.LVL1
+ 305 0146 75010000 		.4byte	0x175
+ 306 014a 0D       		.uleb128 0xd
+ 307 014b 0A000000 		.4byte	.LVL2
+ 308 014f 7C010000 		.4byte	0x17c
+ 309 0153 0C       		.uleb128 0xc
+ 310 0154 18000000 		.4byte	.LVL3
+ 311 0158 83010000 		.4byte	0x183
+ 312 015c 00       		.byte	0
+ 313 015d 0E       		.uleb128 0xe
+ 314 015e 47000000 		.4byte	.LASF31
+ 315 0162 01       		.byte	0x1
+ 316 0163 18       		.byte	0x18
+ 317 0164 D4000000 		.4byte	0xd4
+ 318 0168 05       		.uleb128 0x5
+ 319 0169 03       		.byte	0x3
+ 320 016a 00000000 		.4byte	UART_1_backup
+ 321 016e 0F       		.uleb128 0xf
+ 322 016f FC000000 		.4byte	.LASF23
+ 323 0173 03       		.byte	0x3
+ 324 0174 6C       		.byte	0x6c
+ 325 0175 0F       		.uleb128 0xf
+ 326 0176 32000000 		.4byte	.LASF24
+ 327 017a 03       		.byte	0x3
+ 328 017b 8C       		.byte	0x8c
+ 329 017c 0F       		.uleb128 0xf
+ 330 017d 48020000 		.4byte	.LASF25
+ 331 0181 03       		.byte	0x3
+ 332 0182 A4       		.byte	0xa4
+ 333 0183 0F       		.uleb128 0xf
+ 334 0184 72020000 		.4byte	.LASF26
+ 335 0188 03       		.byte	0x3
+ 336 0189 71       		.byte	0x71
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHivvml.s 			page 11
+
+
+ 337 018a 00       		.byte	0
+ 338              		.section	.debug_abbrev,"",%progbits
+ 339              	.Ldebug_abbrev0:
+ 340 0000 01       		.uleb128 0x1
+ 341 0001 11       		.uleb128 0x11
+ 342 0002 01       		.byte	0x1
+ 343 0003 25       		.uleb128 0x25
+ 344 0004 0E       		.uleb128 0xe
+ 345 0005 13       		.uleb128 0x13
+ 346 0006 0B       		.uleb128 0xb
+ 347 0007 03       		.uleb128 0x3
+ 348 0008 0E       		.uleb128 0xe
+ 349 0009 1B       		.uleb128 0x1b
+ 350 000a 0E       		.uleb128 0xe
+ 351 000b 55       		.uleb128 0x55
+ 352 000c 17       		.uleb128 0x17
+ 353 000d 11       		.uleb128 0x11
+ 354 000e 01       		.uleb128 0x1
+ 355 000f 10       		.uleb128 0x10
+ 356 0010 17       		.uleb128 0x17
+ 357 0011 00       		.byte	0
+ 358 0012 00       		.byte	0
+ 359 0013 02       		.uleb128 0x2
+ 360 0014 24       		.uleb128 0x24
+ 361 0015 00       		.byte	0
+ 362 0016 0B       		.uleb128 0xb
+ 363 0017 0B       		.uleb128 0xb
+ 364 0018 3E       		.uleb128 0x3e
+ 365 0019 0B       		.uleb128 0xb
+ 366 001a 03       		.uleb128 0x3
+ 367 001b 0E       		.uleb128 0xe
+ 368 001c 00       		.byte	0
+ 369 001d 00       		.byte	0
+ 370 001e 03       		.uleb128 0x3
+ 371 001f 24       		.uleb128 0x24
+ 372 0020 00       		.byte	0
+ 373 0021 0B       		.uleb128 0xb
+ 374 0022 0B       		.uleb128 0xb
+ 375 0023 3E       		.uleb128 0x3e
+ 376 0024 0B       		.uleb128 0xb
+ 377 0025 03       		.uleb128 0x3
+ 378 0026 08       		.uleb128 0x8
+ 379 0027 00       		.byte	0
+ 380 0028 00       		.byte	0
+ 381 0029 04       		.uleb128 0x4
+ 382 002a 16       		.uleb128 0x16
+ 383 002b 00       		.byte	0
+ 384 002c 03       		.uleb128 0x3
+ 385 002d 0E       		.uleb128 0xe
+ 386 002e 3A       		.uleb128 0x3a
+ 387 002f 0B       		.uleb128 0xb
+ 388 0030 3B       		.uleb128 0x3b
+ 389 0031 0B       		.uleb128 0xb
+ 390 0032 49       		.uleb128 0x49
+ 391 0033 13       		.uleb128 0x13
+ 392 0034 00       		.byte	0
+ 393 0035 00       		.byte	0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHivvml.s 			page 12
+
+
+ 394 0036 05       		.uleb128 0x5
+ 395 0037 16       		.uleb128 0x16
+ 396 0038 00       		.byte	0
+ 397 0039 03       		.uleb128 0x3
+ 398 003a 0E       		.uleb128 0xe
+ 399 003b 3A       		.uleb128 0x3a
+ 400 003c 0B       		.uleb128 0xb
+ 401 003d 3B       		.uleb128 0x3b
+ 402 003e 05       		.uleb128 0x5
+ 403 003f 49       		.uleb128 0x49
+ 404 0040 13       		.uleb128 0x13
+ 405 0041 00       		.byte	0
+ 406 0042 00       		.byte	0
+ 407 0043 06       		.uleb128 0x6
+ 408 0044 35       		.uleb128 0x35
+ 409 0045 00       		.byte	0
+ 410 0046 49       		.uleb128 0x49
+ 411 0047 13       		.uleb128 0x13
+ 412 0048 00       		.byte	0
+ 413 0049 00       		.byte	0
+ 414 004a 07       		.uleb128 0x7
+ 415 004b 13       		.uleb128 0x13
+ 416 004c 01       		.byte	0x1
+ 417 004d 03       		.uleb128 0x3
+ 418 004e 0E       		.uleb128 0xe
+ 419 004f 0B       		.uleb128 0xb
+ 420 0050 0B       		.uleb128 0xb
+ 421 0051 3A       		.uleb128 0x3a
+ 422 0052 0B       		.uleb128 0xb
+ 423 0053 3B       		.uleb128 0x3b
+ 424 0054 0B       		.uleb128 0xb
+ 425 0055 01       		.uleb128 0x1
+ 426 0056 13       		.uleb128 0x13
+ 427 0057 00       		.byte	0
+ 428 0058 00       		.byte	0
+ 429 0059 08       		.uleb128 0x8
+ 430 005a 0D       		.uleb128 0xd
+ 431 005b 00       		.byte	0
+ 432 005c 03       		.uleb128 0x3
+ 433 005d 0E       		.uleb128 0xe
+ 434 005e 3A       		.uleb128 0x3a
+ 435 005f 0B       		.uleb128 0xb
+ 436 0060 3B       		.uleb128 0x3b
+ 437 0061 0B       		.uleb128 0xb
+ 438 0062 49       		.uleb128 0x49
+ 439 0063 13       		.uleb128 0x13
+ 440 0064 38       		.uleb128 0x38
+ 441 0065 0B       		.uleb128 0xb
+ 442 0066 00       		.byte	0
+ 443 0067 00       		.byte	0
+ 444 0068 09       		.uleb128 0x9
+ 445 0069 2E       		.uleb128 0x2e
+ 446 006a 00       		.byte	0
+ 447 006b 3F       		.uleb128 0x3f
+ 448 006c 19       		.uleb128 0x19
+ 449 006d 03       		.uleb128 0x3
+ 450 006e 0E       		.uleb128 0xe
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHivvml.s 			page 13
+
+
+ 451 006f 3A       		.uleb128 0x3a
+ 452 0070 0B       		.uleb128 0xb
+ 453 0071 3B       		.uleb128 0x3b
+ 454 0072 0B       		.uleb128 0xb
+ 455 0073 27       		.uleb128 0x27
+ 456 0074 19       		.uleb128 0x19
+ 457 0075 20       		.uleb128 0x20
+ 458 0076 0B       		.uleb128 0xb
+ 459 0077 00       		.byte	0
+ 460 0078 00       		.byte	0
+ 461 0079 0A       		.uleb128 0xa
+ 462 007a 2E       		.uleb128 0x2e
+ 463 007b 00       		.byte	0
+ 464 007c 31       		.uleb128 0x31
+ 465 007d 13       		.uleb128 0x13
+ 466 007e 11       		.uleb128 0x11
+ 467 007f 01       		.uleb128 0x1
+ 468 0080 12       		.uleb128 0x12
+ 469 0081 06       		.uleb128 0x6
+ 470 0082 40       		.uleb128 0x40
+ 471 0083 18       		.uleb128 0x18
+ 472 0084 9742     		.uleb128 0x2117
+ 473 0086 19       		.uleb128 0x19
+ 474 0087 00       		.byte	0
+ 475 0088 00       		.byte	0
+ 476 0089 0B       		.uleb128 0xb
+ 477 008a 2E       		.uleb128 0x2e
+ 478 008b 01       		.byte	0x1
+ 479 008c 3F       		.uleb128 0x3f
+ 480 008d 19       		.uleb128 0x19
+ 481 008e 03       		.uleb128 0x3
+ 482 008f 0E       		.uleb128 0xe
+ 483 0090 3A       		.uleb128 0x3a
+ 484 0091 0B       		.uleb128 0xb
+ 485 0092 3B       		.uleb128 0x3b
+ 486 0093 0B       		.uleb128 0xb
+ 487 0094 27       		.uleb128 0x27
+ 488 0095 19       		.uleb128 0x19
+ 489 0096 11       		.uleb128 0x11
+ 490 0097 01       		.uleb128 0x1
+ 491 0098 12       		.uleb128 0x12
+ 492 0099 06       		.uleb128 0x6
+ 493 009a 40       		.uleb128 0x40
+ 494 009b 18       		.uleb128 0x18
+ 495 009c 9742     		.uleb128 0x2117
+ 496 009e 19       		.uleb128 0x19
+ 497 009f 01       		.uleb128 0x1
+ 498 00a0 13       		.uleb128 0x13
+ 499 00a1 00       		.byte	0
+ 500 00a2 00       		.byte	0
+ 501 00a3 0C       		.uleb128 0xc
+ 502 00a4 898201   		.uleb128 0x4109
+ 503 00a7 00       		.byte	0
+ 504 00a8 11       		.uleb128 0x11
+ 505 00a9 01       		.uleb128 0x1
+ 506 00aa 9542     		.uleb128 0x2115
+ 507 00ac 19       		.uleb128 0x19
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHivvml.s 			page 14
+
+
+ 508 00ad 31       		.uleb128 0x31
+ 509 00ae 13       		.uleb128 0x13
+ 510 00af 00       		.byte	0
+ 511 00b0 00       		.byte	0
+ 512 00b1 0D       		.uleb128 0xd
+ 513 00b2 898201   		.uleb128 0x4109
+ 514 00b5 00       		.byte	0
+ 515 00b6 11       		.uleb128 0x11
+ 516 00b7 01       		.uleb128 0x1
+ 517 00b8 31       		.uleb128 0x31
+ 518 00b9 13       		.uleb128 0x13
+ 519 00ba 00       		.byte	0
+ 520 00bb 00       		.byte	0
+ 521 00bc 0E       		.uleb128 0xe
+ 522 00bd 34       		.uleb128 0x34
+ 523 00be 00       		.byte	0
+ 524 00bf 03       		.uleb128 0x3
+ 525 00c0 0E       		.uleb128 0xe
+ 526 00c1 3A       		.uleb128 0x3a
+ 527 00c2 0B       		.uleb128 0xb
+ 528 00c3 3B       		.uleb128 0x3b
+ 529 00c4 0B       		.uleb128 0xb
+ 530 00c5 49       		.uleb128 0x49
+ 531 00c6 13       		.uleb128 0x13
+ 532 00c7 02       		.uleb128 0x2
+ 533 00c8 18       		.uleb128 0x18
+ 534 00c9 00       		.byte	0
+ 535 00ca 00       		.byte	0
+ 536 00cb 0F       		.uleb128 0xf
+ 537 00cc 2E       		.uleb128 0x2e
+ 538 00cd 00       		.byte	0
+ 539 00ce 3F       		.uleb128 0x3f
+ 540 00cf 19       		.uleb128 0x19
+ 541 00d0 03       		.uleb128 0x3
+ 542 00d1 0E       		.uleb128 0xe
+ 543 00d2 3A       		.uleb128 0x3a
+ 544 00d3 0B       		.uleb128 0xb
+ 545 00d4 3B       		.uleb128 0x3b
+ 546 00d5 0B       		.uleb128 0xb
+ 547 00d6 27       		.uleb128 0x27
+ 548 00d7 19       		.uleb128 0x19
+ 549 00d8 3C       		.uleb128 0x3c
+ 550 00d9 19       		.uleb128 0x19
+ 551 00da 00       		.byte	0
+ 552 00db 00       		.byte	0
+ 553 00dc 00       		.byte	0
+ 554              		.section	.debug_aranges,"",%progbits
+ 555 0000 34000000 		.4byte	0x34
+ 556 0004 0200     		.2byte	0x2
+ 557 0006 00000000 		.4byte	.Ldebug_info0
+ 558 000a 04       		.byte	0x4
+ 559 000b 00       		.byte	0
+ 560 000c 0000     		.2byte	0
+ 561 000e 0000     		.2byte	0
+ 562 0010 00000000 		.4byte	.LFB0
+ 563 0014 02000000 		.4byte	.LFE0-.LFB0
+ 564 0018 00000000 		.4byte	.LFB1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHivvml.s 			page 15
+
+
+ 565 001c 02000000 		.4byte	.LFE1-.LFB1
+ 566 0020 00000000 		.4byte	.LFB2
+ 567 0024 24000000 		.4byte	.LFE2-.LFB2
+ 568 0028 00000000 		.4byte	.LFB3
+ 569 002c 20000000 		.4byte	.LFE3-.LFB3
+ 570 0030 00000000 		.4byte	0
+ 571 0034 00000000 		.4byte	0
+ 572              		.section	.debug_ranges,"",%progbits
+ 573              	.Ldebug_ranges0:
+ 574 0000 00000000 		.4byte	.LFB0
+ 575 0004 02000000 		.4byte	.LFE0
+ 576 0008 00000000 		.4byte	.LFB1
+ 577 000c 02000000 		.4byte	.LFE1
+ 578 0010 00000000 		.4byte	.LFB2
+ 579 0014 24000000 		.4byte	.LFE2
+ 580 0018 00000000 		.4byte	.LFB3
+ 581 001c 20000000 		.4byte	.LFE3
+ 582 0020 00000000 		.4byte	0
+ 583 0024 00000000 		.4byte	0
+ 584              		.section	.debug_line,"",%progbits
+ 585              	.Ldebug_line0:
+ 586 0000 A4000000 		.section	.debug_str,"MS",%progbits,1
+ 586      02005400 
+ 586      00000201 
+ 586      FB0E0D00 
+ 586      01010101 
+ 587              	.LASF20:
+ 588 0000 55415254 		.ascii	"UART_1_RestoreConfig\000"
+ 588      5F315F52 
+ 588      6573746F 
+ 588      7265436F 
+ 588      6E666967 
+ 589              	.LASF16:
+ 590 0015 72785F70 		.ascii	"rx_period\000"
+ 590      6572696F 
+ 590      6400
+ 591              	.LASF3:
+ 592 001f 73686F72 		.ascii	"short unsigned int\000"
+ 592      7420756E 
+ 592      7369676E 
+ 592      65642069 
+ 592      6E7400
+ 593              	.LASF24:
+ 594 0032 55415254 		.ascii	"UART_1_ClearRxBuffer\000"
+ 594      5F315F43 
+ 594      6C656172 
+ 594      52784275 
+ 594      66666572 
+ 595              	.LASF31:
+ 596 0047 55415254 		.ascii	"UART_1_backup\000"
+ 596      5F315F62 
+ 596      61636B75 
+ 596      7000
+ 597              	.LASF9:
+ 598 0055 666C6F61 		.ascii	"float\000"
+ 598      7400
+ 599              	.LASF27:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHivvml.s 			page 16
+
+
+ 600 005b 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 600      4320342E 
+ 600      392E3320 
+ 600      32303135 
+ 600      30333033 
+ 601 008e 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 601      20726576 
+ 601      6973696F 
+ 601      6E203232 
+ 601      31323230 
+ 602 00c1 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 602      66756E63 
+ 602      74696F6E 
+ 602      2D736563 
+ 602      74696F6E 
+ 603              	.LASF1:
+ 604 00e9 756E7369 		.ascii	"unsigned char\000"
+ 604      676E6564 
+ 604      20636861 
+ 604      7200
+ 605              	.LASF13:
+ 606 00f7 72656738 		.ascii	"reg8\000"
+ 606      00
+ 607              	.LASF23:
+ 608 00fc 55415254 		.ascii	"UART_1_Stop\000"
+ 608      5F315F53 
+ 608      746F7000 
+ 609              	.LASF17:
+ 610 0108 74785F63 		.ascii	"tx_clk_ctr\000"
+ 610      6C6B5F63 
+ 610      747200
+ 611              	.LASF12:
+ 612 0113 75696E74 		.ascii	"uint8\000"
+ 612      3800
+ 613              	.LASF28:
+ 614 0119 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\UART_1_PM.c\000"
+ 614      6E657261 
+ 614      7465645F 
+ 614      536F7572 
+ 614      63655C50 
+ 615              	.LASF10:
+ 616 013e 646F7562 		.ascii	"double\000"
+ 616      6C6500
+ 617              	.LASF22:
+ 618 0145 55415254 		.ascii	"UART_1_Wakeup\000"
+ 618      5F315F57 
+ 618      616B6575 
+ 618      7000
+ 619              	.LASF5:
+ 620 0153 6C6F6E67 		.ascii	"long unsigned int\000"
+ 620      20756E73 
+ 620      69676E65 
+ 620      6420696E 
+ 620      7400
+ 621              	.LASF8:
+ 622 0165 756E7369 		.ascii	"unsigned int\000"
+ 622      676E6564 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHivvml.s 			page 17
+
+
+ 622      20696E74 
+ 622      00
+ 623              	.LASF7:
+ 624 0172 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 624      206C6F6E 
+ 624      6720756E 
+ 624      7369676E 
+ 624      65642069 
+ 625              	.LASF29:
+ 626 0189 443A5C53 		.ascii	"D:\\START_UP\\COMPANY_STARTUP\\3_platform_based_dev"
+ 626      54415254 
+ 626      5F55505C 
+ 626      434F4D50 
+ 626      414E595F 
+ 627 01b9 656C6F70 		.ascii	"elopments\\PSOC_PROJECTS\\platform\\platform\\Psoc_"
+ 627      6D656E74 
+ 627      735C5053 
+ 627      4F435F50 
+ 627      524F4A45 
+ 628 01e8 506C6174 		.ascii	"Platform\\Design02.cydsn\000"
+ 628      666F726D 
+ 628      5C446573 
+ 628      69676E30 
+ 628      322E6379 
+ 629              	.LASF14:
+ 630 0200 73697A65 		.ascii	"sizetype\000"
+ 630      74797065 
+ 630      00
+ 631              	.LASF6:
+ 632 0209 6C6F6E67 		.ascii	"long long int\000"
+ 632      206C6F6E 
+ 632      6720696E 
+ 632      7400
+ 633              	.LASF11:
+ 634 0217 63686172 		.ascii	"char\000"
+ 634      00
+ 635              	.LASF30:
+ 636 021c 55415254 		.ascii	"UART_1_backupStruct_\000"
+ 636      5F315F62 
+ 636      61636B75 
+ 636      70537472 
+ 636      7563745F 
+ 637              	.LASF2:
+ 638 0231 73686F72 		.ascii	"short int\000"
+ 638      7420696E 
+ 638      7400
+ 639              	.LASF21:
+ 640 023b 55415254 		.ascii	"UART_1_Sleep\000"
+ 640      5F315F53 
+ 640      6C656570 
+ 640      00
+ 641              	.LASF25:
+ 642 0248 55415254 		.ascii	"UART_1_ClearTxBuffer\000"
+ 642      5F315F43 
+ 642      6C656172 
+ 642      54784275 
+ 642      66666572 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHivvml.s 			page 18
+
+
+ 643              	.LASF4:
+ 644 025d 6C6F6E67 		.ascii	"long int\000"
+ 644      20696E74 
+ 644      00
+ 645              	.LASF15:
+ 646 0266 656E6162 		.ascii	"enableState\000"
+ 646      6C655374 
+ 646      61746500 
+ 647              	.LASF26:
+ 648 0272 55415254 		.ascii	"UART_1_Enable\000"
+ 648      5F315F45 
+ 648      6E61626C 
+ 648      6500
+ 649              	.LASF19:
+ 650 0280 55415254 		.ascii	"UART_1_SaveConfig\000"
+ 650      5F315F53 
+ 650      61766543 
+ 650      6F6E6669 
+ 650      6700
+ 651              	.LASF0:
+ 652 0292 7369676E 		.ascii	"signed char\000"
+ 652      65642063 
+ 652      68617200 
+ 653              	.LASF18:
+ 654 029e 55415254 		.ascii	"UART_1_BACKUP_STRUCT\000"
+ 654      5F315F42 
+ 654      41434B55 
+ 654      505F5354 
+ 654      52554354 
+ 655              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

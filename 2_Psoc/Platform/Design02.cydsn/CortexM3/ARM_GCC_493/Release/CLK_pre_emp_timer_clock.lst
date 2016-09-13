@@ -1,0 +1,2249 @@
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"CLK_pre_emp_timer_clock.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.CLK_pre_emp_timer_clock_Start,"ax",%progbits
+  19              		.align	1
+  20              		.global	CLK_pre_emp_timer_clock_Start
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	CLK_pre_emp_timer_clock_Start, %function
+  24              	CLK_pre_emp_timer_clock_Start:
+  25              	.LFB0:
+  26              		.file 1 ".\\Generated_Source\\PSoC5\\CLK_pre_emp_timer_clock.c"
+   1:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * File Name: CLK_pre_emp_timer_clock.c
+   3:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Version 2.20
+   4:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+   5:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  Description:
+   6:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   This file provides the source code to the API for the clock component.
+   7:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+   8:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  Note:
+   9:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+  10:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** ********************************************************************************
+  11:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  12:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  13:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  14:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * the software package with which this file was provided.
+  15:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *******************************************************************************/
+  16:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+  17:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #include <cydevice_trm.h>
+  18:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #include "CLK_pre_emp_timer_clock.h"
+  19:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+  20:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** /* Clock Distribution registers. */
+  21:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #define CLK_DIST_LD              (* (reg8 *) CYREG_CLKDIST_LD)
+  22:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #define CLK_DIST_BCFG2           (* (reg8 *) CYREG_CLKDIST_BCFG2)
+  23:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #define BCFG2_MASK               (0x80u)
+  24:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #define CLK_DIST_DMASK           (* (reg8 *) CYREG_CLKDIST_DMASK)
+  25:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #define CLK_DIST_AMASK           (* (reg8 *) CYREG_CLKDIST_AMASK)
+  26:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+  27:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #define HAS_CLKDIST_LD_DISABLE   (CY_PSOC3 || CY_PSOC5LP)
+  28:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+  29:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+  30:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** /*******************************************************************************
+  31:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Function Name: CLK_pre_emp_timer_clock_Start
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 2
+
+
+  32:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** ********************************************************************************
+  33:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+  34:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Summary:
+  35:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  Starts the clock. Note that on startup, clocks may be already running if the
+  36:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  "Start on Reset" option is enabled in the DWR.
+  37:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+  38:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Parameters:
+  39:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  None
+  40:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+  41:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Returns:
+  42:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  None
+  43:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+  44:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *******************************************************************************/
+  45:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** void CLK_pre_emp_timer_clock_Start(void) 
+  46:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** {
+  27              		.loc 1 46 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  47:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     /* Set the bit to enable the clock. */
+  48:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     CLK_pre_emp_timer_clock_CLKEN |= CLK_pre_emp_timer_clock_CLKEN_MASK;
+  32              		.loc 1 48 0
+  33 0000 044A     		ldr	r2, .L2
+  34 0002 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+  35 0004 43F00403 		orr	r3, r3, #4
+  36 0008 1370     		strb	r3, [r2]
+  49:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 	CLK_pre_emp_timer_clock_CLKSTBY |= CLK_pre_emp_timer_clock_CLKSTBY_MASK;
+  37              		.loc 1 49 0
+  38 000a 137C     		ldrb	r3, [r2, #16]	@ zero_extendqisi2
+  39 000c 43F00403 		orr	r3, r3, #4
+  40 0010 1374     		strb	r3, [r2, #16]
+  41 0012 7047     		bx	lr
+  42              	.L3:
+  43              		.align	2
+  44              	.L2:
+  45 0014 A2430040 		.word	1073759138
+  46              		.cfi_endproc
+  47              	.LFE0:
+  48              		.size	CLK_pre_emp_timer_clock_Start, .-CLK_pre_emp_timer_clock_Start
+  49              		.section	.text.CLK_pre_emp_timer_clock_Stop,"ax",%progbits
+  50              		.align	1
+  51              		.global	CLK_pre_emp_timer_clock_Stop
+  52              		.thumb
+  53              		.thumb_func
+  54              		.type	CLK_pre_emp_timer_clock_Stop, %function
+  55              	CLK_pre_emp_timer_clock_Stop:
+  56              	.LFB1:
+  50:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+  51:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+  52:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+  53:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** /*******************************************************************************
+  54:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Function Name: CLK_pre_emp_timer_clock_Stop
+  55:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** ********************************************************************************
+  56:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+  57:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Summary:
+  58:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  Stops the clock and returns immediately. This API does not require the
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 3
+
+
+  59:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  source clock to be running but may return before the hardware is actually
+  60:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  disabled. If the settings of the clock are changed after calling this
+  61:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  function, the clock may glitch when it is started. To avoid the clock
+  62:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  glitch, use the StopBlock function.
+  63:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+  64:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Parameters:
+  65:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  None
+  66:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+  67:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Returns:
+  68:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  None
+  69:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+  70:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *******************************************************************************/
+  71:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** void CLK_pre_emp_timer_clock_Stop(void) 
+  72:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** {
+  57              		.loc 1 72 0
+  58              		.cfi_startproc
+  59              		@ args = 0, pretend = 0, frame = 0
+  60              		@ frame_needed = 0, uses_anonymous_args = 0
+  61              		@ link register save eliminated.
+  73:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     /* Clear the bit to disable the clock. */
+  74:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     CLK_pre_emp_timer_clock_CLKEN &= (uint8)(~CLK_pre_emp_timer_clock_CLKEN_MASK);
+  62              		.loc 1 74 0
+  63 0000 044A     		ldr	r2, .L5
+  64 0002 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+  65 0004 03F0FB03 		and	r3, r3, #251
+  66 0008 1370     		strb	r3, [r2]
+  75:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 	CLK_pre_emp_timer_clock_CLKSTBY &= (uint8)(~CLK_pre_emp_timer_clock_CLKSTBY_MASK);
+  67              		.loc 1 75 0
+  68 000a 137C     		ldrb	r3, [r2, #16]	@ zero_extendqisi2
+  69 000c 03F0FB03 		and	r3, r3, #251
+  70 0010 1374     		strb	r3, [r2, #16]
+  71 0012 7047     		bx	lr
+  72              	.L6:
+  73              		.align	2
+  74              	.L5:
+  75 0014 A2430040 		.word	1073759138
+  76              		.cfi_endproc
+  77              	.LFE1:
+  78              		.size	CLK_pre_emp_timer_clock_Stop, .-CLK_pre_emp_timer_clock_Stop
+  79              		.section	.text.CLK_pre_emp_timer_clock_StopBlock,"ax",%progbits
+  80              		.align	1
+  81              		.global	CLK_pre_emp_timer_clock_StopBlock
+  82              		.thumb
+  83              		.thumb_func
+  84              		.type	CLK_pre_emp_timer_clock_StopBlock, %function
+  85              	CLK_pre_emp_timer_clock_StopBlock:
+  86              	.LFB2:
+  76:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+  77:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+  78:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+  79:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #if(CY_PSOC3 || CY_PSOC5LP)
+  80:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+  81:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+  82:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** /*******************************************************************************
+  83:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Function Name: CLK_pre_emp_timer_clock_StopBlock
+  84:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** ********************************************************************************
+  85:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 4
+
+
+  86:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Summary:
+  87:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  Stops the clock and waits for the hardware to actually be disabled before
+  88:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  returning. This ensures that the clock is never truncated (high part of the
+  89:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  cycle will terminate before the clock is disabled and the API returns).
+  90:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  Note that the source clock must be running or this API will never return as
+  91:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  a stopped clock cannot be disabled.
+  92:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+  93:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Parameters:
+  94:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  None
+  95:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+  96:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Returns:
+  97:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  None
+  98:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+  99:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *******************************************************************************/
+ 100:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** void CLK_pre_emp_timer_clock_StopBlock(void) 
+ 101:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** {
+  87              		.loc 1 101 0
+  88              		.cfi_startproc
+  89              		@ args = 0, pretend = 0, frame = 0
+  90              		@ frame_needed = 0, uses_anonymous_args = 0
+  91 0000 10B5     		push	{r4, lr}
+  92              		.cfi_def_cfa_offset 8
+  93              		.cfi_offset 4, -8
+  94              		.cfi_offset 14, -4
+ 102:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     if ((CLK_pre_emp_timer_clock_CLKEN & CLK_pre_emp_timer_clock_CLKEN_MASK) != 0u)
+  95              		.loc 1 102 0
+  96 0002 154B     		ldr	r3, .L15
+  97 0004 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+  98 0006 5207     		lsls	r2, r2, #29
+  99 0008 24D5     		bpl	.L7
+ 100              	.LBB10:
+ 103:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     {
+ 104:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #if HAS_CLKDIST_LD_DISABLE
+ 105:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         uint16 oldDivider;
+ 106:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 107:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_DIST_LD = 0u;
+ 108:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 109:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         /* Clear all the mask bits except ours. */
+ 110:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #if defined(CLK_pre_emp_timer_clock__CFG3)
+ 111:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_DIST_AMASK = CLK_pre_emp_timer_clock_CLKEN_MASK;
+ 112:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_DIST_DMASK = 0x00u;
+ 113:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #else
+ 114:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_DIST_DMASK = CLK_pre_emp_timer_clock_CLKEN_MASK;
+ 101              		.loc 1 114 0
+ 102 000a 1448     		ldr	r0, .L15+4
+ 107:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 103              		.loc 1 107 0
+ 104 000c 144A     		ldr	r2, .L15+8
+ 105 000e 0021     		movs	r1, #0
+ 106              		.loc 1 114 0
+ 107 0010 0424     		movs	r4, #4
+ 107:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 108              		.loc 1 107 0
+ 109 0012 1170     		strb	r1, [r2]
+ 110              		.loc 1 114 0
+ 111 0014 0470     		strb	r4, [r0]
+ 115:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_DIST_AMASK = 0x00u;
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 5
+
+
+ 112              		.loc 1 115 0
+ 113 0016 0171     		strb	r1, [r0, #4]
+ 116:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #endif /* CLK_pre_emp_timer_clock__CFG3 */
+ 117:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 118:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         /* Clear mask of bus clock. */
+ 119:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_DIST_BCFG2 &= (uint8)(~BCFG2_MASK);
+ 114              		.loc 1 119 0
+ 115 0018 10F8081C 		ldrb	r1, [r0, #-8]	@ zero_extendqisi2
+ 116 001c 01F07F01 		and	r1, r1, #127
+ 117 0020 00F8081C 		strb	r1, [r0, #-8]
+ 120:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 121:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         oldDivider = CY_GET_REG16(CLK_pre_emp_timer_clock_DIV_PTR);
+ 118              		.loc 1 121 0
+ 119 0024 0F49     		ldr	r1, .L15+12
+ 120 0026 0888     		ldrh	r0, [r1]
+ 121 0028 80B2     		uxth	r0, r0
+ 122              	.LVL0:
+ 122:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CY_SET_REG16(CYREG_CLKDIST_WRK0, oldDivider);
+ 123              		.loc 1 122 0
+ 124 002a 21F8860C 		strh	r0, [r1, #-134]	@ movhi
+ 123:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_DIST_LD = CYCLK_LD_DISABLE | CYCLK_LD_SYNC_EN | CYCLK_LD_LOAD;
+ 125              		.loc 1 123 0
+ 126 002e 0721     		movs	r1, #7
+ 127 0030 1170     		strb	r1, [r2]
+ 128              	.L9:
+ 124:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 125:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         /* Wait for clock to be disabled */
+ 126:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         while ((CLK_DIST_LD & CYCLK_LD_LOAD) != 0u) { }
+ 129              		.loc 1 126 0 discriminator 1
+ 130 0032 1178     		ldrb	r1, [r2]	@ zero_extendqisi2
+ 131 0034 11F00101 		ands	r1, r1, #1
+ 132 0038 FBD1     		bne	.L9
+ 127:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #endif /* HAS_CLKDIST_LD_DISABLE */
+ 128:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 129:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         /* Clear the bit to disable the clock. */
+ 130:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_pre_emp_timer_clock_CLKEN &= (uint8)(~CLK_pre_emp_timer_clock_CLKEN_MASK);
+ 133              		.loc 1 130 0
+ 134 003a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 135 003c 02F0FB02 		and	r2, r2, #251
+ 136 0040 1A70     		strb	r2, [r3]
+ 131:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_pre_emp_timer_clock_CLKSTBY &= (uint8)(~CLK_pre_emp_timer_clock_CLKSTBY_MASK);
+ 137              		.loc 1 131 0
+ 138 0042 094A     		ldr	r2, .L15+16
+ 139 0044 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 140 0046 03F0FB03 		and	r3, r3, #251
+ 141 004a 1370     		strb	r3, [r2]
+ 132:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 133:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #if HAS_CLKDIST_LD_DISABLE
+ 134:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         /* Clear the disable bit */
+ 135:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_DIST_LD = 0x00u;
+ 142              		.loc 1 135 0
+ 143 004c 044B     		ldr	r3, .L15+8
+ 144 004e 1970     		strb	r1, [r3]
+ 136:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CY_SET_REG16(CLK_pre_emp_timer_clock_DIV_PTR, oldDivider);
+ 145              		.loc 1 136 0
+ 146 0050 A3F88700 		strh	r0, [r3, #135]	@ movhi
+ 147              	.LVL1:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 6
+
+
+ 148              	.L7:
+ 149 0054 10BD     		pop	{r4, pc}
+ 150              	.L16:
+ 151 0056 00BF     		.align	2
+ 152              	.L15:
+ 153 0058 A2430040 		.word	1073759138
+ 154 005c 10400040 		.word	1073758224
+ 155 0060 01400040 		.word	1073758209
+ 156 0064 88400040 		.word	1073758344
+ 157 0068 B2430040 		.word	1073759154
+ 158              	.LBE10:
+ 159              		.cfi_endproc
+ 160              	.LFE2:
+ 161              		.size	CLK_pre_emp_timer_clock_StopBlock, .-CLK_pre_emp_timer_clock_StopBlock
+ 162              		.section	.text.CLK_pre_emp_timer_clock_StandbyPower,"ax",%progbits
+ 163              		.align	1
+ 164              		.global	CLK_pre_emp_timer_clock_StandbyPower
+ 165              		.thumb
+ 166              		.thumb_func
+ 167              		.type	CLK_pre_emp_timer_clock_StandbyPower, %function
+ 168              	CLK_pre_emp_timer_clock_StandbyPower:
+ 169              	.LFB3:
+ 137:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #endif /* HAS_CLKDIST_LD_DISABLE */
+ 138:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     }
+ 139:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+ 140:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #endif /* (CY_PSOC3 || CY_PSOC5LP) */
+ 141:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 142:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 143:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** /*******************************************************************************
+ 144:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Function Name: CLK_pre_emp_timer_clock_StandbyPower
+ 145:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** ********************************************************************************
+ 146:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 147:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Summary:
+ 148:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  Sets whether the clock is active in standby mode.
+ 149:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 150:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Parameters:
+ 151:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  state:  0 to disable clock during standby, nonzero to enable.
+ 152:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 153:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Returns:
+ 154:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  None
+ 155:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 156:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *******************************************************************************/
+ 157:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** void CLK_pre_emp_timer_clock_StandbyPower(uint8 state) 
+ 158:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** {
+ 170              		.loc 1 158 0
+ 171              		.cfi_startproc
+ 172              		@ args = 0, pretend = 0, frame = 0
+ 173              		@ frame_needed = 0, uses_anonymous_args = 0
+ 174              		@ link register save eliminated.
+ 175              	.LVL2:
+ 176 0000 044B     		ldr	r3, .L21
+ 159:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     if(state == 0u)
+ 160:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     {
+ 161:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_pre_emp_timer_clock_CLKSTBY &= (uint8)(~CLK_pre_emp_timer_clock_CLKSTBY_MASK);
+ 177              		.loc 1 161 0
+ 178 0002 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 159:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     if(state == 0u)
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 7
+
+
+ 179              		.loc 1 159 0
+ 180 0004 10B9     		cbnz	r0, .L18
+ 181              		.loc 1 161 0
+ 182 0006 02F0FB02 		and	r2, r2, #251
+ 183 000a 01E0     		b	.L20
+ 184              	.L18:
+ 162:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     }
+ 163:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     else
+ 164:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     {
+ 165:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_pre_emp_timer_clock_CLKSTBY |= CLK_pre_emp_timer_clock_CLKSTBY_MASK;
+ 185              		.loc 1 165 0
+ 186 000c 42F00402 		orr	r2, r2, #4
+ 187              	.L20:
+ 188 0010 1A70     		strb	r2, [r3]
+ 189 0012 7047     		bx	lr
+ 190              	.L22:
+ 191              		.align	2
+ 192              	.L21:
+ 193 0014 B2430040 		.word	1073759154
+ 194              		.cfi_endproc
+ 195              	.LFE3:
+ 196              		.size	CLK_pre_emp_timer_clock_StandbyPower, .-CLK_pre_emp_timer_clock_StandbyPower
+ 197              		.section	.text.CLK_pre_emp_timer_clock_SetDividerRegister,"ax",%progbits
+ 198              		.align	1
+ 199              		.global	CLK_pre_emp_timer_clock_SetDividerRegister
+ 200              		.thumb
+ 201              		.thumb_func
+ 202              		.type	CLK_pre_emp_timer_clock_SetDividerRegister, %function
+ 203              	CLK_pre_emp_timer_clock_SetDividerRegister:
+ 204              	.LFB4:
+ 166:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     }
+ 167:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+ 168:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 169:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 170:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** /*******************************************************************************
+ 171:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Function Name: CLK_pre_emp_timer_clock_SetDividerRegister
+ 172:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** ********************************************************************************
+ 173:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 174:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Summary:
+ 175:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  Modifies the clock divider and, thus, the frequency. When the clock divider
+ 176:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  register is set to zero or changed from zero, the clock will be temporarily
+ 177:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  disabled in order to change the SSS mode bit. If the clock is enabled when
+ 178:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  SetDividerRegister is called, then the source clock must be running.
+ 179:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 180:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Parameters:
+ 181:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  clkDivider:  Divider register value (0-65,535). This value is NOT the
+ 182:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *    divider; the clock hardware divides by clkDivider plus one. For example,
+ 183:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *    to divide the clock by 2, this parameter should be set to 1.
+ 184:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  restart:  If nonzero, restarts the clock divider: the current clock cycle
+ 185:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   will be truncated and the new divide value will take effect immediately. If
+ 186:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   zero, the new divide value will take effect at the end of the current clock
+ 187:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   cycle.
+ 188:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 189:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Returns:
+ 190:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  None
+ 191:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 192:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *******************************************************************************/
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 8
+
+
+ 193:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** void CLK_pre_emp_timer_clock_SetDividerRegister(uint16 clkDivider, uint8 restart)
+ 194:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                                 
+ 195:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** {
+ 205              		.loc 1 195 0
+ 206              		.cfi_startproc
+ 207              		@ args = 0, pretend = 0, frame = 0
+ 208              		@ frame_needed = 0, uses_anonymous_args = 0
+ 209              	.LVL3:
+ 210 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 211              		.cfi_def_cfa_offset 20
+ 212              		.cfi_offset 4, -20
+ 213              		.cfi_offset 5, -16
+ 214              		.cfi_offset 6, -12
+ 215              		.cfi_offset 7, -8
+ 216              		.cfi_offset 14, -4
+ 217              	.LBB11:
+ 218              	.LBB12:
+ 196:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     uint8 enabled;
+ 197:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 198:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     uint8 currSrc = CLK_pre_emp_timer_clock_GetSourceRegister();
+ 199:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     uint16 oldDivider = CLK_pre_emp_timer_clock_GetDividerRegister();
+ 200:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 201:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     if (clkDivider != oldDivider)
+ 202:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     {
+ 203:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         enabled = CLK_pre_emp_timer_clock_CLKEN & CLK_pre_emp_timer_clock_CLKEN_MASK;
+ 204:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 205:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         if ((currSrc == (uint8)CYCLK_SRC_SEL_CLK_SYNC_D) && ((oldDivider == 0u) || (clkDivider == 0
+ 206:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         {
+ 207:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             /* Moving to/from SSS requires correct ordering to prevent halting the clock    */
+ 208:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             if (oldDivider == 0u)
+ 209:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             {
+ 210:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 /* Moving away from SSS, set the divider first so when SSS is cleared we    */
+ 211:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 /* don't halt the clock.  Using the shadow load isn't required as the       */
+ 212:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 /* divider is ignored while SSS is set.                                     */
+ 213:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 CY_SET_REG16(CLK_pre_emp_timer_clock_DIV_PTR, clkDivider);
+ 214:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 CLK_pre_emp_timer_clock_MOD_SRC &= (uint8)(~CYCLK_SSS);
+ 215:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             }
+ 216:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             else
+ 217:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             {
+ 218:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 /* Moving to SSS, set SSS which then ignores the divider and we can set     */
+ 219:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 /* it without bothering with the shadow load.                               */
+ 220:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 CLK_pre_emp_timer_clock_MOD_SRC |= CYCLK_SSS;
+ 221:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 CY_SET_REG16(CLK_pre_emp_timer_clock_DIV_PTR, clkDivider);
+ 222:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             }
+ 223:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         }
+ 224:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         else
+ 225:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         {
+ 226:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 			
+ 227:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             if (enabled != 0u)
+ 228:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             {
+ 229:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 CLK_DIST_LD = 0x00u;
+ 230:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 231:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 /* Clear all the mask bits except ours. */
+ 232:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #if defined(CLK_pre_emp_timer_clock__CFG3)
+ 233:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 CLK_DIST_AMASK = CLK_pre_emp_timer_clock_CLKEN_MASK;
+ 234:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 CLK_DIST_DMASK = 0x00u;
+ 235:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #else
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 9
+
+
+ 236:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 CLK_DIST_DMASK = CLK_pre_emp_timer_clock_CLKEN_MASK;
+ 237:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 CLK_DIST_AMASK = 0x00u;
+ 238:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #endif /* CLK_pre_emp_timer_clock__CFG3 */
+ 239:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 /* Clear mask of bus clock. */
+ 240:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 CLK_DIST_BCFG2 &= (uint8)(~BCFG2_MASK);
+ 241:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 242:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 /* If clock is currently enabled, disable it if async or going from N-to-1*/
+ 243:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 if (((CLK_pre_emp_timer_clock_MOD_SRC & CYCLK_SYNC) == 0u) || (clkDivider == 0u))
+ 244:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 {
+ 245:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #if HAS_CLKDIST_LD_DISABLE
+ 246:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                     CY_SET_REG16(CYREG_CLKDIST_WRK0, oldDivider);
+ 247:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                     CLK_DIST_LD = CYCLK_LD_DISABLE|CYCLK_LD_SYNC_EN|CYCLK_LD_LOAD;
+ 248:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 249:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                     /* Wait for clock to be disabled */
+ 250:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                     while ((CLK_DIST_LD & CYCLK_LD_LOAD) != 0u) { }
+ 251:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #endif /* HAS_CLKDIST_LD_DISABLE */
+ 252:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 253:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                     CLK_pre_emp_timer_clock_CLKEN &= (uint8)(~CLK_pre_emp_timer_clock_CLKEN_MASK);
+ 254:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 255:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #if HAS_CLKDIST_LD_DISABLE
+ 256:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                     /* Clear the disable bit */
+ 257:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                     CLK_DIST_LD = 0x00u;
+ 258:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #endif /* HAS_CLKDIST_LD_DISABLE */
+ 259:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 }
+ 260:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             }
+ 261:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 262:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             /* Load divide value. */
+ 263:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             if ((CLK_pre_emp_timer_clock_CLKEN & CLK_pre_emp_timer_clock_CLKEN_MASK) != 0u)
+ 264:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             {
+ 265:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 /* If the clock is still enabled, use the shadow registers */
+ 266:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 CY_SET_REG16(CYREG_CLKDIST_WRK0, clkDivider);
+ 267:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 268:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 CLK_DIST_LD = (CYCLK_LD_LOAD | ((restart != 0u) ? CYCLK_LD_SYNC_EN : 0x00u));
+ 269:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 while ((CLK_DIST_LD & CYCLK_LD_LOAD) != 0u) { }
+ 270:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             }
+ 271:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             else
+ 272:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             {
+ 273:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 /* If the clock is disabled, set the divider directly */
+ 274:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 CY_SET_REG16(CLK_pre_emp_timer_clock_DIV_PTR, clkDivider);
+ 275:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 				CLK_pre_emp_timer_clock_CLKEN |= enabled;
+ 276:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             }
+ 277:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         }
+ 278:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     }
+ 279:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+ 280:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 281:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 282:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** /*******************************************************************************
+ 283:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Function Name: CLK_pre_emp_timer_clock_GetDividerRegister
+ 284:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** ********************************************************************************
+ 285:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 286:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Summary:
+ 287:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  Gets the clock divider register value.
+ 288:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 289:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Parameters:
+ 290:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  None
+ 291:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 292:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Returns:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 10
+
+
+ 293:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  Divide value of the clock minus 1. For example, if the clock is set to
+ 294:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  divide by 2, the return value will be 1.
+ 295:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 296:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *******************************************************************************/
+ 297:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** uint16 CLK_pre_emp_timer_clock_GetDividerRegister(void) 
+ 298:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** {
+ 299:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     return CY_GET_REG16(CLK_pre_emp_timer_clock_DIV_PTR);
+ 300:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+ 301:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 302:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 303:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** /*******************************************************************************
+ 304:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Function Name: CLK_pre_emp_timer_clock_SetModeRegister
+ 305:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** ********************************************************************************
+ 306:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 307:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Summary:
+ 308:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  Sets flags that control the operating mode of the clock. This function only
+ 309:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  changes flags from 0 to 1; flags that are already 1 will remain unchanged.
+ 310:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  To clear flags, use the ClearModeRegister function. The clock must be
+ 311:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  disabled before changing the mode.
+ 312:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 313:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Parameters:
+ 314:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  clkMode: Bit mask containing the bits to set. For PSoC 3 and PSoC 5,
+ 315:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   clkMode should be a set of the following optional bits or'ed together.
+ 316:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   - CYCLK_EARLY Enable early phase mode. Rising edge of output clock will
+ 317:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *                 occur when the divider count reaches half of the divide
+ 318:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *                 value.
+ 319:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   - CYCLK_DUTY  Enable 50% duty cycle output. When enabled, the output clock
+ 320:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *                 is asserted for approximately half of its period. When
+ 321:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *                 disabled, the output clock is asserted for one period of the
+ 322:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *                 source clock.
+ 323:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   - CYCLK_SYNC  Enable output synchronization to master clock. This should
+ 324:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *                 be enabled for all synchronous clocks.
+ 325:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   See the Technical Reference Manual for details about setting the mode of
+ 326:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   the clock. Specifically, see the CLKDIST.DCFG.CFG2 register.
+ 327:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 328:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Returns:
+ 329:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  None
+ 330:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 331:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *******************************************************************************/
+ 332:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** void CLK_pre_emp_timer_clock_SetModeRegister(uint8 modeBitMask) 
+ 333:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** {
+ 334:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     CLK_pre_emp_timer_clock_MOD_SRC |= modeBitMask & (uint8)CLK_pre_emp_timer_clock_MODE_MASK;
+ 335:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+ 336:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 337:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 338:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** /*******************************************************************************
+ 339:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Function Name: CLK_pre_emp_timer_clock_ClearModeRegister
+ 340:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** ********************************************************************************
+ 341:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 342:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Summary:
+ 343:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  Clears flags that control the operating mode of the clock. This function
+ 344:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  only changes flags from 1 to 0; flags that are already 0 will remain
+ 345:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  unchanged. To set flags, use the SetModeRegister function. The clock must be
+ 346:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  disabled before changing the mode.
+ 347:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 348:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Parameters:
+ 349:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  clkMode: Bit mask containing the bits to clear. For PSoC 3 and PSoC 5,
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 11
+
+
+ 350:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   clkMode should be a set of the following optional bits or'ed together.
+ 351:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   - CYCLK_EARLY Enable early phase mode. Rising edge of output clock will
+ 352:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *                 occur when the divider count reaches half of the divide
+ 353:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *                 value.
+ 354:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   - CYCLK_DUTY  Enable 50% duty cycle output. When enabled, the output clock
+ 355:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *                 is asserted for approximately half of its period. When
+ 356:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *                 disabled, the output clock is asserted for one period of the
+ 357:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *                 source clock.
+ 358:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   - CYCLK_SYNC  Enable output synchronization to master clock. This should
+ 359:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *                 be enabled for all synchronous clocks.
+ 360:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   See the Technical Reference Manual for details about setting the mode of
+ 361:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   the clock. Specifically, see the CLKDIST.DCFG.CFG2 register.
+ 362:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 363:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Returns:
+ 364:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  None
+ 365:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 366:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *******************************************************************************/
+ 367:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** void CLK_pre_emp_timer_clock_ClearModeRegister(uint8 modeBitMask) 
+ 368:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** {
+ 369:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     CLK_pre_emp_timer_clock_MOD_SRC &= (uint8)(~modeBitMask) | (uint8)(~(uint8)(CLK_pre_emp_timer_c
+ 370:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+ 371:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 372:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 373:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** /*******************************************************************************
+ 374:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Function Name: CLK_pre_emp_timer_clock_GetModeRegister
+ 375:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** ********************************************************************************
+ 376:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 377:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Summary:
+ 378:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  Gets the clock mode register value.
+ 379:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 380:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Parameters:
+ 381:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  None
+ 382:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 383:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Returns:
+ 384:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  Bit mask representing the enabled mode bits. See the SetModeRegister and
+ 385:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  ClearModeRegister descriptions for details about the mode bits.
+ 386:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 387:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *******************************************************************************/
+ 388:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** uint8 CLK_pre_emp_timer_clock_GetModeRegister(void) 
+ 389:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** {
+ 390:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     return CLK_pre_emp_timer_clock_MOD_SRC & (uint8)(CLK_pre_emp_timer_clock_MODE_MASK);
+ 391:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+ 392:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 393:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 394:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** /*******************************************************************************
+ 395:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Function Name: CLK_pre_emp_timer_clock_SetSourceRegister
+ 396:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** ********************************************************************************
+ 397:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 398:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Summary:
+ 399:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  Sets the input source of the clock. The clock must be disabled before
+ 400:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  changing the source. The old and new clock sources must be running.
+ 401:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 402:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Parameters:
+ 403:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  clkSource:  For PSoC 3 and PSoC 5 devices, clkSource should be one of the
+ 404:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   following input sources:
+ 405:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   - CYCLK_SRC_SEL_SYNC_DIG
+ 406:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   - CYCLK_SRC_SEL_IMO
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 12
+
+
+ 407:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   - CYCLK_SRC_SEL_XTALM
+ 408:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   - CYCLK_SRC_SEL_ILO
+ 409:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   - CYCLK_SRC_SEL_PLL
+ 410:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   - CYCLK_SRC_SEL_XTALK
+ 411:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   - CYCLK_SRC_SEL_DSI_G
+ 412:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   - CYCLK_SRC_SEL_DSI_D/CYCLK_SRC_SEL_DSI_A
+ 413:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *   See the Technical Reference Manual for details on clock sources.
+ 414:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 415:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Returns:
+ 416:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  None
+ 417:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 418:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *******************************************************************************/
+ 419:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** void CLK_pre_emp_timer_clock_SetSourceRegister(uint8 clkSource) 
+ 420:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** {
+ 421:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     uint16 currDiv = CLK_pre_emp_timer_clock_GetDividerRegister();
+ 422:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     uint8 oldSrc = CLK_pre_emp_timer_clock_GetSourceRegister();
+ 423:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 424:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     if (((oldSrc != ((uint8)CYCLK_SRC_SEL_CLK_SYNC_D)) && 
+ 425:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         (clkSource == ((uint8)CYCLK_SRC_SEL_CLK_SYNC_D))) && (currDiv == 0u))
+ 426:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     {
+ 427:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         /* Switching to Master and divider is 1, set SSS, which will output master, */
+ 428:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         /* then set the source so we are consistent.                                */
+ 429:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_pre_emp_timer_clock_MOD_SRC |= CYCLK_SSS;
+ 430:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_pre_emp_timer_clock_MOD_SRC =
+ 431:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             (CLK_pre_emp_timer_clock_MOD_SRC & (uint8)(~CLK_pre_emp_timer_clock_SRC_SEL_MSK)) | clk
+ 432:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     }
+ 433:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     else if (((oldSrc == ((uint8)CYCLK_SRC_SEL_CLK_SYNC_D)) && 
+ 434:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             (clkSource != ((uint8)CYCLK_SRC_SEL_CLK_SYNC_D))) && (currDiv == 0u))
+ 435:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     {
+ 436:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         /* Switching from Master to not and divider is 1, set source, so we don't   */
+ 437:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         /* lock when we clear SSS.                                                  */
+ 438:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_pre_emp_timer_clock_MOD_SRC =
+ 439:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             (CLK_pre_emp_timer_clock_MOD_SRC & (uint8)(~CLK_pre_emp_timer_clock_SRC_SEL_MSK)) | clk
+ 440:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_pre_emp_timer_clock_MOD_SRC &= (uint8)(~CYCLK_SSS);
+ 441:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     }
+ 442:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     else
+ 443:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     {
+ 444:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_pre_emp_timer_clock_MOD_SRC =
+ 445:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             (CLK_pre_emp_timer_clock_MOD_SRC & (uint8)(~CLK_pre_emp_timer_clock_SRC_SEL_MSK)) | clk
+ 446:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     }
+ 447:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+ 448:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 449:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 450:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** /*******************************************************************************
+ 451:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Function Name: CLK_pre_emp_timer_clock_GetSourceRegister
+ 452:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** ********************************************************************************
+ 453:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 454:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Summary:
+ 455:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  Gets the input source of the clock.
+ 456:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 457:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Parameters:
+ 458:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  None
+ 459:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 460:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** * Returns:
+ 461:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *  The input source of the clock. See SetSourceRegister for details.
+ 462:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *
+ 463:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** *******************************************************************************/
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 13
+
+
+ 464:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** uint8 CLK_pre_emp_timer_clock_GetSourceRegister(void) 
+ 465:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** {
+ 466:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     return CLK_pre_emp_timer_clock_MOD_SRC & CLK_pre_emp_timer_clock_SRC_SEL_MSK;
+ 219              		.loc 1 466 0
+ 220 0002 2C4D     		ldr	r5, .L44
+ 221              	.LBE12:
+ 222              	.LBE11:
+ 223              	.LBB15:
+ 224              	.LBB16:
+ 299:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+ 225              		.loc 1 299 0
+ 226 0004 2C4E     		ldr	r6, .L44+4
+ 227              	.LBE16:
+ 228              	.LBE15:
+ 229              	.LBB19:
+ 230              	.LBB13:
+ 231              		.loc 1 466 0
+ 232 0006 2F78     		ldrb	r7, [r5]	@ zero_extendqisi2
+ 233              	.LBE13:
+ 234              	.LBE19:
+ 235              	.LBB20:
+ 236              	.LBB17:
+ 299:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+ 237              		.loc 1 299 0
+ 238 0008 3488     		ldrh	r4, [r6]
+ 239              	.LBE17:
+ 240              	.LBE20:
+ 241              	.LBB21:
+ 242              	.LBB14:
+ 243              		.loc 1 466 0
+ 244 000a 07F00707 		and	r7, r7, #7
+ 245              	.LBE14:
+ 246              	.LBE21:
+ 247              	.LBB22:
+ 248              	.LBB18:
+ 299:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+ 249              		.loc 1 299 0
+ 250 000e A4B2     		uxth	r4, r4
+ 251              	.LBE18:
+ 252              	.LBE22:
+ 201:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     {
+ 253              		.loc 1 201 0
+ 254 0010 A042     		cmp	r0, r4
+ 255 0012 4DD0     		beq	.L23
+ 203:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 256              		.loc 1 203 0
+ 257 0014 294B     		ldr	r3, .L44+8
+ 258 0016 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 259 0018 D2B2     		uxtb	r2, r2
+ 260              	.LVL4:
+ 205:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         {
+ 261              		.loc 1 205 0
+ 262 001a 6FB9     		cbnz	r7, .L26
+ 205:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         {
+ 263              		.loc 1 205 0 is_stmt 0 discriminator 1
+ 264 001c 34B1     		cbz	r4, .L27
+ 205:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         {
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 14
+
+
+ 265              		.loc 1 205 0 discriminator 2
+ 266 001e 58B9     		cbnz	r0, .L26
+ 220:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 CY_SET_REG16(CLK_pre_emp_timer_clock_DIV_PTR, clkDivider);
+ 267              		.loc 1 220 0 is_stmt 1
+ 268 0020 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 269 0022 43F04003 		orr	r3, r3, #64
+ 270 0026 2B70     		strb	r3, [r5]
+ 221:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             }
+ 271              		.loc 1 221 0
+ 272 0028 3080     		strh	r0, [r6]	@ movhi
+ 273 002a F0BD     		pop	{r4, r5, r6, r7, pc}
+ 274              	.L27:
+ 213:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 CLK_pre_emp_timer_clock_MOD_SRC &= (uint8)(~CYCLK_SSS);
+ 275              		.loc 1 213 0
+ 276 002c 3080     		strh	r0, [r6]	@ movhi
+ 214:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             }
+ 277              		.loc 1 214 0
+ 278 002e 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 279 0030 03F0BF03 		and	r3, r3, #191
+ 280 0034 2B70     		strb	r3, [r5]
+ 281 0036 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 282              	.L26:
+ 203:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 283              		.loc 1 203 0
+ 284 0038 02F00402 		and	r2, r2, #4
+ 285              	.LVL5:
+ 227:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             {
+ 286              		.loc 1 227 0
+ 287 003c 02F0FF06 		and	r6, r2, #255
+ 288 0040 0AB3     		cbz	r2, .L30
+ 236:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 CLK_DIST_AMASK = 0x00u;
+ 289              		.loc 1 236 0
+ 290 0042 1F4F     		ldr	r7, .L44+12
+ 229:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 291              		.loc 1 229 0
+ 292 0044 1F4A     		ldr	r2, .L44+16
+ 293 0046 0025     		movs	r5, #0
+ 236:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 CLK_DIST_AMASK = 0x00u;
+ 294              		.loc 1 236 0
+ 295 0048 4FF0040E 		mov	lr, #4
+ 229:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 296              		.loc 1 229 0
+ 297 004c 1570     		strb	r5, [r2]
+ 236:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 CLK_DIST_AMASK = 0x00u;
+ 298              		.loc 1 236 0
+ 299 004e 87F800E0 		strb	lr, [r7]
+ 237:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #endif /* CLK_pre_emp_timer_clock__CFG3 */
+ 300              		.loc 1 237 0
+ 301 0052 3D71     		strb	r5, [r7, #4]
+ 240:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 302              		.loc 1 240 0
+ 303 0054 17F8085C 		ldrb	r5, [r7, #-8]	@ zero_extendqisi2
+ 304 0058 05F07F05 		and	r5, r5, #127
+ 305 005c 07F8085C 		strb	r5, [r7, #-8]
+ 243:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 {
+ 306              		.loc 1 243 0
+ 307 0060 144D     		ldr	r5, .L44
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 15
+
+
+ 308 0062 2D78     		ldrb	r5, [r5]	@ zero_extendqisi2
+ 309 0064 2D07     		lsls	r5, r5, #28
+ 310 0066 00D5     		bpl	.L31
+ 243:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 {
+ 311              		.loc 1 243 0 is_stmt 0 discriminator 1
+ 312 0068 68B9     		cbnz	r0, .L30
+ 313              	.L31:
+ 246:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                     CLK_DIST_LD = CYCLK_LD_DISABLE|CYCLK_LD_SYNC_EN|CYCLK_LD_LOAD;
+ 314              		.loc 1 246 0 is_stmt 1
+ 315 006a 174D     		ldr	r5, .L44+20
+ 316 006c 2C80     		strh	r4, [r5]	@ movhi
+ 247:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 317              		.loc 1 247 0
+ 318 006e 0724     		movs	r4, #7
+ 319 0070 1470     		strb	r4, [r2]
+ 320              	.L33:
+ 250:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #endif /* HAS_CLKDIST_LD_DISABLE */
+ 321              		.loc 1 250 0 discriminator 1
+ 322 0072 1478     		ldrb	r4, [r2]	@ zero_extendqisi2
+ 323 0074 14F00104 		ands	r4, r4, #1
+ 324 0078 FBD1     		bne	.L33
+ 253:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 325              		.loc 1 253 0
+ 326 007a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 327 007c 02F0FB02 		and	r2, r2, #251
+ 328 0080 1A70     		strb	r2, [r3]
+ 257:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** #endif /* HAS_CLKDIST_LD_DISABLE */
+ 329              		.loc 1 257 0
+ 330 0082 104A     		ldr	r2, .L44+16
+ 331 0084 1470     		strb	r4, [r2]
+ 332              	.L30:
+ 263:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             {
+ 333              		.loc 1 263 0
+ 334 0086 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 335 0088 0C4A     		ldr	r2, .L44+8
+ 336 008a 5C07     		lsls	r4, r3, #29
+ 337 008c 0BD5     		bpl	.L34
+ 266:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 338              		.loc 1 266 0
+ 339 008e 0E4B     		ldr	r3, .L44+20
+ 268:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 while ((CLK_DIST_LD & CYCLK_LD_LOAD) != 0u) { }
+ 340              		.loc 1 268 0
+ 341 0090 0029     		cmp	r1, #0
+ 266:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 342              		.loc 1 266 0
+ 343 0092 1880     		strh	r0, [r3]	@ movhi
+ 268:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****                 while ((CLK_DIST_LD & CYCLK_LD_LOAD) != 0u) { }
+ 344              		.loc 1 268 0
+ 345 0094 14BF     		ite	ne
+ 346 0096 0322     		movne	r2, #3
+ 347 0098 0122     		moveq	r2, #1
+ 348 009a 013B     		subs	r3, r3, #1
+ 349 009c 1A70     		strb	r2, [r3]
+ 350              	.L36:
+ 269:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             }
+ 351              		.loc 1 269 0 discriminator 1
+ 352 009e 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 16
+
+
+ 353 00a0 D207     		lsls	r2, r2, #31
+ 354 00a2 FCD4     		bmi	.L36
+ 355 00a4 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 356              	.L34:
+ 274:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 				CLK_pre_emp_timer_clock_CLKEN |= enabled;
+ 357              		.loc 1 274 0
+ 358 00a6 044B     		ldr	r3, .L44+4
+ 359 00a8 1880     		strh	r0, [r3]	@ movhi
+ 275:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             }
+ 360              		.loc 1 275 0
+ 361 00aa 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 362 00ac 3343     		orrs	r3, r3, r6
+ 363 00ae 1370     		strb	r3, [r2]
+ 364              	.L23:
+ 365 00b0 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 366              	.L45:
+ 367 00b2 00BF     		.align	2
+ 368              	.L44:
+ 369 00b4 8A400040 		.word	1073758346
+ 370 00b8 88400040 		.word	1073758344
+ 371 00bc A2430040 		.word	1073759138
+ 372 00c0 10400040 		.word	1073758224
+ 373 00c4 01400040 		.word	1073758209
+ 374 00c8 02400040 		.word	1073758210
+ 375              		.cfi_endproc
+ 376              	.LFE4:
+ 377              		.size	CLK_pre_emp_timer_clock_SetDividerRegister, .-CLK_pre_emp_timer_clock_SetDividerRegister
+ 378              		.section	.text.CLK_pre_emp_timer_clock_GetDividerRegister,"ax",%progbits
+ 379              		.align	1
+ 380              		.global	CLK_pre_emp_timer_clock_GetDividerRegister
+ 381              		.thumb
+ 382              		.thumb_func
+ 383              		.type	CLK_pre_emp_timer_clock_GetDividerRegister, %function
+ 384              	CLK_pre_emp_timer_clock_GetDividerRegister:
+ 385              	.LFB5:
+ 298:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     return CY_GET_REG16(CLK_pre_emp_timer_clock_DIV_PTR);
+ 386              		.loc 1 298 0
+ 387              		.cfi_startproc
+ 388              		@ args = 0, pretend = 0, frame = 0
+ 389              		@ frame_needed = 0, uses_anonymous_args = 0
+ 390              		@ link register save eliminated.
+ 299:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+ 391              		.loc 1 299 0
+ 392 0000 014B     		ldr	r3, .L47
+ 393 0002 1888     		ldrh	r0, [r3]
+ 300:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 394              		.loc 1 300 0
+ 395 0004 80B2     		uxth	r0, r0
+ 396 0006 7047     		bx	lr
+ 397              	.L48:
+ 398              		.align	2
+ 399              	.L47:
+ 400 0008 88400040 		.word	1073758344
+ 401              		.cfi_endproc
+ 402              	.LFE5:
+ 403              		.size	CLK_pre_emp_timer_clock_GetDividerRegister, .-CLK_pre_emp_timer_clock_GetDividerRegister
+ 404              		.section	.text.CLK_pre_emp_timer_clock_SetModeRegister,"ax",%progbits
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 17
+
+
+ 405              		.align	1
+ 406              		.global	CLK_pre_emp_timer_clock_SetModeRegister
+ 407              		.thumb
+ 408              		.thumb_func
+ 409              		.type	CLK_pre_emp_timer_clock_SetModeRegister, %function
+ 410              	CLK_pre_emp_timer_clock_SetModeRegister:
+ 411              	.LFB6:
+ 333:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     CLK_pre_emp_timer_clock_MOD_SRC |= modeBitMask & (uint8)CLK_pre_emp_timer_clock_MODE_MASK;
+ 412              		.loc 1 333 0
+ 413              		.cfi_startproc
+ 414              		@ args = 0, pretend = 0, frame = 0
+ 415              		@ frame_needed = 0, uses_anonymous_args = 0
+ 416              		@ link register save eliminated.
+ 417              	.LVL6:
+ 334:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+ 418              		.loc 1 334 0
+ 419 0000 034A     		ldr	r2, .L50
+ 420 0002 00F0F800 		and	r0, r0, #248
+ 421              	.LVL7:
+ 422 0006 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 423 0008 0343     		orrs	r3, r3, r0
+ 424 000a 1370     		strb	r3, [r2]
+ 425 000c 7047     		bx	lr
+ 426              	.L51:
+ 427 000e 00BF     		.align	2
+ 428              	.L50:
+ 429 0010 8A400040 		.word	1073758346
+ 430              		.cfi_endproc
+ 431              	.LFE6:
+ 432              		.size	CLK_pre_emp_timer_clock_SetModeRegister, .-CLK_pre_emp_timer_clock_SetModeRegister
+ 433              		.section	.text.CLK_pre_emp_timer_clock_ClearModeRegister,"ax",%progbits
+ 434              		.align	1
+ 435              		.global	CLK_pre_emp_timer_clock_ClearModeRegister
+ 436              		.thumb
+ 437              		.thumb_func
+ 438              		.type	CLK_pre_emp_timer_clock_ClearModeRegister, %function
+ 439              	CLK_pre_emp_timer_clock_ClearModeRegister:
+ 440              	.LFB7:
+ 368:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     CLK_pre_emp_timer_clock_MOD_SRC &= (uint8)(~modeBitMask) | (uint8)(~(uint8)(CLK_pre_emp_timer_c
+ 441              		.loc 1 368 0
+ 442              		.cfi_startproc
+ 443              		@ args = 0, pretend = 0, frame = 0
+ 444              		@ frame_needed = 0, uses_anonymous_args = 0
+ 445              		@ link register save eliminated.
+ 446              	.LVL8:
+ 369:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+ 447              		.loc 1 369 0
+ 448 0000 C043     		mvns	r0, r0
+ 449              	.LVL9:
+ 450 0002 034B     		ldr	r3, .L53
+ 451 0004 40F00700 		orr	r0, r0, #7
+ 452 0008 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 453 000a 1040     		ands	r0, r0, r2
+ 454 000c 1870     		strb	r0, [r3]
+ 455 000e 7047     		bx	lr
+ 456              	.L54:
+ 457              		.align	2
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 18
+
+
+ 458              	.L53:
+ 459 0010 8A400040 		.word	1073758346
+ 460              		.cfi_endproc
+ 461              	.LFE7:
+ 462              		.size	CLK_pre_emp_timer_clock_ClearModeRegister, .-CLK_pre_emp_timer_clock_ClearModeRegister
+ 463              		.section	.text.CLK_pre_emp_timer_clock_GetModeRegister,"ax",%progbits
+ 464              		.align	1
+ 465              		.global	CLK_pre_emp_timer_clock_GetModeRegister
+ 466              		.thumb
+ 467              		.thumb_func
+ 468              		.type	CLK_pre_emp_timer_clock_GetModeRegister, %function
+ 469              	CLK_pre_emp_timer_clock_GetModeRegister:
+ 470              	.LFB8:
+ 389:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     return CLK_pre_emp_timer_clock_MOD_SRC & (uint8)(CLK_pre_emp_timer_clock_MODE_MASK);
+ 471              		.loc 1 389 0
+ 472              		.cfi_startproc
+ 473              		@ args = 0, pretend = 0, frame = 0
+ 474              		@ frame_needed = 0, uses_anonymous_args = 0
+ 475              		@ link register save eliminated.
+ 390:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+ 476              		.loc 1 390 0
+ 477 0000 024B     		ldr	r3, .L56
+ 478 0002 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 391:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** 
+ 479              		.loc 1 391 0
+ 480 0004 00F0F800 		and	r0, r0, #248
+ 481 0008 7047     		bx	lr
+ 482              	.L57:
+ 483 000a 00BF     		.align	2
+ 484              	.L56:
+ 485 000c 8A400040 		.word	1073758346
+ 486              		.cfi_endproc
+ 487              	.LFE8:
+ 488              		.size	CLK_pre_emp_timer_clock_GetModeRegister, .-CLK_pre_emp_timer_clock_GetModeRegister
+ 489              		.section	.text.CLK_pre_emp_timer_clock_SetSourceRegister,"ax",%progbits
+ 490              		.align	1
+ 491              		.global	CLK_pre_emp_timer_clock_SetSourceRegister
+ 492              		.thumb
+ 493              		.thumb_func
+ 494              		.type	CLK_pre_emp_timer_clock_SetSourceRegister, %function
+ 495              	CLK_pre_emp_timer_clock_SetSourceRegister:
+ 496              	.LFB9:
+ 420:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     uint16 currDiv = CLK_pre_emp_timer_clock_GetDividerRegister();
+ 497              		.loc 1 420 0
+ 498              		.cfi_startproc
+ 499              		@ args = 0, pretend = 0, frame = 0
+ 500              		@ frame_needed = 0, uses_anonymous_args = 0
+ 501              		@ link register save eliminated.
+ 502              	.LVL10:
+ 503              	.LBB23:
+ 504              	.LBB24:
+ 299:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+ 505              		.loc 1 299 0
+ 506 0000 124B     		ldr	r3, .L66
+ 507 0002 1A88     		ldrh	r2, [r3]
+ 508              	.LBE24:
+ 509              	.LBE23:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 19
+
+
+ 510              	.LBB26:
+ 511              	.LBB27:
+ 512              		.loc 1 466 0
+ 513 0004 0233     		adds	r3, r3, #2
+ 514 0006 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
+ 515              	.LBE27:
+ 516              	.LBE26:
+ 517              	.LBB28:
+ 518              	.LBB25:
+ 299:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+ 519              		.loc 1 299 0
+ 520 0008 92B2     		uxth	r2, r2
+ 521              	.LBE25:
+ 522              	.LBE28:
+ 424:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         (clkSource == ((uint8)CYCLK_SRC_SEL_CLK_SYNC_D))) && (currDiv == 0u))
+ 523              		.loc 1 424 0
+ 524 000a 11F0070F 		tst	r1, #7
+ 525 000e 1946     		mov	r1, r3
+ 526 0010 09D0     		beq	.L59
+ 424:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         (clkSource == ((uint8)CYCLK_SRC_SEL_CLK_SYNC_D))) && (currDiv == 0u))
+ 527              		.loc 1 424 0 is_stmt 0 discriminator 1
+ 528 0012 A0B9     		cbnz	r0, .L60
+ 425:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     {
+ 529              		.loc 1 425 0 is_stmt 1
+ 530 0014 9AB9     		cbnz	r2, .L60
+ 429:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_pre_emp_timer_clock_MOD_SRC =
+ 531              		.loc 1 429 0
+ 532 0016 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 533 0018 42F04002 		orr	r2, r2, #64
+ 534 001c 1A70     		strb	r2, [r3]
+ 431:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     }
+ 535              		.loc 1 431 0
+ 536 001e 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 430:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             (CLK_pre_emp_timer_clock_MOD_SRC & (uint8)(~CLK_pre_emp_timer_clock_SRC_SEL_MSK)) | clk
+ 537              		.loc 1 430 0
+ 538 0020 02F0F802 		and	r2, r2, #248
+ 539 0024 09E0     		b	.L65
+ 540              	.L59:
+ 433:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             (clkSource != ((uint8)CYCLK_SRC_SEL_CLK_SYNC_D))) && (currDiv == 0u))
+ 541              		.loc 1 433 0 discriminator 1
+ 542 0026 50B1     		cbz	r0, .L60
+ 434:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     {
+ 543              		.loc 1 434 0
+ 544 0028 4AB9     		cbnz	r2, .L60
+ 439:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****         CLK_pre_emp_timer_clock_MOD_SRC &= (uint8)(~CYCLK_SSS);
+ 545              		.loc 1 439 0
+ 546 002a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 438:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             (CLK_pre_emp_timer_clock_MOD_SRC & (uint8)(~CLK_pre_emp_timer_clock_SRC_SEL_MSK)) | clk
+ 547              		.loc 1 438 0
+ 548 002c 02F0F802 		and	r2, r2, #248
+ 549 0030 1043     		orrs	r0, r0, r2
+ 550              	.LVL11:
+ 551 0032 1870     		strb	r0, [r3]
+ 440:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     }
+ 552              		.loc 1 440 0
+ 553 0034 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 554 0036 02F0BF02 		and	r2, r2, #191
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 20
+
+
+ 555              	.L65:
+ 556 003a 1A70     		strb	r2, [r3]
+ 557 003c 7047     		bx	lr
+ 558              	.LVL12:
+ 559              	.L60:
+ 445:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     }
+ 560              		.loc 1 445 0
+ 561 003e 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
+ 444:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****             (CLK_pre_emp_timer_clock_MOD_SRC & (uint8)(~CLK_pre_emp_timer_clock_SRC_SEL_MSK)) | clk
+ 562              		.loc 1 444 0
+ 563 0040 03F0F803 		and	r3, r3, #248
+ 564 0044 1843     		orrs	r0, r0, r3
+ 565              	.LVL13:
+ 566 0046 0870     		strb	r0, [r1]
+ 567 0048 7047     		bx	lr
+ 568              	.L67:
+ 569 004a 00BF     		.align	2
+ 570              	.L66:
+ 571 004c 88400040 		.word	1073758344
+ 572              		.cfi_endproc
+ 573              	.LFE9:
+ 574              		.size	CLK_pre_emp_timer_clock_SetSourceRegister, .-CLK_pre_emp_timer_clock_SetSourceRegister
+ 575              		.section	.text.CLK_pre_emp_timer_clock_GetSourceRegister,"ax",%progbits
+ 576              		.align	1
+ 577              		.global	CLK_pre_emp_timer_clock_GetSourceRegister
+ 578              		.thumb
+ 579              		.thumb_func
+ 580              		.type	CLK_pre_emp_timer_clock_GetSourceRegister, %function
+ 581              	CLK_pre_emp_timer_clock_GetSourceRegister:
+ 582              	.LFB10:
+ 465:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c ****     return CLK_pre_emp_timer_clock_MOD_SRC & CLK_pre_emp_timer_clock_SRC_SEL_MSK;
+ 583              		.loc 1 465 0
+ 584              		.cfi_startproc
+ 585              		@ args = 0, pretend = 0, frame = 0
+ 586              		@ frame_needed = 0, uses_anonymous_args = 0
+ 587              		@ link register save eliminated.
+ 588              		.loc 1 466 0
+ 589 0000 024B     		ldr	r3, .L69
+ 590 0002 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 467:.\Generated_Source\PSoC5/CLK_pre_emp_timer_clock.c **** }
+ 591              		.loc 1 467 0
+ 592 0004 00F00700 		and	r0, r0, #7
+ 593 0008 7047     		bx	lr
+ 594              	.L70:
+ 595 000a 00BF     		.align	2
+ 596              	.L69:
+ 597 000c 8A400040 		.word	1073758346
+ 598              		.cfi_endproc
+ 599              	.LFE10:
+ 600              		.size	CLK_pre_emp_timer_clock_GetSourceRegister, .-CLK_pre_emp_timer_clock_GetSourceRegister
+ 601              		.text
+ 602              	.Letext0:
+ 603              		.file 2 "Generated_Source\\PSoC5/cytypes.h"
+ 604              		.section	.debug_info,"",%progbits
+ 605              	.Ldebug_info0:
+ 606 0000 97020000 		.4byte	0x297
+ 607 0004 0400     		.2byte	0x4
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 21
+
+
+ 608 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 609 000a 04       		.byte	0x4
+ 610 000b 01       		.uleb128 0x1
+ 611 000c BF000000 		.4byte	.LASF36
+ 612 0010 01       		.byte	0x1
+ 613 0011 71020000 		.4byte	.LASF37
+ 614 0015 AF020000 		.4byte	.LASF38
+ 615 0019 58000000 		.4byte	.Ldebug_ranges0+0x58
+ 616 001d 00000000 		.4byte	0
+ 617 0021 00000000 		.4byte	.Ldebug_line0
+ 618 0025 02       		.uleb128 0x2
+ 619 0026 01       		.byte	0x1
+ 620 0027 06       		.byte	0x6
+ 621 0028 F5010000 		.4byte	.LASF0
+ 622 002c 02       		.uleb128 0x2
+ 623 002d 01       		.byte	0x1
+ 624 002e 08       		.byte	0x8
+ 625 002f BD010000 		.4byte	.LASF1
+ 626 0033 02       		.uleb128 0x2
+ 627 0034 02       		.byte	0x2
+ 628 0035 05       		.byte	0x5
+ 629 0036 39000000 		.4byte	.LASF2
+ 630 003a 02       		.uleb128 0x2
+ 631 003b 02       		.byte	0x2
+ 632 003c 07       		.byte	0x7
+ 633 003d 25020000 		.4byte	.LASF3
+ 634 0041 02       		.uleb128 0x2
+ 635 0042 04       		.byte	0x4
+ 636 0043 05       		.byte	0x5
+ 637 0044 61010000 		.4byte	.LASF4
+ 638 0048 02       		.uleb128 0x2
+ 639 0049 04       		.byte	0x4
+ 640 004a 07       		.byte	0x7
+ 641 004b 2B030000 		.4byte	.LASF5
+ 642 004f 02       		.uleb128 0x2
+ 643 0050 08       		.byte	0x8
+ 644 0051 05       		.byte	0x5
+ 645 0052 53010000 		.4byte	.LASF6
+ 646 0056 02       		.uleb128 0x2
+ 647 0057 08       		.byte	0x8
+ 648 0058 07       		.byte	0x7
+ 649 0059 01020000 		.4byte	.LASF7
+ 650 005d 03       		.uleb128 0x3
+ 651 005e 04       		.byte	0x4
+ 652 005f 05       		.byte	0x5
+ 653 0060 696E7400 		.ascii	"int\000"
+ 654 0064 02       		.uleb128 0x2
+ 655 0065 04       		.byte	0x4
+ 656 0066 07       		.byte	0x7
+ 657 0067 18020000 		.4byte	.LASF8
+ 658 006b 04       		.uleb128 0x4
+ 659 006c AE000000 		.4byte	.LASF9
+ 660 0070 02       		.byte	0x2
+ 661 0071 A1       		.byte	0xa1
+ 662 0072 2C000000 		.4byte	0x2c
+ 663 0076 04       		.uleb128 0x4
+ 664 0077 98000000 		.4byte	.LASF10
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 22
+
+
+ 665 007b 02       		.byte	0x2
+ 666 007c A2       		.byte	0xa2
+ 667 007d 3A000000 		.4byte	0x3a
+ 668 0081 02       		.uleb128 0x2
+ 669 0082 04       		.byte	0x4
+ 670 0083 04       		.byte	0x4
+ 671 0084 4D010000 		.4byte	.LASF11
+ 672 0088 02       		.uleb128 0x2
+ 673 0089 08       		.byte	0x8
+ 674 008a 04       		.byte	0x4
+ 675 008b 3D030000 		.4byte	.LASF12
+ 676 008f 02       		.uleb128 0x2
+ 677 0090 01       		.byte	0x1
+ 678 0091 08       		.byte	0x8
+ 679 0092 38020000 		.4byte	.LASF13
+ 680 0096 05       		.uleb128 0x5
+ 681 0097 26030000 		.4byte	.LASF14
+ 682 009b 02       		.byte	0x2
+ 683 009c 4B01     		.2byte	0x14b
+ 684 009e A2000000 		.4byte	0xa2
+ 685 00a2 06       		.uleb128 0x6
+ 686 00a3 6B000000 		.4byte	0x6b
+ 687 00a7 05       		.uleb128 0x5
+ 688 00a8 33000000 		.4byte	.LASF15
+ 689 00ac 02       		.byte	0x2
+ 690 00ad 4C01     		.2byte	0x14c
+ 691 00af B3000000 		.4byte	0xb3
+ 692 00b3 06       		.uleb128 0x6
+ 693 00b4 76000000 		.4byte	0x76
+ 694 00b8 07       		.uleb128 0x7
+ 695 00b9 69030000 		.4byte	.LASF16
+ 696 00bd 01       		.byte	0x1
+ 697 00be D001     		.2byte	0x1d0
+ 698 00c0 6B000000 		.4byte	0x6b
+ 699 00c4 01       		.byte	0x1
+ 700 00c5 07       		.uleb128 0x7
+ 701 00c6 43000000 		.4byte	.LASF17
+ 702 00ca 01       		.byte	0x1
+ 703 00cb 2901     		.2byte	0x129
+ 704 00cd 76000000 		.4byte	0x76
+ 705 00d1 01       		.byte	0x1
+ 706 00d2 08       		.uleb128 0x8
+ 707 00d3 D7010000 		.4byte	.LASF18
+ 708 00d7 01       		.byte	0x1
+ 709 00d8 2D       		.byte	0x2d
+ 710 00d9 00000000 		.4byte	.LFB0
+ 711 00dd 18000000 		.4byte	.LFE0-.LFB0
+ 712 00e1 01       		.uleb128 0x1
+ 713 00e2 9C       		.byte	0x9c
+ 714 00e3 08       		.uleb128 0x8
+ 715 00e4 44030000 		.4byte	.LASF19
+ 716 00e8 01       		.byte	0x1
+ 717 00e9 47       		.byte	0x47
+ 718 00ea 00000000 		.4byte	.LFB1
+ 719 00ee 18000000 		.4byte	.LFE1-.LFB1
+ 720 00f2 01       		.uleb128 0x1
+ 721 00f3 9C       		.byte	0x9c
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 23
+
+
+ 722 00f4 09       		.uleb128 0x9
+ 723 00f5 3D020000 		.4byte	.LASF20
+ 724 00f9 01       		.byte	0x1
+ 725 00fa 64       		.byte	0x64
+ 726 00fb 00000000 		.4byte	.LFB2
+ 727 00ff 6C000000 		.4byte	.LFE2-.LFB2
+ 728 0103 01       		.uleb128 0x1
+ 729 0104 9C       		.byte	0x9c
+ 730 0105 23010000 		.4byte	0x123
+ 731 0109 0A       		.uleb128 0xa
+ 732 010a 0A000000 		.4byte	.LBB10
+ 733 010e 62000000 		.4byte	.LBE10-.LBB10
+ 734 0112 0B       		.uleb128 0xb
+ 735 0113 A4020000 		.4byte	.LASF26
+ 736 0117 01       		.byte	0x1
+ 737 0118 69       		.byte	0x69
+ 738 0119 76000000 		.4byte	0x76
+ 739 011d 00000000 		.4byte	.LLST0
+ 740 0121 00       		.byte	0
+ 741 0122 00       		.byte	0
+ 742 0123 09       		.uleb128 0x9
+ 743 0124 98010000 		.4byte	.LASF21
+ 744 0128 01       		.byte	0x1
+ 745 0129 9D       		.byte	0x9d
+ 746 012a 00000000 		.4byte	.LFB3
+ 747 012e 18000000 		.4byte	.LFE3-.LFB3
+ 748 0132 01       		.uleb128 0x1
+ 749 0133 9C       		.byte	0x9c
+ 750 0134 46010000 		.4byte	0x146
+ 751 0138 0C       		.uleb128 0xc
+ 752 0139 92010000 		.4byte	.LASF23
+ 753 013d 01       		.byte	0x1
+ 754 013e 9D       		.byte	0x9d
+ 755 013f 6B000000 		.4byte	0x6b
+ 756 0143 01       		.uleb128 0x1
+ 757 0144 50       		.byte	0x50
+ 758 0145 00       		.byte	0
+ 759 0146 09       		.uleb128 0x9
+ 760 0147 00000000 		.4byte	.LASF22
+ 761 014b 01       		.byte	0x1
+ 762 014c C1       		.byte	0xc1
+ 763 014d 00000000 		.4byte	.LFB4
+ 764 0151 CC000000 		.4byte	.LFE4-.LFB4
+ 765 0155 01       		.uleb128 0x1
+ 766 0156 9C       		.byte	0x9c
+ 767 0157 B9010000 		.4byte	0x1b9
+ 768 015b 0C       		.uleb128 0xc
+ 769 015c B4000000 		.4byte	.LASF24
+ 770 0160 01       		.byte	0x1
+ 771 0161 C1       		.byte	0xc1
+ 772 0162 76000000 		.4byte	0x76
+ 773 0166 01       		.uleb128 0x1
+ 774 0167 50       		.byte	0x50
+ 775 0168 0C       		.uleb128 0xc
+ 776 0169 9F000000 		.4byte	.LASF25
+ 777 016d 01       		.byte	0x1
+ 778 016e C1       		.byte	0xc1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 24
+
+
+ 779 016f 6B000000 		.4byte	0x6b
+ 780 0173 01       		.uleb128 0x1
+ 781 0174 51       		.byte	0x51
+ 782 0175 0B       		.uleb128 0xb
+ 783 0176 61030000 		.4byte	.LASF27
+ 784 017a 01       		.byte	0x1
+ 785 017b C4       		.byte	0xc4
+ 786 017c 6B000000 		.4byte	0x6b
+ 787 0180 13000000 		.4byte	.LLST1
+ 788 0184 0D       		.uleb128 0xd
+ 789 0185 69020000 		.4byte	.LASF28
+ 790 0189 01       		.byte	0x1
+ 791 018a C6       		.byte	0xc6
+ 792 018b 6B000000 		.4byte	0x6b
+ 793 018f 0D       		.uleb128 0xd
+ 794 0190 A4020000 		.4byte	.LASF26
+ 795 0194 01       		.byte	0x1
+ 796 0195 C7       		.byte	0xc7
+ 797 0196 76000000 		.4byte	0x76
+ 798 019a 0E       		.uleb128 0xe
+ 799 019b B8000000 		.4byte	0xb8
+ 800 019f 02000000 		.4byte	.LBB11
+ 801 01a3 00000000 		.4byte	.Ldebug_ranges0+0
+ 802 01a7 01       		.byte	0x1
+ 803 01a8 C6       		.byte	0xc6
+ 804 01a9 0E       		.uleb128 0xe
+ 805 01aa C5000000 		.4byte	0xc5
+ 806 01ae 04000000 		.4byte	.LBB15
+ 807 01b2 20000000 		.4byte	.Ldebug_ranges0+0x20
+ 808 01b6 01       		.byte	0x1
+ 809 01b7 C7       		.byte	0xc7
+ 810 01b8 00       		.byte	0
+ 811 01b9 0F       		.uleb128 0xf
+ 812 01ba C5000000 		.4byte	0xc5
+ 813 01be 00000000 		.4byte	.LFB5
+ 814 01c2 0C000000 		.4byte	.LFE5-.LFB5
+ 815 01c6 01       		.uleb128 0x1
+ 816 01c7 9C       		.byte	0x9c
+ 817 01c8 10       		.uleb128 0x10
+ 818 01c9 BD030000 		.4byte	.LASF29
+ 819 01cd 01       		.byte	0x1
+ 820 01ce 4C01     		.2byte	0x14c
+ 821 01d0 00000000 		.4byte	.LFB6
+ 822 01d4 14000000 		.4byte	.LFE6-.LFB6
+ 823 01d8 01       		.uleb128 0x1
+ 824 01d9 9C       		.byte	0x9c
+ 825 01da EF010000 		.4byte	0x1ef
+ 826 01de 11       		.uleb128 0x11
+ 827 01df CB010000 		.4byte	.LASF30
+ 828 01e3 01       		.byte	0x1
+ 829 01e4 4C01     		.2byte	0x14c
+ 830 01e6 6B000000 		.4byte	0x6b
+ 831 01ea 2A000000 		.4byte	.LLST2
+ 832 01ee 00       		.byte	0
+ 833 01ef 10       		.uleb128 0x10
+ 834 01f0 6E000000 		.4byte	.LASF31
+ 835 01f4 01       		.byte	0x1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 25
+
+
+ 836 01f5 6F01     		.2byte	0x16f
+ 837 01f7 00000000 		.4byte	.LFB7
+ 838 01fb 14000000 		.4byte	.LFE7-.LFB7
+ 839 01ff 01       		.uleb128 0x1
+ 840 0200 9C       		.byte	0x9c
+ 841 0201 16020000 		.4byte	0x216
+ 842 0205 11       		.uleb128 0x11
+ 843 0206 CB010000 		.4byte	.LASF30
+ 844 020a 01       		.byte	0x1
+ 845 020b 6F01     		.2byte	0x16f
+ 846 020d 6B000000 		.4byte	0x6b
+ 847 0211 4B000000 		.4byte	.LLST3
+ 848 0215 00       		.byte	0
+ 849 0216 12       		.uleb128 0x12
+ 850 0217 6A010000 		.4byte	.LASF39
+ 851 021b 01       		.byte	0x1
+ 852 021c 8401     		.2byte	0x184
+ 853 021e 6B000000 		.4byte	0x6b
+ 854 0222 00000000 		.4byte	.LFB8
+ 855 0226 10000000 		.4byte	.LFE8-.LFB8
+ 856 022a 01       		.uleb128 0x1
+ 857 022b 9C       		.byte	0x9c
+ 858 022c 10       		.uleb128 0x10
+ 859 022d 93030000 		.4byte	.LASF32
+ 860 0231 01       		.byte	0x1
+ 861 0232 A301     		.2byte	0x1a3
+ 862 0234 00000000 		.4byte	.LFB9
+ 863 0238 50000000 		.4byte	.LFE9-.LFB9
+ 864 023c 01       		.uleb128 0x1
+ 865 023d 9C       		.byte	0x9c
+ 866 023e 8B020000 		.4byte	0x28b
+ 867 0242 11       		.uleb128 0x11
+ 868 0243 5F020000 		.4byte	.LASF33
+ 869 0247 01       		.byte	0x1
+ 870 0248 A301     		.2byte	0x1a3
+ 871 024a 6B000000 		.4byte	0x6b
+ 872 024e 6C000000 		.4byte	.LLST4
+ 873 0252 13       		.uleb128 0x13
+ 874 0253 2B000000 		.4byte	.LASF34
+ 875 0257 01       		.byte	0x1
+ 876 0258 A501     		.2byte	0x1a5
+ 877 025a 76000000 		.4byte	0x76
+ 878 025e 13       		.uleb128 0x13
+ 879 025f A7000000 		.4byte	.LASF35
+ 880 0263 01       		.byte	0x1
+ 881 0264 A601     		.2byte	0x1a6
+ 882 0266 6B000000 		.4byte	0x6b
+ 883 026a 14       		.uleb128 0x14
+ 884 026b C5000000 		.4byte	0xc5
+ 885 026f 00000000 		.4byte	.LBB23
+ 886 0273 40000000 		.4byte	.Ldebug_ranges0+0x40
+ 887 0277 01       		.byte	0x1
+ 888 0278 A501     		.2byte	0x1a5
+ 889 027a 15       		.uleb128 0x15
+ 890 027b B8000000 		.4byte	0xb8
+ 891 027f 04000000 		.4byte	.LBB26
+ 892 0283 04000000 		.4byte	.LBE26-.LBB26
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 26
+
+
+ 893 0287 01       		.byte	0x1
+ 894 0288 A601     		.2byte	0x1a6
+ 895 028a 00       		.byte	0
+ 896 028b 0F       		.uleb128 0xf
+ 897 028c B8000000 		.4byte	0xb8
+ 898 0290 00000000 		.4byte	.LFB10
+ 899 0294 10000000 		.4byte	.LFE10-.LFB10
+ 900 0298 01       		.uleb128 0x1
+ 901 0299 9C       		.byte	0x9c
+ 902 029a 00       		.byte	0
+ 903              		.section	.debug_abbrev,"",%progbits
+ 904              	.Ldebug_abbrev0:
+ 905 0000 01       		.uleb128 0x1
+ 906 0001 11       		.uleb128 0x11
+ 907 0002 01       		.byte	0x1
+ 908 0003 25       		.uleb128 0x25
+ 909 0004 0E       		.uleb128 0xe
+ 910 0005 13       		.uleb128 0x13
+ 911 0006 0B       		.uleb128 0xb
+ 912 0007 03       		.uleb128 0x3
+ 913 0008 0E       		.uleb128 0xe
+ 914 0009 1B       		.uleb128 0x1b
+ 915 000a 0E       		.uleb128 0xe
+ 916 000b 55       		.uleb128 0x55
+ 917 000c 17       		.uleb128 0x17
+ 918 000d 11       		.uleb128 0x11
+ 919 000e 01       		.uleb128 0x1
+ 920 000f 10       		.uleb128 0x10
+ 921 0010 17       		.uleb128 0x17
+ 922 0011 00       		.byte	0
+ 923 0012 00       		.byte	0
+ 924 0013 02       		.uleb128 0x2
+ 925 0014 24       		.uleb128 0x24
+ 926 0015 00       		.byte	0
+ 927 0016 0B       		.uleb128 0xb
+ 928 0017 0B       		.uleb128 0xb
+ 929 0018 3E       		.uleb128 0x3e
+ 930 0019 0B       		.uleb128 0xb
+ 931 001a 03       		.uleb128 0x3
+ 932 001b 0E       		.uleb128 0xe
+ 933 001c 00       		.byte	0
+ 934 001d 00       		.byte	0
+ 935 001e 03       		.uleb128 0x3
+ 936 001f 24       		.uleb128 0x24
+ 937 0020 00       		.byte	0
+ 938 0021 0B       		.uleb128 0xb
+ 939 0022 0B       		.uleb128 0xb
+ 940 0023 3E       		.uleb128 0x3e
+ 941 0024 0B       		.uleb128 0xb
+ 942 0025 03       		.uleb128 0x3
+ 943 0026 08       		.uleb128 0x8
+ 944 0027 00       		.byte	0
+ 945 0028 00       		.byte	0
+ 946 0029 04       		.uleb128 0x4
+ 947 002a 16       		.uleb128 0x16
+ 948 002b 00       		.byte	0
+ 949 002c 03       		.uleb128 0x3
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 27
+
+
+ 950 002d 0E       		.uleb128 0xe
+ 951 002e 3A       		.uleb128 0x3a
+ 952 002f 0B       		.uleb128 0xb
+ 953 0030 3B       		.uleb128 0x3b
+ 954 0031 0B       		.uleb128 0xb
+ 955 0032 49       		.uleb128 0x49
+ 956 0033 13       		.uleb128 0x13
+ 957 0034 00       		.byte	0
+ 958 0035 00       		.byte	0
+ 959 0036 05       		.uleb128 0x5
+ 960 0037 16       		.uleb128 0x16
+ 961 0038 00       		.byte	0
+ 962 0039 03       		.uleb128 0x3
+ 963 003a 0E       		.uleb128 0xe
+ 964 003b 3A       		.uleb128 0x3a
+ 965 003c 0B       		.uleb128 0xb
+ 966 003d 3B       		.uleb128 0x3b
+ 967 003e 05       		.uleb128 0x5
+ 968 003f 49       		.uleb128 0x49
+ 969 0040 13       		.uleb128 0x13
+ 970 0041 00       		.byte	0
+ 971 0042 00       		.byte	0
+ 972 0043 06       		.uleb128 0x6
+ 973 0044 35       		.uleb128 0x35
+ 974 0045 00       		.byte	0
+ 975 0046 49       		.uleb128 0x49
+ 976 0047 13       		.uleb128 0x13
+ 977 0048 00       		.byte	0
+ 978 0049 00       		.byte	0
+ 979 004a 07       		.uleb128 0x7
+ 980 004b 2E       		.uleb128 0x2e
+ 981 004c 00       		.byte	0
+ 982 004d 3F       		.uleb128 0x3f
+ 983 004e 19       		.uleb128 0x19
+ 984 004f 03       		.uleb128 0x3
+ 985 0050 0E       		.uleb128 0xe
+ 986 0051 3A       		.uleb128 0x3a
+ 987 0052 0B       		.uleb128 0xb
+ 988 0053 3B       		.uleb128 0x3b
+ 989 0054 05       		.uleb128 0x5
+ 990 0055 27       		.uleb128 0x27
+ 991 0056 19       		.uleb128 0x19
+ 992 0057 49       		.uleb128 0x49
+ 993 0058 13       		.uleb128 0x13
+ 994 0059 20       		.uleb128 0x20
+ 995 005a 0B       		.uleb128 0xb
+ 996 005b 00       		.byte	0
+ 997 005c 00       		.byte	0
+ 998 005d 08       		.uleb128 0x8
+ 999 005e 2E       		.uleb128 0x2e
+ 1000 005f 00       		.byte	0
+ 1001 0060 3F       		.uleb128 0x3f
+ 1002 0061 19       		.uleb128 0x19
+ 1003 0062 03       		.uleb128 0x3
+ 1004 0063 0E       		.uleb128 0xe
+ 1005 0064 3A       		.uleb128 0x3a
+ 1006 0065 0B       		.uleb128 0xb
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 28
+
+
+ 1007 0066 3B       		.uleb128 0x3b
+ 1008 0067 0B       		.uleb128 0xb
+ 1009 0068 27       		.uleb128 0x27
+ 1010 0069 19       		.uleb128 0x19
+ 1011 006a 11       		.uleb128 0x11
+ 1012 006b 01       		.uleb128 0x1
+ 1013 006c 12       		.uleb128 0x12
+ 1014 006d 06       		.uleb128 0x6
+ 1015 006e 40       		.uleb128 0x40
+ 1016 006f 18       		.uleb128 0x18
+ 1017 0070 9742     		.uleb128 0x2117
+ 1018 0072 19       		.uleb128 0x19
+ 1019 0073 00       		.byte	0
+ 1020 0074 00       		.byte	0
+ 1021 0075 09       		.uleb128 0x9
+ 1022 0076 2E       		.uleb128 0x2e
+ 1023 0077 01       		.byte	0x1
+ 1024 0078 3F       		.uleb128 0x3f
+ 1025 0079 19       		.uleb128 0x19
+ 1026 007a 03       		.uleb128 0x3
+ 1027 007b 0E       		.uleb128 0xe
+ 1028 007c 3A       		.uleb128 0x3a
+ 1029 007d 0B       		.uleb128 0xb
+ 1030 007e 3B       		.uleb128 0x3b
+ 1031 007f 0B       		.uleb128 0xb
+ 1032 0080 27       		.uleb128 0x27
+ 1033 0081 19       		.uleb128 0x19
+ 1034 0082 11       		.uleb128 0x11
+ 1035 0083 01       		.uleb128 0x1
+ 1036 0084 12       		.uleb128 0x12
+ 1037 0085 06       		.uleb128 0x6
+ 1038 0086 40       		.uleb128 0x40
+ 1039 0087 18       		.uleb128 0x18
+ 1040 0088 9742     		.uleb128 0x2117
+ 1041 008a 19       		.uleb128 0x19
+ 1042 008b 01       		.uleb128 0x1
+ 1043 008c 13       		.uleb128 0x13
+ 1044 008d 00       		.byte	0
+ 1045 008e 00       		.byte	0
+ 1046 008f 0A       		.uleb128 0xa
+ 1047 0090 0B       		.uleb128 0xb
+ 1048 0091 01       		.byte	0x1
+ 1049 0092 11       		.uleb128 0x11
+ 1050 0093 01       		.uleb128 0x1
+ 1051 0094 12       		.uleb128 0x12
+ 1052 0095 06       		.uleb128 0x6
+ 1053 0096 00       		.byte	0
+ 1054 0097 00       		.byte	0
+ 1055 0098 0B       		.uleb128 0xb
+ 1056 0099 34       		.uleb128 0x34
+ 1057 009a 00       		.byte	0
+ 1058 009b 03       		.uleb128 0x3
+ 1059 009c 0E       		.uleb128 0xe
+ 1060 009d 3A       		.uleb128 0x3a
+ 1061 009e 0B       		.uleb128 0xb
+ 1062 009f 3B       		.uleb128 0x3b
+ 1063 00a0 0B       		.uleb128 0xb
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 29
+
+
+ 1064 00a1 49       		.uleb128 0x49
+ 1065 00a2 13       		.uleb128 0x13
+ 1066 00a3 02       		.uleb128 0x2
+ 1067 00a4 17       		.uleb128 0x17
+ 1068 00a5 00       		.byte	0
+ 1069 00a6 00       		.byte	0
+ 1070 00a7 0C       		.uleb128 0xc
+ 1071 00a8 05       		.uleb128 0x5
+ 1072 00a9 00       		.byte	0
+ 1073 00aa 03       		.uleb128 0x3
+ 1074 00ab 0E       		.uleb128 0xe
+ 1075 00ac 3A       		.uleb128 0x3a
+ 1076 00ad 0B       		.uleb128 0xb
+ 1077 00ae 3B       		.uleb128 0x3b
+ 1078 00af 0B       		.uleb128 0xb
+ 1079 00b0 49       		.uleb128 0x49
+ 1080 00b1 13       		.uleb128 0x13
+ 1081 00b2 02       		.uleb128 0x2
+ 1082 00b3 18       		.uleb128 0x18
+ 1083 00b4 00       		.byte	0
+ 1084 00b5 00       		.byte	0
+ 1085 00b6 0D       		.uleb128 0xd
+ 1086 00b7 34       		.uleb128 0x34
+ 1087 00b8 00       		.byte	0
+ 1088 00b9 03       		.uleb128 0x3
+ 1089 00ba 0E       		.uleb128 0xe
+ 1090 00bb 3A       		.uleb128 0x3a
+ 1091 00bc 0B       		.uleb128 0xb
+ 1092 00bd 3B       		.uleb128 0x3b
+ 1093 00be 0B       		.uleb128 0xb
+ 1094 00bf 49       		.uleb128 0x49
+ 1095 00c0 13       		.uleb128 0x13
+ 1096 00c1 00       		.byte	0
+ 1097 00c2 00       		.byte	0
+ 1098 00c3 0E       		.uleb128 0xe
+ 1099 00c4 1D       		.uleb128 0x1d
+ 1100 00c5 00       		.byte	0
+ 1101 00c6 31       		.uleb128 0x31
+ 1102 00c7 13       		.uleb128 0x13
+ 1103 00c8 52       		.uleb128 0x52
+ 1104 00c9 01       		.uleb128 0x1
+ 1105 00ca 55       		.uleb128 0x55
+ 1106 00cb 17       		.uleb128 0x17
+ 1107 00cc 58       		.uleb128 0x58
+ 1108 00cd 0B       		.uleb128 0xb
+ 1109 00ce 59       		.uleb128 0x59
+ 1110 00cf 0B       		.uleb128 0xb
+ 1111 00d0 00       		.byte	0
+ 1112 00d1 00       		.byte	0
+ 1113 00d2 0F       		.uleb128 0xf
+ 1114 00d3 2E       		.uleb128 0x2e
+ 1115 00d4 00       		.byte	0
+ 1116 00d5 31       		.uleb128 0x31
+ 1117 00d6 13       		.uleb128 0x13
+ 1118 00d7 11       		.uleb128 0x11
+ 1119 00d8 01       		.uleb128 0x1
+ 1120 00d9 12       		.uleb128 0x12
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 30
+
+
+ 1121 00da 06       		.uleb128 0x6
+ 1122 00db 40       		.uleb128 0x40
+ 1123 00dc 18       		.uleb128 0x18
+ 1124 00dd 9742     		.uleb128 0x2117
+ 1125 00df 19       		.uleb128 0x19
+ 1126 00e0 00       		.byte	0
+ 1127 00e1 00       		.byte	0
+ 1128 00e2 10       		.uleb128 0x10
+ 1129 00e3 2E       		.uleb128 0x2e
+ 1130 00e4 01       		.byte	0x1
+ 1131 00e5 3F       		.uleb128 0x3f
+ 1132 00e6 19       		.uleb128 0x19
+ 1133 00e7 03       		.uleb128 0x3
+ 1134 00e8 0E       		.uleb128 0xe
+ 1135 00e9 3A       		.uleb128 0x3a
+ 1136 00ea 0B       		.uleb128 0xb
+ 1137 00eb 3B       		.uleb128 0x3b
+ 1138 00ec 05       		.uleb128 0x5
+ 1139 00ed 27       		.uleb128 0x27
+ 1140 00ee 19       		.uleb128 0x19
+ 1141 00ef 11       		.uleb128 0x11
+ 1142 00f0 01       		.uleb128 0x1
+ 1143 00f1 12       		.uleb128 0x12
+ 1144 00f2 06       		.uleb128 0x6
+ 1145 00f3 40       		.uleb128 0x40
+ 1146 00f4 18       		.uleb128 0x18
+ 1147 00f5 9742     		.uleb128 0x2117
+ 1148 00f7 19       		.uleb128 0x19
+ 1149 00f8 01       		.uleb128 0x1
+ 1150 00f9 13       		.uleb128 0x13
+ 1151 00fa 00       		.byte	0
+ 1152 00fb 00       		.byte	0
+ 1153 00fc 11       		.uleb128 0x11
+ 1154 00fd 05       		.uleb128 0x5
+ 1155 00fe 00       		.byte	0
+ 1156 00ff 03       		.uleb128 0x3
+ 1157 0100 0E       		.uleb128 0xe
+ 1158 0101 3A       		.uleb128 0x3a
+ 1159 0102 0B       		.uleb128 0xb
+ 1160 0103 3B       		.uleb128 0x3b
+ 1161 0104 05       		.uleb128 0x5
+ 1162 0105 49       		.uleb128 0x49
+ 1163 0106 13       		.uleb128 0x13
+ 1164 0107 02       		.uleb128 0x2
+ 1165 0108 17       		.uleb128 0x17
+ 1166 0109 00       		.byte	0
+ 1167 010a 00       		.byte	0
+ 1168 010b 12       		.uleb128 0x12
+ 1169 010c 2E       		.uleb128 0x2e
+ 1170 010d 00       		.byte	0
+ 1171 010e 3F       		.uleb128 0x3f
+ 1172 010f 19       		.uleb128 0x19
+ 1173 0110 03       		.uleb128 0x3
+ 1174 0111 0E       		.uleb128 0xe
+ 1175 0112 3A       		.uleb128 0x3a
+ 1176 0113 0B       		.uleb128 0xb
+ 1177 0114 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 31
+
+
+ 1178 0115 05       		.uleb128 0x5
+ 1179 0116 27       		.uleb128 0x27
+ 1180 0117 19       		.uleb128 0x19
+ 1181 0118 49       		.uleb128 0x49
+ 1182 0119 13       		.uleb128 0x13
+ 1183 011a 11       		.uleb128 0x11
+ 1184 011b 01       		.uleb128 0x1
+ 1185 011c 12       		.uleb128 0x12
+ 1186 011d 06       		.uleb128 0x6
+ 1187 011e 40       		.uleb128 0x40
+ 1188 011f 18       		.uleb128 0x18
+ 1189 0120 9742     		.uleb128 0x2117
+ 1190 0122 19       		.uleb128 0x19
+ 1191 0123 00       		.byte	0
+ 1192 0124 00       		.byte	0
+ 1193 0125 13       		.uleb128 0x13
+ 1194 0126 34       		.uleb128 0x34
+ 1195 0127 00       		.byte	0
+ 1196 0128 03       		.uleb128 0x3
+ 1197 0129 0E       		.uleb128 0xe
+ 1198 012a 3A       		.uleb128 0x3a
+ 1199 012b 0B       		.uleb128 0xb
+ 1200 012c 3B       		.uleb128 0x3b
+ 1201 012d 05       		.uleb128 0x5
+ 1202 012e 49       		.uleb128 0x49
+ 1203 012f 13       		.uleb128 0x13
+ 1204 0130 00       		.byte	0
+ 1205 0131 00       		.byte	0
+ 1206 0132 14       		.uleb128 0x14
+ 1207 0133 1D       		.uleb128 0x1d
+ 1208 0134 00       		.byte	0
+ 1209 0135 31       		.uleb128 0x31
+ 1210 0136 13       		.uleb128 0x13
+ 1211 0137 52       		.uleb128 0x52
+ 1212 0138 01       		.uleb128 0x1
+ 1213 0139 55       		.uleb128 0x55
+ 1214 013a 17       		.uleb128 0x17
+ 1215 013b 58       		.uleb128 0x58
+ 1216 013c 0B       		.uleb128 0xb
+ 1217 013d 59       		.uleb128 0x59
+ 1218 013e 05       		.uleb128 0x5
+ 1219 013f 00       		.byte	0
+ 1220 0140 00       		.byte	0
+ 1221 0141 15       		.uleb128 0x15
+ 1222 0142 1D       		.uleb128 0x1d
+ 1223 0143 00       		.byte	0
+ 1224 0144 31       		.uleb128 0x31
+ 1225 0145 13       		.uleb128 0x13
+ 1226 0146 11       		.uleb128 0x11
+ 1227 0147 01       		.uleb128 0x1
+ 1228 0148 12       		.uleb128 0x12
+ 1229 0149 06       		.uleb128 0x6
+ 1230 014a 58       		.uleb128 0x58
+ 1231 014b 0B       		.uleb128 0xb
+ 1232 014c 59       		.uleb128 0x59
+ 1233 014d 05       		.uleb128 0x5
+ 1234 014e 00       		.byte	0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 32
+
+
+ 1235 014f 00       		.byte	0
+ 1236 0150 00       		.byte	0
+ 1237              		.section	.debug_loc,"",%progbits
+ 1238              	.Ldebug_loc0:
+ 1239              	.LLST0:
+ 1240 0000 2A000000 		.4byte	.LVL0
+ 1241 0004 54000000 		.4byte	.LVL1
+ 1242 0008 0100     		.2byte	0x1
+ 1243 000a 50       		.byte	0x50
+ 1244 000b 00000000 		.4byte	0
+ 1245 000f 00000000 		.4byte	0
+ 1246              	.LLST1:
+ 1247 0013 1A000000 		.4byte	.LVL4
+ 1248 0017 3C000000 		.4byte	.LVL5
+ 1249 001b 0500     		.2byte	0x5
+ 1250 001d 72       		.byte	0x72
+ 1251 001e 00       		.sleb128 0
+ 1252 001f 34       		.byte	0x34
+ 1253 0020 1A       		.byte	0x1a
+ 1254 0021 9F       		.byte	0x9f
+ 1255 0022 00000000 		.4byte	0
+ 1256 0026 00000000 		.4byte	0
+ 1257              	.LLST2:
+ 1258 002a 00000000 		.4byte	.LVL6
+ 1259 002e 06000000 		.4byte	.LVL7
+ 1260 0032 0100     		.2byte	0x1
+ 1261 0034 50       		.byte	0x50
+ 1262 0035 06000000 		.4byte	.LVL7
+ 1263 0039 14000000 		.4byte	.LFE6
+ 1264 003d 0400     		.2byte	0x4
+ 1265 003f F3       		.byte	0xf3
+ 1266 0040 01       		.uleb128 0x1
+ 1267 0041 50       		.byte	0x50
+ 1268 0042 9F       		.byte	0x9f
+ 1269 0043 00000000 		.4byte	0
+ 1270 0047 00000000 		.4byte	0
+ 1271              	.LLST3:
+ 1272 004b 00000000 		.4byte	.LVL8
+ 1273 004f 02000000 		.4byte	.LVL9
+ 1274 0053 0100     		.2byte	0x1
+ 1275 0055 50       		.byte	0x50
+ 1276 0056 02000000 		.4byte	.LVL9
+ 1277 005a 14000000 		.4byte	.LFE7
+ 1278 005e 0400     		.2byte	0x4
+ 1279 0060 F3       		.byte	0xf3
+ 1280 0061 01       		.uleb128 0x1
+ 1281 0062 50       		.byte	0x50
+ 1282 0063 9F       		.byte	0x9f
+ 1283 0064 00000000 		.4byte	0
+ 1284 0068 00000000 		.4byte	0
+ 1285              	.LLST4:
+ 1286 006c 00000000 		.4byte	.LVL10
+ 1287 0070 32000000 		.4byte	.LVL11
+ 1288 0074 0100     		.2byte	0x1
+ 1289 0076 50       		.byte	0x50
+ 1290 0077 32000000 		.4byte	.LVL11
+ 1291 007b 3E000000 		.4byte	.LVL12
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 33
+
+
+ 1292 007f 0400     		.2byte	0x4
+ 1293 0081 F3       		.byte	0xf3
+ 1294 0082 01       		.uleb128 0x1
+ 1295 0083 50       		.byte	0x50
+ 1296 0084 9F       		.byte	0x9f
+ 1297 0085 3E000000 		.4byte	.LVL12
+ 1298 0089 46000000 		.4byte	.LVL13
+ 1299 008d 0100     		.2byte	0x1
+ 1300 008f 50       		.byte	0x50
+ 1301 0090 46000000 		.4byte	.LVL13
+ 1302 0094 50000000 		.4byte	.LFE9
+ 1303 0098 0400     		.2byte	0x4
+ 1304 009a F3       		.byte	0xf3
+ 1305 009b 01       		.uleb128 0x1
+ 1306 009c 50       		.byte	0x50
+ 1307 009d 9F       		.byte	0x9f
+ 1308 009e 00000000 		.4byte	0
+ 1309 00a2 00000000 		.4byte	0
+ 1310              		.section	.debug_aranges,"",%progbits
+ 1311 0000 6C000000 		.4byte	0x6c
+ 1312 0004 0200     		.2byte	0x2
+ 1313 0006 00000000 		.4byte	.Ldebug_info0
+ 1314 000a 04       		.byte	0x4
+ 1315 000b 00       		.byte	0
+ 1316 000c 0000     		.2byte	0
+ 1317 000e 0000     		.2byte	0
+ 1318 0010 00000000 		.4byte	.LFB0
+ 1319 0014 18000000 		.4byte	.LFE0-.LFB0
+ 1320 0018 00000000 		.4byte	.LFB1
+ 1321 001c 18000000 		.4byte	.LFE1-.LFB1
+ 1322 0020 00000000 		.4byte	.LFB2
+ 1323 0024 6C000000 		.4byte	.LFE2-.LFB2
+ 1324 0028 00000000 		.4byte	.LFB3
+ 1325 002c 18000000 		.4byte	.LFE3-.LFB3
+ 1326 0030 00000000 		.4byte	.LFB4
+ 1327 0034 CC000000 		.4byte	.LFE4-.LFB4
+ 1328 0038 00000000 		.4byte	.LFB5
+ 1329 003c 0C000000 		.4byte	.LFE5-.LFB5
+ 1330 0040 00000000 		.4byte	.LFB6
+ 1331 0044 14000000 		.4byte	.LFE6-.LFB6
+ 1332 0048 00000000 		.4byte	.LFB7
+ 1333 004c 14000000 		.4byte	.LFE7-.LFB7
+ 1334 0050 00000000 		.4byte	.LFB8
+ 1335 0054 10000000 		.4byte	.LFE8-.LFB8
+ 1336 0058 00000000 		.4byte	.LFB9
+ 1337 005c 50000000 		.4byte	.LFE9-.LFB9
+ 1338 0060 00000000 		.4byte	.LFB10
+ 1339 0064 10000000 		.4byte	.LFE10-.LFB10
+ 1340 0068 00000000 		.4byte	0
+ 1341 006c 00000000 		.4byte	0
+ 1342              		.section	.debug_ranges,"",%progbits
+ 1343              	.Ldebug_ranges0:
+ 1344 0000 02000000 		.4byte	.LBB11
+ 1345 0004 04000000 		.4byte	.LBE11
+ 1346 0008 06000000 		.4byte	.LBB19
+ 1347 000c 08000000 		.4byte	.LBE19
+ 1348 0010 0A000000 		.4byte	.LBB21
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 34
+
+
+ 1349 0014 0E000000 		.4byte	.LBE21
+ 1350 0018 00000000 		.4byte	0
+ 1351 001c 00000000 		.4byte	0
+ 1352 0020 04000000 		.4byte	.LBB15
+ 1353 0024 06000000 		.4byte	.LBE15
+ 1354 0028 08000000 		.4byte	.LBB20
+ 1355 002c 0A000000 		.4byte	.LBE20
+ 1356 0030 0E000000 		.4byte	.LBB22
+ 1357 0034 10000000 		.4byte	.LBE22
+ 1358 0038 00000000 		.4byte	0
+ 1359 003c 00000000 		.4byte	0
+ 1360 0040 00000000 		.4byte	.LBB23
+ 1361 0044 04000000 		.4byte	.LBE23
+ 1362 0048 08000000 		.4byte	.LBB28
+ 1363 004c 0A000000 		.4byte	.LBE28
+ 1364 0050 00000000 		.4byte	0
+ 1365 0054 00000000 		.4byte	0
+ 1366 0058 00000000 		.4byte	.LFB0
+ 1367 005c 18000000 		.4byte	.LFE0
+ 1368 0060 00000000 		.4byte	.LFB1
+ 1369 0064 18000000 		.4byte	.LFE1
+ 1370 0068 00000000 		.4byte	.LFB2
+ 1371 006c 6C000000 		.4byte	.LFE2
+ 1372 0070 00000000 		.4byte	.LFB3
+ 1373 0074 18000000 		.4byte	.LFE3
+ 1374 0078 00000000 		.4byte	.LFB4
+ 1375 007c CC000000 		.4byte	.LFE4
+ 1376 0080 00000000 		.4byte	.LFB5
+ 1377 0084 0C000000 		.4byte	.LFE5
+ 1378 0088 00000000 		.4byte	.LFB6
+ 1379 008c 14000000 		.4byte	.LFE6
+ 1380 0090 00000000 		.4byte	.LFB7
+ 1381 0094 14000000 		.4byte	.LFE7
+ 1382 0098 00000000 		.4byte	.LFB8
+ 1383 009c 10000000 		.4byte	.LFE8
+ 1384 00a0 00000000 		.4byte	.LFB9
+ 1385 00a4 50000000 		.4byte	.LFE9
+ 1386 00a8 00000000 		.4byte	.LFB10
+ 1387 00ac 10000000 		.4byte	.LFE10
+ 1388 00b0 00000000 		.4byte	0
+ 1389 00b4 00000000 		.4byte	0
+ 1390              		.section	.debug_line,"",%progbits
+ 1391              	.Ldebug_line0:
+ 1392 0000 D3010000 		.section	.debug_str,"MS",%progbits,1
+ 1392      02006D00 
+ 1392      00000201 
+ 1392      FB0E0D00 
+ 1392      01010101 
+ 1393              	.LASF22:
+ 1394 0000 434C4B5F 		.ascii	"CLK_pre_emp_timer_clock_SetDividerRegister\000"
+ 1394      7072655F 
+ 1394      656D705F 
+ 1394      74696D65 
+ 1394      725F636C 
+ 1395              	.LASF34:
+ 1396 002b 63757272 		.ascii	"currDiv\000"
+ 1396      44697600 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 35
+
+
+ 1397              	.LASF15:
+ 1398 0033 72656731 		.ascii	"reg16\000"
+ 1398      3600
+ 1399              	.LASF2:
+ 1400 0039 73686F72 		.ascii	"short int\000"
+ 1400      7420696E 
+ 1400      7400
+ 1401              	.LASF17:
+ 1402 0043 434C4B5F 		.ascii	"CLK_pre_emp_timer_clock_GetDividerRegister\000"
+ 1402      7072655F 
+ 1402      656D705F 
+ 1402      74696D65 
+ 1402      725F636C 
+ 1403              	.LASF31:
+ 1404 006e 434C4B5F 		.ascii	"CLK_pre_emp_timer_clock_ClearModeRegister\000"
+ 1404      7072655F 
+ 1404      656D705F 
+ 1404      74696D65 
+ 1404      725F636C 
+ 1405              	.LASF10:
+ 1406 0098 75696E74 		.ascii	"uint16\000"
+ 1406      313600
+ 1407              	.LASF25:
+ 1408 009f 72657374 		.ascii	"restart\000"
+ 1408      61727400 
+ 1409              	.LASF35:
+ 1410 00a7 6F6C6453 		.ascii	"oldSrc\000"
+ 1410      726300
+ 1411              	.LASF9:
+ 1412 00ae 75696E74 		.ascii	"uint8\000"
+ 1412      3800
+ 1413              	.LASF24:
+ 1414 00b4 636C6B44 		.ascii	"clkDivider\000"
+ 1414      69766964 
+ 1414      657200
+ 1415              	.LASF36:
+ 1416 00bf 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 1416      4320342E 
+ 1416      392E3320 
+ 1416      32303135 
+ 1416      30333033 
+ 1417 00f2 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 1417      20726576 
+ 1417      6973696F 
+ 1417      6E203232 
+ 1417      31323230 
+ 1418 0125 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 1418      66756E63 
+ 1418      74696F6E 
+ 1418      2D736563 
+ 1418      74696F6E 
+ 1419              	.LASF11:
+ 1420 014d 666C6F61 		.ascii	"float\000"
+ 1420      7400
+ 1421              	.LASF6:
+ 1422 0153 6C6F6E67 		.ascii	"long long int\000"
+ 1422      206C6F6E 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 36
+
+
+ 1422      6720696E 
+ 1422      7400
+ 1423              	.LASF4:
+ 1424 0161 6C6F6E67 		.ascii	"long int\000"
+ 1424      20696E74 
+ 1424      00
+ 1425              	.LASF39:
+ 1426 016a 434C4B5F 		.ascii	"CLK_pre_emp_timer_clock_GetModeRegister\000"
+ 1426      7072655F 
+ 1426      656D705F 
+ 1426      74696D65 
+ 1426      725F636C 
+ 1427              	.LASF23:
+ 1428 0192 73746174 		.ascii	"state\000"
+ 1428      6500
+ 1429              	.LASF21:
+ 1430 0198 434C4B5F 		.ascii	"CLK_pre_emp_timer_clock_StandbyPower\000"
+ 1430      7072655F 
+ 1430      656D705F 
+ 1430      74696D65 
+ 1430      725F636C 
+ 1431              	.LASF1:
+ 1432 01bd 756E7369 		.ascii	"unsigned char\000"
+ 1432      676E6564 
+ 1432      20636861 
+ 1432      7200
+ 1433              	.LASF30:
+ 1434 01cb 6D6F6465 		.ascii	"modeBitMask\000"
+ 1434      4269744D 
+ 1434      61736B00 
+ 1435              	.LASF18:
+ 1436 01d7 434C4B5F 		.ascii	"CLK_pre_emp_timer_clock_Start\000"
+ 1436      7072655F 
+ 1436      656D705F 
+ 1436      74696D65 
+ 1436      725F636C 
+ 1437              	.LASF0:
+ 1438 01f5 7369676E 		.ascii	"signed char\000"
+ 1438      65642063 
+ 1438      68617200 
+ 1439              	.LASF7:
+ 1440 0201 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1440      206C6F6E 
+ 1440      6720756E 
+ 1440      7369676E 
+ 1440      65642069 
+ 1441              	.LASF8:
+ 1442 0218 756E7369 		.ascii	"unsigned int\000"
+ 1442      676E6564 
+ 1442      20696E74 
+ 1442      00
+ 1443              	.LASF3:
+ 1444 0225 73686F72 		.ascii	"short unsigned int\000"
+ 1444      7420756E 
+ 1444      7369676E 
+ 1444      65642069 
+ 1444      6E7400
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 37
+
+
+ 1445              	.LASF13:
+ 1446 0238 63686172 		.ascii	"char\000"
+ 1446      00
+ 1447              	.LASF20:
+ 1448 023d 434C4B5F 		.ascii	"CLK_pre_emp_timer_clock_StopBlock\000"
+ 1448      7072655F 
+ 1448      656D705F 
+ 1448      74696D65 
+ 1448      725F636C 
+ 1449              	.LASF33:
+ 1450 025f 636C6B53 		.ascii	"clkSource\000"
+ 1450      6F757263 
+ 1450      6500
+ 1451              	.LASF28:
+ 1452 0269 63757272 		.ascii	"currSrc\000"
+ 1452      53726300 
+ 1453              	.LASF37:
+ 1454 0271 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\CLK_pre_emp_timer_clock"
+ 1454      6E657261 
+ 1454      7465645F 
+ 1454      536F7572 
+ 1454      63655C50 
+ 1455 02a1 2E6300   		.ascii	".c\000"
+ 1456              	.LASF26:
+ 1457 02a4 6F6C6444 		.ascii	"oldDivider\000"
+ 1457      69766964 
+ 1457      657200
+ 1458              	.LASF38:
+ 1459 02af 443A5C53 		.ascii	"D:\\START_UP\\COMPANY_STARTUP\\3_platform_based_dev"
+ 1459      54415254 
+ 1459      5F55505C 
+ 1459      434F4D50 
+ 1459      414E595F 
+ 1460 02df 656C6F70 		.ascii	"elopments\\PSOC_PROJECTS\\platform\\platform\\Psoc_"
+ 1460      6D656E74 
+ 1460      735C5053 
+ 1460      4F435F50 
+ 1460      524F4A45 
+ 1461 030e 506C6174 		.ascii	"Platform\\Design02.cydsn\000"
+ 1461      666F726D 
+ 1461      5C446573 
+ 1461      69676E30 
+ 1461      322E6379 
+ 1462              	.LASF14:
+ 1463 0326 72656738 		.ascii	"reg8\000"
+ 1463      00
+ 1464              	.LASF5:
+ 1465 032b 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1465      20756E73 
+ 1465      69676E65 
+ 1465      6420696E 
+ 1465      7400
+ 1466              	.LASF12:
+ 1467 033d 646F7562 		.ascii	"double\000"
+ 1467      6C6500
+ 1468              	.LASF19:
+ 1469 0344 434C4B5F 		.ascii	"CLK_pre_emp_timer_clock_Stop\000"
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ARR5F.s 			page 38
+
+
+ 1469      7072655F 
+ 1469      656D705F 
+ 1469      74696D65 
+ 1469      725F636C 
+ 1470              	.LASF27:
+ 1471 0361 656E6162 		.ascii	"enabled\000"
+ 1471      6C656400 
+ 1472              	.LASF16:
+ 1473 0369 434C4B5F 		.ascii	"CLK_pre_emp_timer_clock_GetSourceRegister\000"
+ 1473      7072655F 
+ 1473      656D705F 
+ 1473      74696D65 
+ 1473      725F636C 
+ 1474              	.LASF32:
+ 1475 0393 434C4B5F 		.ascii	"CLK_pre_emp_timer_clock_SetSourceRegister\000"
+ 1475      7072655F 
+ 1475      656D705F 
+ 1475      74696D65 
+ 1475      725F636C 
+ 1476              	.LASF29:
+ 1477 03bd 434C4B5F 		.ascii	"CLK_pre_emp_timer_clock_SetModeRegister\000"
+ 1477      7072655F 
+ 1477      656D705F 
+ 1477      74696D65 
+ 1477      725F636C 
+ 1478              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

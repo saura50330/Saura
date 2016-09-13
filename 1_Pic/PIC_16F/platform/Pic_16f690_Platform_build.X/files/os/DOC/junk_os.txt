@@ -1,0 +1,71 @@
+
+		
+		if(Os_10ms_Task_Sts==READY)
+		{
+			   if(Os_10ms_Task_Ptr!=0)
+			   {
+					Os_Task_Ptr_Temp=Os_10ms_Task_Ptr;   // task selected for execution
+					Os_10ms_Task_Ptr=Os_10ms_Task_Ptr+1;  // execute one task after aother from 10ms container
+					if(Os_10ms_Task_Ptr==0)  // this check is done to make sure that , when last function in task get executed , while loop can immidiatly take next task in next cycle
+					{
+						Os_10ms_Task_Ptr=Os_10ms_Task[0]; // when next timer tick rech 10ms start from begining.
+						Os_10ms_Task_Sts=SUSPENDED; // criticl section
+					}
+			   }
+			   else // if task is empty no task get executed
+			   {
+					Os_10ms_Task_Ptr=Os_10ms_Task[0]; // when next timer tick rech 10ms start from begining.
+					Os_10ms_Task_Sts=SUSPENDED; // criticl section
+					// all task in 10ms are executed or its empty				
+			   }
+		}
+		else if(Os_50ms_Task_Sts==READY)
+		{
+			   if(Os_50ms_Task_Ptr!=0)
+			   {
+					Os_Task_Ptr_Temp=Os_50ms_Task_Ptr;   // task selected for execution
+					Os_50ms_Task_Ptr=Os_50ms_Task_Ptr+1;  // execute one task after aother from 50ms container
+			   }
+			   else
+			   {
+					Os_50ms_Task_Ptr=Os_50ms_Task[0]; // when next timer tick rech 50ms start from begining.
+					Os_50ms_Task_Sts=SUSPENDED; // critical section
+					// all task in 10ms are executed or its empty
+				
+			   }
+		}
+		else  // background task // executes very fast
+		{
+		 #if(KERNEL_MAX_SW_TIMERS>0) 
+		 // manage software timer based tasks
+		    for(_UBYTE i = 0;i<KERNEL_MAX_SW_TIMERS;i++)
+		   {
+			 // if task is unlocked     
+			 if(Kernel_stTimer[i].lock == TRUE)
+			  {
+			  // if task is ready to execute		
+				if(Kernel_stTimer[i].TimerValue == 0)
+				{
+					// execute the function assigned on ti,e out
+					if(Kernel_stTimer[i].cb != NULL)
+					{   
+						(*Kernel_stTimer[i].cb)();
+						//(Kernel_stTimer[i].cb)();
+					}  		
+					Kernel_stTimer[i].TimerValue = Kernel_stTimer[i].TimerValueBk;
+				}
+			  }
+			}
+		   //# end of software bsased tasks
+		   #endif
+			 if(Os_Back_Ground_Task_Ptr!=0)
+			   {
+					Os_Task_Ptr_Temp=Os_Back_Ground_Task_Ptr;   // task selected for execution
+					Os_Back_Ground_Task_Ptr=Os_Back_Ground_Task_Ptr+1;  // execute one task after aother from Os_Back_Ground_Task_Ptr container
+			   }
+			   else
+			   {
+					Os_Back_Ground_Task_Ptr=Os_Back_Ground_Task[0]; // when next timer tick rech 50ms start from begining.
+					// all task in background are executed or its empty	
+			   }
+		}

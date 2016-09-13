@@ -1,0 +1,817 @@
+Version 3.2 HI-TECH Software Intermediate Code
+[; ;type_def.h: 9: typedef unsigned char _UBYTE;
+[; ;type_def.h: 10: typedef unsigned char _UINT8;
+[; ;type_def.h: 11: typedef signed char _SBYTE;
+[; ;type_def.h: 12: typedef signed char _SINT8;
+[; ;type_def.h: 14: typedef unsigned int _UINT16;
+[; ;type_def.h: 15: typedef signed int _SINT16;
+[; ;type_def.h: 17: typedef unsigned long int _UINT32;
+[; ;type_def.h: 18: typedef signed long int _SINT32;
+[; ;sevlb_pub.h: 6: _UBYTE clear_bit_position(_UBYTE number1,_UBYTE bit_position);
+[; ;sevlb_pub.h: 7: _UBYTE set_bit_position(_UBYTE number1,_UBYTE bit_position);
+[; ;sevlb_pub.h: 8: _UBYTE update_bit_position(_UBYTE number1,_UBYTE bit_position,_UBYTE bit_value);
+[; ;sevlb_pub.h: 9: _UBYTE get_bit_value(_UBYTE number1,_UBYTE bit_position);
+[; ;sevlb_pub.h: 10: _UBYTE srvb_between(_SINT32 temp, _SINT32 num1, _SINT32 num2);
+[; ;sevlb_pub.h: 11: void num_to_string(_UBYTE number);
+[; ;sevlb_pub.h: 12: void delay_ms(_UINT16 delay_count);
+[; ;sevlb_pub.h: 13: _SINT8 srvb_add_s8_s16_s16(_SINT16 add1,_SINT16 add2);
+[; ;sevlb_pub.h: 14: _SINT16 srvb_add_s16_s16_s16(_SINT16 add1,_SINT16 add2);
+[; ;sevlb_pub.h: 15: _SINT8 srvb_sub_s8_s16_s16(_SINT16 sub1,_SINT16 sub2);
+[; ;sevlb_pub.h: 17: _UINT16 srvb_mul_div_u16_u16_u16_u16(_UINT32 mul1 ,_UINT32 mul2 ,_UINT16 div1);
+[; ;sevlb_pub.h: 19: _UINT8 srvb_mul_div_u8_u16_u16_u16(_UINT32 mul1 ,_UINT32 mul2 ,_UINT16 div1);
+[; ;sevlb_pub.h: 21: _SINT16 srvb_mul_div_s16_s16_s16_s16(_SINT32 mul1 ,_SINT32 mul2 ,_SINT16 div1);
+[; ;sevlb_pub.h: 23: _SINT8 srvb_mul_div_s8_s16_s16_s16(_UINT32 mul1 ,_UINT32 mul2 ,_UINT16 div1);
+[; ;sevlb_pub.h: 24: _UBYTE hyst_delta_minus_s10s10s10u8(_SINT16 var_compare,_SINT16 var_max,_SINT16 var_min, _UBYTE * state_var);
+"9 D:/START_UP/COMPANY_STARTUP/3_platform_based_developments/pic16f690_projects/platform_pic16f690/platform/Pic_16f690_Platform_build.X/files/os/sevlb.c
+[v _clear_bit_position `(uc ~T0 @X0 1 ef2`uc`uc ]
+"10
+{
+[; ;sevlb.c: 9: _UBYTE clear_bit_position(_UBYTE number1,_UBYTE bit_position)
+[; ;sevlb.c: 10: {
+[e :U _clear_bit_position ]
+"9
+[v _number1 `uc ~T0 @X0 1 r1 ]
+[v _bit_position `uc ~T0 @X0 1 r2 ]
+"10
+[f ]
+[; ;sevlb.c: 11: return(number1 & (~(0x01<<bit_position)));
+"11
+[e ) -> & -> _number1 `i ~ << -> 1 `i _bit_position `uc ]
+[e $UE 1  ]
+[; ;sevlb.c: 12: }
+"12
+[e :UE 1 ]
+}
+"13
+[v _set_bit_position `(uc ~T0 @X0 1 ef2`uc`uc ]
+"14
+{
+[; ;sevlb.c: 13: _UBYTE set_bit_position(_UBYTE number1,_UBYTE bit_position)
+[; ;sevlb.c: 14: {
+[e :U _set_bit_position ]
+"13
+[v _number1 `uc ~T0 @X0 1 r1 ]
+[v _bit_position `uc ~T0 @X0 1 r2 ]
+"14
+[f ]
+[; ;sevlb.c: 15: return( number1 | (0x01<<bit_position) );
+"15
+[e ) -> | -> _number1 `i << -> 1 `i _bit_position `uc ]
+[e $UE 2  ]
+[; ;sevlb.c: 16: }
+"16
+[e :UE 2 ]
+}
+"17
+[v _update_bit_position `(uc ~T0 @X0 1 ef3`uc`uc`uc ]
+"18
+{
+[; ;sevlb.c: 17: _UBYTE update_bit_position(_UBYTE number1,_UBYTE bit_position,_UBYTE bit_value)
+[; ;sevlb.c: 18: {
+[e :U _update_bit_position ]
+"17
+[v _number1 `uc ~T0 @X0 1 r1 ]
+[v _bit_position `uc ~T0 @X0 1 r2 ]
+[v _bit_value `uc ~T0 @X0 1 r3 ]
+"18
+[f ]
+[; ;sevlb.c: 19: return(bit_value?( number1 | (0x01<<bit_position) ):(number1 & (~(0x01<<bit_position))));
+"19
+[e ) -> ? != -> _bit_value `i -> -> -> 0 `i `uc `i : | -> _number1 `i << -> 1 `i _bit_position & -> _number1 `i ~ << -> 1 `i _bit_position `uc ]
+[e $UE 3  ]
+[; ;sevlb.c: 20: }
+"20
+[e :UE 3 ]
+}
+"21
+[v _get_bit_value `(uc ~T0 @X0 1 ef2`uc`uc ]
+"22
+{
+[; ;sevlb.c: 21: _UBYTE get_bit_value(_UBYTE number1,_UBYTE bit_position)
+[; ;sevlb.c: 22: {
+[e :U _get_bit_value ]
+"21
+[v _number1 `uc ~T0 @X0 1 r1 ]
+[v _bit_position `uc ~T0 @X0 1 r2 ]
+"22
+[f ]
+[; ;sevlb.c: 23: return((number1>>bit_position) & 0x01);
+"23
+[e ) -> & >> -> _number1 `i _bit_position -> 1 `i `uc ]
+[e $UE 4  ]
+[; ;sevlb.c: 24: }
+"24
+[e :UE 4 ]
+}
+"27
+[v _srvb_between `(uc ~T0 @X0 1 ef3`l`l`l ]
+"28
+{
+[; ;sevlb.c: 27: _UBYTE srvb_between(_SINT32 temp, _SINT32 num1, _SINT32 num2)
+[; ;sevlb.c: 28: {
+[e :U _srvb_between ]
+"27
+[v _temp `l ~T0 @X0 1 r1 ]
+[v _num1 `l ~T0 @X0 1 r2 ]
+[v _num2 `l ~T0 @X0 1 r3 ]
+"28
+[f ]
+[; ;sevlb.c: 29: return(((temp>num1)&&(temp<num2))||((temp>num2)&&(temp<num1)));
+"29
+[e ) -> -> || && > _temp _num1 < _temp _num2 && > _temp _num2 < _temp _num1 `i `uc ]
+[e $UE 5  ]
+[; ;sevlb.c: 30: }
+"30
+[e :UE 5 ]
+}
+"32
+[v _num_to_string `(v ~T0 @X0 1 ef1`uc ]
+"33
+{
+[; ;sevlb.c: 32: void num_to_string(_UBYTE number)
+[; ;sevlb.c: 33: {
+[e :U _num_to_string ]
+"32
+[v _number `uc ~T0 @X0 1 r1 ]
+"33
+[f ]
+"34
+[v F73 `uc ~T0 @X0 -> 4 `i s num_string ]
+[i F73
+:U ..
+-> -> 48 `ui `uc
+-> -> 48 `ui `uc
+-> -> 48 `ui `uc
+-> -> 0 `i `uc
+..
+]
+"35
+[v _count `uc ~T0 @X0 1 a ]
+[v _wrt_spac `uc ~T0 @X0 1 a ]
+[; ;sevlb.c: 34: static _UBYTE num_string[4]={'0','0','0',0};
+[; ;sevlb.c: 35: _UBYTE count ,wrt_spac;
+[; ;sevlb.c: 36: wrt_spac=1;
+"36
+[e = _wrt_spac -> -> 1 `i `uc ]
+[; ;sevlb.c: 37: count = 2;
+"37
+[e = _count -> -> 2 `i `uc ]
+[; ;sevlb.c: 39: while (number>0)
+"39
+[e $U 7  ]
+[e :U 8 ]
+[; ;sevlb.c: 40: {
+"40
+{
+[; ;sevlb.c: 41: num_string[count]=(number%10)+48;
+"41
+[e = *U + &U F73 * -> _count `ux -> -> # *U &U F73 `ui `ux -> + % -> _number `i -> 10 `i -> 48 `i `uc ]
+[; ;sevlb.c: 42: number/=10;
+"42
+[e =/ _number -> 10 `uc ]
+[; ;sevlb.c: 43: if(count>0)
+"43
+[e $ ! > -> _count `i -> 0 `i 10  ]
+[; ;sevlb.c: 44: {
+"44
+{
+[; ;sevlb.c: 45: count--;
+"45
+[e -- _count -> -> 1 `i `uc ]
+"46
+}
+[; ;sevlb.c: 46: }
+[e $U 11  ]
+"47
+[e :U 10 ]
+[; ;sevlb.c: 47: else
+[; ;sevlb.c: 48: {
+"48
+{
+[; ;sevlb.c: 49: wrt_spac=0;
+"49
+[e = _wrt_spac -> -> 0 `i `uc ]
+[; ;sevlb.c: 50: break;
+"50
+[e $U 9  ]
+"51
+}
+[e :U 11 ]
+"52
+}
+[e :U 7 ]
+"39
+[e $ > -> _number `i -> 0 `i 8  ]
+[e :U 9 ]
+[; ;sevlb.c: 51: }
+[; ;sevlb.c: 52: }
+[; ;sevlb.c: 53: while(wrt_spac&&(count!=0))
+"53
+[e $U 12  ]
+[e :U 13 ]
+[; ;sevlb.c: 54: {
+"54
+{
+[; ;sevlb.c: 55: num_string[count]='0';
+"55
+[e = *U + &U F73 * -> _count `ux -> -> # *U &U F73 `ui `ux -> -> 48 `ui `uc ]
+[; ;sevlb.c: 56: count--;
+"56
+[e -- _count -> -> 1 `i `uc ]
+"57
+}
+[e :U 12 ]
+"53
+[e $ && != -> _wrt_spac `i -> -> -> 0 `i `uc `i != -> _count `i -> 0 `i 13  ]
+[e :U 14 ]
+[; ;sevlb.c: 57: }
+[; ;sevlb.c: 58: num_string[0]='0';
+"58
+[e = *U + &U F73 * -> -> -> 0 `i `ui `ux -> -> # *U &U F73 `ui `ux -> -> 48 `ui `uc ]
+[; ;sevlb.c: 59: }
+"59
+[e :UE 6 ]
+}
+"62
+[v _srvb_add_s8_s16_s16 `(c ~T0 @X0 1 ef2`i`i ]
+"63
+{
+[; ;sevlb.c: 62: _SINT8 srvb_add_s8_s16_s16(_SINT16 add1,_SINT16 add2)
+[; ;sevlb.c: 63: {
+[e :U _srvb_add_s8_s16_s16 ]
+"62
+[v _add1 `i ~T0 @X0 1 r1 ]
+[v _add2 `i ~T0 @X0 1 r2 ]
+"63
+[f ]
+"64
+[v _temp `i ~T0 @X0 1 a ]
+[; ;sevlb.c: 64: _SINT16 temp=0;
+[e = _temp -> 0 `i ]
+[; ;sevlb.c: 65: temp= add1 + add2;
+"65
+[e = _temp + _add1 _add2 ]
+[; ;sevlb.c: 66: if(srvb_between(temp,0x7F,0x7FFF))
+"66
+[e $ ! != -> ( _srvb_between (3 , , -> _temp `l -> -> 127 `i `l -> -> 32767 `i `l `i -> -> -> 0 `i `uc `i 16  ]
+[; ;sevlb.c: 67: {
+"67
+{
+[; ;sevlb.c: 68: return(0x7F);
+"68
+[e ) -> -> 127 `i `c ]
+[e $UE 15  ]
+"69
+}
+[; ;sevlb.c: 69: }
+[e $U 17  ]
+"70
+[e :U 16 ]
+[; ;sevlb.c: 70: else if(srvb_between(temp,0x80,0x8000))
+[e $ ! != -> ( _srvb_between (3 , , -> _temp `l -> -> 128 `i `l -> -> 32768 `ui `l `i -> -> -> 0 `i `uc `i 18  ]
+[; ;sevlb.c: 71: {
+"71
+{
+[; ;sevlb.c: 72: return(0x80);
+"72
+[e ) -> -> 128 `i `c ]
+[e $UE 15  ]
+"73
+}
+[; ;sevlb.c: 73: }
+[e $U 19  ]
+"74
+[e :U 18 ]
+[; ;sevlb.c: 74: else
+[; ;sevlb.c: 75: {
+"75
+{
+[; ;sevlb.c: 76: return ((_SINT8)temp);
+"76
+[e ) -> _temp `c ]
+[e $UE 15  ]
+"77
+}
+[e :U 19 ]
+[e :U 17 ]
+[; ;sevlb.c: 77: }
+[; ;sevlb.c: 79: }
+"79
+[e :UE 15 ]
+}
+"81
+[v _srvb_add_s16_s16_s16 `(i ~T0 @X0 1 ef2`i`i ]
+"82
+{
+[; ;sevlb.c: 81: _SINT16 srvb_add_s16_s16_s16(_SINT16 add1,_SINT16 add2)
+[; ;sevlb.c: 82: {
+[e :U _srvb_add_s16_s16_s16 ]
+"81
+[v _add1 `i ~T0 @X0 1 r1 ]
+[v _add2 `i ~T0 @X0 1 r2 ]
+"82
+[f ]
+"83
+[v _temp `i ~T0 @X0 1 a ]
+[; ;sevlb.c: 83: _SINT16 temp=0;
+[e = _temp -> 0 `i ]
+[; ;sevlb.c: 84: temp= add1 + add2;
+"84
+[e = _temp + _add1 _add2 ]
+[; ;sevlb.c: 85: return ((_SINT16)temp);
+"85
+[e ) _temp ]
+[e $UE 20  ]
+[; ;sevlb.c: 87: }
+"87
+[e :UE 20 ]
+}
+"89
+[v _srvb_sub_s8_s16_s16 `(c ~T0 @X0 1 ef2`i`i ]
+"90
+{
+[; ;sevlb.c: 89: _SINT8 srvb_sub_s8_s16_s16(_SINT16 sub1,_SINT16 sub2)
+[; ;sevlb.c: 90: {
+[e :U _srvb_sub_s8_s16_s16 ]
+"89
+[v _sub1 `i ~T0 @X0 1 r1 ]
+[v _sub2 `i ~T0 @X0 1 r2 ]
+"90
+[f ]
+"91
+[v _temp `i ~T0 @X0 1 a ]
+[; ;sevlb.c: 91: _SINT16 temp=0;
+[e = _temp -> 0 `i ]
+[; ;sevlb.c: 92: temp= sub1 - sub2;
+"92
+[e = _temp - _sub1 _sub2 ]
+[; ;sevlb.c: 93: if(srvb_between(temp,0x7F,0x7FFF))
+"93
+[e $ ! != -> ( _srvb_between (3 , , -> _temp `l -> -> 127 `i `l -> -> 32767 `i `l `i -> -> -> 0 `i `uc `i 22  ]
+[; ;sevlb.c: 94: {
+"94
+{
+[; ;sevlb.c: 95: return(0x7F);
+"95
+[e ) -> -> 127 `i `c ]
+[e $UE 21  ]
+"96
+}
+[; ;sevlb.c: 96: }
+[e $U 23  ]
+"97
+[e :U 22 ]
+[; ;sevlb.c: 97: else if(srvb_between(temp,0x80,0x8000))
+[e $ ! != -> ( _srvb_between (3 , , -> _temp `l -> -> 128 `i `l -> -> 32768 `ui `l `i -> -> -> 0 `i `uc `i 24  ]
+[; ;sevlb.c: 98: {
+"98
+{
+[; ;sevlb.c: 99: return(0x80);
+"99
+[e ) -> -> 128 `i `c ]
+[e $UE 21  ]
+"100
+}
+[; ;sevlb.c: 100: }
+[e $U 25  ]
+"101
+[e :U 24 ]
+[; ;sevlb.c: 101: else
+[; ;sevlb.c: 102: {
+"102
+{
+[; ;sevlb.c: 103: return ((_SINT8)temp);
+"103
+[e ) -> _temp `c ]
+[e $UE 21  ]
+"104
+}
+[e :U 25 ]
+[e :U 23 ]
+[; ;sevlb.c: 104: }
+[; ;sevlb.c: 106: }
+"106
+[e :UE 21 ]
+}
+"110
+[v _srvb_mul_div_u16_u16_u16_u16 `(ui ~T0 @X0 1 ef3`ul`ul`ui ]
+"111
+{
+[; ;sevlb.c: 110: _UINT16 srvb_mul_div_u16_u16_u16_u16(_UINT32 mul1 ,_UINT32 mul2 ,_UINT16 div1)
+[; ;sevlb.c: 111: {
+[e :U _srvb_mul_div_u16_u16_u16_u16 ]
+"110
+[v _mul1 `ul ~T0 @X0 1 r1 ]
+[v _mul2 `ul ~T0 @X0 1 r2 ]
+[v _div1 `ui ~T0 @X0 1 r3 ]
+"111
+[f ]
+"112
+[v _temp `l ~T0 @X0 1 a ]
+[; ;sevlb.c: 112: _SINT32 temp=0;
+[e = _temp -> -> 0 `i `l ]
+[; ;sevlb.c: 113: if(div1)
+"113
+[e $ ! != _div1 -> -> 0 `i `ui 27  ]
+[; ;sevlb.c: 114: {
+"114
+{
+[; ;sevlb.c: 115: temp=(mul1*mul2)/div1;
+"115
+[e = _temp -> / * _mul1 _mul2 -> _div1 `ul `l ]
+[; ;sevlb.c: 116: return(((temp>0xFFFF)?0xFFFF:(_UINT16)temp));
+"116
+[e ) ? > _temp -> -> 65535 `ui `l : -> 65535 `ui -> _temp `ui ]
+[e $UE 26  ]
+"117
+}
+[; ;sevlb.c: 117: }
+[e $U 28  ]
+"118
+[e :U 27 ]
+[; ;sevlb.c: 118: else
+[; ;sevlb.c: 119: {
+"119
+{
+[; ;sevlb.c: 120: return(0);
+"120
+[e ) -> -> 0 `i `ui ]
+[e $UE 26  ]
+"121
+}
+[e :U 28 ]
+[; ;sevlb.c: 121: }
+[; ;sevlb.c: 122: }
+"122
+[e :UE 26 ]
+}
+"123
+[v _srvb_mul_div_u8_u16_u16_u16 `(uc ~T0 @X0 1 ef3`ul`ul`ui ]
+"124
+{
+[; ;sevlb.c: 123: _UINT8 srvb_mul_div_u8_u16_u16_u16(_UINT32 mul1 ,_UINT32 mul2 ,_UINT16 div1)
+[; ;sevlb.c: 124: {
+[e :U _srvb_mul_div_u8_u16_u16_u16 ]
+"123
+[v _mul1 `ul ~T0 @X0 1 r1 ]
+[v _mul2 `ul ~T0 @X0 1 r2 ]
+[v _div1 `ui ~T0 @X0 1 r3 ]
+"124
+[f ]
+"125
+[v _temp `l ~T0 @X0 1 a ]
+[; ;sevlb.c: 125: _SINT32 temp=0;
+[e = _temp -> -> 0 `i `l ]
+[; ;sevlb.c: 126: if(div1)
+"126
+[e $ ! != _div1 -> -> 0 `i `ui 30  ]
+[; ;sevlb.c: 127: {
+"127
+{
+[; ;sevlb.c: 128: temp=(mul1*mul2)/div1;
+"128
+[e = _temp -> / * _mul1 _mul2 -> _div1 `ul `l ]
+[; ;sevlb.c: 129: return(((temp>0xFF)?0xFF:(_UINT8)temp));
+"129
+[e ) -> ? > _temp -> -> 255 `i `l : -> 255 `i -> -> _temp `uc `i `uc ]
+[e $UE 29  ]
+"130
+}
+[; ;sevlb.c: 130: }
+[e $U 31  ]
+"131
+[e :U 30 ]
+[; ;sevlb.c: 131: else
+[; ;sevlb.c: 132: {
+"132
+{
+[; ;sevlb.c: 133: return(0);
+"133
+[e ) -> -> 0 `i `uc ]
+[e $UE 29  ]
+"134
+}
+[e :U 31 ]
+[; ;sevlb.c: 134: }
+[; ;sevlb.c: 135: }
+"135
+[e :UE 29 ]
+}
+"137
+[v _srvb_mul_div_s16_s16_s16_s16 `(i ~T0 @X0 1 ef3`l`l`i ]
+"138
+{
+[; ;sevlb.c: 137: _SINT16 srvb_mul_div_s16_s16_s16_s16(_SINT32 mul1 ,_SINT32 mul2 ,_SINT16 div1)
+[; ;sevlb.c: 138: {
+[e :U _srvb_mul_div_s16_s16_s16_s16 ]
+"137
+[v _mul1 `l ~T0 @X0 1 r1 ]
+[v _mul2 `l ~T0 @X0 1 r2 ]
+[v _div1 `i ~T0 @X0 1 r3 ]
+"138
+[f ]
+"139
+[v _temp `l ~T0 @X0 1 a ]
+[; ;sevlb.c: 139: _SINT32 temp=0;
+[e = _temp -> -> 0 `i `l ]
+[; ;sevlb.c: 140: if(div1)
+"140
+[e $ ! != _div1 -> 0 `i 33  ]
+[; ;sevlb.c: 141: {
+"141
+{
+[; ;sevlb.c: 142: temp=(mul1*mul2)/div1;
+"142
+[e = _temp / * _mul1 _mul2 -> _div1 `l ]
+[; ;sevlb.c: 143: if(srvb_between(temp,0x7FFF,0x7FFFFFFF))
+"143
+[e $ ! != -> ( _srvb_between (3 , , _temp -> -> 32767 `i `l -> 2147483647 `l `i -> -> -> 0 `i `uc `i 34  ]
+[; ;sevlb.c: 144: {
+"144
+{
+[; ;sevlb.c: 145: return(0x7FFF);
+"145
+[e ) -> 32767 `i ]
+[e $UE 32  ]
+"146
+}
+[; ;sevlb.c: 146: }
+[e $U 35  ]
+"147
+[e :U 34 ]
+[; ;sevlb.c: 147: else if(srvb_between(temp,0x8000,0x80000000))
+[e $ ! != -> ( _srvb_between (3 , , _temp -> -> 32768 `ui `l -> -> -2147483648 `ul `l `i -> -> -> 0 `i `uc `i 36  ]
+[; ;sevlb.c: 148: {
+"148
+{
+[; ;sevlb.c: 149: return(0x8000);
+"149
+[e ) -> -> 32768 `ui `i ]
+[e $UE 32  ]
+"150
+}
+[; ;sevlb.c: 150: }
+[e $U 37  ]
+"151
+[e :U 36 ]
+[; ;sevlb.c: 151: else
+[; ;sevlb.c: 152: {
+"152
+{
+[; ;sevlb.c: 153: return ((_SINT16)temp);
+"153
+[e ) -> _temp `i ]
+[e $UE 32  ]
+"154
+}
+[e :U 37 ]
+[e :U 35 ]
+"155
+}
+[; ;sevlb.c: 154: }
+[; ;sevlb.c: 155: }
+[e $U 38  ]
+"156
+[e :U 33 ]
+[; ;sevlb.c: 156: else
+[; ;sevlb.c: 157: {
+"157
+{
+[; ;sevlb.c: 158: return(0);
+"158
+[e ) -> 0 `i ]
+[e $UE 32  ]
+"159
+}
+[e :U 38 ]
+[; ;sevlb.c: 159: }
+[; ;sevlb.c: 160: }
+"160
+[e :UE 32 ]
+}
+"161
+[v _srvb_mul_div_s8_s16_s16_s16 `(c ~T0 @X0 1 ef3`ul`ul`ui ]
+"162
+{
+[; ;sevlb.c: 161: _SINT8 srvb_mul_div_s8_s16_s16_s16(_UINT32 mul1 ,_UINT32 mul2 ,_UINT16 div1)
+[; ;sevlb.c: 162: {
+[e :U _srvb_mul_div_s8_s16_s16_s16 ]
+"161
+[v _mul1 `ul ~T0 @X0 1 r1 ]
+[v _mul2 `ul ~T0 @X0 1 r2 ]
+[v _div1 `ui ~T0 @X0 1 r3 ]
+"162
+[f ]
+"163
+[v _temp `l ~T0 @X0 1 a ]
+[; ;sevlb.c: 163: _SINT32 temp=0;
+[e = _temp -> -> 0 `i `l ]
+[; ;sevlb.c: 164: if(div1)
+"164
+[e $ ! != _div1 -> -> 0 `i `ui 40  ]
+[; ;sevlb.c: 165: {
+"165
+{
+[; ;sevlb.c: 166: temp=(mul1*mul2)/div1;
+"166
+[e = _temp -> / * _mul1 _mul2 -> _div1 `ul `l ]
+[; ;sevlb.c: 167: if(srvb_between(temp,0x7F,0x7FFFFFFF))
+"167
+[e $ ! != -> ( _srvb_between (3 , , _temp -> -> 127 `i `l -> 2147483647 `l `i -> -> -> 0 `i `uc `i 41  ]
+[; ;sevlb.c: 168: {
+"168
+{
+[; ;sevlb.c: 169: return(0x7F);
+"169
+[e ) -> -> 127 `i `c ]
+[e $UE 39  ]
+"170
+}
+[; ;sevlb.c: 170: }
+[e $U 42  ]
+"171
+[e :U 41 ]
+[; ;sevlb.c: 171: else if(srvb_between(temp,0x80,0x80000000))
+[e $ ! != -> ( _srvb_between (3 , , _temp -> -> 128 `i `l -> -> -2147483648 `ul `l `i -> -> -> 0 `i `uc `i 43  ]
+[; ;sevlb.c: 172: {
+"172
+{
+[; ;sevlb.c: 173: return(0x80);
+"173
+[e ) -> -> 128 `i `c ]
+[e $UE 39  ]
+"174
+}
+[; ;sevlb.c: 174: }
+[e $U 44  ]
+"175
+[e :U 43 ]
+[; ;sevlb.c: 175: else
+[; ;sevlb.c: 176: {
+"176
+{
+[; ;sevlb.c: 177: return ((_SINT8)temp);
+"177
+[e ) -> _temp `c ]
+[e $UE 39  ]
+"178
+}
+[e :U 44 ]
+[e :U 42 ]
+"179
+}
+[; ;sevlb.c: 178: }
+[; ;sevlb.c: 179: }
+[e $U 45  ]
+"180
+[e :U 40 ]
+[; ;sevlb.c: 180: else
+[; ;sevlb.c: 181: {
+"181
+{
+[; ;sevlb.c: 182: return(0);
+"182
+[e ) -> -> 0 `i `c ]
+[e $UE 39  ]
+"183
+}
+[e :U 45 ]
+[; ;sevlb.c: 183: }
+[; ;sevlb.c: 184: }
+"184
+[e :UE 39 ]
+}
+"187
+[v _hyst_delta_minus_s10s10s10u8 `(uc ~T0 @X0 1 ef4`i`i`i`*uc ]
+"188
+{
+[; ;sevlb.c: 187: _UBYTE hyst_delta_minus_s10s10s10u8(_SINT16 var_compare,_SINT16 var_max,_SINT16 var_min, _UBYTE * state_var)
+[; ;sevlb.c: 188: {
+[e :U _hyst_delta_minus_s10s10s10u8 ]
+"187
+[v _var_compare `i ~T0 @X0 1 r1 ]
+[v _var_max `i ~T0 @X0 1 r2 ]
+[v _var_min `i ~T0 @X0 1 r3 ]
+[v _state_var `*uc ~T0 @X0 1 r4 ]
+"188
+[f ]
+[; ;sevlb.c: 193: if(*state_var)
+"193
+[e $ ! != -> *U _state_var `i -> -> -> 0 `i `uc `i 47  ]
+[; ;sevlb.c: 194: {
+"194
+{
+[; ;sevlb.c: 195: if(var_compare > var_max)
+"195
+[e $ ! > _var_compare _var_max 48  ]
+[; ;sevlb.c: 196: {
+"196
+{
+[; ;sevlb.c: 197: *state_var=0;
+"197
+[e = *U _state_var -> -> 0 `i `uc ]
+"198
+}
+[; ;sevlb.c: 198: }
+[e $U 49  ]
+"199
+[e :U 48 ]
+[; ;sevlb.c: 199: else
+[; ;sevlb.c: 200: {
+"200
+{
+"202
+}
+[e :U 49 ]
+"203
+}
+[; ;sevlb.c: 202: }
+[; ;sevlb.c: 203: }
+[e $U 50  ]
+"204
+[e :U 47 ]
+[; ;sevlb.c: 204: else
+[; ;sevlb.c: 205: {
+"205
+{
+[; ;sevlb.c: 206: if(var_compare < var_min)
+"206
+[e $ ! < _var_compare _var_min 51  ]
+[; ;sevlb.c: 207: {
+"207
+{
+[; ;sevlb.c: 208: *state_var=1;
+"208
+[e = *U _state_var -> -> 1 `i `uc ]
+"209
+}
+[; ;sevlb.c: 209: }
+[e $U 52  ]
+"210
+[e :U 51 ]
+[; ;sevlb.c: 210: else
+[; ;sevlb.c: 211: {
+"211
+{
+"213
+}
+[e :U 52 ]
+"215
+}
+[e :U 50 ]
+[; ;sevlb.c: 213: }
+[; ;sevlb.c: 215: }
+[; ;sevlb.c: 218: return (* state_var);
+"218
+[e ) *U _state_var ]
+[e $UE 46  ]
+[; ;sevlb.c: 219: }
+"219
+[e :UE 46 ]
+}
+"220
+[v _delay_ms `(v ~T0 @X0 1 ef1`ui ]
+"221
+{
+[; ;sevlb.c: 220: void delay_ms(_UINT16 delay_count)
+[; ;sevlb.c: 221: {
+[e :U _delay_ms ]
+"220
+[v _delay_count `ui ~T0 @X0 1 r1 ]
+"221
+[f ]
+"222
+[v _i `uc ~T0 @X0 1 a ]
+[; ;sevlb.c: 222: _UBYTE i;
+[; ;sevlb.c: 223: while(delay_count)
+"223
+[e $U 54  ]
+[e :U 55 ]
+[; ;sevlb.c: 224: {
+"224
+{
+[; ;sevlb.c: 225: for(i=0;i<224u;i++);
+"225
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `ui -> 224 `ui 57  ]
+[e $U 58  ]
+[e :U 57 ]
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `ui -> 224 `ui 57  ]
+[e :U 58 ]
+}
+[; ;sevlb.c: 227: delay_count=delay_count-1;
+"227
+[e = _delay_count - _delay_count -> -> 1 `i `ui ]
+"228
+}
+[e :U 54 ]
+"223
+[e $ != _delay_count -> -> 0 `i `ui 55  ]
+[e :U 56 ]
+[; ;sevlb.c: 228: }
+[; ;sevlb.c: 230: }
+"230
+[e :UE 53 ]
+}

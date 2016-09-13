@@ -1,0 +1,818 @@
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWBcvWa.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"wifi.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.wifi_module_manager,"ax",%progbits
+  19              		.align	1
+  20              		.global	wifi_module_manager
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	wifi_module_manager, %function
+  24              	wifi_module_manager:
+  25              	.LFB56:
+  26              		.file 1 ".\\wifi.c"
+   1:.\wifi.c      **** /* ========================================
+   2:.\wifi.c      ****  *
+   3:.\wifi.c      ****  * Copyright YOUR COMPANY, THE YEAR
+   4:.\wifi.c      ****  * All Rights Reserved
+   5:.\wifi.c      ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:.\wifi.c      ****  *
+   7:.\wifi.c      ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:.\wifi.c      ****  * WHICH IS THE PROPERTY OF your company.
+   9:.\wifi.c      ****  *
+  10:.\wifi.c      ****  * ========================================
+  11:.\wifi.c      **** */
+  12:.\wifi.c      **** // this moule uses the uar as base for tx and rx
+  13:.\wifi.c      **** #include <project.h>
+  14:.\wifi.c      **** #include "common.h"
+  15:.\wifi.c      **** #include "wifi.h"
+  16:.\wifi.c      **** static uint8  stWifiModule; // wifi module state machine status
+  17:.\wifi.c      **** void wifi_module_manager(void)  // called every 100ms
+  18:.\wifi.c      **** {
+  27              		.loc 1 18 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 38B5     		push	{r3, r4, r5, lr}
+  32              		.cfi_def_cfa_offset 16
+  33              		.cfi_offset 3, -16
+  34              		.cfi_offset 4, -12
+  35              		.cfi_offset 5, -8
+  36              		.cfi_offset 14, -4
+  19:.\wifi.c      ****    static uint8 CommandNum; 
+  20:.\wifi.c      ****        switch(stWifiModule)
+  37              		.loc 1 20 0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWBcvWa.s 			page 2
+
+
+  38 0002 0A4C     		ldr	r4, .L5
+  39 0004 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+  40 0006 012B     		cmp	r3, #1
+  41 0008 0FD1     		bne	.L1
+  21:.\wifi.c      ****        {
+  22:.\wifi.c      ****            case WIFI_IDLE : break; 
+  23:.\wifi.c      ****            case WFI_INI: UART_1_PutString(WifiIniCmd[CommandNum]);   // send all required initializ
+  42              		.loc 1 23 0
+  43 000a 6378     		ldrb	r3, [r4, #1]	@ zero_extendqisi2
+  44 000c 084D     		ldr	r5, .L5+4
+  45 000e 55F82300 		ldr	r0, [r5, r3, lsl #2]
+  46 0012 FFF7FEFF 		bl	UART_1_PutString
+  47              	.LVL0:
+  24:.\wifi.c      ****                       CommandNum++;
+  48              		.loc 1 24 0
+  49 0016 6378     		ldrb	r3, [r4, #1]	@ zero_extendqisi2
+  50 0018 0133     		adds	r3, r3, #1
+  51 001a DBB2     		uxtb	r3, r3
+  52 001c 6370     		strb	r3, [r4, #1]
+  25:.\wifi.c      ****                       if((*WifiIniCmd[CommandNum])==0x00)  //nonly null is end of coomand
+  53              		.loc 1 25 0
+  54 001e 55F82330 		ldr	r3, [r5, r3, lsl #2]
+  55 0022 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  56 0024 0BB9     		cbnz	r3, .L1
+  26:.\wifi.c      ****                       {
+  27:.\wifi.c      ****                             stWifiModule=WIFI_IDLE;
+  57              		.loc 1 27 0
+  58 0026 2370     		strb	r3, [r4]
+  28:.\wifi.c      ****                             CommandNum=0;
+  59              		.loc 1 28 0
+  60 0028 6370     		strb	r3, [r4, #1]
+  61              	.L1:
+  62 002a 38BD     		pop	{r3, r4, r5, pc}
+  63              	.L6:
+  64              		.align	2
+  65              	.L5:
+  66 002c 00000000 		.word	.LANCHOR0
+  67 0030 00000000 		.word	.LANCHOR1
+  68              		.cfi_endproc
+  69              	.LFE56:
+  70              		.size	wifi_module_manager, .-wifi_module_manager
+  71              		.section	.text.wifi_module_config,"ax",%progbits
+  72              		.align	1
+  73              		.global	wifi_module_config
+  74              		.thumb
+  75              		.thumb_func
+  76              		.type	wifi_module_config, %function
+  77              	wifi_module_config:
+  78              	.LFB57:
+  29:.\wifi.c      ****                       }
+  30:.\wifi.c      ****                       break;
+  31:.\wifi.c      ****             default:break;
+  32:.\wifi.c      ****        }
+  33:.\wifi.c      **** }
+  34:.\wifi.c      **** void wifi_module_config(uint8 Command)
+  35:.\wifi.c      **** {
+  79              		.loc 1 35 0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWBcvWa.s 			page 3
+
+
+  80              		.cfi_startproc
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  83              		@ link register save eliminated.
+  84              	.LVL1:
+  36:.\wifi.c      ****     switch(Command)
+  85              		.loc 1 36 0
+  86 0000 0128     		cmp	r0, #1
+  37:.\wifi.c      ****     {
+  38:.\wifi.c      ****         case WFI_INI:
+  39:.\wifi.c      ****                      stWifiModule=WFI_INI; 
+  87              		.loc 1 39 0
+  88 0002 04BF     		itt	eq
+  89 0004 014B     		ldreq	r3, .L10
+  90 0006 1870     		strbeq	r0, [r3]
+  91 0008 7047     		bx	lr
+  92              	.L11:
+  93 000a 00BF     		.align	2
+  94              	.L10:
+  95 000c 00000000 		.word	.LANCHOR0
+  96              		.cfi_endproc
+  97              	.LFE57:
+  98              		.size	wifi_module_config, .-wifi_module_config
+  99              		.global	WifiIniCmd
+ 100              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 101              	.LC0:
+ 102 0000 41540D0A 		.ascii	"AT\015\012\000"
+ 102      00
+ 103              	.LC1:
+ 104 0005 41542B43 		.ascii	"AT+CWMODE=3\015\012\000"
+ 104      574D4F44 
+ 104      453D330D 
+ 104      0A00
+ 105              	.LC2:
+ 106 0013 41542B52 		.ascii	"AT+RST\015\012\000"
+ 106      53540D0A 
+ 106      00
+ 107              	.LC3:
+ 108 001c 41542B43 		.ascii	"AT+CWJAP=NETGEAR,strongviolet962\015\012\000"
+ 108      574A4150 
+ 108      3D4E4554 
+ 108      47454152 
+ 108      2C737472 
+ 109              	.LC4:
+ 110 003f 41542B43 		.ascii	"AT+CIPMUX=1\015\012\000"
+ 110      49504D55 
+ 110      583D310D 
+ 110      0A00
+ 111              	.LC5:
+ 112 004d 41542B43 		.ascii	"AT+CIPSTART=4,TCP,google.com,80\015\012\000"
+ 112      49505354 
+ 112      4152543D 
+ 112      342C5443 
+ 112      502C676F 
+ 113              	.LC6:
+ 114 006f 00       		.ascii	"\000"
+ 115              		.data
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWBcvWa.s 			page 4
+
+
+ 116              		.align	2
+ 117              		.set	.LANCHOR1,. + 0
+ 118              		.type	WifiIniCmd, %object
+ 119              		.size	WifiIniCmd, 28
+ 120              	WifiIniCmd:
+ 121 0000 00000000 		.word	.LC0
+ 122 0004 05000000 		.word	.LC1
+ 123 0008 13000000 		.word	.LC2
+ 124 000c 1C000000 		.word	.LC3
+ 125 0010 3F000000 		.word	.LC4
+ 126 0014 4D000000 		.word	.LC5
+ 127 0018 6F000000 		.word	.LC6
+ 128              		.bss
+ 129              		.set	.LANCHOR0,. + 0
+ 130              		.type	stWifiModule, %object
+ 131              		.size	stWifiModule, 1
+ 132              	stWifiModule:
+ 133 0000 00       		.space	1
+ 134              		.type	CommandNum.5840, %object
+ 135              		.size	CommandNum.5840, 1
+ 136              	CommandNum.5840:
+ 137 0001 00       		.space	1
+ 138              		.text
+ 139              	.Letext0:
+ 140              		.file 2 "c:\\program files\\cypress\\psoc creator\\3.3\\psoc creator\\import\\gnu\\arm\\4.9.3\\arm
+ 141              		.file 3 "c:\\program files\\cypress\\psoc creator\\3.3\\psoc creator\\import\\gnu\\arm\\4.9.3\\arm
+ 142              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 143              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 144              		.file 6 ".\\wifi.h"
+ 145              		.file 7 "Generated_Source\\PSoC5/UART_1.h"
+ 146              		.section	.debug_info,"",%progbits
+ 147              	.Ldebug_info0:
+ 148 0000 6D010000 		.4byte	0x16d
+ 149 0004 0400     		.2byte	0x4
+ 150 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 151 000a 04       		.byte	0x4
+ 152 000b 01       		.uleb128 0x1
+ 153 000c 7D010000 		.4byte	.LASF23
+ 154 0010 01       		.byte	0x1
+ 155 0011 48000000 		.4byte	.LASF24
+ 156 0015 E5000000 		.4byte	.LASF25
+ 157 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 158 001d 00000000 		.4byte	0
+ 159 0021 00000000 		.4byte	.Ldebug_line0
+ 160 0025 02       		.uleb128 0x2
+ 161 0026 01       		.byte	0x1
+ 162 0027 06       		.byte	0x6
+ 163 0028 3C000000 		.4byte	.LASF0
+ 164 002c 02       		.uleb128 0x2
+ 165 002d 01       		.byte	0x1
+ 166 002e 08       		.byte	0x8
+ 167 002f A4000000 		.4byte	.LASF1
+ 168 0033 02       		.uleb128 0x2
+ 169 0034 02       		.byte	0x2
+ 170 0035 05       		.byte	0x5
+ 171 0036 1B020000 		.4byte	.LASF2
+ 172 003a 02       		.uleb128 0x2
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWBcvWa.s 			page 5
+
+
+ 173 003b 02       		.byte	0x2
+ 174 003c 07       		.byte	0x7
+ 175 003d 0E000000 		.4byte	.LASF3
+ 176 0041 03       		.uleb128 0x3
+ 177 0042 0B020000 		.4byte	.LASF9
+ 178 0046 02       		.byte	0x2
+ 179 0047 3F       		.byte	0x3f
+ 180 0048 4C000000 		.4byte	0x4c
+ 181 004c 02       		.uleb128 0x2
+ 182 004d 04       		.byte	0x4
+ 183 004e 05       		.byte	0x5
+ 184 004f CA000000 		.4byte	.LASF4
+ 185 0053 02       		.uleb128 0x2
+ 186 0054 04       		.byte	0x4
+ 187 0055 07       		.byte	0x7
+ 188 0056 59000000 		.4byte	.LASF5
+ 189 005a 02       		.uleb128 0x2
+ 190 005b 08       		.byte	0x8
+ 191 005c 05       		.byte	0x5
+ 192 005d 00000000 		.4byte	.LASF6
+ 193 0061 02       		.uleb128 0x2
+ 194 0062 08       		.byte	0x8
+ 195 0063 07       		.byte	0x7
+ 196 0064 6B000000 		.4byte	.LASF7
+ 197 0068 04       		.uleb128 0x4
+ 198 0069 04       		.byte	0x4
+ 199 006a 05       		.byte	0x5
+ 200 006b 696E7400 		.ascii	"int\000"
+ 201 006f 02       		.uleb128 0x2
+ 202 0070 04       		.byte	0x4
+ 203 0071 07       		.byte	0x7
+ 204 0072 21000000 		.4byte	.LASF8
+ 205 0076 03       		.uleb128 0x3
+ 206 0077 51000000 		.4byte	.LASF10
+ 207 007b 03       		.byte	0x3
+ 208 007c 2C       		.byte	0x2c
+ 209 007d 41000000 		.4byte	0x41
+ 210 0081 03       		.uleb128 0x3
+ 211 0082 36000000 		.4byte	.LASF11
+ 212 0086 04       		.byte	0x4
+ 213 0087 A1       		.byte	0xa1
+ 214 0088 2C000000 		.4byte	0x2c
+ 215 008c 02       		.uleb128 0x2
+ 216 008d 04       		.byte	0x4
+ 217 008e 04       		.byte	0x4
+ 218 008f 15020000 		.4byte	.LASF12
+ 219 0093 02       		.uleb128 0x2
+ 220 0094 08       		.byte	0x8
+ 221 0095 04       		.byte	0x4
+ 222 0096 DE000000 		.4byte	.LASF13
+ 223 009a 03       		.uleb128 0x3
+ 224 009b 93000000 		.4byte	.LASF14
+ 225 009f 04       		.byte	0x4
+ 226 00a0 B2       		.byte	0xb2
+ 227 00a1 A5000000 		.4byte	0xa5
+ 228 00a5 02       		.uleb128 0x2
+ 229 00a6 01       		.byte	0x1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWBcvWa.s 			page 6
+
+
+ 230 00a7 08       		.byte	0x8
+ 231 00a8 C5000000 		.4byte	.LASF15
+ 232 00ac 02       		.uleb128 0x2
+ 233 00ad 04       		.byte	0x4
+ 234 00ae 07       		.byte	0x7
+ 235 00af 32020000 		.4byte	.LASF16
+ 236 00b3 05       		.uleb128 0x5
+ 237 00b4 04       		.byte	0x4
+ 238 00b5 B9000000 		.4byte	0xb9
+ 239 00b9 06       		.uleb128 0x6
+ 240 00ba A5000000 		.4byte	0xa5
+ 241 00be 07       		.uleb128 0x7
+ 242 00bf 5C010000 		.4byte	.LASF17
+ 243 00c3 01       		.byte	0x1
+ 244 00c4 11       		.byte	0x11
+ 245 00c5 00000000 		.4byte	.LFB56
+ 246 00c9 34000000 		.4byte	.LFE56-.LFB56
+ 247 00cd 01       		.uleb128 0x1
+ 248 00ce 9C       		.byte	0x9c
+ 249 00cf EE000000 		.4byte	0xee
+ 250 00d3 08       		.uleb128 0x8
+ 251 00d4 99000000 		.4byte	.LASF19
+ 252 00d8 01       		.byte	0x1
+ 253 00d9 13       		.byte	0x13
+ 254 00da 81000000 		.4byte	0x81
+ 255 00de 05       		.uleb128 0x5
+ 256 00df 03       		.byte	0x3
+ 257 00e0 01000000 		.4byte	CommandNum.5840
+ 258 00e4 09       		.uleb128 0x9
+ 259 00e5 16000000 		.4byte	.LVL0
+ 260 00e9 54010000 		.4byte	0x154
+ 261 00ed 00       		.byte	0
+ 262 00ee 07       		.uleb128 0x7
+ 263 00ef B2000000 		.4byte	.LASF18
+ 264 00f3 01       		.byte	0x1
+ 265 00f4 22       		.byte	0x22
+ 266 00f5 00000000 		.4byte	.LFB57
+ 267 00f9 10000000 		.4byte	.LFE57-.LFB57
+ 268 00fd 01       		.uleb128 0x1
+ 269 00fe 9C       		.byte	0x9c
+ 270 00ff 11010000 		.4byte	0x111
+ 271 0103 0A       		.uleb128 0xa
+ 272 0104 2E000000 		.4byte	.LASF26
+ 273 0108 01       		.byte	0x1
+ 274 0109 22       		.byte	0x22
+ 275 010a 81000000 		.4byte	0x81
+ 276 010e 01       		.uleb128 0x1
+ 277 010f 50       		.byte	0x50
+ 278 0110 00       		.byte	0
+ 279 0111 08       		.uleb128 0x8
+ 280 0112 25020000 		.4byte	.LASF20
+ 281 0116 01       		.byte	0x1
+ 282 0117 10       		.byte	0x10
+ 283 0118 81000000 		.4byte	0x81
+ 284 011c 05       		.uleb128 0x5
+ 285 011d 03       		.byte	0x3
+ 286 011e 00000000 		.4byte	stWifiModule
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWBcvWa.s 			page 7
+
+
+ 287 0122 0B       		.uleb128 0xb
+ 288 0123 70010000 		.4byte	.LASF21
+ 289 0127 05       		.byte	0x5
+ 290 0128 1606     		.2byte	0x616
+ 291 012a 2E010000 		.4byte	0x12e
+ 292 012e 0C       		.uleb128 0xc
+ 293 012f 76000000 		.4byte	0x76
+ 294 0133 0D       		.uleb128 0xd
+ 295 0134 B3000000 		.4byte	0xb3
+ 296 0138 43010000 		.4byte	0x143
+ 297 013c 0E       		.uleb128 0xe
+ 298 013d AC000000 		.4byte	0xac
+ 299 0141 06       		.byte	0x6
+ 300 0142 00       		.byte	0
+ 301 0143 0F       		.uleb128 0xf
+ 302 0144 D3000000 		.4byte	.LASF22
+ 303 0148 06       		.byte	0x6
+ 304 0149 0F       		.byte	0xf
+ 305 014a 33010000 		.4byte	0x133
+ 306 014e 05       		.uleb128 0x5
+ 307 014f 03       		.byte	0x3
+ 308 0150 00000000 		.4byte	WifiIniCmd
+ 309 0154 10       		.uleb128 0x10
+ 310 0155 82000000 		.4byte	.LASF27
+ 311 0159 07       		.byte	0x7
+ 312 015a A0       		.byte	0xa0
+ 313 015b 65010000 		.4byte	0x165
+ 314 015f 11       		.uleb128 0x11
+ 315 0160 65010000 		.4byte	0x165
+ 316 0164 00       		.byte	0
+ 317 0165 05       		.uleb128 0x5
+ 318 0166 04       		.byte	0x4
+ 319 0167 6B010000 		.4byte	0x16b
+ 320 016b 06       		.uleb128 0x6
+ 321 016c 9A000000 		.4byte	0x9a
+ 322 0170 00       		.byte	0
+ 323              		.section	.debug_abbrev,"",%progbits
+ 324              	.Ldebug_abbrev0:
+ 325 0000 01       		.uleb128 0x1
+ 326 0001 11       		.uleb128 0x11
+ 327 0002 01       		.byte	0x1
+ 328 0003 25       		.uleb128 0x25
+ 329 0004 0E       		.uleb128 0xe
+ 330 0005 13       		.uleb128 0x13
+ 331 0006 0B       		.uleb128 0xb
+ 332 0007 03       		.uleb128 0x3
+ 333 0008 0E       		.uleb128 0xe
+ 334 0009 1B       		.uleb128 0x1b
+ 335 000a 0E       		.uleb128 0xe
+ 336 000b 55       		.uleb128 0x55
+ 337 000c 17       		.uleb128 0x17
+ 338 000d 11       		.uleb128 0x11
+ 339 000e 01       		.uleb128 0x1
+ 340 000f 10       		.uleb128 0x10
+ 341 0010 17       		.uleb128 0x17
+ 342 0011 00       		.byte	0
+ 343 0012 00       		.byte	0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWBcvWa.s 			page 8
+
+
+ 344 0013 02       		.uleb128 0x2
+ 345 0014 24       		.uleb128 0x24
+ 346 0015 00       		.byte	0
+ 347 0016 0B       		.uleb128 0xb
+ 348 0017 0B       		.uleb128 0xb
+ 349 0018 3E       		.uleb128 0x3e
+ 350 0019 0B       		.uleb128 0xb
+ 351 001a 03       		.uleb128 0x3
+ 352 001b 0E       		.uleb128 0xe
+ 353 001c 00       		.byte	0
+ 354 001d 00       		.byte	0
+ 355 001e 03       		.uleb128 0x3
+ 356 001f 16       		.uleb128 0x16
+ 357 0020 00       		.byte	0
+ 358 0021 03       		.uleb128 0x3
+ 359 0022 0E       		.uleb128 0xe
+ 360 0023 3A       		.uleb128 0x3a
+ 361 0024 0B       		.uleb128 0xb
+ 362 0025 3B       		.uleb128 0x3b
+ 363 0026 0B       		.uleb128 0xb
+ 364 0027 49       		.uleb128 0x49
+ 365 0028 13       		.uleb128 0x13
+ 366 0029 00       		.byte	0
+ 367 002a 00       		.byte	0
+ 368 002b 04       		.uleb128 0x4
+ 369 002c 24       		.uleb128 0x24
+ 370 002d 00       		.byte	0
+ 371 002e 0B       		.uleb128 0xb
+ 372 002f 0B       		.uleb128 0xb
+ 373 0030 3E       		.uleb128 0x3e
+ 374 0031 0B       		.uleb128 0xb
+ 375 0032 03       		.uleb128 0x3
+ 376 0033 08       		.uleb128 0x8
+ 377 0034 00       		.byte	0
+ 378 0035 00       		.byte	0
+ 379 0036 05       		.uleb128 0x5
+ 380 0037 0F       		.uleb128 0xf
+ 381 0038 00       		.byte	0
+ 382 0039 0B       		.uleb128 0xb
+ 383 003a 0B       		.uleb128 0xb
+ 384 003b 49       		.uleb128 0x49
+ 385 003c 13       		.uleb128 0x13
+ 386 003d 00       		.byte	0
+ 387 003e 00       		.byte	0
+ 388 003f 06       		.uleb128 0x6
+ 389 0040 26       		.uleb128 0x26
+ 390 0041 00       		.byte	0
+ 391 0042 49       		.uleb128 0x49
+ 392 0043 13       		.uleb128 0x13
+ 393 0044 00       		.byte	0
+ 394 0045 00       		.byte	0
+ 395 0046 07       		.uleb128 0x7
+ 396 0047 2E       		.uleb128 0x2e
+ 397 0048 01       		.byte	0x1
+ 398 0049 3F       		.uleb128 0x3f
+ 399 004a 19       		.uleb128 0x19
+ 400 004b 03       		.uleb128 0x3
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWBcvWa.s 			page 9
+
+
+ 401 004c 0E       		.uleb128 0xe
+ 402 004d 3A       		.uleb128 0x3a
+ 403 004e 0B       		.uleb128 0xb
+ 404 004f 3B       		.uleb128 0x3b
+ 405 0050 0B       		.uleb128 0xb
+ 406 0051 27       		.uleb128 0x27
+ 407 0052 19       		.uleb128 0x19
+ 408 0053 11       		.uleb128 0x11
+ 409 0054 01       		.uleb128 0x1
+ 410 0055 12       		.uleb128 0x12
+ 411 0056 06       		.uleb128 0x6
+ 412 0057 40       		.uleb128 0x40
+ 413 0058 18       		.uleb128 0x18
+ 414 0059 9742     		.uleb128 0x2117
+ 415 005b 19       		.uleb128 0x19
+ 416 005c 01       		.uleb128 0x1
+ 417 005d 13       		.uleb128 0x13
+ 418 005e 00       		.byte	0
+ 419 005f 00       		.byte	0
+ 420 0060 08       		.uleb128 0x8
+ 421 0061 34       		.uleb128 0x34
+ 422 0062 00       		.byte	0
+ 423 0063 03       		.uleb128 0x3
+ 424 0064 0E       		.uleb128 0xe
+ 425 0065 3A       		.uleb128 0x3a
+ 426 0066 0B       		.uleb128 0xb
+ 427 0067 3B       		.uleb128 0x3b
+ 428 0068 0B       		.uleb128 0xb
+ 429 0069 49       		.uleb128 0x49
+ 430 006a 13       		.uleb128 0x13
+ 431 006b 02       		.uleb128 0x2
+ 432 006c 18       		.uleb128 0x18
+ 433 006d 00       		.byte	0
+ 434 006e 00       		.byte	0
+ 435 006f 09       		.uleb128 0x9
+ 436 0070 898201   		.uleb128 0x4109
+ 437 0073 00       		.byte	0
+ 438 0074 11       		.uleb128 0x11
+ 439 0075 01       		.uleb128 0x1
+ 440 0076 31       		.uleb128 0x31
+ 441 0077 13       		.uleb128 0x13
+ 442 0078 00       		.byte	0
+ 443 0079 00       		.byte	0
+ 444 007a 0A       		.uleb128 0xa
+ 445 007b 05       		.uleb128 0x5
+ 446 007c 00       		.byte	0
+ 447 007d 03       		.uleb128 0x3
+ 448 007e 0E       		.uleb128 0xe
+ 449 007f 3A       		.uleb128 0x3a
+ 450 0080 0B       		.uleb128 0xb
+ 451 0081 3B       		.uleb128 0x3b
+ 452 0082 0B       		.uleb128 0xb
+ 453 0083 49       		.uleb128 0x49
+ 454 0084 13       		.uleb128 0x13
+ 455 0085 02       		.uleb128 0x2
+ 456 0086 18       		.uleb128 0x18
+ 457 0087 00       		.byte	0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWBcvWa.s 			page 10
+
+
+ 458 0088 00       		.byte	0
+ 459 0089 0B       		.uleb128 0xb
+ 460 008a 34       		.uleb128 0x34
+ 461 008b 00       		.byte	0
+ 462 008c 03       		.uleb128 0x3
+ 463 008d 0E       		.uleb128 0xe
+ 464 008e 3A       		.uleb128 0x3a
+ 465 008f 0B       		.uleb128 0xb
+ 466 0090 3B       		.uleb128 0x3b
+ 467 0091 05       		.uleb128 0x5
+ 468 0092 49       		.uleb128 0x49
+ 469 0093 13       		.uleb128 0x13
+ 470 0094 3F       		.uleb128 0x3f
+ 471 0095 19       		.uleb128 0x19
+ 472 0096 3C       		.uleb128 0x3c
+ 473 0097 19       		.uleb128 0x19
+ 474 0098 00       		.byte	0
+ 475 0099 00       		.byte	0
+ 476 009a 0C       		.uleb128 0xc
+ 477 009b 35       		.uleb128 0x35
+ 478 009c 00       		.byte	0
+ 479 009d 49       		.uleb128 0x49
+ 480 009e 13       		.uleb128 0x13
+ 481 009f 00       		.byte	0
+ 482 00a0 00       		.byte	0
+ 483 00a1 0D       		.uleb128 0xd
+ 484 00a2 01       		.uleb128 0x1
+ 485 00a3 01       		.byte	0x1
+ 486 00a4 49       		.uleb128 0x49
+ 487 00a5 13       		.uleb128 0x13
+ 488 00a6 01       		.uleb128 0x1
+ 489 00a7 13       		.uleb128 0x13
+ 490 00a8 00       		.byte	0
+ 491 00a9 00       		.byte	0
+ 492 00aa 0E       		.uleb128 0xe
+ 493 00ab 21       		.uleb128 0x21
+ 494 00ac 00       		.byte	0
+ 495 00ad 49       		.uleb128 0x49
+ 496 00ae 13       		.uleb128 0x13
+ 497 00af 2F       		.uleb128 0x2f
+ 498 00b0 0B       		.uleb128 0xb
+ 499 00b1 00       		.byte	0
+ 500 00b2 00       		.byte	0
+ 501 00b3 0F       		.uleb128 0xf
+ 502 00b4 34       		.uleb128 0x34
+ 503 00b5 00       		.byte	0
+ 504 00b6 03       		.uleb128 0x3
+ 505 00b7 0E       		.uleb128 0xe
+ 506 00b8 3A       		.uleb128 0x3a
+ 507 00b9 0B       		.uleb128 0xb
+ 508 00ba 3B       		.uleb128 0x3b
+ 509 00bb 0B       		.uleb128 0xb
+ 510 00bc 49       		.uleb128 0x49
+ 511 00bd 13       		.uleb128 0x13
+ 512 00be 3F       		.uleb128 0x3f
+ 513 00bf 19       		.uleb128 0x19
+ 514 00c0 02       		.uleb128 0x2
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWBcvWa.s 			page 11
+
+
+ 515 00c1 18       		.uleb128 0x18
+ 516 00c2 00       		.byte	0
+ 517 00c3 00       		.byte	0
+ 518 00c4 10       		.uleb128 0x10
+ 519 00c5 2E       		.uleb128 0x2e
+ 520 00c6 01       		.byte	0x1
+ 521 00c7 3F       		.uleb128 0x3f
+ 522 00c8 19       		.uleb128 0x19
+ 523 00c9 03       		.uleb128 0x3
+ 524 00ca 0E       		.uleb128 0xe
+ 525 00cb 3A       		.uleb128 0x3a
+ 526 00cc 0B       		.uleb128 0xb
+ 527 00cd 3B       		.uleb128 0x3b
+ 528 00ce 0B       		.uleb128 0xb
+ 529 00cf 27       		.uleb128 0x27
+ 530 00d0 19       		.uleb128 0x19
+ 531 00d1 3C       		.uleb128 0x3c
+ 532 00d2 19       		.uleb128 0x19
+ 533 00d3 01       		.uleb128 0x1
+ 534 00d4 13       		.uleb128 0x13
+ 535 00d5 00       		.byte	0
+ 536 00d6 00       		.byte	0
+ 537 00d7 11       		.uleb128 0x11
+ 538 00d8 05       		.uleb128 0x5
+ 539 00d9 00       		.byte	0
+ 540 00da 49       		.uleb128 0x49
+ 541 00db 13       		.uleb128 0x13
+ 542 00dc 00       		.byte	0
+ 543 00dd 00       		.byte	0
+ 544 00de 00       		.byte	0
+ 545              		.section	.debug_aranges,"",%progbits
+ 546 0000 24000000 		.4byte	0x24
+ 547 0004 0200     		.2byte	0x2
+ 548 0006 00000000 		.4byte	.Ldebug_info0
+ 549 000a 04       		.byte	0x4
+ 550 000b 00       		.byte	0
+ 551 000c 0000     		.2byte	0
+ 552 000e 0000     		.2byte	0
+ 553 0010 00000000 		.4byte	.LFB56
+ 554 0014 34000000 		.4byte	.LFE56-.LFB56
+ 555 0018 00000000 		.4byte	.LFB57
+ 556 001c 10000000 		.4byte	.LFE57-.LFB57
+ 557 0020 00000000 		.4byte	0
+ 558 0024 00000000 		.4byte	0
+ 559              		.section	.debug_ranges,"",%progbits
+ 560              	.Ldebug_ranges0:
+ 561 0000 00000000 		.4byte	.LFB56
+ 562 0004 34000000 		.4byte	.LFE56
+ 563 0008 00000000 		.4byte	.LFB57
+ 564 000c 10000000 		.4byte	.LFE57
+ 565 0010 00000000 		.4byte	0
+ 566 0014 00000000 		.4byte	0
+ 567              		.section	.debug_line,"",%progbits
+ 568              	.Ldebug_line0:
+ 569 0000 81010000 		.section	.debug_str,"MS",%progbits,1
+ 569      02005501 
+ 569      00000201 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWBcvWa.s 			page 12
+
+
+ 569      FB0E0D00 
+ 569      01010101 
+ 570              	.LASF6:
+ 571 0000 6C6F6E67 		.ascii	"long long int\000"
+ 571      206C6F6E 
+ 571      6720696E 
+ 571      7400
+ 572              	.LASF3:
+ 573 000e 73686F72 		.ascii	"short unsigned int\000"
+ 573      7420756E 
+ 573      7369676E 
+ 573      65642069 
+ 573      6E7400
+ 574              	.LASF8:
+ 575 0021 756E7369 		.ascii	"unsigned int\000"
+ 575      676E6564 
+ 575      20696E74 
+ 575      00
+ 576              	.LASF26:
+ 577 002e 436F6D6D 		.ascii	"Command\000"
+ 577      616E6400 
+ 578              	.LASF11:
+ 579 0036 75696E74 		.ascii	"uint8\000"
+ 579      3800
+ 580              	.LASF0:
+ 581 003c 7369676E 		.ascii	"signed char\000"
+ 581      65642063 
+ 581      68617200 
+ 582              	.LASF24:
+ 583 0048 2E5C7769 		.ascii	".\\wifi.c\000"
+ 583      66692E63 
+ 583      00
+ 584              	.LASF10:
+ 585 0051 696E7433 		.ascii	"int32_t\000"
+ 585      325F7400 
+ 586              	.LASF5:
+ 587 0059 6C6F6E67 		.ascii	"long unsigned int\000"
+ 587      20756E73 
+ 587      69676E65 
+ 587      6420696E 
+ 587      7400
+ 588              	.LASF7:
+ 589 006b 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 589      206C6F6E 
+ 589      6720756E 
+ 589      7369676E 
+ 589      65642069 
+ 590              	.LASF27:
+ 591 0082 55415254 		.ascii	"UART_1_PutString\000"
+ 591      5F315F50 
+ 591      75745374 
+ 591      72696E67 
+ 591      00
+ 592              	.LASF14:
+ 593 0093 63686172 		.ascii	"char8\000"
+ 593      3800
+ 594              	.LASF19:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWBcvWa.s 			page 13
+
+
+ 595 0099 436F6D6D 		.ascii	"CommandNum\000"
+ 595      616E644E 
+ 595      756D00
+ 596              	.LASF1:
+ 597 00a4 756E7369 		.ascii	"unsigned char\000"
+ 597      676E6564 
+ 597      20636861 
+ 597      7200
+ 598              	.LASF18:
+ 599 00b2 77696669 		.ascii	"wifi_module_config\000"
+ 599      5F6D6F64 
+ 599      756C655F 
+ 599      636F6E66 
+ 599      696700
+ 600              	.LASF15:
+ 601 00c5 63686172 		.ascii	"char\000"
+ 601      00
+ 602              	.LASF4:
+ 603 00ca 6C6F6E67 		.ascii	"long int\000"
+ 603      20696E74 
+ 603      00
+ 604              	.LASF22:
+ 605 00d3 57696669 		.ascii	"WifiIniCmd\000"
+ 605      496E6943 
+ 605      6D6400
+ 606              	.LASF13:
+ 607 00de 646F7562 		.ascii	"double\000"
+ 607      6C6500
+ 608              	.LASF25:
+ 609 00e5 443A5C53 		.ascii	"D:\\START_UP\\COMPANY_STARTUP\\3_platform_based_dev"
+ 609      54415254 
+ 609      5F55505C 
+ 609      434F4D50 
+ 609      414E595F 
+ 610 0115 656C6F70 		.ascii	"elopments\\PSOC_PROJECTS\\platform\\platform\\Psoc_"
+ 610      6D656E74 
+ 610      735C5053 
+ 610      4F435F50 
+ 610      524F4A45 
+ 611 0144 506C6174 		.ascii	"Platform\\Design02.cydsn\000"
+ 611      666F726D 
+ 611      5C446573 
+ 611      69676E30 
+ 611      322E6379 
+ 612              	.LASF17:
+ 613 015c 77696669 		.ascii	"wifi_module_manager\000"
+ 613      5F6D6F64 
+ 613      756C655F 
+ 613      6D616E61 
+ 613      67657200 
+ 614              	.LASF21:
+ 615 0170 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 615      52784275 
+ 615      66666572 
+ 615      00
+ 616              	.LASF23:
+ 617 017d 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWBcvWa.s 			page 14
+
+
+ 617      4320342E 
+ 617      392E3320 
+ 617      32303135 
+ 617      30333033 
+ 618 01b0 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 618      20726576 
+ 618      6973696F 
+ 618      6E203232 
+ 618      31323230 
+ 619 01e3 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 619      66756E63 
+ 619      74696F6E 
+ 619      2D736563 
+ 619      74696F6E 
+ 620              	.LASF9:
+ 621 020b 5F5F696E 		.ascii	"__int32_t\000"
+ 621      7433325F 
+ 621      7400
+ 622              	.LASF12:
+ 623 0215 666C6F61 		.ascii	"float\000"
+ 623      7400
+ 624              	.LASF2:
+ 625 021b 73686F72 		.ascii	"short int\000"
+ 625      7420696E 
+ 625      7400
+ 626              	.LASF20:
+ 627 0225 73745769 		.ascii	"stWifiModule\000"
+ 627      66694D6F 
+ 627      64756C65 
+ 627      00
+ 628              	.LASF16:
+ 629 0232 73697A65 		.ascii	"sizetype\000"
+ 629      74797065 
+ 629      00
+ 630              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

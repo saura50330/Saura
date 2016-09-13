@@ -1,0 +1,1024 @@
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccj4qtGz.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"UART_1_INT.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.UART_1_RXISR,"ax",%progbits
+  19              		.align	1
+  20              		.global	UART_1_RXISR
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	UART_1_RXISR, %function
+  24              	UART_1_RXISR:
+  25              	.LFB0:
+  26              		.file 1 ".\\Generated_Source\\PSoC5\\UART_1_INT.c"
+   1:.\Generated_Source\PSoC5/UART_1_INT.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/UART_1_INT.c **** * File Name: UART_1_INT.c
+   3:.\Generated_Source\PSoC5/UART_1_INT.c **** * Version 2.30
+   4:.\Generated_Source\PSoC5/UART_1_INT.c **** *
+   5:.\Generated_Source\PSoC5/UART_1_INT.c **** * Description:
+   6:.\Generated_Source\PSoC5/UART_1_INT.c **** *  This file provides all Interrupt Service functionality of the UART component
+   7:.\Generated_Source\PSoC5/UART_1_INT.c **** *
+   8:.\Generated_Source\PSoC5/UART_1_INT.c **** * Note:
+   9:.\Generated_Source\PSoC5/UART_1_INT.c **** *  Any unusual or non-standard behavior should be noted here. Other-
+  10:.\Generated_Source\PSoC5/UART_1_INT.c **** *  wise, this section should remain blank.
+  11:.\Generated_Source\PSoC5/UART_1_INT.c **** *
+  12:.\Generated_Source\PSoC5/UART_1_INT.c **** ********************************************************************************
+  13:.\Generated_Source\PSoC5/UART_1_INT.c **** * Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  14:.\Generated_Source\PSoC5/UART_1_INT.c **** * You may use this file only in accordance with the license, terms, conditions,
+  15:.\Generated_Source\PSoC5/UART_1_INT.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  16:.\Generated_Source\PSoC5/UART_1_INT.c **** * the software package with which this file was provided.
+  17:.\Generated_Source\PSoC5/UART_1_INT.c **** *******************************************************************************/
+  18:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+  19:.\Generated_Source\PSoC5/UART_1_INT.c **** #include "UART_1.h"
+  20:.\Generated_Source\PSoC5/UART_1_INT.c **** #include "CyLib.h"
+  21:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+  22:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+  23:.\Generated_Source\PSoC5/UART_1_INT.c **** /***************************************
+  24:.\Generated_Source\PSoC5/UART_1_INT.c **** * Custom Declratations
+  25:.\Generated_Source\PSoC5/UART_1_INT.c **** ***************************************/
+  26:.\Generated_Source\PSoC5/UART_1_INT.c **** /* `#START CUSTOM_DECLARATIONS` Place your declaration here */
+  27:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+  28:.\Generated_Source\PSoC5/UART_1_INT.c **** /* `#END` */
+  29:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+  30:.\Generated_Source\PSoC5/UART_1_INT.c **** #if( (UART_1_RX_ENABLED || UART_1_HD_ENABLED) && \
+  31:.\Generated_Source\PSoC5/UART_1_INT.c ****      (UART_1_RXBUFFERSIZE > UART_1_FIFO_LENGTH))
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccj4qtGz.s 			page 2
+
+
+  32:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+  33:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+  34:.\Generated_Source\PSoC5/UART_1_INT.c ****     /*******************************************************************************
+  35:.\Generated_Source\PSoC5/UART_1_INT.c ****     * Function Name: UART_1_RXISR
+  36:.\Generated_Source\PSoC5/UART_1_INT.c ****     ********************************************************************************
+  37:.\Generated_Source\PSoC5/UART_1_INT.c ****     *
+  38:.\Generated_Source\PSoC5/UART_1_INT.c ****     * Summary:
+  39:.\Generated_Source\PSoC5/UART_1_INT.c ****     *  Interrupt Service Routine for RX portion of the UART
+  40:.\Generated_Source\PSoC5/UART_1_INT.c ****     *
+  41:.\Generated_Source\PSoC5/UART_1_INT.c ****     * Parameters:
+  42:.\Generated_Source\PSoC5/UART_1_INT.c ****     *  None.
+  43:.\Generated_Source\PSoC5/UART_1_INT.c ****     *
+  44:.\Generated_Source\PSoC5/UART_1_INT.c ****     * Return:
+  45:.\Generated_Source\PSoC5/UART_1_INT.c ****     *  None.
+  46:.\Generated_Source\PSoC5/UART_1_INT.c ****     *
+  47:.\Generated_Source\PSoC5/UART_1_INT.c ****     * Global Variables:
+  48:.\Generated_Source\PSoC5/UART_1_INT.c ****     *  UART_1_rxBuffer - RAM buffer pointer for save received data.
+  49:.\Generated_Source\PSoC5/UART_1_INT.c ****     *  UART_1_rxBufferWrite - cyclic index for write to rxBuffer,
+  50:.\Generated_Source\PSoC5/UART_1_INT.c ****     *     increments after each byte saved to buffer.
+  51:.\Generated_Source\PSoC5/UART_1_INT.c ****     *  UART_1_rxBufferRead - cyclic index for read from rxBuffer,
+  52:.\Generated_Source\PSoC5/UART_1_INT.c ****     *     checked to detect overflow condition.
+  53:.\Generated_Source\PSoC5/UART_1_INT.c ****     *  UART_1_rxBufferOverflow - software overflow flag. Set to one
+  54:.\Generated_Source\PSoC5/UART_1_INT.c ****     *     when UART_1_rxBufferWrite index overtakes
+  55:.\Generated_Source\PSoC5/UART_1_INT.c ****     *     UART_1_rxBufferRead index.
+  56:.\Generated_Source\PSoC5/UART_1_INT.c ****     *  UART_1_rxBufferLoopDetect - additional variable to detect overflow.
+  57:.\Generated_Source\PSoC5/UART_1_INT.c ****     *     Set to one when UART_1_rxBufferWrite is equal to
+  58:.\Generated_Source\PSoC5/UART_1_INT.c ****     *    UART_1_rxBufferRead
+  59:.\Generated_Source\PSoC5/UART_1_INT.c ****     *  UART_1_rxAddressMode - this variable contains the Address mode,
+  60:.\Generated_Source\PSoC5/UART_1_INT.c ****     *     selected in customizer or set by UART_SetRxAddressMode() API.
+  61:.\Generated_Source\PSoC5/UART_1_INT.c ****     *  UART_1_rxAddressDetected - set to 1 when correct address received,
+  62:.\Generated_Source\PSoC5/UART_1_INT.c ****     *     and analysed to store following addressed data bytes to the buffer.
+  63:.\Generated_Source\PSoC5/UART_1_INT.c ****     *     When not correct address received, set to 0 to skip following data bytes.
+  64:.\Generated_Source\PSoC5/UART_1_INT.c ****     *
+  65:.\Generated_Source\PSoC5/UART_1_INT.c ****     *******************************************************************************/
+  66:.\Generated_Source\PSoC5/UART_1_INT.c ****     CY_ISR(UART_1_RXISR)
+  67:.\Generated_Source\PSoC5/UART_1_INT.c ****     {
+  27              		.loc 1 67 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              	.LVL0:
+  68:.\Generated_Source\PSoC5/UART_1_INT.c ****         uint8 readData;
+  69:.\Generated_Source\PSoC5/UART_1_INT.c ****         uint8 increment_pointer = 0u;
+  70:.\Generated_Source\PSoC5/UART_1_INT.c ****         #if(CY_PSOC3)
+  71:.\Generated_Source\PSoC5/UART_1_INT.c ****             uint8 int_en;
+  72:.\Generated_Source\PSoC5/UART_1_INT.c ****         #endif /* CY_PSOC3 */
+  73:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+  74:.\Generated_Source\PSoC5/UART_1_INT.c ****         /* User code required at start of ISR */
+  75:.\Generated_Source\PSoC5/UART_1_INT.c ****         /* `#START UART_1_RXISR_START` */
+  76:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+  77:.\Generated_Source\PSoC5/UART_1_INT.c ****         /* `#END` */
+  78:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+  79:.\Generated_Source\PSoC5/UART_1_INT.c ****         #if(CY_PSOC3)   /* Make sure nested interrupt is enabled */
+  80:.\Generated_Source\PSoC5/UART_1_INT.c ****             int_en = EA;
+  81:.\Generated_Source\PSoC5/UART_1_INT.c ****             CyGlobalIntEnable;
+  82:.\Generated_Source\PSoC5/UART_1_INT.c ****         #endif /* CY_PSOC3 */
+  83:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccj4qtGz.s 			page 3
+
+
+  84:.\Generated_Source\PSoC5/UART_1_INT.c ****         readData = UART_1_RXSTATUS_REG;
+  32              		.loc 1 84 0
+  33 0000 144A     		ldr	r2, .L12
+  67:.\Generated_Source\PSoC5/UART_1_INT.c ****         uint8 readData;
+  34              		.loc 1 67 0
+  35 0002 10B5     		push	{r4, lr}
+  36              		.cfi_def_cfa_offset 8
+  37              		.cfi_offset 4, -8
+  38              		.cfi_offset 14, -4
+  39 0004 1046     		mov	r0, r2
+  40              		.loc 1 84 0
+  41 0006 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+  42 0008 DBB2     		uxtb	r3, r3
+  43              	.LVL1:
+  44              	.L2:
+  85:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+  86:.\Generated_Source\PSoC5/UART_1_INT.c ****         if((readData & (UART_1_RX_STS_BREAK | UART_1_RX_STS_PAR_ERROR |
+  87:.\Generated_Source\PSoC5/UART_1_INT.c ****                         UART_1_RX_STS_STOP_ERROR | UART_1_RX_STS_OVERRUN)) != 0u)
+  88:.\Generated_Source\PSoC5/UART_1_INT.c ****         {
+  89:.\Generated_Source\PSoC5/UART_1_INT.c ****             /* ERROR handling. */
+  90:.\Generated_Source\PSoC5/UART_1_INT.c ****             /* `#START UART_1_RXISR_ERROR` */
+  91:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+  92:.\Generated_Source\PSoC5/UART_1_INT.c ****             /* `#END` */
+  93:.\Generated_Source\PSoC5/UART_1_INT.c ****         }
+  94:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+  95:.\Generated_Source\PSoC5/UART_1_INT.c ****         while((readData & UART_1_RX_STS_FIFO_NOTEMPTY) != 0u)
+  45              		.loc 1 95 0
+  46 000a 9B06     		lsls	r3, r3, #26
+  47              	.LVL2:
+  48 000c 21D5     		bpl	.L11
+  96:.\Generated_Source\PSoC5/UART_1_INT.c ****         {
+  97:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+  98:.\Generated_Source\PSoC5/UART_1_INT.c ****             #if (UART_1_RXHW_ADDRESS_ENABLED)
+  99:.\Generated_Source\PSoC5/UART_1_INT.c ****                 if(UART_1_rxAddressMode == (uint8)UART_1__B_UART__AM_SW_DETECT_TO_BUFFER)
+ 100:.\Generated_Source\PSoC5/UART_1_INT.c ****                 {
+ 101:.\Generated_Source\PSoC5/UART_1_INT.c ****                     if((readData & UART_1_RX_STS_MRKSPC) != 0u)
+ 102:.\Generated_Source\PSoC5/UART_1_INT.c ****                     {
+ 103:.\Generated_Source\PSoC5/UART_1_INT.c ****                         if ((readData & UART_1_RX_STS_ADDR_MATCH) != 0u)
+ 104:.\Generated_Source\PSoC5/UART_1_INT.c ****                         {
+ 105:.\Generated_Source\PSoC5/UART_1_INT.c ****                             UART_1_rxAddressDetected = 1u;
+ 106:.\Generated_Source\PSoC5/UART_1_INT.c ****                         }
+ 107:.\Generated_Source\PSoC5/UART_1_INT.c ****                         else
+ 108:.\Generated_Source\PSoC5/UART_1_INT.c ****                         {
+ 109:.\Generated_Source\PSoC5/UART_1_INT.c ****                             UART_1_rxAddressDetected = 0u;
+ 110:.\Generated_Source\PSoC5/UART_1_INT.c ****                         }
+ 111:.\Generated_Source\PSoC5/UART_1_INT.c ****                     }
+ 112:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 113:.\Generated_Source\PSoC5/UART_1_INT.c ****                     readData = UART_1_RXDATA_REG;
+ 114:.\Generated_Source\PSoC5/UART_1_INT.c ****                     if(UART_1_rxAddressDetected != 0u)
+ 115:.\Generated_Source\PSoC5/UART_1_INT.c ****                     {   /* store only addressed data */
+ 116:.\Generated_Source\PSoC5/UART_1_INT.c ****                         UART_1_rxBuffer[UART_1_rxBufferWrite] = readData;
+ 117:.\Generated_Source\PSoC5/UART_1_INT.c ****                         increment_pointer = 1u;
+ 118:.\Generated_Source\PSoC5/UART_1_INT.c ****                     }
+ 119:.\Generated_Source\PSoC5/UART_1_INT.c ****                 }
+ 120:.\Generated_Source\PSoC5/UART_1_INT.c ****                 else /* without software addressing */
+ 121:.\Generated_Source\PSoC5/UART_1_INT.c ****                 {
+ 122:.\Generated_Source\PSoC5/UART_1_INT.c ****                     UART_1_rxBuffer[UART_1_rxBufferWrite] = UART_1_RXDATA_REG;
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccj4qtGz.s 			page 4
+
+
+ 123:.\Generated_Source\PSoC5/UART_1_INT.c ****                     increment_pointer = 1u;
+ 124:.\Generated_Source\PSoC5/UART_1_INT.c ****                 }
+ 125:.\Generated_Source\PSoC5/UART_1_INT.c ****             #else  /* without addressing */
+ 126:.\Generated_Source\PSoC5/UART_1_INT.c ****                 UART_1_rxBuffer[UART_1_rxBufferWrite] = UART_1_RXDATA_REG;
+  49              		.loc 1 126 0
+  50 000e 124B     		ldr	r3, .L12+4
+  51 0010 1249     		ldr	r1, .L12+8
+  52 0012 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+  53 0014 0978     		ldrb	r1, [r1]	@ zero_extendqisi2
+  54 0016 124C     		ldr	r4, .L12+12
+  55 0018 D2B2     		uxtb	r2, r2
+  56 001a C9B2     		uxtb	r1, r1
+  57 001c A154     		strb	r1, [r4, r2]
+  58              	.LVL3:
+ 127:.\Generated_Source\PSoC5/UART_1_INT.c ****                 increment_pointer = 1u;
+ 128:.\Generated_Source\PSoC5/UART_1_INT.c ****             #endif /* End SW_DETECT_TO_BUFFER */
+ 129:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 130:.\Generated_Source\PSoC5/UART_1_INT.c ****             /* do not increment buffer pointer when skip not adderessed data */
+ 131:.\Generated_Source\PSoC5/UART_1_INT.c ****             if( increment_pointer != 0u )
+ 132:.\Generated_Source\PSoC5/UART_1_INT.c ****             {
+ 133:.\Generated_Source\PSoC5/UART_1_INT.c ****                 if(UART_1_rxBufferLoopDetect != 0u)
+  59              		.loc 1 133 0
+  60 001e 1149     		ldr	r1, .L12+16
+  61 0020 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+  62 0022 12B1     		cbz	r2, .L3
+ 134:.\Generated_Source\PSoC5/UART_1_INT.c ****                 {   /* Set Software Buffer status Overflow */
+ 135:.\Generated_Source\PSoC5/UART_1_INT.c ****                     UART_1_rxBufferOverflow = 1u;
+  63              		.loc 1 135 0
+  64 0024 104A     		ldr	r2, .L12+20
+  65 0026 0124     		movs	r4, #1
+  66 0028 1470     		strb	r4, [r2]
+  67              	.L3:
+ 136:.\Generated_Source\PSoC5/UART_1_INT.c ****                 }
+ 137:.\Generated_Source\PSoC5/UART_1_INT.c ****                 /* Set next pointer. */
+ 138:.\Generated_Source\PSoC5/UART_1_INT.c ****                 UART_1_rxBufferWrite++;
+  68              		.loc 1 138 0
+  69 002a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+  70 002c 0132     		adds	r2, r2, #1
+  71 002e D2B2     		uxtb	r2, r2
+  72 0030 1A70     		strb	r2, [r3]
+ 139:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 140:.\Generated_Source\PSoC5/UART_1_INT.c ****                 /* Check pointer for a loop condition */
+ 141:.\Generated_Source\PSoC5/UART_1_INT.c ****                 if(UART_1_rxBufferWrite >= UART_1_RXBUFFERSIZE)
+  73              		.loc 1 141 0
+  74 0032 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+  75 0034 0F2A     		cmp	r2, #15
+ 142:.\Generated_Source\PSoC5/UART_1_INT.c ****                 {
+ 143:.\Generated_Source\PSoC5/UART_1_INT.c ****                     UART_1_rxBufferWrite = 0u;
+  76              		.loc 1 143 0
+  77 0036 82BF     		ittt	hi
+  78 0038 074A     		ldrhi	r2, .L12+4
+  79 003a 0024     		movhi	r4, #0
+  80 003c 1470     		strbhi	r4, [r2]
+ 144:.\Generated_Source\PSoC5/UART_1_INT.c ****                 }
+ 145:.\Generated_Source\PSoC5/UART_1_INT.c ****                 /* Detect pre-overload condition and set flag */
+ 146:.\Generated_Source\PSoC5/UART_1_INT.c ****                 if(UART_1_rxBufferWrite == UART_1_rxBufferRead)
+  81              		.loc 1 146 0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccj4qtGz.s 			page 5
+
+
+  82 003e 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+  83 0040 0A4B     		ldr	r3, .L12+24
+  84 0042 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  85 0044 9A42     		cmp	r2, r3
+ 147:.\Generated_Source\PSoC5/UART_1_INT.c ****                 {
+ 148:.\Generated_Source\PSoC5/UART_1_INT.c ****                     UART_1_rxBufferLoopDetect = 1u;
+  86              		.loc 1 148 0
+  87 0046 04BF     		itt	eq
+  88 0048 0123     		moveq	r3, #1
+  89 004a 0B70     		strbeq	r3, [r1]
+ 149:.\Generated_Source\PSoC5/UART_1_INT.c ****                     /* When Hardware Flow Control selected */
+ 150:.\Generated_Source\PSoC5/UART_1_INT.c ****                     #if(UART_1_FLOW_CONTROL != 0u)
+ 151:.\Generated_Source\PSoC5/UART_1_INT.c ****                     /* Disable RX interrupt mask, it will be enabled when user read data from the b
+ 152:.\Generated_Source\PSoC5/UART_1_INT.c ****                         UART_1_RXSTATUS_MASK_REG  &= (uint8)~UART_1_RX_STS_FIFO_NOTEMPTY;
+ 153:.\Generated_Source\PSoC5/UART_1_INT.c ****                         CyIntClearPending(UART_1_RX_VECT_NUM);
+ 154:.\Generated_Source\PSoC5/UART_1_INT.c ****                         break; /* Break the reading of the FIFO loop, leave the data there for gene
+ 155:.\Generated_Source\PSoC5/UART_1_INT.c ****                     #endif /* End UART_1_FLOW_CONTROL != 0 */
+ 156:.\Generated_Source\PSoC5/UART_1_INT.c ****                 }
+ 157:.\Generated_Source\PSoC5/UART_1_INT.c ****             }
+ 158:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 159:.\Generated_Source\PSoC5/UART_1_INT.c ****             /* Check again if there is data. */
+ 160:.\Generated_Source\PSoC5/UART_1_INT.c ****             readData = UART_1_RXSTATUS_REG;
+  90              		.loc 1 160 0
+  91 004c 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+  92 004e DBB2     		uxtb	r3, r3
+  93              	.LVL4:
+  94 0050 DBE7     		b	.L2
+  95              	.LVL5:
+  96              	.L11:
+ 161:.\Generated_Source\PSoC5/UART_1_INT.c ****         }
+ 162:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 163:.\Generated_Source\PSoC5/UART_1_INT.c ****         /* User code required at end of ISR (Optional) */
+ 164:.\Generated_Source\PSoC5/UART_1_INT.c ****         /* `#START UART_1_RXISR_END` */
+ 165:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 166:.\Generated_Source\PSoC5/UART_1_INT.c ****         /* `#END` */
+ 167:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 168:.\Generated_Source\PSoC5/UART_1_INT.c ****         #if(CY_PSOC3)
+ 169:.\Generated_Source\PSoC5/UART_1_INT.c ****             EA = int_en;
+ 170:.\Generated_Source\PSoC5/UART_1_INT.c ****         #endif /* CY_PSOC3 */
+ 171:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 172:.\Generated_Source\PSoC5/UART_1_INT.c ****     }
+  97              		.loc 1 172 0
+  98 0052 10BD     		pop	{r4, pc}
+  99              	.L13:
+ 100              		.align	2
+ 101              	.L12:
+ 102 0054 66640040 		.word	1073767526
+ 103 0058 00000000 		.word	UART_1_rxBufferWrite
+ 104 005c 45640040 		.word	1073767493
+ 105 0060 00000000 		.word	UART_1_rxBuffer
+ 106 0064 00000000 		.word	UART_1_rxBufferLoopDetect
+ 107 0068 00000000 		.word	UART_1_rxBufferOverflow
+ 108 006c 00000000 		.word	UART_1_rxBufferRead
+ 109              		.cfi_endproc
+ 110              	.LFE0:
+ 111              		.size	UART_1_RXISR, .-UART_1_RXISR
+ 112              		.section	.text.UART_1_TXISR,"ax",%progbits
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccj4qtGz.s 			page 6
+
+
+ 113              		.align	1
+ 114              		.global	UART_1_TXISR
+ 115              		.thumb
+ 116              		.thumb_func
+ 117              		.type	UART_1_TXISR, %function
+ 118              	UART_1_TXISR:
+ 119              	.LFB1:
+ 173:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 174:.\Generated_Source\PSoC5/UART_1_INT.c **** #endif /* End UART_1_RX_ENABLED && (UART_1_RXBUFFERSIZE > UART_1_FIFO_LENGTH) */
+ 175:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 176:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 177:.\Generated_Source\PSoC5/UART_1_INT.c **** #if(UART_1_TX_ENABLED && (UART_1_TXBUFFERSIZE > UART_1_FIFO_LENGTH))
+ 178:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 179:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 180:.\Generated_Source\PSoC5/UART_1_INT.c ****     /*******************************************************************************
+ 181:.\Generated_Source\PSoC5/UART_1_INT.c ****     * Function Name: UART_1_TXISR
+ 182:.\Generated_Source\PSoC5/UART_1_INT.c ****     ********************************************************************************
+ 183:.\Generated_Source\PSoC5/UART_1_INT.c ****     *
+ 184:.\Generated_Source\PSoC5/UART_1_INT.c ****     * Summary:
+ 185:.\Generated_Source\PSoC5/UART_1_INT.c ****     * Interrupt Service Routine for the TX portion of the UART
+ 186:.\Generated_Source\PSoC5/UART_1_INT.c ****     *
+ 187:.\Generated_Source\PSoC5/UART_1_INT.c ****     * Parameters:
+ 188:.\Generated_Source\PSoC5/UART_1_INT.c ****     *  None.
+ 189:.\Generated_Source\PSoC5/UART_1_INT.c ****     *
+ 190:.\Generated_Source\PSoC5/UART_1_INT.c ****     * Return:
+ 191:.\Generated_Source\PSoC5/UART_1_INT.c ****     *  None.
+ 192:.\Generated_Source\PSoC5/UART_1_INT.c ****     *
+ 193:.\Generated_Source\PSoC5/UART_1_INT.c ****     * Global Variables:
+ 194:.\Generated_Source\PSoC5/UART_1_INT.c ****     *  UART_1_txBuffer - RAM buffer pointer for transmit data from.
+ 195:.\Generated_Source\PSoC5/UART_1_INT.c ****     *  UART_1_txBufferRead - cyclic index for read and transmit data
+ 196:.\Generated_Source\PSoC5/UART_1_INT.c ****     *     from txBuffer, increments after each transmited byte.
+ 197:.\Generated_Source\PSoC5/UART_1_INT.c ****     *  UART_1_rxBufferWrite - cyclic index for write to txBuffer,
+ 198:.\Generated_Source\PSoC5/UART_1_INT.c ****     *     checked to detect available for transmission bytes.
+ 199:.\Generated_Source\PSoC5/UART_1_INT.c ****     *
+ 200:.\Generated_Source\PSoC5/UART_1_INT.c ****     *******************************************************************************/
+ 201:.\Generated_Source\PSoC5/UART_1_INT.c ****     CY_ISR(UART_1_TXISR)
+ 202:.\Generated_Source\PSoC5/UART_1_INT.c ****     {
+ 120              		.loc 1 202 0
+ 121              		.cfi_startproc
+ 122              		@ args = 0, pretend = 0, frame = 0
+ 123              		@ frame_needed = 0, uses_anonymous_args = 0
+ 124              		@ link register save eliminated.
+ 125              	.L15:
+ 203:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 204:.\Generated_Source\PSoC5/UART_1_INT.c ****         #if(CY_PSOC3)
+ 205:.\Generated_Source\PSoC5/UART_1_INT.c ****             uint8 int_en;
+ 206:.\Generated_Source\PSoC5/UART_1_INT.c ****         #endif /* CY_PSOC3 */
+ 207:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 208:.\Generated_Source\PSoC5/UART_1_INT.c ****         /* User code required at start of ISR */
+ 209:.\Generated_Source\PSoC5/UART_1_INT.c ****         /* `#START UART_1_TXISR_START` */
+ 210:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 211:.\Generated_Source\PSoC5/UART_1_INT.c ****         /* `#END` */
+ 212:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 213:.\Generated_Source\PSoC5/UART_1_INT.c ****         #if(CY_PSOC3)   /* Make sure nested interrupt is enabled */
+ 214:.\Generated_Source\PSoC5/UART_1_INT.c ****             int_en = EA;
+ 215:.\Generated_Source\PSoC5/UART_1_INT.c ****             CyGlobalIntEnable;
+ 216:.\Generated_Source\PSoC5/UART_1_INT.c ****         #endif /* CY_PSOC3 */
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccj4qtGz.s 			page 7
+
+
+ 217:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 218:.\Generated_Source\PSoC5/UART_1_INT.c ****         while((UART_1_txBufferRead != UART_1_txBufferWrite) &&
+ 126              		.loc 1 218 0
+ 127 0000 0D4B     		ldr	r3, .L19
+ 128 0002 0E49     		ldr	r1, .L19+4
+ 129 0004 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 130 0006 0978     		ldrb	r1, [r1]	@ zero_extendqisi2
+ 131 0008 9142     		cmp	r1, r2
+ 132 000a 14D0     		beq	.L14
+ 219:.\Generated_Source\PSoC5/UART_1_INT.c ****              ((UART_1_TXSTATUS_REG & UART_1_TX_STS_FIFO_FULL) == 0u))
+ 133              		.loc 1 219 0 discriminator 1
+ 134 000c 0C4A     		ldr	r2, .L19+8
+ 135 000e 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 218:.\Generated_Source\PSoC5/UART_1_INT.c ****              ((UART_1_TXSTATUS_REG & UART_1_TX_STS_FIFO_FULL) == 0u))
+ 136              		.loc 1 218 0 discriminator 1
+ 137 0010 12F00402 		ands	r2, r2, #4
+ 138 0014 0FD1     		bne	.L14
+ 220:.\Generated_Source\PSoC5/UART_1_INT.c ****         {
+ 221:.\Generated_Source\PSoC5/UART_1_INT.c ****             /* Check pointer. */
+ 222:.\Generated_Source\PSoC5/UART_1_INT.c ****             if(UART_1_txBufferRead >= UART_1_TXBUFFERSIZE)
+ 139              		.loc 1 222 0
+ 140 0016 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
+ 141 0018 0F29     		cmp	r1, #15
+ 223:.\Generated_Source\PSoC5/UART_1_INT.c ****             {
+ 224:.\Generated_Source\PSoC5/UART_1_INT.c ****                 UART_1_txBufferRead = 0u;
+ 142              		.loc 1 224 0
+ 143 001a 88BF     		it	hi
+ 144 001c 1A70     		strbhi	r2, [r3]
+ 225:.\Generated_Source\PSoC5/UART_1_INT.c ****             }
+ 226:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 227:.\Generated_Source\PSoC5/UART_1_INT.c ****             UART_1_TXDATA_REG = UART_1_txBuffer[UART_1_txBufferRead];
+ 145              		.loc 1 227 0
+ 146 001e 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 147 0020 0849     		ldr	r1, .L19+12
+ 148 0022 D2B2     		uxtb	r2, r2
+ 149 0024 8A5C     		ldrb	r2, [r1, r2]	@ zero_extendqisi2
+ 150 0026 0849     		ldr	r1, .L19+16
+ 151 0028 D2B2     		uxtb	r2, r2
+ 152 002a 0A70     		strb	r2, [r1]
+ 228:.\Generated_Source\PSoC5/UART_1_INT.c **** 
+ 229:.\Generated_Source\PSoC5/UART_1_INT.c ****             /* Set next pointer. */
+ 230:.\Generated_Source\PSoC5/UART_1_INT.c ****             UART_1_txBufferRead++;
+ 153              		.loc 1 230 0
+ 154 002c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 155 002e 0132     		adds	r2, r2, #1
+ 156 0030 D2B2     		uxtb	r2, r2
+ 157 0032 1A70     		strb	r2, [r3]
+ 158 0034 E4E7     		b	.L15
+ 159              	.L14:
+ 160 0036 7047     		bx	lr
+ 161              	.L20:
+ 162              		.align	2
+ 163              	.L19:
+ 164 0038 00000000 		.word	UART_1_txBufferRead
+ 165 003c 00000000 		.word	UART_1_txBufferWrite
+ 166 0040 62640040 		.word	1073767522
+ 167 0044 00000000 		.word	UART_1_txBuffer
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccj4qtGz.s 			page 8
+
+
+ 168 0048 42640040 		.word	1073767490
+ 169              		.cfi_endproc
+ 170              	.LFE1:
+ 171              		.size	UART_1_TXISR, .-UART_1_TXISR
+ 172              		.text
+ 173              	.Letext0:
+ 174              		.file 2 ".\\Generated_Source\\PSoC5\\cytypes.h"
+ 175              		.file 3 ".\\Generated_Source\\PSoC5\\UART_1.h"
+ 176              		.section	.debug_info,"",%progbits
+ 177              	.Ldebug_info0:
+ 178 0000 5F010000 		.4byte	0x15f
+ 179 0004 0400     		.2byte	0x4
+ 180 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 181 000a 04       		.byte	0x4
+ 182 000b 01       		.uleb128 0x1
+ 183 000c C4010000 		.4byte	.LASF25
+ 184 0010 01       		.byte	0x1
+ 185 0011 14000000 		.4byte	.LASF26
+ 186 0015 02010000 		.4byte	.LASF27
+ 187 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 188 001d 00000000 		.4byte	0
+ 189 0021 00000000 		.4byte	.Ldebug_line0
+ 190 0025 02       		.uleb128 0x2
+ 191 0026 01       		.byte	0x1
+ 192 0027 06       		.byte	0x6
+ 193 0028 99020000 		.4byte	.LASF0
+ 194 002c 02       		.uleb128 0x2
+ 195 002d 01       		.byte	0x1
+ 196 002e 08       		.byte	0x8
+ 197 002f 7A000000 		.4byte	.LASF1
+ 198 0033 02       		.uleb128 0x2
+ 199 0034 02       		.byte	0x2
+ 200 0035 05       		.byte	0x5
+ 201 0036 BA010000 		.4byte	.LASF2
+ 202 003a 02       		.uleb128 0x2
+ 203 003b 02       		.byte	0x2
+ 204 003c 07       		.byte	0x7
+ 205 003d 54000000 		.4byte	.LASF3
+ 206 0041 02       		.uleb128 0x2
+ 207 0042 04       		.byte	0x4
+ 208 0043 05       		.byte	0x5
+ 209 0044 67020000 		.4byte	.LASF4
+ 210 0048 02       		.uleb128 0x2
+ 211 0049 04       		.byte	0x4
+ 212 004a 07       		.byte	0x7
+ 213 004b 8D000000 		.4byte	.LASF5
+ 214 004f 02       		.uleb128 0x2
+ 215 0050 08       		.byte	0x8
+ 216 0051 05       		.byte	0x5
+ 217 0052 9A010000 		.4byte	.LASF6
+ 218 0056 02       		.uleb128 0x2
+ 219 0057 08       		.byte	0x8
+ 220 0058 07       		.byte	0x7
+ 221 0059 EB000000 		.4byte	.LASF7
+ 222 005d 03       		.uleb128 0x3
+ 223 005e 04       		.byte	0x4
+ 224 005f 05       		.byte	0x5
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccj4qtGz.s 			page 9
+
+
+ 225 0060 696E7400 		.ascii	"int\000"
+ 226 0064 02       		.uleb128 0x2
+ 227 0065 04       		.byte	0x4
+ 228 0066 07       		.byte	0x7
+ 229 0067 DE000000 		.4byte	.LASF8
+ 230 006b 04       		.uleb128 0x4
+ 231 006c 9F000000 		.4byte	.LASF12
+ 232 0070 02       		.byte	0x2
+ 233 0071 A1       		.byte	0xa1
+ 234 0072 2C000000 		.4byte	0x2c
+ 235 0076 02       		.uleb128 0x2
+ 236 0077 04       		.byte	0x4
+ 237 0078 04       		.byte	0x4
+ 238 0079 74000000 		.4byte	.LASF9
+ 239 007d 02       		.uleb128 0x2
+ 240 007e 08       		.byte	0x8
+ 241 007f 04       		.byte	0x4
+ 242 0080 C2000000 		.4byte	.LASF10
+ 243 0084 02       		.uleb128 0x2
+ 244 0085 01       		.byte	0x1
+ 245 0086 08       		.byte	0x8
+ 246 0087 70020000 		.4byte	.LASF11
+ 247 008b 05       		.uleb128 0x5
+ 248 008c 88000000 		.4byte	.LASF13
+ 249 0090 02       		.byte	0x2
+ 250 0091 4B01     		.2byte	0x14b
+ 251 0093 97000000 		.4byte	0x97
+ 252 0097 06       		.uleb128 0x6
+ 253 0098 6B000000 		.4byte	0x6b
+ 254 009c 02       		.uleb128 0x2
+ 255 009d 04       		.byte	0x4
+ 256 009e 07       		.byte	0x7
+ 257 009f 91010000 		.4byte	.LASF14
+ 258 00a3 07       		.uleb128 0x7
+ 259 00a4 67000000 		.4byte	.LASF28
+ 260 00a8 01       		.byte	0x1
+ 261 00a9 42       		.byte	0x42
+ 262 00aa 00000000 		.4byte	.LFB0
+ 263 00ae 70000000 		.4byte	.LFE0-.LFB0
+ 264 00b2 01       		.uleb128 0x1
+ 265 00b3 9C       		.byte	0x9c
+ 266 00b4 D7000000 		.4byte	0xd7
+ 267 00b8 08       		.uleb128 0x8
+ 268 00b9 A5020000 		.4byte	.LASF15
+ 269 00bd 01       		.byte	0x1
+ 270 00be 44       		.byte	0x44
+ 271 00bf 6B000000 		.4byte	0x6b
+ 272 00c3 00000000 		.4byte	.LLST0
+ 273 00c7 08       		.uleb128 0x8
+ 274 00c8 A8010000 		.4byte	.LASF16
+ 275 00cc 01       		.byte	0x1
+ 276 00cd 45       		.byte	0x45
+ 277 00ce 6B000000 		.4byte	0x6b
+ 278 00d2 1E000000 		.4byte	.LLST1
+ 279 00d6 00       		.byte	0
+ 280 00d7 09       		.uleb128 0x9
+ 281 00d8 A5000000 		.4byte	.LASF29
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccj4qtGz.s 			page 10
+
+
+ 282 00dc 01       		.byte	0x1
+ 283 00dd C9       		.byte	0xc9
+ 284 00de 00000000 		.4byte	.LFB1
+ 285 00e2 4C000000 		.4byte	.LFE1-.LFB1
+ 286 00e6 01       		.uleb128 0x1
+ 287 00e7 9C       		.byte	0x9c
+ 288 00e8 0A       		.uleb128 0xa
+ 289 00e9 6B000000 		.4byte	0x6b
+ 290 00ed F8000000 		.4byte	0xf8
+ 291 00f1 0B       		.uleb128 0xb
+ 292 00f2 9C000000 		.4byte	0x9c
+ 293 00f6 0F       		.byte	0xf
+ 294 00f7 00       		.byte	0
+ 295 00f8 0C       		.uleb128 0xc
+ 296 00f9 B2000000 		.4byte	.LASF17
+ 297 00fd 03       		.byte	0x3
+ 298 00fe 4C01     		.2byte	0x14c
+ 299 0100 04010000 		.4byte	0x104
+ 300 0104 06       		.uleb128 0x6
+ 301 0105 E8000000 		.4byte	0xe8
+ 302 0109 0C       		.uleb128 0xc
+ 303 010a 85020000 		.4byte	.LASF18
+ 304 010e 03       		.byte	0x3
+ 305 010f 4D01     		.2byte	0x14d
+ 306 0111 97000000 		.4byte	0x97
+ 307 0115 0C       		.uleb128 0xc
+ 308 0116 52020000 		.4byte	.LASF19
+ 309 011a 03       		.byte	0x3
+ 310 011b 4E01     		.2byte	0x14e
+ 311 011d 6B000000 		.4byte	0x6b
+ 312 0121 0C       		.uleb128 0xc
+ 313 0122 75020000 		.4byte	.LASF20
+ 314 0126 03       		.byte	0x3
+ 315 0127 5201     		.2byte	0x152
+ 316 0129 2D010000 		.4byte	0x12d
+ 317 012d 06       		.uleb128 0x6
+ 318 012e E8000000 		.4byte	0xe8
+ 319 0132 0C       		.uleb128 0xc
+ 320 0133 00000000 		.4byte	.LASF21
+ 321 0137 03       		.byte	0x3
+ 322 0138 5301     		.2byte	0x153
+ 323 013a 97000000 		.4byte	0x97
+ 324 013e 0C       		.uleb128 0xc
+ 325 013f C9000000 		.4byte	.LASF22
+ 326 0143 03       		.byte	0x3
+ 327 0144 5401     		.2byte	0x154
+ 328 0146 97000000 		.4byte	0x97
+ 329 014a 0C       		.uleb128 0xc
+ 330 014b 3A000000 		.4byte	.LASF23
+ 331 014f 03       		.byte	0x3
+ 332 0150 5501     		.2byte	0x155
+ 333 0152 97000000 		.4byte	0x97
+ 334 0156 0C       		.uleb128 0xc
+ 335 0157 79010000 		.4byte	.LASF24
+ 336 015b 03       		.byte	0x3
+ 337 015c 5601     		.2byte	0x156
+ 338 015e 97000000 		.4byte	0x97
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccj4qtGz.s 			page 11
+
+
+ 339 0162 00       		.byte	0
+ 340              		.section	.debug_abbrev,"",%progbits
+ 341              	.Ldebug_abbrev0:
+ 342 0000 01       		.uleb128 0x1
+ 343 0001 11       		.uleb128 0x11
+ 344 0002 01       		.byte	0x1
+ 345 0003 25       		.uleb128 0x25
+ 346 0004 0E       		.uleb128 0xe
+ 347 0005 13       		.uleb128 0x13
+ 348 0006 0B       		.uleb128 0xb
+ 349 0007 03       		.uleb128 0x3
+ 350 0008 0E       		.uleb128 0xe
+ 351 0009 1B       		.uleb128 0x1b
+ 352 000a 0E       		.uleb128 0xe
+ 353 000b 55       		.uleb128 0x55
+ 354 000c 17       		.uleb128 0x17
+ 355 000d 11       		.uleb128 0x11
+ 356 000e 01       		.uleb128 0x1
+ 357 000f 10       		.uleb128 0x10
+ 358 0010 17       		.uleb128 0x17
+ 359 0011 00       		.byte	0
+ 360 0012 00       		.byte	0
+ 361 0013 02       		.uleb128 0x2
+ 362 0014 24       		.uleb128 0x24
+ 363 0015 00       		.byte	0
+ 364 0016 0B       		.uleb128 0xb
+ 365 0017 0B       		.uleb128 0xb
+ 366 0018 3E       		.uleb128 0x3e
+ 367 0019 0B       		.uleb128 0xb
+ 368 001a 03       		.uleb128 0x3
+ 369 001b 0E       		.uleb128 0xe
+ 370 001c 00       		.byte	0
+ 371 001d 00       		.byte	0
+ 372 001e 03       		.uleb128 0x3
+ 373 001f 24       		.uleb128 0x24
+ 374 0020 00       		.byte	0
+ 375 0021 0B       		.uleb128 0xb
+ 376 0022 0B       		.uleb128 0xb
+ 377 0023 3E       		.uleb128 0x3e
+ 378 0024 0B       		.uleb128 0xb
+ 379 0025 03       		.uleb128 0x3
+ 380 0026 08       		.uleb128 0x8
+ 381 0027 00       		.byte	0
+ 382 0028 00       		.byte	0
+ 383 0029 04       		.uleb128 0x4
+ 384 002a 16       		.uleb128 0x16
+ 385 002b 00       		.byte	0
+ 386 002c 03       		.uleb128 0x3
+ 387 002d 0E       		.uleb128 0xe
+ 388 002e 3A       		.uleb128 0x3a
+ 389 002f 0B       		.uleb128 0xb
+ 390 0030 3B       		.uleb128 0x3b
+ 391 0031 0B       		.uleb128 0xb
+ 392 0032 49       		.uleb128 0x49
+ 393 0033 13       		.uleb128 0x13
+ 394 0034 00       		.byte	0
+ 395 0035 00       		.byte	0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccj4qtGz.s 			page 12
+
+
+ 396 0036 05       		.uleb128 0x5
+ 397 0037 16       		.uleb128 0x16
+ 398 0038 00       		.byte	0
+ 399 0039 03       		.uleb128 0x3
+ 400 003a 0E       		.uleb128 0xe
+ 401 003b 3A       		.uleb128 0x3a
+ 402 003c 0B       		.uleb128 0xb
+ 403 003d 3B       		.uleb128 0x3b
+ 404 003e 05       		.uleb128 0x5
+ 405 003f 49       		.uleb128 0x49
+ 406 0040 13       		.uleb128 0x13
+ 407 0041 00       		.byte	0
+ 408 0042 00       		.byte	0
+ 409 0043 06       		.uleb128 0x6
+ 410 0044 35       		.uleb128 0x35
+ 411 0045 00       		.byte	0
+ 412 0046 49       		.uleb128 0x49
+ 413 0047 13       		.uleb128 0x13
+ 414 0048 00       		.byte	0
+ 415 0049 00       		.byte	0
+ 416 004a 07       		.uleb128 0x7
+ 417 004b 2E       		.uleb128 0x2e
+ 418 004c 01       		.byte	0x1
+ 419 004d 3F       		.uleb128 0x3f
+ 420 004e 19       		.uleb128 0x19
+ 421 004f 03       		.uleb128 0x3
+ 422 0050 0E       		.uleb128 0xe
+ 423 0051 3A       		.uleb128 0x3a
+ 424 0052 0B       		.uleb128 0xb
+ 425 0053 3B       		.uleb128 0x3b
+ 426 0054 0B       		.uleb128 0xb
+ 427 0055 27       		.uleb128 0x27
+ 428 0056 19       		.uleb128 0x19
+ 429 0057 11       		.uleb128 0x11
+ 430 0058 01       		.uleb128 0x1
+ 431 0059 12       		.uleb128 0x12
+ 432 005a 06       		.uleb128 0x6
+ 433 005b 40       		.uleb128 0x40
+ 434 005c 18       		.uleb128 0x18
+ 435 005d 9742     		.uleb128 0x2117
+ 436 005f 19       		.uleb128 0x19
+ 437 0060 01       		.uleb128 0x1
+ 438 0061 13       		.uleb128 0x13
+ 439 0062 00       		.byte	0
+ 440 0063 00       		.byte	0
+ 441 0064 08       		.uleb128 0x8
+ 442 0065 34       		.uleb128 0x34
+ 443 0066 00       		.byte	0
+ 444 0067 03       		.uleb128 0x3
+ 445 0068 0E       		.uleb128 0xe
+ 446 0069 3A       		.uleb128 0x3a
+ 447 006a 0B       		.uleb128 0xb
+ 448 006b 3B       		.uleb128 0x3b
+ 449 006c 0B       		.uleb128 0xb
+ 450 006d 49       		.uleb128 0x49
+ 451 006e 13       		.uleb128 0x13
+ 452 006f 02       		.uleb128 0x2
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccj4qtGz.s 			page 13
+
+
+ 453 0070 17       		.uleb128 0x17
+ 454 0071 00       		.byte	0
+ 455 0072 00       		.byte	0
+ 456 0073 09       		.uleb128 0x9
+ 457 0074 2E       		.uleb128 0x2e
+ 458 0075 00       		.byte	0
+ 459 0076 3F       		.uleb128 0x3f
+ 460 0077 19       		.uleb128 0x19
+ 461 0078 03       		.uleb128 0x3
+ 462 0079 0E       		.uleb128 0xe
+ 463 007a 3A       		.uleb128 0x3a
+ 464 007b 0B       		.uleb128 0xb
+ 465 007c 3B       		.uleb128 0x3b
+ 466 007d 0B       		.uleb128 0xb
+ 467 007e 27       		.uleb128 0x27
+ 468 007f 19       		.uleb128 0x19
+ 469 0080 11       		.uleb128 0x11
+ 470 0081 01       		.uleb128 0x1
+ 471 0082 12       		.uleb128 0x12
+ 472 0083 06       		.uleb128 0x6
+ 473 0084 40       		.uleb128 0x40
+ 474 0085 18       		.uleb128 0x18
+ 475 0086 9742     		.uleb128 0x2117
+ 476 0088 19       		.uleb128 0x19
+ 477 0089 00       		.byte	0
+ 478 008a 00       		.byte	0
+ 479 008b 0A       		.uleb128 0xa
+ 480 008c 01       		.uleb128 0x1
+ 481 008d 01       		.byte	0x1
+ 482 008e 49       		.uleb128 0x49
+ 483 008f 13       		.uleb128 0x13
+ 484 0090 01       		.uleb128 0x1
+ 485 0091 13       		.uleb128 0x13
+ 486 0092 00       		.byte	0
+ 487 0093 00       		.byte	0
+ 488 0094 0B       		.uleb128 0xb
+ 489 0095 21       		.uleb128 0x21
+ 490 0096 00       		.byte	0
+ 491 0097 49       		.uleb128 0x49
+ 492 0098 13       		.uleb128 0x13
+ 493 0099 2F       		.uleb128 0x2f
+ 494 009a 0B       		.uleb128 0xb
+ 495 009b 00       		.byte	0
+ 496 009c 00       		.byte	0
+ 497 009d 0C       		.uleb128 0xc
+ 498 009e 34       		.uleb128 0x34
+ 499 009f 00       		.byte	0
+ 500 00a0 03       		.uleb128 0x3
+ 501 00a1 0E       		.uleb128 0xe
+ 502 00a2 3A       		.uleb128 0x3a
+ 503 00a3 0B       		.uleb128 0xb
+ 504 00a4 3B       		.uleb128 0x3b
+ 505 00a5 05       		.uleb128 0x5
+ 506 00a6 49       		.uleb128 0x49
+ 507 00a7 13       		.uleb128 0x13
+ 508 00a8 3F       		.uleb128 0x3f
+ 509 00a9 19       		.uleb128 0x19
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccj4qtGz.s 			page 14
+
+
+ 510 00aa 3C       		.uleb128 0x3c
+ 511 00ab 19       		.uleb128 0x19
+ 512 00ac 00       		.byte	0
+ 513 00ad 00       		.byte	0
+ 514 00ae 00       		.byte	0
+ 515              		.section	.debug_loc,"",%progbits
+ 516              	.Ldebug_loc0:
+ 517              	.LLST0:
+ 518 0000 0A000000 		.4byte	.LVL1
+ 519 0004 0C000000 		.4byte	.LVL2
+ 520 0008 0100     		.2byte	0x1
+ 521 000a 53       		.byte	0x53
+ 522 000b 50000000 		.4byte	.LVL4
+ 523 000f 52000000 		.4byte	.LVL5
+ 524 0013 0100     		.2byte	0x1
+ 525 0015 53       		.byte	0x53
+ 526 0016 00000000 		.4byte	0
+ 527 001a 00000000 		.4byte	0
+ 528              	.LLST1:
+ 529 001e 00000000 		.4byte	.LVL0
+ 530 0022 0A000000 		.4byte	.LVL1
+ 531 0026 0200     		.2byte	0x2
+ 532 0028 30       		.byte	0x30
+ 533 0029 9F       		.byte	0x9f
+ 534 002a 1E000000 		.4byte	.LVL3
+ 535 002e 52000000 		.4byte	.LVL5
+ 536 0032 0200     		.2byte	0x2
+ 537 0034 31       		.byte	0x31
+ 538 0035 9F       		.byte	0x9f
+ 539 0036 00000000 		.4byte	0
+ 540 003a 00000000 		.4byte	0
+ 541              		.section	.debug_aranges,"",%progbits
+ 542 0000 24000000 		.4byte	0x24
+ 543 0004 0200     		.2byte	0x2
+ 544 0006 00000000 		.4byte	.Ldebug_info0
+ 545 000a 04       		.byte	0x4
+ 546 000b 00       		.byte	0
+ 547 000c 0000     		.2byte	0
+ 548 000e 0000     		.2byte	0
+ 549 0010 00000000 		.4byte	.LFB0
+ 550 0014 70000000 		.4byte	.LFE0-.LFB0
+ 551 0018 00000000 		.4byte	.LFB1
+ 552 001c 4C000000 		.4byte	.LFE1-.LFB1
+ 553 0020 00000000 		.4byte	0
+ 554 0024 00000000 		.4byte	0
+ 555              		.section	.debug_ranges,"",%progbits
+ 556              	.Ldebug_ranges0:
+ 557 0000 00000000 		.4byte	.LFB0
+ 558 0004 70000000 		.4byte	.LFE0
+ 559 0008 00000000 		.4byte	.LFB1
+ 560 000c 4C000000 		.4byte	.LFE1
+ 561 0010 00000000 		.4byte	0
+ 562 0014 00000000 		.4byte	0
+ 563              		.section	.debug_line,"",%progbits
+ 564              	.Ldebug_line0:
+ 565 0000 A8000000 		.section	.debug_str,"MS",%progbits,1
+ 565      02005500 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccj4qtGz.s 			page 15
+
+
+ 565      00000201 
+ 565      FB0E0D00 
+ 565      01010101 
+ 566              	.LASF21:
+ 567 0000 55415254 		.ascii	"UART_1_rxBufferRead\000"
+ 567      5F315F72 
+ 567      78427566 
+ 567      66657252 
+ 567      65616400 
+ 568              	.LASF26:
+ 569 0014 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\UART_1_INT.c\000"
+ 569      6E657261 
+ 569      7465645F 
+ 569      536F7572 
+ 569      63655C50 
+ 570              	.LASF23:
+ 571 003a 55415254 		.ascii	"UART_1_rxBufferLoopDetect\000"
+ 571      5F315F72 
+ 571      78427566 
+ 571      6665724C 
+ 571      6F6F7044 
+ 572              	.LASF3:
+ 573 0054 73686F72 		.ascii	"short unsigned int\000"
+ 573      7420756E 
+ 573      7369676E 
+ 573      65642069 
+ 573      6E7400
+ 574              	.LASF28:
+ 575 0067 55415254 		.ascii	"UART_1_RXISR\000"
+ 575      5F315F52 
+ 575      58495352 
+ 575      00
+ 576              	.LASF9:
+ 577 0074 666C6F61 		.ascii	"float\000"
+ 577      7400
+ 578              	.LASF1:
+ 579 007a 756E7369 		.ascii	"unsigned char\000"
+ 579      676E6564 
+ 579      20636861 
+ 579      7200
+ 580              	.LASF13:
+ 581 0088 72656738 		.ascii	"reg8\000"
+ 581      00
+ 582              	.LASF5:
+ 583 008d 6C6F6E67 		.ascii	"long unsigned int\000"
+ 583      20756E73 
+ 583      69676E65 
+ 583      6420696E 
+ 583      7400
+ 584              	.LASF12:
+ 585 009f 75696E74 		.ascii	"uint8\000"
+ 585      3800
+ 586              	.LASF29:
+ 587 00a5 55415254 		.ascii	"UART_1_TXISR\000"
+ 587      5F315F54 
+ 587      58495352 
+ 587      00
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccj4qtGz.s 			page 16
+
+
+ 588              	.LASF17:
+ 589 00b2 55415254 		.ascii	"UART_1_txBuffer\000"
+ 589      5F315F74 
+ 589      78427566 
+ 589      66657200 
+ 590              	.LASF10:
+ 591 00c2 646F7562 		.ascii	"double\000"
+ 591      6C6500
+ 592              	.LASF22:
+ 593 00c9 55415254 		.ascii	"UART_1_rxBufferWrite\000"
+ 593      5F315F72 
+ 593      78427566 
+ 593      66657257 
+ 593      72697465 
+ 594              	.LASF8:
+ 595 00de 756E7369 		.ascii	"unsigned int\000"
+ 595      676E6564 
+ 595      20696E74 
+ 595      00
+ 596              	.LASF7:
+ 597 00eb 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 597      206C6F6E 
+ 597      6720756E 
+ 597      7369676E 
+ 597      65642069 
+ 598              	.LASF27:
+ 599 0102 443A5C53 		.ascii	"D:\\START_UP\\COMPANY_STARTUP\\3_platform_based_dev"
+ 599      54415254 
+ 599      5F55505C 
+ 599      434F4D50 
+ 599      414E595F 
+ 600 0132 656C6F70 		.ascii	"elopments\\PSOC_PROJECTS\\platform\\platform\\Psoc_"
+ 600      6D656E74 
+ 600      735C5053 
+ 600      4F435F50 
+ 600      524F4A45 
+ 601 0161 506C6174 		.ascii	"Platform\\Design02.cydsn\000"
+ 601      666F726D 
+ 601      5C446573 
+ 601      69676E30 
+ 601      322E6379 
+ 602              	.LASF24:
+ 603 0179 55415254 		.ascii	"UART_1_rxBufferOverflow\000"
+ 603      5F315F72 
+ 603      78427566 
+ 603      6665724F 
+ 603      76657266 
+ 604              	.LASF14:
+ 605 0191 73697A65 		.ascii	"sizetype\000"
+ 605      74797065 
+ 605      00
+ 606              	.LASF6:
+ 607 019a 6C6F6E67 		.ascii	"long long int\000"
+ 607      206C6F6E 
+ 607      6720696E 
+ 607      7400
+ 608              	.LASF16:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccj4qtGz.s 			page 17
+
+
+ 609 01a8 696E6372 		.ascii	"increment_pointer\000"
+ 609      656D656E 
+ 609      745F706F 
+ 609      696E7465 
+ 609      7200
+ 610              	.LASF2:
+ 611 01ba 73686F72 		.ascii	"short int\000"
+ 611      7420696E 
+ 611      7400
+ 612              	.LASF25:
+ 613 01c4 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 613      4320342E 
+ 613      392E3320 
+ 613      32303135 
+ 613      30333033 
+ 614 01f7 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 614      20726576 
+ 614      6973696F 
+ 614      6E203232 
+ 614      31323230 
+ 615 022a 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 615      66756E63 
+ 615      74696F6E 
+ 615      2D736563 
+ 615      74696F6E 
+ 616              	.LASF19:
+ 617 0252 55415254 		.ascii	"UART_1_txBufferWrite\000"
+ 617      5F315F74 
+ 617      78427566 
+ 617      66657257 
+ 617      72697465 
+ 618              	.LASF4:
+ 619 0267 6C6F6E67 		.ascii	"long int\000"
+ 619      20696E74 
+ 619      00
+ 620              	.LASF11:
+ 621 0270 63686172 		.ascii	"char\000"
+ 621      00
+ 622              	.LASF20:
+ 623 0275 55415254 		.ascii	"UART_1_rxBuffer\000"
+ 623      5F315F72 
+ 623      78427566 
+ 623      66657200 
+ 624              	.LASF18:
+ 625 0285 55415254 		.ascii	"UART_1_txBufferRead\000"
+ 625      5F315F74 
+ 625      78427566 
+ 625      66657252 
+ 625      65616400 
+ 626              	.LASF0:
+ 627 0299 7369676E 		.ascii	"signed char\000"
+ 627      65642063 
+ 627      68617200 
+ 628              	.LASF15:
+ 629 02a5 72656164 		.ascii	"readData\000"
+ 629      44617461 
+ 629      00
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccj4qtGz.s 			page 18
+
+
+ 630              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br
