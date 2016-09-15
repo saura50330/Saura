@@ -59,116 +59,109 @@ void I2C_Mgr(void) // 1ms task
     }
     
 }
-void I2C_WRITE(uint8 SaveAdress, (uint8 *) wrData, uint8 Data_length) // sends bytes to slave
+uint8 I2C_WRITE(uint8 SaveAdress, (uint8 *) wrData, uint8 Data_length) // sends bytes to slave
 {
     if(stI2CMgr==IDLE)
     {
       I2C_1_MasterClearStatus(); /* Clear any previous status */
       I2C_1_MasterWriteBuf(SaveAdress,wrData, Data_length, I2C_MODE_COMPLETE_XFER);
       stI2CMgr=WAIT_FOR_TX;
+	  retuen(1);
     }
+	else
+	{
+	retuen(0);
+	}
 }
-void I2C_READ(uint8 SaveAdress, (uint8 *) rdData, uint8 Data_length) // sends bytes to slave
+}
+uint8 I2C_READ(uint8 SaveAdress, (uint8 *) rdData, uint8 Data_length) // sends bytes to slave
 {
     if(stI2CMgr==IDLE)
     {
       I2C_1_MasterClearStatus(); /* Clear any previous status */
       uint8 I2C_MasterReadBuf(uint8 slaveAddress, uint8 * rdData, uint8 Data_length, 2C_MODE_COMPLETE_XFER);
       stI2CMgr=WAIT_FOR_RX;
-    }
-}
-
-void MPU9250_Init(void)
-{
-    
-    I2C_WriteOneByte(GYRO_ADDRESS,PWR_MGMT_1, 0x00);  // slave address , reg address , data
-	I2C_WriteOneByte(GYRO_ADDRESS,SMPLRT_DIV, 0x07);
-	I2C_WriteOneByte(GYRO_ADDRESS,CONFIG, 0x06);
-	I2C_WriteOneByte(GYRO_ADDRESS,GYRO_CONFIG, 0x10);
-	I2C_WriteOneByte(GYRO_ADDRESS,ACCEL_CONFIG, 0x01);
-
-    MPU9250_InitGyrOffset();
-
-}
-/**
-  * @brief  Initializes gyroscopes offset
-  * @param  None
-  * @retval None
-  */
-void MPU9250_InitGyrOffset(void)
-{
-	uint8_t i;
-	int32_t	TempGx = 0, TempGy = 0, TempGz = 0;
-	
-	// read 32 gyro readings 
-	// add them all
- 	for(i = 0; i < 32; i ++)
- 	{
-		MPU9250_READ_GYRO();
-		
-		TempGx += gyro[0];
-		TempGy += gyro[1];
-		TempGz += gyro[2];
-
-		Delay_us(100);
+      retuen(1);
 	}
-	// take average of all readings 
-	MPU9250_Offset.X = TempGx >> 5;
-	MPU9250_Offset.Y = TempGy >> 5;
-	MPU9250_Offset.Z = TempGz >> 5;
-
+	else
+	{
+	retuen(0);
+	}
 }
 
-/**
-  * @brief  Check MPU9250,ensure communication succeed
-  * @param  None
-  * @retval true: communicate succeed
-  *               false: communicate fualt 
-  */
-bool MPU9250_Check(void) 
+void MPU9250_Init(void) // should be called when os is running 50 ms task
 {
-   	if(WHO_AM_I_VAL == I2C_ReadOneByte(DEFAULT_ADDRESS, WHO_AM_I))  
-   	{
-   		return true;
-   	}
-   	else 
-   	{
-   		return false;
-   	}	
+    static uint8 st_IMU;
+	int32_t	TempGx = 0, TempGy = 0, TempGz = 0;
+	uint8_t i;
+	int16_t InBuffer[3] = {0}; 
+	static int32_t OutBuffer[3] = {0};
+	static MPU9250_AvgTypeDef MPU9250_Filter[3];
+	
+	switch(st_IMU)
+	{
+		case IMU_INIT:	
+					   if(I2C_WRITE(GYRO_ADDRESS, Gyro_Calib_init[0][0], 10))  // send all init data
+								{
+								  st_MCU=CALIB; 
+								}	
+								break;
+	    case IMU_CALIB_READ: if(I2C_READ(GYRO_ADDRESS, Gyro_Calib_data[0],6))  // read all gyro values in Gyro_Calib_data 
+						   {
+						    st_IMU=IMU_CALIB_CALC;
+					       }
+						   break;
+		case IMU_CALIB_CALC: 
+							// read 32 gyro readings 
+						   // add them all
+		
+							if(stI2CMgr==IDLE)	
+                            {
+								InBuffer[0]=(Gyro_Calib_data[1]<<8)|Gyro_Calib_data[0];
+								InBuffer[1]=(Gyro_Calib_data[3]<<8)|Gyro_Calib_data[2];
+								InBuffer[2]=(Gyro_Calib_data[5]<<8)|Gyro_Calib_data[4];
+								
+								for(i = 0; i < 3; i ++)	
+								{
+									MPU9250_CalAvgValue(&MPU9250_Filter[i].Index, MPU9250_Filter[i].AvgBuffer, InBuffer[i], OutBuffer + i);
+								}
+								gyro[0] = *(OutBuffer + 0) - MPU9250_Offset.X;
+								gyro[1] = *(OutBuffer + 1) - MPU9250_Offset.Y;
+								gyro[2] = *(OutBuffer + 2) - MPU9250_Offset.Z;
+						        
+								TempGx += gyro[0];
+								TempGy += gyro[1];
+								TempGz += gyro[2];
+						        
+								// do this 32 times
+							    if(calc_count<32)
+								{
+								  st_IMU=IMU_CALIB_READ;
+								  calc_count++
+								}
+								else
+								{
+									calc_count=0;
+									st_IMU=IMU_CALIB_AVG;
+								}
+								
+							}
+							break;
+						 
+		case IMU_CALIB_AVG:
+						// take average of all readings 
+						MPU9250_Offset.X = TempGx >> 5;
+						MPU9250_Offset.Y = TempGy >> 5;
+						MPU9250_Offset.Z = TempGz >> 5;
+						st_IMU=IMU_INIT;
+						// TODO: turn off this task     
+						break;
+	}
+					       
 }
 
-/**
-  * @brief Get gyroscopes datas
-  * @param  None
-  * @retval None
-  */
-void MPU9250_READ_GYRO(void)
-{ 
-   uint8_t i;
-	 int16_t InBuffer[3] = {0}; 
-	 static int32_t OutBuffer[3] = {0};
-	 static MPU9250_AvgTypeDef MPU9250_Filter[3];
 
-   BUF[0]=I2C_ReadOneByte(GYRO_ADDRESS,GYRO_XOUT_L); 
-   BUF[1]=I2C_ReadOneByte(GYRO_ADDRESS,GYRO_XOUT_H);
-   InBuffer[0]=	(BUF[1]<<8)|BUF[0];
-   
-   BUF[2]=I2C_ReadOneByte(GYRO_ADDRESS,GYRO_YOUT_L);
-   BUF[3]=I2C_ReadOneByte(GYRO_ADDRESS,GYRO_YOUT_H);
-   InBuffer[1] = (BUF[3]<<8)|BUF[2];
-    
-   BUF[4]=I2C_ReadOneByte(GYRO_ADDRESS,GYRO_ZOUT_L);
-   BUF[5]=I2C_ReadOneByte(GYRO_ADDRESS,GYRO_ZOUT_H);
-   InBuffer[2] = (BUF[5]<<8)|BUF[4];	
 
-   for(i = 0; i < 3; i ++)	
-   {
-      MPU9250_CalAvgValue(&MPU9250_Filter[i].Index, MPU9250_Filter[i].AvgBuffer, InBuffer[i], OutBuffer + i);
-   }
-   gyro[0] = *(OutBuffer + 0) - MPU9250_Offset.X;
-   gyro[1] = *(OutBuffer + 1) - MPU9250_Offset.Y;
-   gyro[2] = *(OutBuffer + 2) - MPU9250_Offset.Z;
-}
 /**
   * @brief Get compass datas
   * @param  None
@@ -176,7 +169,7 @@ void MPU9250_READ_GYRO(void)
   */
 void MPU9250_READ_MAG(void)
 { 
-   uint8_t i;
+     uint8_t i;
 	 int16_t InBuffer[3] = {0}; 
 	 static int32_t OutBuffer[3] = {0};
 	 static MPU9250_AvgTypeDef MPU9250_Filter[3];
@@ -237,6 +230,31 @@ void MPU9250_READ_ACCEL(void)
    accel[0] = *(OutBuffer + 0);
    accel[1] = *(OutBuffer + 1);
    accel[2] = *(OutBuffer + 2); 
+}
+
+/**
+  * @brief  Digital filter
+  * @param *pIndex:
+  * @param *pAvgBuffer:
+  * @param InVal:
+  * @param pOutVal:
+  *
+  * @retval None
+  *               
+  */
+void MPU9250_CalAvgValue(uint8_t *pIndex, int16_t *pAvgBuffer, int16_t InVal, int32_t *pOutVal)
+{	
+	uint8_t i;
+	
+	*(pAvgBuffer + ((*pIndex) ++)) = InVal;
+  	*pIndex &= 0x07;
+  	
+  	*pOutVal = 0;
+	for(i = 0; i < 8; i ++) 
+  	{
+    	*pOutVal += *(pAvgBuffer + i);
+  	}
+  	*pOutVal >>= 3;
 }
 // IMU APllication layer
 //int16_t accel[3], gyro[3];

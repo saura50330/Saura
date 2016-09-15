@@ -52,9 +52,16 @@
 #define ADDRESS_AD0_LOW     0xD0 //address pin low (GND), default for InvenSense evaluation board
 #define ADDRESS_AD0_HIGH    0xD1 //address pin high (VCC)
 #define DEFAULT_ADDRESS     GYRO_ADDRESS
-#define WHO_AM_I_VAL				0x73 //identity of MPU9250 is 0x71. identity of MPU9255 is 0x73.
+#define WHO_AM_I_VAL        0x73 //identity of MPU9250 is 0x71. identity of MPU9255 is 0x73.
 
-
+uint8 Gyro_Calib_init[5][2]= 
+{
+   {PWR_MGMT_1,0x00},   // reg address , data
+   {SMPLRT_DIV,0x07},
+   {CONFIG,0x06},
+   {GYRO_CONFIG,0x10},
+   {ACCEL_CONFIG,0x01}
+}
 typedef struct
 {
 	int16_t X;
