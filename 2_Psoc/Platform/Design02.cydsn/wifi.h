@@ -9,17 +9,11 @@
  *
  * ========================================
 */
+
 #define WIFI_IDLE 0
-#define WFI_INI 1
+#define WIFI_INI 1
 
-const char *WifiIniCmd[]={
-                          "AT\r\n",   // check connecton responce is ok
-                          "AT+CWMODE=3\r\n",  // Access point request, rep =0
-                          "AT+RST\r\n",  // reset the card 
-                          "AT+CWJAP=""NETGEAR"",""strongviolet962\r\n", // connect to rauter
-                          "AT+CIPMUX=1\r\n", // connect to internet
-                          "AT+CIPSTART=4,""TCP"",""google.com"",80\r\n",  // run website
-                          ""
-                         };
-
+#include "type_def.h"
+void wifi_module_manager(void);
+void wifi_module_config(_UINT8 Command);
 /* [] END OF FILE */

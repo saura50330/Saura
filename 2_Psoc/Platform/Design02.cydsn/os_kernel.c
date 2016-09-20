@@ -287,7 +287,7 @@ void CANH_TrigMain_Timeout_Callback(void)
  
  
 #endif
-CY_ISR(Co_Op_1ms_Interrupt)
+CY_ISR(Co_Op_10ms_Interrupt)
 {
 /* ISR Code here*/
     static _UBYTE ms10_ctr,ms50_ctr,ms200_ctr;
@@ -342,7 +342,7 @@ void Os_Ini(void)
     
     // initialise  all ISR
     // Set ISR address in the interrupt vector table
-    ISR_Co_Op_1ms_StartEx(Co_Op_1ms_Interrupt);
+    ISR_Co_Op_10ms_StartEx(Co_Op_10ms_Interrupt);
     //ISR_Pre_Emp_1ms_StartEx(Kernel_Pre_Emptiv_Timer_ISR);
    
      TMR_Os_Tmr_Co_Op_Start();

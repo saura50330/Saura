@@ -99,7 +99,12 @@ const tFuncPtr Os_200ms_Task[] =
  const tFuncPtr Os_1000ms_Task[] =
 {
 	//(void (*const)()) usege_timer,
-    //(void (*const)()) Task1_1000ms,
+    #if(BT_MODULE==ENABLE)
+        (void (*const)())bt_module_manager,
+    #endif
+     #if(WIFI_MODULE==ENABLE)
+        (void (*const)())wifi_module_manager,
+    #endif
 	//(void (*const)()) Task2_1000ms, 
 	(void (*const)()) 0  // void zero is used for ending task 
 };

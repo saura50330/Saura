@@ -15,13 +15,11 @@
 // once paird LED stays on
 // once paired with master any data sent on uart is trasperant to master
 // hc-06 can act as slave only
+#include "type_def.h"
+
 #define BT_IDLE 0
 #define BT_INI 1
 
-const char *BtIniCmd[]={
-                          "AT",   // check connecton responce is ok
-                          "AT+NAMESaura",  // sts bt name as Saura
-                          "AT+PIN1234",  // 1234 is pin 
-                          ""
-                         };
+void bt_module_config(_UINT8 Command);
+void bt_module_manager(void);
 /* [] END OF FILE */

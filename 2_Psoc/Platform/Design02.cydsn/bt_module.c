@@ -11,8 +11,15 @@
 */
 #include <project.h>
 #include "common.h"
-#include "bt_module.h"
-static uint8  stBtModule; // wifi module state machine status
+#if(BT_MODULE==ENABLE)
+const char *BtIniCmd[4]={"AT",   // check connecton responce is ok
+                        "AT+NAMESaura",  // sts bt name as Saura
+                          "AT+PIN1234",  // 1234 is pin 
+                          "" };
+
+uint8  stBtModule; // wifi module state machine status
+
+
 void bt_module_manager(void)  // called every 1second task due to slow responce
 {
    static uint8 CommandNum; 
@@ -35,10 +42,13 @@ void bt_module_config(uint8 Command)
     switch(Command)
     {
         case BT_INI:
+                    if(stBtModule==BT_IDLE)
+                    {
                      stBtModule=BT_INI; 
+                    }
                      break;
         default:break;
     }
 }
-
+#endif
 /* [] END OF FILE */
