@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
   29:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** /*******************************************************************************
   30:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** * Function Name: TMR_Os_Tmr_Pre_Emp_Init
   31:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** ********************************************************************************
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 2
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 2
 
 
   32:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** *
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
   72:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c ****                 interrupt) is enabled*/
   73:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c ****                 TMR_Os_Tmr_Pre_Emp_CONTROL2 |= 0x03u;
   74:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c ****             #endif /* Set One-Shot Halt on Interrupt bit in CONTROL2 for PSoC5A */
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 3
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 3
 
 
   75:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** 
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  112:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** 
  113:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c ****         /* Set the IRQ to use the status register interrupts */
  114:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c ****         TMR_Os_Tmr_Pre_Emp_CONTROL2 |= TMR_Os_Tmr_Pre_Emp_CTRL2_IRQ_SEL;
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 4
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 4
 
 
   58              		.loc 1 114 0
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  161:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** 
  162:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c ****     TMR_Os_Tmr_Pre_Emp_SetInterruptMode(TMR_Os_Tmr_Pre_Emp_INIT_INTERRUPT_MODE);
  163:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** }
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 5
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 5
 
 
  164:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** 
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  218:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c ****     {
  219:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c ****         TMR_Os_Tmr_Pre_Emp_Init();
  220:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** 
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 6
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 6
 
 
  221:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c ****         TMR_Os_Tmr_Pre_Emp_initVar = 1u;   /* Clear this bit for Initialization */
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  275:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** * Return:
  276:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** *  void
  277:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** *
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 7
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 7
 
 
  278:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** *******************************************************************************/
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  332:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** *******************************************************************************/
  333:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** uint8   TMR_Os_Tmr_Pre_Emp_ReadStatusRegister(void) 
  334:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** {
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 8
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 8
 
 
  335:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c ****     return (TMR_Os_Tmr_Pre_Emp_STATUS);
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  389:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** 
  390:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** 
  391:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** /*******************************************************************************
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 9
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 9
 
 
  392:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** * Function Name: TMR_Os_Tmr_Pre_Emp_ReadPeriod
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  438:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c ****     #endif /*Write Period value with appropriate resolution suffix depending on UDB or fixed functi
  439:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** }
  440:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** 
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 10
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 10
 
 
  441:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c **** 
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
   81              		.loc 1 281 0
   82 0048 044B     		ldr	r3, .L2+12
   83 004a 0822     		movs	r2, #8
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 11
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 11
 
 
   84 004c 1A70     		strb	r2, [r3]
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  134              		.global	TMR_Os_Tmr_Pre_Emp_Start
  135              		.thumb
  136              		.thumb_func
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 12
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 12
 
 
  137              		.type	TMR_Os_Tmr_Pre_Emp_Start, %function
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  184              		@ args = 0, pretend = 0, frame = 0
  185              		@ frame_needed = 0, uses_anonymous_args = 0
  186              		@ link register save eliminated.
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 13
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 13
 
 
  251:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c ****     #endif /* Remove assignment if control register is removed */
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  234              	.LFE4:
  235              		.size	TMR_Os_Tmr_Pre_Emp_SetInterruptMode, .-TMR_Os_Tmr_Pre_Emp_SetInterruptMode
  236              		.section	.text.TMR_Os_Tmr_Pre_Emp_SoftwareCapture,"ax",%progbits
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 14
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 14
 
 
  237              		.align	1
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  286              		.align	1
  287              		.global	TMR_Os_Tmr_Pre_Emp_ReadControlRegister
  288              		.thumb
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 15
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 15
 
 
  289              		.thumb_func
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  338              		.thumb
  339              		.thumb_func
  340              		.type	TMR_Os_Tmr_Pre_Emp_ReadPeriod, %function
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 16
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 16
 
 
  341              	TMR_Os_Tmr_Pre_Emp_ReadPeriod:
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  390              		.thumb_func
  391              		.type	TMR_Os_Tmr_Pre_Emp_ReadCapture, %function
  392              	TMR_Os_Tmr_Pre_Emp_ReadCapture:
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 17
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 17
 
 
  393              	.LFB11:
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  443              	TMR_Os_Tmr_Pre_Emp_ReadCounter:
  444              	.LFB13:
  487:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c ****         
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 18
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 18
 
 
  488:.\Generated_Source\PSoC5/TMR_Os_Tmr_Pre_Emp.c ****     #else
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  461              	.L43:
  462 000c 124F0040 		.word	1073762066
  463 0010 144F0040 		.word	1073762068
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 19
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 19
 
 
  464              		.cfi_endproc
@@ -1101,10 +1101,10 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  481 0006 00000000 		.4byte	.Ldebug_abbrev0
  482 000a 04       		.byte	0x4
  483 000b 01       		.uleb128 0x1
- 484 000c FD020000 		.4byte	.LASF34
+ 484 000c C8020000 		.4byte	.LASF34
  485 0010 01       		.byte	0x1
- 486 0011 8D020000 		.4byte	.LASF35
- 487 0015 AB010000 		.4byte	.LASF36
+ 486 0011 58020000 		.4byte	.LASF35
+ 487 0015 79010000 		.4byte	.LASF36
  488 0019 00000000 		.4byte	.Ldebug_ranges0+0
  489 001d 00000000 		.4byte	0
  490 0021 00000000 		.4byte	.Ldebug_line0
@@ -1119,15 +1119,15 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  499 0033 02       		.uleb128 0x2
  500 0034 02       		.byte	0x2
  501 0035 05       		.byte	0x5
- 502 0036 D9020000 		.4byte	.LASF2
+ 502 0036 A4020000 		.4byte	.LASF2
  503 003a 02       		.uleb128 0x2
  504 003b 02       		.byte	0x2
  505 003c 07       		.byte	0x7
- 506 003d DD030000 		.4byte	.LASF3
+ 506 003d A8030000 		.4byte	.LASF3
  507 0041 02       		.uleb128 0x2
  508 0042 04       		.byte	0x4
  509 0043 05       		.byte	0x5
- 510 0044 8B030000 		.4byte	.LASF4
+ 510 0044 56030000 		.4byte	.LASF4
  511 0048 02       		.uleb128 0x2
  512 0049 04       		.byte	0x4
  513 004a 07       		.byte	0x7
@@ -1135,14 +1135,14 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  515 004f 02       		.uleb128 0x2
  516 0050 08       		.byte	0x8
  517 0051 05       		.byte	0x5
- 518 0052 71020000 		.4byte	.LASF6
+ 518 0052 3C020000 		.4byte	.LASF6
  519 0056 02       		.uleb128 0x2
  520 0057 08       		.byte	0x8
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 20
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 20
 
 
  521 0058 07       		.byte	0x7
- 522 0059 94010000 		.4byte	.LASF7
+ 522 0059 D6010000 		.4byte	.LASF7
  523 005d 03       		.uleb128 0x3
  524 005e 04       		.byte	0x4
  525 005f 05       		.byte	0x5
@@ -1150,14 +1150,14 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  527 0064 02       		.uleb128 0x2
  528 0065 04       		.byte	0x4
  529 0066 07       		.byte	0x7
- 530 0067 87010000 		.4byte	.LASF8
+ 530 0067 C9010000 		.4byte	.LASF8
  531 006b 04       		.uleb128 0x4
  532 006c 53010000 		.4byte	.LASF9
  533 0070 02       		.byte	0x2
  534 0071 A1       		.byte	0xa1
  535 0072 2C000000 		.4byte	0x2c
  536 0076 04       		.uleb128 0x4
- 537 0077 80010000 		.4byte	.LASF10
+ 537 0077 C2010000 		.4byte	.LASF10
  538 007b 02       		.byte	0x2
  539 007c A2       		.byte	0xa2
  540 007d 3A000000 		.4byte	0x3a
@@ -1168,11 +1168,11 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  545 0088 02       		.uleb128 0x2
  546 0089 08       		.byte	0x8
  547 008a 04       		.byte	0x4
- 548 008b 79010000 		.4byte	.LASF12
+ 548 008b BB010000 		.4byte	.LASF12
  549 008f 02       		.uleb128 0x2
  550 0090 01       		.byte	0x1
  551 0091 08       		.byte	0x8
- 552 0092 94030000 		.4byte	.LASF13
+ 552 0092 5F030000 		.4byte	.LASF13
  553 0096 05       		.uleb128 0x5
  554 0097 3C010000 		.4byte	.LASF14
  555 009b 02       		.byte	0x2
@@ -1190,7 +1190,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  567 00b8 02       		.uleb128 0x2
  568 00b9 04       		.byte	0x4
  569 00ba 07       		.byte	0x7
- 570 00bb 68020000 		.4byte	.LASF16
+ 570 00bb 33020000 		.4byte	.LASF16
  571 00bf 07       		.uleb128 0x7
  572 00c0 A5000000 		.4byte	.LASF17
  573 00c4 01       		.byte	0x1
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  575 00c7 01       		.byte	0x1
  576 00c8 E5000000 		.4byte	0xe5
  577 00cc 08       		.uleb128 0x8
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 21
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 21
 
 
  578 00cd 9E000000 		.4byte	.LASF19
@@ -1206,13 +1206,13 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  580 00d2 AF01     		.2byte	0x1af
  581 00d4 76000000 		.4byte	0x76
  582 00d8 09       		.uleb128 0x9
- 583 00d9 22020000 		.4byte	.LASF37
+ 583 00d9 ED010000 		.4byte	.LASF37
  584 00dd 01       		.byte	0x1
  585 00de B201     		.2byte	0x1b2
  586 00e0 76000000 		.4byte	0x76
  587 00e4 00       		.byte	0
  588 00e5 07       		.uleb128 0x7
- 589 00e6 99030000 		.4byte	.LASF18
+ 589 00e6 64030000 		.4byte	.LASF18
  590 00ea 01       		.byte	0x1
  591 00eb E001     		.2byte	0x1e0
  592 00ed 01       		.byte	0x1
@@ -1224,13 +1224,13 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  598 00fa 76000000 		.4byte	0x76
  599 00fe 00       		.byte	0
  600 00ff 07       		.uleb128 0x7
- 601 0100 B9030000 		.4byte	.LASF21
+ 601 0100 84030000 		.4byte	.LASF21
  602 0104 01       		.byte	0x1
  603 0105 1701     		.2byte	0x117
  604 0107 01       		.byte	0x1
  605 0108 19010000 		.4byte	0x119
  606 010c 08       		.uleb128 0x8
- 607 010d 7F020000 		.4byte	.LASF22
+ 607 010d 4A020000 		.4byte	.LASF22
  608 0111 01       		.byte	0x1
  609 0112 1701     		.2byte	0x117
  610 0114 6B000000 		.4byte	0x6b
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  632 0148 3E000000 		.4byte	.LBB9
  633 014c 06000000 		.4byte	.LBE9-.LBB9
  634 0150 0E       		.uleb128 0xe
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 22
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 22
 
 
  635 0151 D8000000 		.4byte	0xd8
@@ -1288,7 +1288,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  659 0187 00       		.byte	0
  660 0188 00       		.byte	0
  661 0189 10       		.uleb128 0x10
- 662 018a E3020000 		.4byte	.LASF25
+ 662 018a AE020000 		.4byte	.LASF25
  663 018e 01       		.byte	0x1
  664 018f B4       		.byte	0xb4
  665 0190 00000000 		.4byte	.LFB1
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  689 01c9 00000000 		.4byte	.LFB3
  690 01cd 28000000 		.4byte	.LFE3-.LFB3
  691 01d1 01       		.uleb128 0x1
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 23
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 23
 
 
  692 01d2 9C       		.byte	0x9c
@@ -1378,10 +1378,10 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  746 024f 50       		.byte	0x50
  747 0250 00       		.byte	0
  748 0251 16       		.uleb128 0x16
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 24
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 24
 
 
- 749 0252 BB020000 		.4byte	.LASF31
+ 749 0252 86020000 		.4byte	.LASF31
  750 0256 01       		.byte	0x1
  751 0257 9501     		.2byte	0x195
  752 0259 76000000 		.4byte	0x76
@@ -1406,7 +1406,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  771 0287 50       		.byte	0x50
  772 0288 00       		.byte	0
  773 0289 16       		.uleb128 0x16
- 774 028a 2E020000 		.4byte	.LASF32
+ 774 028a F9010000 		.4byte	.LASF32
  775 028e 01       		.byte	0x1
  776 028f C801     		.2byte	0x1c8
  777 0291 76000000 		.4byte	0x76
@@ -1436,9 +1436,9 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  801 02ce 01       		.uleb128 0x1
  802 02cf 9C       		.byte	0x9c
  803 02d0 1A       		.uleb128 0x1a
- 804 02d1 4D020000 		.4byte	.LASF39
+ 804 02d1 18020000 		.4byte	.LASF39
  805 02d5 01       		.byte	0x1
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 25
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 25
 
 
  806 02d6 1A       		.byte	0x1a
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  860 002e 3A       		.uleb128 0x3a
  861 002f 0B       		.uleb128 0xb
  862 0030 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 26
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 26
 
 
  863 0031 0B       		.uleb128 0xb
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  917 0067 13       		.uleb128 0x13
  918 0068 00       		.byte	0
  919 0069 00       		.byte	0
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 27
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 27
 
 
  920 006a 09       		.uleb128 0x9
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  974 00a1 00       		.byte	0
  975 00a2 0C       		.uleb128 0xc
  976 00a3 05       		.uleb128 0x5
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 28
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 28
 
 
  977 00a4 00       		.byte	0
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  1031 00da 01       		.uleb128 0x1
  1032 00db 12       		.uleb128 0x12
  1033 00dc 06       		.uleb128 0x6
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 29
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 29
 
 
  1034 00dd 40       		.uleb128 0x40
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  1088 011a 00       		.byte	0
  1089 011b 3F       		.uleb128 0x3f
  1090 011c 19       		.uleb128 0x19
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 30
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 30
 
 
  1091 011d 03       		.uleb128 0x3
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  1145 0155 27       		.uleb128 0x27
  1146 0156 19       		.uleb128 0x19
  1147 0157 11       		.uleb128 0x11
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 31
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 31
 
 
  1148 0158 01       		.uleb128 0x1
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  1202 0000 84000000 		.4byte	0x84
  1203 0004 0200     		.2byte	0x2
  1204 0006 00000000 		.4byte	.Ldebug_info0
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 32
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 32
 
 
  1205 000a 04       		.byte	0x4
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  1259 0048 00000000 		.4byte	.LFB9
  1260 004c 0C000000 		.4byte	.LFE9
  1261 0050 00000000 		.4byte	.LFB10
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 33
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 33
 
 
  1262 0054 0C000000 		.4byte	.LFE10
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  1289      4F735F54 
  1289      6D725F50 
  1289      72655F45 
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 34
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 34
 
 
  1289      6D705F53 
@@ -2030,139 +2030,134 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 1
  1311      6D725F50 
  1311      72655F45 
  1311      6D705F53 
- 1312              	.LASF12:
- 1313 0179 646F7562 		.ascii	"double\000"
- 1313      6C6500
- 1314              	.LASF10:
- 1315 0180 75696E74 		.ascii	"uint16\000"
- 1315      313600
- 1316              	.LASF8:
- 1317 0187 756E7369 		.ascii	"unsigned int\000"
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 35
+ 1312              	.LASF36:
+ 1313 0179 433A5C55 		.ascii	"C:\\Users\\acer\\Desktop\\Saura-master\\2_Psoc\\Pla"
+ 1313      73657273 
+ 1313      5C616365 
+ 1313      725C4465 
+ 1313      736B746F 
+ 1314 01a6 74666F72 		.ascii	"tform\\Design02.cydsn\000"
+ 1314      6D5C4465 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 35
 
 
- 1317      676E6564 
- 1317      20696E74 
- 1317      00
- 1318              	.LASF7:
- 1319 0194 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1319      206C6F6E 
- 1319      6720756E 
- 1319      7369676E 
- 1319      65642069 
- 1320              	.LASF36:
- 1321 01ab 443A5C53 		.ascii	"D:\\START_UP\\COMPANY_STARTUP\\3_platform_based_dev"
- 1321      54415254 
- 1321      5F55505C 
- 1321      434F4D50 
- 1321      414E595F 
- 1322 01db 656C6F70 		.ascii	"elopments\\PSOC_PROJECTS\\platform\\platform\\Psoc_"
- 1322      6D656E74 
- 1322      735C5053 
- 1322      4F435F50 
- 1322      524F4A45 
- 1323 020a 506C6174 		.ascii	"Platform\\Design02.cydsn\000"
- 1323      666F726D 
- 1323      5C446573 
- 1323      69676E30 
- 1323      322E6379 
- 1324              	.LASF37:
- 1325 0222 70657269 		.ascii	"period_temp\000"
- 1325      6F645F74 
- 1325      656D7000 
- 1326              	.LASF32:
- 1327 022e 544D525F 		.ascii	"TMR_Os_Tmr_Pre_Emp_ReadCapture\000"
- 1327      4F735F54 
- 1327      6D725F50 
- 1327      72655F45 
- 1327      6D705F52 
- 1328              	.LASF39:
- 1329 024d 544D525F 		.ascii	"TMR_Os_Tmr_Pre_Emp_initVar\000"
- 1329      4F735F54 
- 1329      6D725F50 
- 1329      72655F45 
- 1329      6D705F69 
- 1330              	.LASF16:
- 1331 0268 73697A65 		.ascii	"sizetype\000"
- 1331      74797065 
- 1331      00
- 1332              	.LASF6:
- 1333 0271 6C6F6E67 		.ascii	"long long int\000"
- 1333      206C6F6E 
- 1333      6720696E 
- 1333      7400
- 1334              	.LASF22:
- 1335 027f 696E7465 		.ascii	"interruptMode\000"
- 1335      72727570 
- 1335      744D6F64 
- 1335      6500
- 1336              	.LASF35:
- 1337 028d 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\TMR_Os_Tmr_Pre_Emp.c\000"
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 36
+ 1314      7369676E 
+ 1314      30322E63 
+ 1314      7964736E 
+ 1315              	.LASF12:
+ 1316 01bb 646F7562 		.ascii	"double\000"
+ 1316      6C6500
+ 1317              	.LASF10:
+ 1318 01c2 75696E74 		.ascii	"uint16\000"
+ 1318      313600
+ 1319              	.LASF8:
+ 1320 01c9 756E7369 		.ascii	"unsigned int\000"
+ 1320      676E6564 
+ 1320      20696E74 
+ 1320      00
+ 1321              	.LASF7:
+ 1322 01d6 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1322      206C6F6E 
+ 1322      6720756E 
+ 1322      7369676E 
+ 1322      65642069 
+ 1323              	.LASF37:
+ 1324 01ed 70657269 		.ascii	"period_temp\000"
+ 1324      6F645F74 
+ 1324      656D7000 
+ 1325              	.LASF32:
+ 1326 01f9 544D525F 		.ascii	"TMR_Os_Tmr_Pre_Emp_ReadCapture\000"
+ 1326      4F735F54 
+ 1326      6D725F50 
+ 1326      72655F45 
+ 1326      6D705F52 
+ 1327              	.LASF39:
+ 1328 0218 544D525F 		.ascii	"TMR_Os_Tmr_Pre_Emp_initVar\000"
+ 1328      4F735F54 
+ 1328      6D725F50 
+ 1328      72655F45 
+ 1328      6D705F69 
+ 1329              	.LASF16:
+ 1330 0233 73697A65 		.ascii	"sizetype\000"
+ 1330      74797065 
+ 1330      00
+ 1331              	.LASF6:
+ 1332 023c 6C6F6E67 		.ascii	"long long int\000"
+ 1332      206C6F6E 
+ 1332      6720696E 
+ 1332      7400
+ 1333              	.LASF22:
+ 1334 024a 696E7465 		.ascii	"interruptMode\000"
+ 1334      72727570 
+ 1334      744D6F64 
+ 1334      6500
+ 1335              	.LASF35:
+ 1336 0258 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\TMR_Os_Tmr_Pre_Emp.c\000"
+ 1336      6E657261 
+ 1336      7465645F 
+ 1336      536F7572 
+ 1336      63655C50 
+ 1337              	.LASF31:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 36
 
 
- 1337      6E657261 
- 1337      7465645F 
- 1337      536F7572 
- 1337      63655C50 
- 1338              	.LASF31:
- 1339 02bb 544D525F 		.ascii	"TMR_Os_Tmr_Pre_Emp_ReadPeriod\000"
- 1339      4F735F54 
- 1339      6D725F50 
- 1339      72655F45 
- 1339      6D705F52 
- 1340              	.LASF2:
- 1341 02d9 73686F72 		.ascii	"short int\000"
- 1341      7420696E 
- 1341      7400
- 1342              	.LASF25:
- 1343 02e3 544D525F 		.ascii	"TMR_Os_Tmr_Pre_Emp_Enable\000"
- 1343      4F735F54 
- 1343      6D725F50 
- 1343      72655F45 
- 1343      6D705F45 
- 1344              	.LASF34:
- 1345 02fd 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
- 1345      4320342E 
- 1345      392E3320 
- 1345      32303135 
- 1345      30333033 
- 1346 0330 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
- 1346      20726576 
- 1346      6973696F 
- 1346      6E203232 
- 1346      31323230 
- 1347 0363 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
- 1347      66756E63 
- 1347      74696F6E 
- 1347      2D736563 
- 1347      74696F6E 
- 1348              	.LASF4:
- 1349 038b 6C6F6E67 		.ascii	"long int\000"
- 1349      20696E74 
- 1349      00
- 1350              	.LASF13:
- 1351 0394 63686172 		.ascii	"char\000"
- 1351      00
- 1352              	.LASF18:
- 1353 0399 544D525F 		.ascii	"TMR_Os_Tmr_Pre_Emp_WriteCounter\000"
- 1353      4F735F54 
- 1353      6D725F50 
- 1353      72655F45 
- 1353      6D705F57 
- 1354              	.LASF21:
- 1355 03b9 544D525F 		.ascii	"TMR_Os_Tmr_Pre_Emp_SetInterruptMode\000"
- 1355      4F735F54 
- 1355      6D725F50 
- 1355      72655F45 
- 1355      6D705F53 
- 1356              	.LASF3:
- 1357 03dd 73686F72 		.ascii	"short unsigned int\000"
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccQB5Mdb.s 			page 37
+ 1338 0286 544D525F 		.ascii	"TMR_Os_Tmr_Pre_Emp_ReadPeriod\000"
+ 1338      4F735F54 
+ 1338      6D725F50 
+ 1338      72655F45 
+ 1338      6D705F52 
+ 1339              	.LASF2:
+ 1340 02a4 73686F72 		.ascii	"short int\000"
+ 1340      7420696E 
+ 1340      7400
+ 1341              	.LASF25:
+ 1342 02ae 544D525F 		.ascii	"TMR_Os_Tmr_Pre_Emp_Enable\000"
+ 1342      4F735F54 
+ 1342      6D725F50 
+ 1342      72655F45 
+ 1342      6D705F45 
+ 1343              	.LASF34:
+ 1344 02c8 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 1344      4320342E 
+ 1344      392E3320 
+ 1344      32303135 
+ 1344      30333033 
+ 1345 02fb 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 1345      20726576 
+ 1345      6973696F 
+ 1345      6E203232 
+ 1345      31323230 
+ 1346 032e 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 1346      66756E63 
+ 1346      74696F6E 
+ 1346      2D736563 
+ 1346      74696F6E 
+ 1347              	.LASF4:
+ 1348 0356 6C6F6E67 		.ascii	"long int\000"
+ 1348      20696E74 
+ 1348      00
+ 1349              	.LASF13:
+ 1350 035f 63686172 		.ascii	"char\000"
+ 1350      00
+ 1351              	.LASF18:
+ 1352 0364 544D525F 		.ascii	"TMR_Os_Tmr_Pre_Emp_WriteCounter\000"
+ 1352      4F735F54 
+ 1352      6D725F50 
+ 1352      72655F45 
+ 1352      6D705F57 
+ 1353              	.LASF21:
+ 1354 0384 544D525F 		.ascii	"TMR_Os_Tmr_Pre_Emp_SetInterruptMode\000"
+ 1354      4F735F54 
+ 1354      6D725F50 
+ 1354      72655F45 
+ 1354      6D705F53 
+ 1355              	.LASF3:
+ 1356 03a8 73686F72 		.ascii	"short unsigned int\000"
+ 1356      7420756E 
+ 1356      7369676E 
+ 1356      65642069 
+ 1356      6E7400
+ 1357              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccHIqLoG.s 			page 37
 
 
- 1357      7420756E 
- 1357      7369676E 
- 1357      65642069 
- 1357      6E7400
- 1358              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

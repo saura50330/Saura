@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWowqFj.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
   29:.\Generated_Source\PSoC5/SERVO_1.c **** * Summary:
   30:.\Generated_Source\PSoC5/SERVO_1.c **** *  Assign a new value to the digital port's data output register.  
   31:.\Generated_Source\PSoC5/SERVO_1.c **** *
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 2
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWowqFj.s 			page 2
 
 
   32:.\Generated_Source\PSoC5/SERVO_1.c **** * Parameters:  
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
   46:.\Generated_Source\PSoC5/SERVO_1.c **** /*******************************************************************************
   47:.\Generated_Source\PSoC5/SERVO_1.c **** * Function Name: SERVO_1_SetDriveMode
   48:.\Generated_Source\PSoC5/SERVO_1.c **** ********************************************************************************
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 3
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWowqFj.s 			page 3
 
 
   49:.\Generated_Source\PSoC5/SERVO_1.c **** *
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
   73:.\Generated_Source\PSoC5/SERVO_1.c **** 
   74:.\Generated_Source\PSoC5/SERVO_1.c **** 
   75:.\Generated_Source\PSoC5/SERVO_1.c **** /*******************************************************************************
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 4
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWowqFj.s 			page 4
 
 
   76:.\Generated_Source\PSoC5/SERVO_1.c **** * Function Name: SERVO_1_Read
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
  104:.\Generated_Source\PSoC5/SERVO_1.c **** *  Read the current value assigned to a Digital Port's data output register
  105:.\Generated_Source\PSoC5/SERVO_1.c **** *
  106:.\Generated_Source\PSoC5/SERVO_1.c **** * Parameters:  
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 5
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWowqFj.s 			page 5
 
 
  107:.\Generated_Source\PSoC5/SERVO_1.c **** *  None 
@@ -279,17 +279,17 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
  146 0006 00000000 		.4byte	.Ldebug_abbrev0
  147 000a 04       		.byte	0x4
  148 000b 01       		.uleb128 0x1
- 149 000c 80010000 		.4byte	.LASF20
+ 149 000c 4B010000 		.4byte	.LASF20
  150 0010 01       		.byte	0x1
  151 0011 1F000000 		.4byte	.LASF21
- 152 0015 E7000000 		.4byte	.LASF22
+ 152 0015 A7000000 		.4byte	.LASF22
  153 0019 00000000 		.4byte	.Ldebug_ranges0+0
  154 001d 00000000 		.4byte	0
  155 0021 00000000 		.4byte	.Ldebug_line0
  156 0025 02       		.uleb128 0x2
  157 0026 01       		.byte	0x1
  158 0027 06       		.byte	0x6
- 159 0028 17020000 		.4byte	.LASF0
+ 159 0028 E2010000 		.4byte	.LASF0
  160 002c 02       		.uleb128 0x2
  161 002d 01       		.byte	0x1
  162 002e 08       		.byte	0x8
@@ -297,8 +297,8 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
  164 0033 02       		.uleb128 0x2
  165 0034 02       		.byte	0x2
  166 0035 05       		.byte	0x5
- 167 0036 76010000 		.4byte	.LASF2
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 6
+ 167 0036 41010000 		.4byte	.LASF2
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWowqFj.s 			page 6
 
 
  168 003a 02       		.uleb128 0x2
@@ -308,7 +308,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
  172 0041 02       		.uleb128 0x2
  173 0042 04       		.byte	0x4
  174 0043 05       		.byte	0x5
- 175 0044 0E020000 		.4byte	.LASF4
+ 175 0044 D9010000 		.4byte	.LASF4
  176 0048 02       		.uleb128 0x2
  177 0049 04       		.byte	0x4
  178 004a 07       		.byte	0x7
@@ -316,11 +316,11 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
  180 004f 02       		.uleb128 0x2
  181 0050 08       		.byte	0x8
  182 0051 05       		.byte	0x5
- 183 0052 63010000 		.4byte	.LASF6
+ 183 0052 2E010000 		.4byte	.LASF6
  184 0056 02       		.uleb128 0x2
  185 0057 08       		.byte	0x8
  186 0058 07       		.byte	0x7
- 187 0059 D0000000 		.4byte	.LASF7
+ 187 0059 12010000 		.4byte	.LASF7
  188 005d 03       		.uleb128 0x3
  189 005e 04       		.byte	0x4
  190 005f 05       		.byte	0x5
@@ -328,7 +328,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
  192 0064 02       		.uleb128 0x2
  193 0065 04       		.byte	0x4
  194 0066 07       		.byte	0x7
- 195 0067 C3000000 		.4byte	.LASF8
+ 195 0067 05010000 		.4byte	.LASF8
  196 006b 04       		.uleb128 0x4
  197 006c 69000000 		.4byte	.LASF12
  198 0070 02       		.byte	0x2
@@ -341,11 +341,11 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
  205 007d 02       		.uleb128 0x2
  206 007e 08       		.byte	0x8
  207 007f 04       		.byte	0x4
- 208 0080 A7000000 		.4byte	.LASF10
+ 208 0080 E9000000 		.4byte	.LASF10
  209 0084 02       		.uleb128 0x2
  210 0085 01       		.byte	0x1
  211 0086 08       		.byte	0x8
- 212 0087 71010000 		.4byte	.LASF11
+ 212 0087 3C010000 		.4byte	.LASF11
  213 008b 05       		.uleb128 0x5
  214 008c 7D000000 		.4byte	.LASF13
  215 0090 02       		.byte	0x2
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
  222 00a1 01       		.byte	0x1
  223 00a2 27       		.byte	0x27
  224 00a3 00000000 		.4byte	.LFB0
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 7
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWowqFj.s 			page 7
 
 
  225 00a7 18000000 		.4byte	.LFE0-.LFB0
@@ -379,7 +379,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
  240 00cb 21000000 		.4byte	.LLST1
  241 00cf 00       		.byte	0
  242 00d0 07       		.uleb128 0x7
- 243 00d1 AE000000 		.4byte	.LASF15
+ 243 00d1 F0000000 		.4byte	.LASF15
  244 00d5 01       		.byte	0x1
  245 00d6 45       		.byte	0x45
  246 00d7 00000000 		.4byte	.LFB1
@@ -388,7 +388,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
  249 00e0 9C       		.byte	0x9c
  250 00e1 F5000000 		.4byte	0xf5
  251 00e5 08       		.uleb128 0x8
- 252 00e6 5E010000 		.4byte	.LASF17
+ 252 00e6 29010000 		.4byte	.LASF17
  253 00ea 01       		.byte	0x1
  254 00eb 45       		.byte	0x45
  255 00ec 6B000000 		.4byte	0x6b
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
  279 0000 01       		.uleb128 0x1
  280 0001 11       		.uleb128 0x11
  281 0002 01       		.byte	0x1
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 8
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWowqFj.s 			page 8
 
 
  282 0003 25       		.uleb128 0x25
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
  336 0039 03       		.uleb128 0x3
  337 003a 0E       		.uleb128 0xe
  338 003b 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 9
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWowqFj.s 			page 9
 
 
  339 003c 0B       		.uleb128 0xb
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
  393 0073 09       		.uleb128 0x9
  394 0074 34       		.uleb128 0x34
  395 0075 00       		.byte	0
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 10
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWowqFj.s 			page 10
 
 
  396 0076 03       		.uleb128 0x3
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
  450              	.LLST1:
  451 0021 06000000 		.4byte	.LVL2
  452 0025 0E000000 		.4byte	.LVL3
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 11
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWowqFj.s 			page 11
 
 
  453 0029 0600     		.2byte	0x6
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
  507              	.Ldebug_line0:
  508 0000 96000000 		.section	.debug_str,"MS",%progbits,1
  508      02004600 
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 12
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWowqFj.s 			page 12
 
 
  508      00000201 
@@ -718,86 +718,81 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 1
  532      7420756E 
  532      7369676E 
  532      65642069 
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 13
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWowqFj.s 			page 13
 
 
  532      6E7400
- 533              	.LASF10:
- 534 00a7 646F7562 		.ascii	"double\000"
- 534      6C6500
- 535              	.LASF15:
- 536 00ae 53455256 		.ascii	"SERVO_1_SetDriveMode\000"
- 536      4F5F315F 
- 536      53657444 
- 536      72697665 
- 536      4D6F6465 
- 537              	.LASF8:
- 538 00c3 756E7369 		.ascii	"unsigned int\000"
- 538      676E6564 
- 538      20696E74 
- 538      00
- 539              	.LASF7:
- 540 00d0 6C6F6E67 		.ascii	"long long unsigned int\000"
- 540      206C6F6E 
- 540      6720756E 
- 540      7369676E 
- 540      65642069 
- 541              	.LASF22:
- 542 00e7 443A5C53 		.ascii	"D:\\START_UP\\COMPANY_STARTUP\\3_platform_based_dev"
- 542      54415254 
- 542      5F55505C 
- 542      434F4D50 
- 542      414E595F 
- 543 0117 656C6F70 		.ascii	"elopments\\PSOC_PROJECTS\\platform\\platform\\Psoc_"
- 543      6D656E74 
- 543      735C5053 
- 543      4F435F50 
- 543      524F4A45 
- 544 0146 506C6174 		.ascii	"Platform\\Design02.cydsn\000"
- 544      666F726D 
- 544      5C446573 
- 544      69676E30 
- 544      322E6379 
- 545              	.LASF17:
- 546 015e 6D6F6465 		.ascii	"mode\000"
- 546      00
- 547              	.LASF6:
- 548 0163 6C6F6E67 		.ascii	"long long int\000"
- 548      206C6F6E 
- 548      6720696E 
- 548      7400
- 549              	.LASF11:
- 550 0171 63686172 		.ascii	"char\000"
- 550      00
- 551              	.LASF2:
- 552 0176 73686F72 		.ascii	"short int\000"
- 552      7420696E 
- 552      7400
- 553              	.LASF20:
- 554 0180 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
- 554      4320342E 
- 554      392E3320 
- 554      32303135 
-ARM GAS  C:\Users\acer\AppData\Local\Temp\ccPvzqWl.s 			page 14
+ 533              	.LASF22:
+ 534 00a7 433A5C55 		.ascii	"C:\\Users\\acer\\Desktop\\Saura-master\\2_Psoc\\Pla"
+ 534      73657273 
+ 534      5C616365 
+ 534      725C4465 
+ 534      736B746F 
+ 535 00d4 74666F72 		.ascii	"tform\\Design02.cydsn\000"
+ 535      6D5C4465 
+ 535      7369676E 
+ 535      30322E63 
+ 535      7964736E 
+ 536              	.LASF10:
+ 537 00e9 646F7562 		.ascii	"double\000"
+ 537      6C6500
+ 538              	.LASF15:
+ 539 00f0 53455256 		.ascii	"SERVO_1_SetDriveMode\000"
+ 539      4F5F315F 
+ 539      53657444 
+ 539      72697665 
+ 539      4D6F6465 
+ 540              	.LASF8:
+ 541 0105 756E7369 		.ascii	"unsigned int\000"
+ 541      676E6564 
+ 541      20696E74 
+ 541      00
+ 542              	.LASF7:
+ 543 0112 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 543      206C6F6E 
+ 543      6720756E 
+ 543      7369676E 
+ 543      65642069 
+ 544              	.LASF17:
+ 545 0129 6D6F6465 		.ascii	"mode\000"
+ 545      00
+ 546              	.LASF6:
+ 547 012e 6C6F6E67 		.ascii	"long long int\000"
+ 547      206C6F6E 
+ 547      6720696E 
+ 547      7400
+ 548              	.LASF11:
+ 549 013c 63686172 		.ascii	"char\000"
+ 549      00
+ 550              	.LASF2:
+ 551 0141 73686F72 		.ascii	"short int\000"
+ 551      7420696E 
+ 551      7400
+ 552              	.LASF20:
+ 553 014b 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 553      4320342E 
+ 553      392E3320 
+ 553      32303135 
+ 553      30333033 
+ 554 017e 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 554      20726576 
+ 554      6973696F 
+ 554      6E203232 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccWowqFj.s 			page 14
 
 
- 554      30333033 
- 555 01b3 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
- 555      20726576 
- 555      6973696F 
- 555      6E203232 
- 555      31323230 
- 556 01e6 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
- 556      66756E63 
- 556      74696F6E 
- 556      2D736563 
- 556      74696F6E 
- 557              	.LASF4:
- 558 020e 6C6F6E67 		.ascii	"long int\000"
- 558      20696E74 
- 558      00
- 559              	.LASF0:
- 560 0217 7369676E 		.ascii	"signed char\000"
- 560      65642063 
- 560      68617200 
- 561              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br
+ 554      31323230 
+ 555 01b1 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 555      66756E63 
+ 555      74696F6E 
+ 555      2D736563 
+ 555      74696F6E 
+ 556              	.LASF4:
+ 557 01d9 6C6F6E67 		.ascii	"long int\000"
+ 557      20696E74 
+ 557      00
+ 558              	.LASF0:
+ 559 01e2 7369676E 		.ascii	"signed char\000"
+ 559      65642063 
+ 559      68617200 
+ 560              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

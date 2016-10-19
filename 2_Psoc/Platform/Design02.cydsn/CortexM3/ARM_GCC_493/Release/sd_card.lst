@@ -1,0 +1,2049 @@
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"sd_card.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.SDC_InitializeCard,"ax",%progbits
+  19              		.align	1
+  20              		.global	SDC_InitializeCard
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	SDC_InitializeCard, %function
+  24              	SDC_InitializeCard:
+  25              	.LFB56:
+  26              		.file 1 ".\\sd_card.c"
+   1:.\sd_card.c   **** 
+   2:.\sd_card.c   **** 
+   3:.\sd_card.c   **** /***************************************************************************
+   4:.\sd_card.c   **** * HEADER-FILES (Only those that are needed in this file)
+   5:.\sd_card.c   **** ****************************************************************************/
+   6:.\sd_card.c   **** #include "sd_card.h"
+   7:.\sd_card.c   **** #include <project.h>
+   8:.\sd_card.c   **** #include <Global.h>
+   9:.\sd_card.c   **** #include <stdio.h>
+  10:.\sd_card.c   **** 
+  11:.\sd_card.c   **** struct SdSTSLST SdInf;
+  12:.\sd_card.c   **** 
+  13:.\sd_card.c   **** /* START: FUNCTION DEFINITION */
+  14:.\sd_card.c   **** 
+  15:.\sd_card.c   **** void SDC_InitializeCard(void)
+  16:.\sd_card.c   **** {
+  27              		.loc 1 16 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 08B5     		push	{r3, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 3, -8
+  34              		.cfi_offset 14, -4
+  17:.\sd_card.c   **** 	FS_Init();
+  35              		.loc 1 17 0
+  36 0002 FFF7FEFF 		bl	FS_Init
+  37              	.LVL0:
+  18:.\sd_card.c   ****     SdInf.Init = 1;
+  38              		.loc 1 18 0
+  39 0006 024B     		ldr	r3, .L2
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 2
+
+
+  40 0008 0122     		movs	r2, #1
+  41 000a 1A72     		strb	r2, [r3, #8]
+  42 000c 08BD     		pop	{r3, pc}
+  43              	.L3:
+  44 000e 00BF     		.align	2
+  45              	.L2:
+  46 0010 00000000 		.word	SdInf
+  47              		.cfi_endproc
+  48              	.LFE56:
+  49              		.size	SDC_InitializeCard, .-SDC_InitializeCard
+  50              		.section	.text.SDC_FormatCard,"ax",%progbits
+  51              		.align	1
+  52              		.global	SDC_FormatCard
+  53              		.thumb
+  54              		.thumb_func
+  55              		.type	SDC_FormatCard, %function
+  56              	SDC_FormatCard:
+  57              	.LFB57:
+  19:.\sd_card.c   **** }
+  20:.\sd_card.c   **** 
+  21:.\sd_card.c   **** uint8 SDC_FormatCard(void)
+  22:.\sd_card.c   **** {
+  58              		.loc 1 22 0
+  59              		.cfi_startproc
+  60              		@ args = 0, pretend = 0, frame = 16
+  61              		@ frame_needed = 0, uses_anonymous_args = 0
+  62              	.LVL1:
+  63 0000 1FB5     		push	{r0, r1, r2, r3, r4, lr}
+  64              		.cfi_def_cfa_offset 24
+  65              		.cfi_offset 14, -4
+  23:.\sd_card.c   **** 	uint8 u8Return =0;		// 0: Success, 1: Failure
+  24:.\sd_card.c   **** 	char sdVolName[10];
+  25:.\sd_card.c   **** 	
+  26:.\sd_card.c   **** 	// Get volume name
+  27:.\sd_card.c   **** 	FS_GetVolumeName(0u, &sdVolName[0], 9u);
+  66              		.loc 1 27 0
+  67 0002 0922     		movs	r2, #9
+  68 0004 01A9     		add	r1, sp, #4
+  69 0006 0020     		movs	r0, #0
+  70 0008 FFF7FEFF 		bl	FS_GetVolumeName
+  71              	.LVL2:
+  28:.\sd_card.c   **** 
+  29:.\sd_card.c   **** 	if(0 != FS_FormatSD(sdVolName))
+  72              		.loc 1 29 0
+  73 000c 01A8     		add	r0, sp, #4
+  74 000e FFF7FEFF 		bl	FS_FormatSD
+  75              	.LVL3:
+  30:.\sd_card.c   **** 	u8Return =1;
+  31:.\sd_card.c   **** 	
+  32:.\sd_card.c   ****     return(u8Return);	
+  33:.\sd_card.c   **** }
+  76              		.loc 1 33 0
+  77 0012 0030     		adds	r0, r0, #0
+  78 0014 18BF     		it	ne
+  79 0016 0120     		movne	r0, #1
+  80              	.LVL4:
+  81 0018 05B0     		add	sp, sp, #20
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 3
+
+
+  82              		.cfi_def_cfa_offset 4
+  83              		@ sp needed
+  84 001a 5DF804FB 		ldr	pc, [sp], #4
+  85              		.cfi_endproc
+  86              	.LFE57:
+  87              		.size	SDC_FormatCard, .-SDC_FormatCard
+  88              		.section	.text.SDC_OpenFile,"ax",%progbits
+  89              		.align	1
+  90              		.global	SDC_OpenFile
+  91              		.thumb
+  92              		.thumb_func
+  93              		.type	SDC_OpenFile, %function
+  94              	SDC_OpenFile:
+  95              	.LFB58:
+  34:.\sd_card.c   **** 
+  35:.\sd_card.c   **** uint8 SDC_OpenFile(char *sdfile, const uint8 Handle, const char *mode)
+  36:.\sd_card.c   **** {
+  96              		.loc 1 36 0
+  97              		.cfi_startproc
+  98              		@ args = 0, pretend = 0, frame = 0
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100              	.LVL5:
+  37:.\sd_card.c   **** 	uint8 u8Return =0;
+  38:.\sd_card.c   **** 	if(Handle < 4)
+ 101              		.loc 1 38 0
+ 102 0000 0329     		cmp	r1, #3
+  36:.\sd_card.c   **** 	uint8 u8Return =0;
+ 103              		.loc 1 36 0
+ 104 0002 70B5     		push	{r4, r5, r6, lr}
+ 105              		.cfi_def_cfa_offset 16
+ 106              		.cfi_offset 4, -16
+ 107              		.cfi_offset 5, -12
+ 108              		.cfi_offset 6, -8
+ 109              		.cfi_offset 14, -4
+  36:.\sd_card.c   **** 	uint8 u8Return =0;
+ 110              		.loc 1 36 0
+ 111 0004 0E46     		mov	r6, r1
+ 112 0006 0C4D     		ldr	r5, .L10
+ 113 0008 01F10204 		add	r4, r1, #2
+ 114              		.loc 1 38 0
+ 115 000c 05D8     		bhi	.L6
+  39:.\sd_card.c   **** 	SdInf.pFile[Handle] = FS_FOpen(sdfile, mode);
+ 116              		.loc 1 39 0
+ 117 000e 1146     		mov	r1, r2
+ 118              	.LVL6:
+ 119 0010 FFF7FEFF 		bl	FS_FOpen
+ 120              	.LVL7:
+ 121 0014 05EB8403 		add	r3, r5, r4, lsl #2
+ 122 0018 5860     		str	r0, [r3, #4]
+ 123              	.L6:
+  40:.\sd_card.c   **** 	
+  41:.\sd_card.c   **** 	if(SdInf.pFile[Handle] == NULL)
+ 124              		.loc 1 41 0
+ 125 001a 05EB8404 		add	r4, r5, r4, lsl #2
+ 126 001e 6468     		ldr	r4, [r4, #4]
+ 127              	.LVL8:
+  42:.\sd_card.c   **** 	u8Return = 1; // Indicate failure
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 4
+
+
+  43:.\sd_card.c   **** 
+  44:.\sd_card.c   **** 	SdInf.u32VFile_Size[Handle] = FS_GetFileSize(SdInf.pFile[Handle]);
+ 128              		.loc 1 44 0
+ 129 0020 2046     		mov	r0, r4
+ 130 0022 FFF7FEFF 		bl	FS_GetFileSize
+ 131              	.LVL9:
+ 132 0026 45F82600 		str	r0, [r5, r6, lsl #2]
+  45:.\sd_card.c   ****     
+  46:.\sd_card.c   ****     if(SdInf.u32VFile_Size[Handle] == 0xFFFFFFFF)
+ 133              		.loc 1 46 0
+ 134 002a 0130     		adds	r0, r0, #1
+  37:.\sd_card.c   **** 	if(Handle < 4)
+ 135              		.loc 1 37 0
+ 136 002c 1ABF     		itte	ne
+ 137 002e B4FA84F0 		clzne	r0, r4
+ 138 0032 4009     		lsrne	r0, r0, #5
+  47:.\sd_card.c   ****     u8Return = 1; // Indicate failure
+ 139              		.loc 1 47 0
+ 140 0034 0120     		moveq	r0, #1
+ 141              	.LVL10:
+  48:.\sd_card.c   ****  
+  49:.\sd_card.c   **** 	return(u8Return);
+  50:.\sd_card.c   **** }
+ 142              		.loc 1 50 0
+ 143 0036 70BD     		pop	{r4, r5, r6, pc}
+ 144              	.L11:
+ 145              		.align	2
+ 146              	.L10:
+ 147 0038 00000000 		.word	SdInf
+ 148              		.cfi_endproc
+ 149              	.LFE58:
+ 150              		.size	SDC_OpenFile, .-SDC_OpenFile
+ 151              		.section	.text.SDC_CloseFile,"ax",%progbits
+ 152              		.align	1
+ 153              		.global	SDC_CloseFile
+ 154              		.thumb
+ 155              		.thumb_func
+ 156              		.type	SDC_CloseFile, %function
+ 157              	SDC_CloseFile:
+ 158              	.LFB59:
+  51:.\sd_card.c   **** 
+  52:.\sd_card.c   **** uint8 SDC_CloseFile(uint8 Handle)
+  53:.\sd_card.c   **** {
+ 159              		.loc 1 53 0
+ 160              		.cfi_startproc
+ 161              		@ args = 0, pretend = 0, frame = 0
+ 162              		@ frame_needed = 0, uses_anonymous_args = 0
+ 163              	.LVL11:
+  54:.\sd_card.c   **** 	// Return 0 : Success, Return 1: Failure , Refer emFile
+  55:.\sd_card.c   **** 	uint8 u8Return =0;
+  56:.\sd_card.c   **** 	if(Handle < 4)
+ 164              		.loc 1 56 0
+ 165 0000 0328     		cmp	r0, #3
+  53:.\sd_card.c   **** 	// Return 0 : Success, Return 1: Failure , Refer emFile
+ 166              		.loc 1 53 0
+ 167 0002 08B5     		push	{r3, lr}
+ 168              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 5
+
+
+ 169              		.cfi_offset 3, -8
+ 170              		.cfi_offset 14, -4
+ 171              		.loc 1 56 0
+ 172 0004 07D8     		bhi	.L14
+  57:.\sd_card.c   **** 	u8Return = FS_FClose(SdInf.pFile[Handle]);
+ 173              		.loc 1 57 0
+ 174 0006 054B     		ldr	r3, .L15
+ 175 0008 03EB8000 		add	r0, r3, r0, lsl #2
+ 176              	.LVL12:
+ 177 000c C068     		ldr	r0, [r0, #12]
+ 178 000e FFF7FEFF 		bl	FS_FClose
+ 179              	.LVL13:
+ 180 0012 C0B2     		uxtb	r0, r0
+ 181              	.LVL14:
+ 182 0014 08BD     		pop	{r3, pc}
+ 183              	.LVL15:
+ 184              	.L14:
+  55:.\sd_card.c   **** 	if(Handle < 4)
+ 185              		.loc 1 55 0
+ 186 0016 0020     		movs	r0, #0
+ 187              	.LVL16:
+  58:.\sd_card.c   **** 	return(u8Return);
+  59:.\sd_card.c   **** }
+ 188              		.loc 1 59 0
+ 189 0018 08BD     		pop	{r3, pc}
+ 190              	.L16:
+ 191 001a 00BF     		.align	2
+ 192              	.L15:
+ 193 001c 00000000 		.word	SdInf
+ 194              		.cfi_endproc
+ 195              	.LFE59:
+ 196              		.size	SDC_CloseFile, .-SDC_CloseFile
+ 197              		.section	.text.SDC_LoadBuffer,"ax",%progbits
+ 198              		.align	1
+ 199              		.global	SDC_LoadBuffer
+ 200              		.thumb
+ 201              		.thumb_func
+ 202              		.type	SDC_LoadBuffer, %function
+ 203              	SDC_LoadBuffer:
+ 204              	.LFB60:
+  60:.\sd_card.c   **** 
+  61:.\sd_card.c   **** // 10 ms cyclic call
+  62:.\sd_card.c   **** void SDC_LoadBuffer()
+  63:.\sd_card.c   **** {	
+ 205              		.loc 1 63 0
+ 206              		.cfi_startproc
+ 207              		@ args = 0, pretend = 0, frame = 0
+ 208              		@ frame_needed = 0, uses_anonymous_args = 0
+ 209              		@ link register save eliminated.
+ 210 0000 7047     		bx	lr
+ 211              		.cfi_endproc
+ 212              	.LFE60:
+ 213              		.size	SDC_LoadBuffer, .-SDC_LoadBuffer
+ 214              		.section	.text.SDC_WriteCrashData,"ax",%progbits
+ 215              		.align	1
+ 216              		.global	SDC_WriteCrashData
+ 217              		.thumb
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 6
+
+
+ 218              		.thumb_func
+ 219              		.type	SDC_WriteCrashData, %function
+ 220              	SDC_WriteCrashData:
+ 221              	.LFB61:
+  64:.\sd_card.c   ****    	
+  65:.\sd_card.c   **** 		// Fetch Data from SD and convert it to RSU data format
+  66:.\sd_card.c   **** 		// u16BytesRead = FS_Read(pFile[0], u8A_SD_Buff_RSU0, u16V_RSU0_Buf1_cnt);
+  67:.\sd_card.c   **** 		
+  68:.\sd_card.c   **** 	
+  69:.\sd_card.c   **** }
+  70:.\sd_card.c   **** 
+  71:.\sd_card.c   **** 
+  72:.\sd_card.c   **** 
+  73:.\sd_card.c   **** /*************************************************************************
+  74:.\sd_card.c   **** *   Function 	- SDC_WriteCrashData
+  75:.\sd_card.c   **** *	Description - Write data to SD CARD
+  76:.\sd_card.c   **** *	Input		- 	u8Buff  : Source address of data to be written to SD card
+  77:.\sd_card.c   **** *					u16Size : # of bytes to be written to SDC
+  78:.\sd_card.c   **** *					u8handle: File handle to access the file
+  79:.\sd_card.c   **** **************************************************************************/
+  80:.\sd_card.c   **** void SDC_WriteCrashData(uint8* u8Buff, _UINT16 u16Size, uint8 u8handle)
+  81:.\sd_card.c   **** {
+ 222              		.loc 1 81 0
+ 223              		.cfi_startproc
+ 224              		@ args = 0, pretend = 0, frame = 0
+ 225              		@ frame_needed = 0, uses_anonymous_args = 0
+ 226              	.LVL17:
+ 227              		.loc 1 81 0
+ 228 0000 30B5     		push	{r4, r5, lr}
+ 229              		.cfi_def_cfa_offset 12
+ 230              		.cfi_offset 4, -12
+ 231              		.cfi_offset 5, -8
+ 232              		.cfi_offset 14, -4
+ 233              		.loc 1 81 0
+ 234 0002 0546     		mov	r5, r0
+ 235 0004 0C46     		mov	r4, r1
+  82:.\sd_card.c   **** 	FS_Write(SdInf.pFile[u8handle],u8Buff,u16Size);
+ 236              		.loc 1 82 0
+ 237 0006 054B     		ldr	r3, .L19
+ 238 0008 2946     		mov	r1, r5
+ 239              	.LVL18:
+ 240 000a 03EB8202 		add	r2, r3, r2, lsl #2
+ 241              	.LVL19:
+ 242 000e D068     		ldr	r0, [r2, #12]
+ 243              	.LVL20:
+ 244 0010 2246     		mov	r2, r4
+  83:.\sd_card.c   **** }
+ 245              		.loc 1 83 0
+ 246 0012 BDE83040 		pop	{r4, r5, lr}
+ 247              		.cfi_restore 14
+ 248              		.cfi_restore 5
+ 249              		.cfi_restore 4
+ 250              		.cfi_def_cfa_offset 0
+  82:.\sd_card.c   **** 	FS_Write(SdInf.pFile[u8handle],u8Buff,u16Size);
+ 251              		.loc 1 82 0
+ 252 0016 FFF7FEBF 		b	FS_Write
+ 253              	.LVL21:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 7
+
+
+ 254              	.L20:
+ 255 001a 00BF     		.align	2
+ 256              	.L19:
+ 257 001c 00000000 		.word	SdInf
+ 258              		.cfi_endproc
+ 259              	.LFE61:
+ 260              		.size	SDC_WriteCrashData, .-SDC_WriteCrashData
+ 261              		.section	.text.SDC_Cnvrt_To_ASCII,"ax",%progbits
+ 262              		.align	1
+ 263              		.global	SDC_Cnvrt_To_ASCII
+ 264              		.thumb
+ 265              		.thumb_func
+ 266              		.type	SDC_Cnvrt_To_ASCII, %function
+ 267              	SDC_Cnvrt_To_ASCII:
+ 268              	.LFB62:
+  84:.\sd_card.c   **** 
+  85:.\sd_card.c   **** /*************************************************************************
+  86:.\sd_card.c   **** *	Function	- SDC_Cnvrt_To_ASCII
+  87:.\sd_card.c   **** *	Description	- Converts Hex value to ASCII
+  88:.\sd_card.c   **** *	Input		- ASCII value
+  89:.\sd_card.c   **** *	Return		- Hex value
+  90:.\sd_card.c   **** *	Note		- None
+  91:.\sd_card.c   **** *************************************************************************/
+  92:.\sd_card.c   **** uint8 SDC_Cnvrt_To_ASCII(uint8 u8Input)
+  93:.\sd_card.c   **** {
+ 269              		.loc 1 93 0
+ 270              		.cfi_startproc
+ 271              		@ args = 0, pretend = 0, frame = 0
+ 272              		@ frame_needed = 0, uses_anonymous_args = 0
+ 273              		@ link register save eliminated.
+ 274              	.LVL22:
+  94:.\sd_card.c   **** 	uint8 u8Out =0;
+  95:.\sd_card.c   **** 	if(u8Input <=0x09)
+ 275              		.loc 1 95 0
+ 276 0000 0928     		cmp	r0, #9
+  96:.\sd_card.c   **** 	{
+  97:.\sd_card.c   **** 		u8Out = 0x30 + u8Input;
+ 277              		.loc 1 97 0
+ 278 0002 94BF     		ite	ls
+ 279 0004 3030     		addls	r0, r0, #48
+ 280              	.LVL23:
+  98:.\sd_card.c   **** 	}
+  99:.\sd_card.c   **** 	else
+ 100:.\sd_card.c   **** 	{
+ 101:.\sd_card.c   **** 		u8Out = 0x37 + u8Input;
+ 281              		.loc 1 101 0
+ 282 0006 3730     		addhi	r0, r0, #55
+ 283 0008 C0B2     		uxtb	r0, r0
+ 284              	.LVL24:
+ 102:.\sd_card.c   **** 	}
+ 103:.\sd_card.c   **** 	return(u8Out);
+ 104:.\sd_card.c   **** }
+ 285              		.loc 1 104 0
+ 286 000a 7047     		bx	lr
+ 287              		.cfi_endproc
+ 288              	.LFE62:
+ 289              		.size	SDC_Cnvrt_To_ASCII, .-SDC_Cnvrt_To_ASCII
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 8
+
+
+ 290              		.section	.text.SDC_CardDetection,"ax",%progbits
+ 291              		.align	1
+ 292              		.global	SDC_CardDetection
+ 293              		.thumb
+ 294              		.thumb_func
+ 295              		.type	SDC_CardDetection, %function
+ 296              	SDC_CardDetection:
+ 297              	.LFB63:
+ 105:.\sd_card.c   **** 
+ 106:.\sd_card.c   **** // 250 ms cyclic call
+ 107:.\sd_card.c   **** void SDC_CardDetection(void)
+ 108:.\sd_card.c   **** {
+ 298              		.loc 1 108 0
+ 299              		.cfi_startproc
+ 300              		@ args = 0, pretend = 0, frame = 0
+ 301              		@ frame_needed = 0, uses_anonymous_args = 0
+ 302 0000 10B5     		push	{r4, lr}
+ 303              		.cfi_def_cfa_offset 8
+ 304              		.cfi_offset 4, -8
+ 305              		.cfi_offset 14, -4
+ 109:.\sd_card.c   ****     static uint8 u8v_Debounce_Counter = 0;
+ 110:.\sd_card.c   **** 
+ 111:.\sd_card.c   ****     
+ 112:.\sd_card.c   ****     if(Pin_SD_Detect_Read() == 0)
+ 306              		.loc 1 112 0
+ 307 0002 FFF7FEFF 		bl	Pin_SD_Detect_Read
+ 308              	.LVL25:
+ 309 0006 90B9     		cbnz	r0, .L26
+ 113:.\sd_card.c   ****     {   // Card is inserted
+ 114:.\sd_card.c   ****         if(u8v_Debounce_Counter < 5)
+ 310              		.loc 1 114 0
+ 311 0008 0D4C     		ldr	r4, .L30
+ 312 000a 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 313 000c 042B     		cmp	r3, #4
+ 314 000e 16D8     		bhi	.L25
+ 115:.\sd_card.c   **** 		{
+ 116:.\sd_card.c   **** 			u8v_Debounce_Counter++;
+ 315              		.loc 1 116 0
+ 316 0010 0133     		adds	r3, r3, #1
+ 317 0012 DBB2     		uxtb	r3, r3
+ 117:.\sd_card.c   **** 			if((u8v_Debounce_Counter == 4u) && (SdInf.Init == 0))
+ 318              		.loc 1 117 0
+ 319 0014 042B     		cmp	r3, #4
+ 116:.\sd_card.c   **** 			if((u8v_Debounce_Counter == 4u) && (SdInf.Init == 0))
+ 320              		.loc 1 116 0
+ 321 0016 2370     		strb	r3, [r4]
+ 322              		.loc 1 117 0
+ 323 0018 11D1     		bne	.L25
+ 324              		.loc 1 117 0 is_stmt 0 discriminator 1
+ 325 001a 0A4B     		ldr	r3, .L30+4
+ 326 001c 1B7A     		ldrb	r3, [r3, #8]	@ zero_extendqisi2
+ 327 001e 73B9     		cbnz	r3, .L25
+ 118:.\sd_card.c   **** 			{
+ 119:.\sd_card.c   ****                 FS_DeInit();
+ 328              		.loc 1 119 0 is_stmt 1
+ 329 0020 FFF7FEFF 		bl	FS_DeInit
+ 330              	.LVL26:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 9
+
+
+ 120:.\sd_card.c   ****                 SDC_InitializeCard();   // Re- initialize card.
+ 331              		.loc 1 120 0
+ 332 0024 FFF7FEFF 		bl	SDC_InitializeCard
+ 333              	.LVL27:
+ 121:.\sd_card.c   ****                 u8v_Debounce_Counter = 10u;               
+ 334              		.loc 1 121 0
+ 335 0028 0A23     		movs	r3, #10
+ 336 002a 2370     		strb	r3, [r4]
+ 337 002c 10BD     		pop	{r4, pc}
+ 338              	.L26:
+ 122:.\sd_card.c   **** 			}
+ 123:.\sd_card.c   **** 		}
+ 124:.\sd_card.c   ****     }
+ 125:.\sd_card.c   ****     else
+ 126:.\sd_card.c   ****     {	// Card is removed
+ 127:.\sd_card.c   **** 		if(SdInf.Init == 1u)
+ 339              		.loc 1 127 0
+ 340 002e 054B     		ldr	r3, .L30+4
+ 341 0030 1A7A     		ldrb	r2, [r3, #8]	@ zero_extendqisi2
+ 342 0032 012A     		cmp	r2, #1
+ 128:.\sd_card.c   **** 		{
+ 129:.\sd_card.c   **** 			// Turn on RED LED
+ 130:.\sd_card.c   **** 			u8v_Debounce_Counter = 0;
+ 343              		.loc 1 130 0
+ 344 0034 01BF     		itttt	eq
+ 345 0036 0249     		ldreq	r1, .L30
+ 346 0038 0022     		moveq	r2, #0
+ 347 003a 0A70     		strbeq	r2, [r1]
+ 131:.\sd_card.c   ****             SdInf.Init = 0;
+ 348              		.loc 1 131 0
+ 349 003c 1A72     		strbeq	r2, [r3, #8]
+ 350              	.L25:
+ 351 003e 10BD     		pop	{r4, pc}
+ 352              	.L31:
+ 353              		.align	2
+ 354              	.L30:
+ 355 0040 00000000 		.word	.LANCHOR0
+ 356 0044 00000000 		.word	SdInf
+ 357              		.cfi_endproc
+ 358              	.LFE63:
+ 359              		.size	SDC_CardDetection, .-SDC_CardDetection
+ 360              		.comm	SdInf,20,4
+ 361              		.bss
+ 362              		.set	.LANCHOR0,. + 0
+ 363              		.type	u8v_Debounce_Counter.7670, %object
+ 364              		.size	u8v_Debounce_Counter.7670, 1
+ 365              	u8v_Debounce_Counter.7670:
+ 366 0000 00       		.space	1
+ 367              		.text
+ 368              	.Letext0:
+ 369              		.file 2 ".\\type_def.h"
+ 370              		.file 3 ".\\Inc\\sd/FS_Types.h"
+ 371              		.file 4 ".\\sd_card.h"
+ 372              		.file 5 "c:\\program files\\cypress\\psoc creator\\3.3\\psoc creator\\import\\gnu\\arm\\4.9.3\\arm
+ 373              		.file 6 "c:\\program files\\cypress\\psoc creator\\3.3\\psoc creator\\import\\gnu\\arm\\4.9.3\\arm
+ 374              		.file 7 "Generated_Source\\PSoC5/core_cm3.h"
+ 375              		.file 8 ".\\Inc\\sd/FS.h"
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 10
+
+
+ 376              		.file 9 "Generated_Source\\PSoC5/Pin_SD_Detect.h"
+ 377              		.section	.debug_info,"",%progbits
+ 378              	.Ldebug_info0:
+ 379 0000 55040000 		.4byte	0x455
+ 380 0004 0400     		.2byte	0x4
+ 381 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 382 000a 04       		.byte	0x4
+ 383 000b 01       		.uleb128 0x1
+ 384 000c 42020000 		.4byte	.LASF50
+ 385 0010 01       		.byte	0x1
+ 386 0011 66000000 		.4byte	.LASF51
+ 387 0015 14010000 		.4byte	.LASF52
+ 388 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 389 001d 00000000 		.4byte	0
+ 390 0021 00000000 		.4byte	.Ldebug_line0
+ 391 0025 02       		.uleb128 0x2
+ 392 0026 01       		.byte	0x1
+ 393 0027 08       		.byte	0x8
+ 394 0028 A0000000 		.4byte	.LASF0
+ 395 002c 03       		.uleb128 0x3
+ 396 002d 72000000 		.4byte	.LASF2
+ 397 0031 02       		.byte	0x2
+ 398 0032 11       		.byte	0x11
+ 399 0033 25000000 		.4byte	0x25
+ 400 0037 02       		.uleb128 0x2
+ 401 0038 01       		.byte	0x1
+ 402 0039 06       		.byte	0x6
+ 403 003a FC020000 		.4byte	.LASF1
+ 404 003e 03       		.uleb128 0x3
+ 405 003f 98000000 		.4byte	.LASF3
+ 406 0043 02       		.byte	0x2
+ 407 0044 17       		.byte	0x17
+ 408 0045 49000000 		.4byte	0x49
+ 409 0049 02       		.uleb128 0x2
+ 410 004a 02       		.byte	0x2
+ 411 004b 07       		.byte	0x7
+ 412 004c C7000000 		.4byte	.LASF4
+ 413 0050 02       		.uleb128 0x2
+ 414 0051 02       		.byte	0x2
+ 415 0052 05       		.byte	0x5
+ 416 0053 77010000 		.4byte	.LASF5
+ 417 0057 02       		.uleb128 0x2
+ 418 0058 04       		.byte	0x4
+ 419 0059 07       		.byte	0x7
+ 420 005a B5000000 		.4byte	.LASF6
+ 421 005e 03       		.uleb128 0x3
+ 422 005f 96010000 		.4byte	.LASF7
+ 423 0063 02       		.byte	0x2
+ 424 0064 1D       		.byte	0x1d
+ 425 0065 57000000 		.4byte	0x57
+ 426 0069 02       		.uleb128 0x2
+ 427 006a 04       		.byte	0x4
+ 428 006b 05       		.byte	0x5
+ 429 006c F3020000 		.4byte	.LASF8
+ 430 0070 03       		.uleb128 0x3
+ 431 0071 D9010000 		.4byte	.LASF9
+ 432 0075 03       		.byte	0x3
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 11
+
+
+ 433 0076 7E       		.byte	0x7e
+ 434 0077 7B000000 		.4byte	0x7b
+ 435 007b 04       		.uleb128 0x4
+ 436 007c D9010000 		.4byte	.LASF9
+ 437 0080 02       		.uleb128 0x2
+ 438 0081 04       		.byte	0x4
+ 439 0082 07       		.byte	0x7
+ 440 0083 A6010000 		.4byte	.LASF10
+ 441 0087 05       		.uleb128 0x5
+ 442 0088 04       		.byte	0x4
+ 443 0089 05       		.byte	0x5
+ 444 008a 696E7400 		.ascii	"int\000"
+ 445 008e 02       		.uleb128 0x2
+ 446 008f 04       		.byte	0x4
+ 447 0090 07       		.byte	0x7
+ 448 0091 E1010000 		.4byte	.LASF11
+ 449 0095 02       		.uleb128 0x2
+ 450 0096 01       		.byte	0x1
+ 451 0097 08       		.byte	0x8
+ 452 0098 07020000 		.4byte	.LASF12
+ 453 009c 06       		.uleb128 0x6
+ 454 009d 04       		.byte	0x4
+ 455 009e 95000000 		.4byte	0x95
+ 456 00a2 06       		.uleb128 0x6
+ 457 00a3 04       		.byte	0x4
+ 458 00a4 70000000 		.4byte	0x70
+ 459 00a8 06       		.uleb128 0x6
+ 460 00a9 04       		.byte	0x4
+ 461 00aa AE000000 		.4byte	0xae
+ 462 00ae 07       		.uleb128 0x7
+ 463 00af 95000000 		.4byte	0x95
+ 464 00b3 06       		.uleb128 0x6
+ 465 00b4 04       		.byte	0x4
+ 466 00b5 B9000000 		.4byte	0xb9
+ 467 00b9 08       		.uleb128 0x8
+ 468 00ba 06       		.uleb128 0x6
+ 469 00bb 04       		.byte	0x4
+ 470 00bc 25000000 		.4byte	0x25
+ 471 00c0 09       		.uleb128 0x9
+ 472 00c1 0C020000 		.4byte	.LASF53
+ 473 00c5 14       		.byte	0x14
+ 474 00c6 04       		.byte	0x4
+ 475 00c7 0B       		.byte	0xb
+ 476 00c8 F1000000 		.4byte	0xf1
+ 477 00cc 0A       		.uleb128 0xa
+ 478 00cd 84000000 		.4byte	.LASF13
+ 479 00d1 04       		.byte	0x4
+ 480 00d2 0D       		.byte	0xd
+ 481 00d3 F1000000 		.4byte	0xf1
+ 482 00d7 00       		.byte	0
+ 483 00d8 0A       		.uleb128 0xa
+ 484 00d9 EF000000 		.4byte	.LASF14
+ 485 00dd 04       		.byte	0x4
+ 486 00de 0E       		.byte	0xe
+ 487 00df 2C000000 		.4byte	0x2c
+ 488 00e3 08       		.byte	0x8
+ 489 00e4 0A       		.uleb128 0xa
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 12
+
+
+ 490 00e5 7E000000 		.4byte	.LASF15
+ 491 00e9 04       		.byte	0x4
+ 492 00ea 0F       		.byte	0xf
+ 493 00eb 01010000 		.4byte	0x101
+ 494 00ef 0C       		.byte	0xc
+ 495 00f0 00       		.byte	0
+ 496 00f1 0B       		.uleb128 0xb
+ 497 00f2 5E000000 		.4byte	0x5e
+ 498 00f6 01010000 		.4byte	0x101
+ 499 00fa 0C       		.uleb128 0xc
+ 500 00fb 8E000000 		.4byte	0x8e
+ 501 00ff 01       		.byte	0x1
+ 502 0100 00       		.byte	0
+ 503 0101 0B       		.uleb128 0xb
+ 504 0102 A2000000 		.4byte	0xa2
+ 505 0106 11010000 		.4byte	0x111
+ 506 010a 0C       		.uleb128 0xc
+ 507 010b 8E000000 		.4byte	0x8e
+ 508 010f 01       		.byte	0x1
+ 509 0110 00       		.byte	0
+ 510 0111 03       		.uleb128 0x3
+ 511 0112 22000000 		.4byte	.LASF16
+ 512 0116 05       		.byte	0x5
+ 513 0117 3F       		.byte	0x3f
+ 514 0118 69000000 		.4byte	0x69
+ 515 011c 02       		.uleb128 0x2
+ 516 011d 08       		.byte	0x8
+ 517 011e 05       		.byte	0x5
+ 518 011f F9010000 		.4byte	.LASF17
+ 519 0123 02       		.uleb128 0x2
+ 520 0124 08       		.byte	0x8
+ 521 0125 07       		.byte	0x7
+ 522 0126 B3010000 		.4byte	.LASF18
+ 523 012a 03       		.uleb128 0x3
+ 524 012b 15020000 		.4byte	.LASF19
+ 525 012f 06       		.byte	0x6
+ 526 0130 2C       		.byte	0x2c
+ 527 0131 11010000 		.4byte	0x111
+ 528 0135 02       		.uleb128 0x2
+ 529 0136 04       		.byte	0x4
+ 530 0137 04       		.byte	0x4
+ 531 0138 92000000 		.4byte	.LASF20
+ 532 013c 02       		.uleb128 0x2
+ 533 013d 08       		.byte	0x8
+ 534 013e 04       		.byte	0x4
+ 535 013f 08030000 		.4byte	.LASF21
+ 536 0143 0D       		.uleb128 0xd
+ 537 0144 2F020000 		.4byte	.LASF30
+ 538 0148 01       		.byte	0x1
+ 539 0149 0F       		.byte	0xf
+ 540 014a 00000000 		.4byte	.LFB56
+ 541 014e 14000000 		.4byte	.LFE56-.LFB56
+ 542 0152 01       		.uleb128 0x1
+ 543 0153 9C       		.byte	0x9c
+ 544 0154 62010000 		.4byte	0x162
+ 545 0158 0E       		.uleb128 0xe
+ 546 0159 06000000 		.4byte	.LVL0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 13
+
+
+ 547 015d A0030000 		.4byte	0x3a0
+ 548 0161 00       		.byte	0
+ 549 0162 0F       		.uleb128 0xf
+ 550 0163 0F030000 		.4byte	.LASF24
+ 551 0167 01       		.byte	0x1
+ 552 0168 15       		.byte	0x15
+ 553 0169 25000000 		.4byte	0x25
+ 554 016d 00000000 		.4byte	.LFB57
+ 555 0171 1E000000 		.4byte	.LFE57-.LFB57
+ 556 0175 01       		.uleb128 0x1
+ 557 0176 9C       		.byte	0x9c
+ 558 0177 C7010000 		.4byte	0x1c7
+ 559 017b 10       		.uleb128 0x10
+ 560 017c 11000000 		.4byte	.LASF22
+ 561 0180 01       		.byte	0x1
+ 562 0181 17       		.byte	0x17
+ 563 0182 25000000 		.4byte	0x25
+ 564 0186 00000000 		.4byte	.LLST0
+ 565 018a 11       		.uleb128 0x11
+ 566 018b E9020000 		.4byte	.LASF23
+ 567 018f 01       		.byte	0x1
+ 568 0190 18       		.byte	0x18
+ 569 0191 C7010000 		.4byte	0x1c7
+ 570 0195 02       		.uleb128 0x2
+ 571 0196 91       		.byte	0x91
+ 572 0197 6C       		.sleb128 -20
+ 573 0198 12       		.uleb128 0x12
+ 574 0199 0C000000 		.4byte	.LVL2
+ 575 019d A8030000 		.4byte	0x3a8
+ 576 01a1 B6010000 		.4byte	0x1b6
+ 577 01a5 13       		.uleb128 0x13
+ 578 01a6 01       		.uleb128 0x1
+ 579 01a7 52       		.byte	0x52
+ 580 01a8 01       		.uleb128 0x1
+ 581 01a9 39       		.byte	0x39
+ 582 01aa 13       		.uleb128 0x13
+ 583 01ab 01       		.uleb128 0x1
+ 584 01ac 51       		.byte	0x51
+ 585 01ad 02       		.uleb128 0x2
+ 586 01ae 91       		.byte	0x91
+ 587 01af 6C       		.sleb128 -20
+ 588 01b0 13       		.uleb128 0x13
+ 589 01b1 01       		.uleb128 0x1
+ 590 01b2 50       		.byte	0x50
+ 591 01b3 01       		.uleb128 0x1
+ 592 01b4 30       		.byte	0x30
+ 593 01b5 00       		.byte	0
+ 594 01b6 14       		.uleb128 0x14
+ 595 01b7 12000000 		.4byte	.LVL3
+ 596 01bb C8030000 		.4byte	0x3c8
+ 597 01bf 13       		.uleb128 0x13
+ 598 01c0 01       		.uleb128 0x1
+ 599 01c1 50       		.byte	0x50
+ 600 01c2 02       		.uleb128 0x2
+ 601 01c3 91       		.byte	0x91
+ 602 01c4 6C       		.sleb128 -20
+ 603 01c5 00       		.byte	0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 14
+
+
+ 604 01c6 00       		.byte	0
+ 605 01c7 0B       		.uleb128 0xb
+ 606 01c8 95000000 		.4byte	0x95
+ 607 01cc D7010000 		.4byte	0x1d7
+ 608 01d0 0C       		.uleb128 0xc
+ 609 01d1 8E000000 		.4byte	0x8e
+ 610 01d5 09       		.byte	0x9
+ 611 01d6 00       		.byte	0
+ 612 01d7 0F       		.uleb128 0xf
+ 613 01d8 2C000000 		.4byte	.LASF25
+ 614 01dc 01       		.byte	0x1
+ 615 01dd 23       		.byte	0x23
+ 616 01de 25000000 		.4byte	0x25
+ 617 01e2 00000000 		.4byte	.LFB58
+ 618 01e6 3C000000 		.4byte	.LFE58-.LFB58
+ 619 01ea 01       		.uleb128 0x1
+ 620 01eb 9C       		.byte	0x9c
+ 621 01ec 59020000 		.4byte	0x259
+ 622 01f0 15       		.uleb128 0x15
+ 623 01f1 89010000 		.4byte	.LASF26
+ 624 01f5 01       		.byte	0x1
+ 625 01f6 23       		.byte	0x23
+ 626 01f7 9C000000 		.4byte	0x9c
+ 627 01fb 23000000 		.4byte	.LLST1
+ 628 01ff 15       		.uleb128 0x15
+ 629 0200 AE000000 		.4byte	.LASF27
+ 630 0204 01       		.byte	0x1
+ 631 0205 23       		.byte	0x23
+ 632 0206 59020000 		.4byte	0x259
+ 633 020a 44000000 		.4byte	.LLST2
+ 634 020e 15       		.uleb128 0x15
+ 635 020f CA010000 		.4byte	.LASF28
+ 636 0213 01       		.byte	0x1
+ 637 0214 23       		.byte	0x23
+ 638 0215 A8000000 		.4byte	0xa8
+ 639 0219 65000000 		.4byte	.LLST3
+ 640 021d 10       		.uleb128 0x10
+ 641 021e 11000000 		.4byte	.LASF22
+ 642 0222 01       		.byte	0x1
+ 643 0223 25       		.byte	0x25
+ 644 0224 25000000 		.4byte	0x25
+ 645 0228 86000000 		.4byte	.LLST4
+ 646 022c 12       		.uleb128 0x12
+ 647 022d 14000000 		.4byte	.LVL7
+ 648 0231 DE030000 		.4byte	0x3de
+ 649 0235 48020000 		.4byte	0x248
+ 650 0239 13       		.uleb128 0x13
+ 651 023a 01       		.uleb128 0x1
+ 652 023b 51       		.byte	0x51
+ 653 023c 03       		.uleb128 0x3
+ 654 023d F3       		.byte	0xf3
+ 655 023e 01       		.uleb128 0x1
+ 656 023f 52       		.byte	0x52
+ 657 0240 13       		.uleb128 0x13
+ 658 0241 01       		.uleb128 0x1
+ 659 0242 50       		.byte	0x50
+ 660 0243 03       		.uleb128 0x3
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 15
+
+
+ 661 0244 F3       		.byte	0xf3
+ 662 0245 01       		.uleb128 0x1
+ 663 0246 50       		.byte	0x50
+ 664 0247 00       		.byte	0
+ 665 0248 14       		.uleb128 0x14
+ 666 0249 26000000 		.4byte	.LVL9
+ 667 024d F9030000 		.4byte	0x3f9
+ 668 0251 13       		.uleb128 0x13
+ 669 0252 01       		.uleb128 0x1
+ 670 0253 50       		.byte	0x50
+ 671 0254 02       		.uleb128 0x2
+ 672 0255 74       		.byte	0x74
+ 673 0256 00       		.sleb128 0
+ 674 0257 00       		.byte	0
+ 675 0258 00       		.byte	0
+ 676 0259 07       		.uleb128 0x7
+ 677 025a 25000000 		.4byte	0x25
+ 678 025e 0F       		.uleb128 0xf
+ 679 025f 58000000 		.4byte	.LASF29
+ 680 0263 01       		.byte	0x1
+ 681 0264 34       		.byte	0x34
+ 682 0265 25000000 		.4byte	0x25
+ 683 0269 00000000 		.4byte	.LFB59
+ 684 026d 20000000 		.4byte	.LFE59-.LFB59
+ 685 0271 01       		.uleb128 0x1
+ 686 0272 9C       		.byte	0x9c
+ 687 0273 9F020000 		.4byte	0x29f
+ 688 0277 15       		.uleb128 0x15
+ 689 0278 AE000000 		.4byte	.LASF27
+ 690 027c 01       		.byte	0x1
+ 691 027d 34       		.byte	0x34
+ 692 027e 25000000 		.4byte	0x25
+ 693 0282 B4000000 		.4byte	.LLST5
+ 694 0286 10       		.uleb128 0x10
+ 695 0287 11000000 		.4byte	.LASF22
+ 696 028b 01       		.byte	0x1
+ 697 028c 37       		.byte	0x37
+ 698 028d 25000000 		.4byte	0x25
+ 699 0291 EE000000 		.4byte	.LLST6
+ 700 0295 0E       		.uleb128 0xe
+ 701 0296 12000000 		.4byte	.LVL13
+ 702 029a 0F040000 		.4byte	0x40f
+ 703 029e 00       		.byte	0
+ 704 029f 16       		.uleb128 0x16
+ 705 02a0 68010000 		.4byte	.LASF54
+ 706 02a4 01       		.byte	0x1
+ 707 02a5 3E       		.byte	0x3e
+ 708 02a6 00000000 		.4byte	.LFB60
+ 709 02aa 02000000 		.4byte	.LFE60-.LFB60
+ 710 02ae 01       		.uleb128 0x1
+ 711 02af 9C       		.byte	0x9c
+ 712 02b0 0D       		.uleb128 0xd
+ 713 02b1 1E030000 		.4byte	.LASF31
+ 714 02b5 01       		.byte	0x1
+ 715 02b6 50       		.byte	0x50
+ 716 02b7 00000000 		.4byte	.LFB61
+ 717 02bb 20000000 		.4byte	.LFE61-.LFB61
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 16
+
+
+ 718 02bf 01       		.uleb128 0x1
+ 719 02c0 9C       		.byte	0x9c
+ 720 02c1 04030000 		.4byte	0x304
+ 721 02c5 15       		.uleb128 0x15
+ 722 02c6 00000000 		.4byte	.LASF32
+ 723 02ca 01       		.byte	0x1
+ 724 02cb 50       		.byte	0x50
+ 725 02cc BA000000 		.4byte	0xba
+ 726 02d0 24010000 		.4byte	.LLST7
+ 727 02d4 15       		.uleb128 0x15
+ 728 02d5 1A000000 		.4byte	.LASF33
+ 729 02d9 01       		.byte	0x1
+ 730 02da 50       		.byte	0x50
+ 731 02db 3E000000 		.4byte	0x3e
+ 732 02df 50010000 		.4byte	.LLST8
+ 733 02e3 15       		.uleb128 0x15
+ 734 02e4 9D010000 		.4byte	.LASF34
+ 735 02e8 01       		.byte	0x1
+ 736 02e9 50       		.byte	0x50
+ 737 02ea 25000000 		.4byte	0x25
+ 738 02ee 71010000 		.4byte	.LLST9
+ 739 02f2 17       		.uleb128 0x17
+ 740 02f3 1A000000 		.4byte	.LVL21
+ 741 02f7 25040000 		.4byte	0x425
+ 742 02fb 13       		.uleb128 0x13
+ 743 02fc 01       		.uleb128 0x1
+ 744 02fd 51       		.byte	0x51
+ 745 02fe 03       		.uleb128 0x3
+ 746 02ff F3       		.byte	0xf3
+ 747 0300 01       		.uleb128 0x1
+ 748 0301 50       		.byte	0x50
+ 749 0302 00       		.byte	0
+ 750 0303 00       		.byte	0
+ 751 0304 0F       		.uleb128 0xf
+ 752 0305 39000000 		.4byte	.LASF35
+ 753 0309 01       		.byte	0x1
+ 754 030a 5C       		.byte	0x5c
+ 755 030b 25000000 		.4byte	0x25
+ 756 030f 00000000 		.4byte	.LFB62
+ 757 0313 0C000000 		.4byte	.LFE62-.LFB62
+ 758 0317 01       		.uleb128 0x1
+ 759 0318 9C       		.byte	0x9c
+ 760 0319 3C030000 		.4byte	0x33c
+ 761 031d 15       		.uleb128 0x15
+ 762 031e D0020000 		.4byte	.LASF36
+ 763 0322 01       		.byte	0x1
+ 764 0323 5C       		.byte	0x5c
+ 765 0324 25000000 		.4byte	0x25
+ 766 0328 92010000 		.4byte	.LLST10
+ 767 032c 10       		.uleb128 0x10
+ 768 032d 78000000 		.4byte	.LASF37
+ 769 0331 01       		.byte	0x1
+ 770 0332 5E       		.byte	0x5e
+ 771 0333 25000000 		.4byte	0x25
+ 772 0337 B3010000 		.4byte	.LLST11
+ 773 033b 00       		.byte	0
+ 774 033c 0D       		.uleb128 0xd
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 17
+
+
+ 775 033d 1D020000 		.4byte	.LASF38
+ 776 0341 01       		.byte	0x1
+ 777 0342 6B       		.byte	0x6b
+ 778 0343 00000000 		.4byte	.LFB63
+ 779 0347 48000000 		.4byte	.LFE63-.LFB63
+ 780 034b 01       		.uleb128 0x1
+ 781 034c 9C       		.byte	0x9c
+ 782 034d 7E030000 		.4byte	0x37e
+ 783 0351 11       		.uleb128 0x11
+ 784 0352 DA000000 		.4byte	.LASF39
+ 785 0356 01       		.byte	0x1
+ 786 0357 6D       		.byte	0x6d
+ 787 0358 25000000 		.4byte	0x25
+ 788 035c 05       		.uleb128 0x5
+ 789 035d 03       		.byte	0x3
+ 790 035e 00000000 		.4byte	u8v_Debounce_Counter.7670
+ 791 0362 0E       		.uleb128 0xe
+ 792 0363 06000000 		.4byte	.LVL25
+ 793 0367 45040000 		.4byte	0x445
+ 794 036b 0E       		.uleb128 0xe
+ 795 036c 24000000 		.4byte	.LVL26
+ 796 0370 50040000 		.4byte	0x450
+ 797 0374 0E       		.uleb128 0xe
+ 798 0375 28000000 		.4byte	.LVL27
+ 799 0379 43010000 		.4byte	0x143
+ 800 037d 00       		.byte	0
+ 801 037e 18       		.uleb128 0x18
+ 802 037f 07010000 		.4byte	.LASF40
+ 803 0383 07       		.byte	0x7
+ 804 0384 1606     		.2byte	0x616
+ 805 0386 8A030000 		.4byte	0x38a
+ 806 038a 19       		.uleb128 0x19
+ 807 038b 2A010000 		.4byte	0x12a
+ 808 038f 1A       		.uleb128 0x1a
+ 809 0390 90010000 		.4byte	.LASF41
+ 810 0394 01       		.byte	0x1
+ 811 0395 0B       		.byte	0xb
+ 812 0396 C0000000 		.4byte	0xc0
+ 813 039a 05       		.uleb128 0x5
+ 814 039b 03       		.byte	0x3
+ 815 039c 00000000 		.4byte	SdInf
+ 816 03a0 1B       		.uleb128 0x1b
+ 817 03a1 81010000 		.4byte	.LASF48
+ 818 03a5 08       		.byte	0x8
+ 819 03a6 DA01     		.2byte	0x1da
+ 820 03a8 1C       		.uleb128 0x1c
+ 821 03a9 D8020000 		.4byte	.LASF42
+ 822 03ad 08       		.byte	0x8
+ 823 03ae 7001     		.2byte	0x170
+ 824 03b0 87000000 		.4byte	0x87
+ 825 03b4 C8030000 		.4byte	0x3c8
+ 826 03b8 1D       		.uleb128 0x1d
+ 827 03b9 87000000 		.4byte	0x87
+ 828 03bd 1D       		.uleb128 0x1d
+ 829 03be 9C000000 		.4byte	0x9c
+ 830 03c2 1D       		.uleb128 0x1d
+ 831 03c3 87000000 		.4byte	0x87
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 18
+
+
+ 832 03c7 00       		.byte	0
+ 833 03c8 1C       		.uleb128 0x1c
+ 834 03c9 4C000000 		.4byte	.LASF43
+ 835 03cd 08       		.byte	0x8
+ 836 03ce E601     		.2byte	0x1e6
+ 837 03d0 87000000 		.4byte	0x87
+ 838 03d4 DE030000 		.4byte	0x3de
+ 839 03d8 1D       		.uleb128 0x1d
+ 840 03d9 A8000000 		.4byte	0xa8
+ 841 03dd 00       		.byte	0
+ 842 03de 1C       		.uleb128 0x1c
+ 843 03df 56010000 		.4byte	.LASF44
+ 844 03e3 08       		.byte	0x8
+ 845 03e4 3A01     		.2byte	0x13a
+ 846 03e6 A2000000 		.4byte	0xa2
+ 847 03ea F9030000 		.4byte	0x3f9
+ 848 03ee 1D       		.uleb128 0x1d
+ 849 03ef A8000000 		.4byte	0xa8
+ 850 03f3 1D       		.uleb128 0x1d
+ 851 03f4 A8000000 		.4byte	0xa8
+ 852 03f8 00       		.byte	0
+ 853 03f9 1C       		.uleb128 0x1c
+ 854 03fa EA010000 		.4byte	.LASF45
+ 855 03fe 08       		.byte	0x8
+ 856 03ff 5F01     		.2byte	0x15f
+ 857 0401 57000000 		.4byte	0x57
+ 858 0405 0F040000 		.4byte	0x40f
+ 859 0409 1D       		.uleb128 0x1d
+ 860 040a A2000000 		.4byte	0xa2
+ 861 040e 00       		.byte	0
+ 862 040f 1C       		.uleb128 0x1c
+ 863 0410 07000000 		.4byte	.LASF46
+ 864 0414 08       		.byte	0x8
+ 865 0415 3B01     		.2byte	0x13b
+ 866 0417 87000000 		.4byte	0x87
+ 867 041b 25040000 		.4byte	0x425
+ 868 041f 1D       		.uleb128 0x1d
+ 869 0420 A2000000 		.4byte	0xa2
+ 870 0424 00       		.byte	0
+ 871 0425 1C       		.uleb128 0x1c
+ 872 0426 5F010000 		.4byte	.LASF47
+ 873 042a 08       		.byte	0x8
+ 874 042b 4401     		.2byte	0x144
+ 875 042d 57000000 		.4byte	0x57
+ 876 0431 45040000 		.4byte	0x445
+ 877 0435 1D       		.uleb128 0x1d
+ 878 0436 A2000000 		.4byte	0xa2
+ 879 043a 1D       		.uleb128 0x1d
+ 880 043b B3000000 		.4byte	0xb3
+ 881 043f 1D       		.uleb128 0x1d
+ 882 0440 57000000 		.4byte	0x57
+ 883 0444 00       		.byte	0
+ 884 0445 1E       		.uleb128 0x1e
+ 885 0446 F4000000 		.4byte	.LASF55
+ 886 044a 09       		.byte	0x9
+ 887 044b 2B       		.byte	0x2b
+ 888 044c 25000000 		.4byte	0x25
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 19
+
+
+ 889 0450 1B       		.uleb128 0x1b
+ 890 0451 CF010000 		.4byte	.LASF49
+ 891 0455 08       		.byte	0x8
+ 892 0456 DC01     		.2byte	0x1dc
+ 893 0458 00       		.byte	0
+ 894              		.section	.debug_abbrev,"",%progbits
+ 895              	.Ldebug_abbrev0:
+ 896 0000 01       		.uleb128 0x1
+ 897 0001 11       		.uleb128 0x11
+ 898 0002 01       		.byte	0x1
+ 899 0003 25       		.uleb128 0x25
+ 900 0004 0E       		.uleb128 0xe
+ 901 0005 13       		.uleb128 0x13
+ 902 0006 0B       		.uleb128 0xb
+ 903 0007 03       		.uleb128 0x3
+ 904 0008 0E       		.uleb128 0xe
+ 905 0009 1B       		.uleb128 0x1b
+ 906 000a 0E       		.uleb128 0xe
+ 907 000b 55       		.uleb128 0x55
+ 908 000c 17       		.uleb128 0x17
+ 909 000d 11       		.uleb128 0x11
+ 910 000e 01       		.uleb128 0x1
+ 911 000f 10       		.uleb128 0x10
+ 912 0010 17       		.uleb128 0x17
+ 913 0011 00       		.byte	0
+ 914 0012 00       		.byte	0
+ 915 0013 02       		.uleb128 0x2
+ 916 0014 24       		.uleb128 0x24
+ 917 0015 00       		.byte	0
+ 918 0016 0B       		.uleb128 0xb
+ 919 0017 0B       		.uleb128 0xb
+ 920 0018 3E       		.uleb128 0x3e
+ 921 0019 0B       		.uleb128 0xb
+ 922 001a 03       		.uleb128 0x3
+ 923 001b 0E       		.uleb128 0xe
+ 924 001c 00       		.byte	0
+ 925 001d 00       		.byte	0
+ 926 001e 03       		.uleb128 0x3
+ 927 001f 16       		.uleb128 0x16
+ 928 0020 00       		.byte	0
+ 929 0021 03       		.uleb128 0x3
+ 930 0022 0E       		.uleb128 0xe
+ 931 0023 3A       		.uleb128 0x3a
+ 932 0024 0B       		.uleb128 0xb
+ 933 0025 3B       		.uleb128 0x3b
+ 934 0026 0B       		.uleb128 0xb
+ 935 0027 49       		.uleb128 0x49
+ 936 0028 13       		.uleb128 0x13
+ 937 0029 00       		.byte	0
+ 938 002a 00       		.byte	0
+ 939 002b 04       		.uleb128 0x4
+ 940 002c 13       		.uleb128 0x13
+ 941 002d 00       		.byte	0
+ 942 002e 03       		.uleb128 0x3
+ 943 002f 0E       		.uleb128 0xe
+ 944 0030 3C       		.uleb128 0x3c
+ 945 0031 19       		.uleb128 0x19
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 20
+
+
+ 946 0032 00       		.byte	0
+ 947 0033 00       		.byte	0
+ 948 0034 05       		.uleb128 0x5
+ 949 0035 24       		.uleb128 0x24
+ 950 0036 00       		.byte	0
+ 951 0037 0B       		.uleb128 0xb
+ 952 0038 0B       		.uleb128 0xb
+ 953 0039 3E       		.uleb128 0x3e
+ 954 003a 0B       		.uleb128 0xb
+ 955 003b 03       		.uleb128 0x3
+ 956 003c 08       		.uleb128 0x8
+ 957 003d 00       		.byte	0
+ 958 003e 00       		.byte	0
+ 959 003f 06       		.uleb128 0x6
+ 960 0040 0F       		.uleb128 0xf
+ 961 0041 00       		.byte	0
+ 962 0042 0B       		.uleb128 0xb
+ 963 0043 0B       		.uleb128 0xb
+ 964 0044 49       		.uleb128 0x49
+ 965 0045 13       		.uleb128 0x13
+ 966 0046 00       		.byte	0
+ 967 0047 00       		.byte	0
+ 968 0048 07       		.uleb128 0x7
+ 969 0049 26       		.uleb128 0x26
+ 970 004a 00       		.byte	0
+ 971 004b 49       		.uleb128 0x49
+ 972 004c 13       		.uleb128 0x13
+ 973 004d 00       		.byte	0
+ 974 004e 00       		.byte	0
+ 975 004f 08       		.uleb128 0x8
+ 976 0050 26       		.uleb128 0x26
+ 977 0051 00       		.byte	0
+ 978 0052 00       		.byte	0
+ 979 0053 00       		.byte	0
+ 980 0054 09       		.uleb128 0x9
+ 981 0055 13       		.uleb128 0x13
+ 982 0056 01       		.byte	0x1
+ 983 0057 03       		.uleb128 0x3
+ 984 0058 0E       		.uleb128 0xe
+ 985 0059 0B       		.uleb128 0xb
+ 986 005a 0B       		.uleb128 0xb
+ 987 005b 3A       		.uleb128 0x3a
+ 988 005c 0B       		.uleb128 0xb
+ 989 005d 3B       		.uleb128 0x3b
+ 990 005e 0B       		.uleb128 0xb
+ 991 005f 01       		.uleb128 0x1
+ 992 0060 13       		.uleb128 0x13
+ 993 0061 00       		.byte	0
+ 994 0062 00       		.byte	0
+ 995 0063 0A       		.uleb128 0xa
+ 996 0064 0D       		.uleb128 0xd
+ 997 0065 00       		.byte	0
+ 998 0066 03       		.uleb128 0x3
+ 999 0067 0E       		.uleb128 0xe
+ 1000 0068 3A       		.uleb128 0x3a
+ 1001 0069 0B       		.uleb128 0xb
+ 1002 006a 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 21
+
+
+ 1003 006b 0B       		.uleb128 0xb
+ 1004 006c 49       		.uleb128 0x49
+ 1005 006d 13       		.uleb128 0x13
+ 1006 006e 38       		.uleb128 0x38
+ 1007 006f 0B       		.uleb128 0xb
+ 1008 0070 00       		.byte	0
+ 1009 0071 00       		.byte	0
+ 1010 0072 0B       		.uleb128 0xb
+ 1011 0073 01       		.uleb128 0x1
+ 1012 0074 01       		.byte	0x1
+ 1013 0075 49       		.uleb128 0x49
+ 1014 0076 13       		.uleb128 0x13
+ 1015 0077 01       		.uleb128 0x1
+ 1016 0078 13       		.uleb128 0x13
+ 1017 0079 00       		.byte	0
+ 1018 007a 00       		.byte	0
+ 1019 007b 0C       		.uleb128 0xc
+ 1020 007c 21       		.uleb128 0x21
+ 1021 007d 00       		.byte	0
+ 1022 007e 49       		.uleb128 0x49
+ 1023 007f 13       		.uleb128 0x13
+ 1024 0080 2F       		.uleb128 0x2f
+ 1025 0081 0B       		.uleb128 0xb
+ 1026 0082 00       		.byte	0
+ 1027 0083 00       		.byte	0
+ 1028 0084 0D       		.uleb128 0xd
+ 1029 0085 2E       		.uleb128 0x2e
+ 1030 0086 01       		.byte	0x1
+ 1031 0087 3F       		.uleb128 0x3f
+ 1032 0088 19       		.uleb128 0x19
+ 1033 0089 03       		.uleb128 0x3
+ 1034 008a 0E       		.uleb128 0xe
+ 1035 008b 3A       		.uleb128 0x3a
+ 1036 008c 0B       		.uleb128 0xb
+ 1037 008d 3B       		.uleb128 0x3b
+ 1038 008e 0B       		.uleb128 0xb
+ 1039 008f 27       		.uleb128 0x27
+ 1040 0090 19       		.uleb128 0x19
+ 1041 0091 11       		.uleb128 0x11
+ 1042 0092 01       		.uleb128 0x1
+ 1043 0093 12       		.uleb128 0x12
+ 1044 0094 06       		.uleb128 0x6
+ 1045 0095 40       		.uleb128 0x40
+ 1046 0096 18       		.uleb128 0x18
+ 1047 0097 9742     		.uleb128 0x2117
+ 1048 0099 19       		.uleb128 0x19
+ 1049 009a 01       		.uleb128 0x1
+ 1050 009b 13       		.uleb128 0x13
+ 1051 009c 00       		.byte	0
+ 1052 009d 00       		.byte	0
+ 1053 009e 0E       		.uleb128 0xe
+ 1054 009f 898201   		.uleb128 0x4109
+ 1055 00a2 00       		.byte	0
+ 1056 00a3 11       		.uleb128 0x11
+ 1057 00a4 01       		.uleb128 0x1
+ 1058 00a5 31       		.uleb128 0x31
+ 1059 00a6 13       		.uleb128 0x13
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 22
+
+
+ 1060 00a7 00       		.byte	0
+ 1061 00a8 00       		.byte	0
+ 1062 00a9 0F       		.uleb128 0xf
+ 1063 00aa 2E       		.uleb128 0x2e
+ 1064 00ab 01       		.byte	0x1
+ 1065 00ac 3F       		.uleb128 0x3f
+ 1066 00ad 19       		.uleb128 0x19
+ 1067 00ae 03       		.uleb128 0x3
+ 1068 00af 0E       		.uleb128 0xe
+ 1069 00b0 3A       		.uleb128 0x3a
+ 1070 00b1 0B       		.uleb128 0xb
+ 1071 00b2 3B       		.uleb128 0x3b
+ 1072 00b3 0B       		.uleb128 0xb
+ 1073 00b4 27       		.uleb128 0x27
+ 1074 00b5 19       		.uleb128 0x19
+ 1075 00b6 49       		.uleb128 0x49
+ 1076 00b7 13       		.uleb128 0x13
+ 1077 00b8 11       		.uleb128 0x11
+ 1078 00b9 01       		.uleb128 0x1
+ 1079 00ba 12       		.uleb128 0x12
+ 1080 00bb 06       		.uleb128 0x6
+ 1081 00bc 40       		.uleb128 0x40
+ 1082 00bd 18       		.uleb128 0x18
+ 1083 00be 9742     		.uleb128 0x2117
+ 1084 00c0 19       		.uleb128 0x19
+ 1085 00c1 01       		.uleb128 0x1
+ 1086 00c2 13       		.uleb128 0x13
+ 1087 00c3 00       		.byte	0
+ 1088 00c4 00       		.byte	0
+ 1089 00c5 10       		.uleb128 0x10
+ 1090 00c6 34       		.uleb128 0x34
+ 1091 00c7 00       		.byte	0
+ 1092 00c8 03       		.uleb128 0x3
+ 1093 00c9 0E       		.uleb128 0xe
+ 1094 00ca 3A       		.uleb128 0x3a
+ 1095 00cb 0B       		.uleb128 0xb
+ 1096 00cc 3B       		.uleb128 0x3b
+ 1097 00cd 0B       		.uleb128 0xb
+ 1098 00ce 49       		.uleb128 0x49
+ 1099 00cf 13       		.uleb128 0x13
+ 1100 00d0 02       		.uleb128 0x2
+ 1101 00d1 17       		.uleb128 0x17
+ 1102 00d2 00       		.byte	0
+ 1103 00d3 00       		.byte	0
+ 1104 00d4 11       		.uleb128 0x11
+ 1105 00d5 34       		.uleb128 0x34
+ 1106 00d6 00       		.byte	0
+ 1107 00d7 03       		.uleb128 0x3
+ 1108 00d8 0E       		.uleb128 0xe
+ 1109 00d9 3A       		.uleb128 0x3a
+ 1110 00da 0B       		.uleb128 0xb
+ 1111 00db 3B       		.uleb128 0x3b
+ 1112 00dc 0B       		.uleb128 0xb
+ 1113 00dd 49       		.uleb128 0x49
+ 1114 00de 13       		.uleb128 0x13
+ 1115 00df 02       		.uleb128 0x2
+ 1116 00e0 18       		.uleb128 0x18
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 23
+
+
+ 1117 00e1 00       		.byte	0
+ 1118 00e2 00       		.byte	0
+ 1119 00e3 12       		.uleb128 0x12
+ 1120 00e4 898201   		.uleb128 0x4109
+ 1121 00e7 01       		.byte	0x1
+ 1122 00e8 11       		.uleb128 0x11
+ 1123 00e9 01       		.uleb128 0x1
+ 1124 00ea 31       		.uleb128 0x31
+ 1125 00eb 13       		.uleb128 0x13
+ 1126 00ec 01       		.uleb128 0x1
+ 1127 00ed 13       		.uleb128 0x13
+ 1128 00ee 00       		.byte	0
+ 1129 00ef 00       		.byte	0
+ 1130 00f0 13       		.uleb128 0x13
+ 1131 00f1 8A8201   		.uleb128 0x410a
+ 1132 00f4 00       		.byte	0
+ 1133 00f5 02       		.uleb128 0x2
+ 1134 00f6 18       		.uleb128 0x18
+ 1135 00f7 9142     		.uleb128 0x2111
+ 1136 00f9 18       		.uleb128 0x18
+ 1137 00fa 00       		.byte	0
+ 1138 00fb 00       		.byte	0
+ 1139 00fc 14       		.uleb128 0x14
+ 1140 00fd 898201   		.uleb128 0x4109
+ 1141 0100 01       		.byte	0x1
+ 1142 0101 11       		.uleb128 0x11
+ 1143 0102 01       		.uleb128 0x1
+ 1144 0103 31       		.uleb128 0x31
+ 1145 0104 13       		.uleb128 0x13
+ 1146 0105 00       		.byte	0
+ 1147 0106 00       		.byte	0
+ 1148 0107 15       		.uleb128 0x15
+ 1149 0108 05       		.uleb128 0x5
+ 1150 0109 00       		.byte	0
+ 1151 010a 03       		.uleb128 0x3
+ 1152 010b 0E       		.uleb128 0xe
+ 1153 010c 3A       		.uleb128 0x3a
+ 1154 010d 0B       		.uleb128 0xb
+ 1155 010e 3B       		.uleb128 0x3b
+ 1156 010f 0B       		.uleb128 0xb
+ 1157 0110 49       		.uleb128 0x49
+ 1158 0111 13       		.uleb128 0x13
+ 1159 0112 02       		.uleb128 0x2
+ 1160 0113 17       		.uleb128 0x17
+ 1161 0114 00       		.byte	0
+ 1162 0115 00       		.byte	0
+ 1163 0116 16       		.uleb128 0x16
+ 1164 0117 2E       		.uleb128 0x2e
+ 1165 0118 00       		.byte	0
+ 1166 0119 3F       		.uleb128 0x3f
+ 1167 011a 19       		.uleb128 0x19
+ 1168 011b 03       		.uleb128 0x3
+ 1169 011c 0E       		.uleb128 0xe
+ 1170 011d 3A       		.uleb128 0x3a
+ 1171 011e 0B       		.uleb128 0xb
+ 1172 011f 3B       		.uleb128 0x3b
+ 1173 0120 0B       		.uleb128 0xb
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 24
+
+
+ 1174 0121 11       		.uleb128 0x11
+ 1175 0122 01       		.uleb128 0x1
+ 1176 0123 12       		.uleb128 0x12
+ 1177 0124 06       		.uleb128 0x6
+ 1178 0125 40       		.uleb128 0x40
+ 1179 0126 18       		.uleb128 0x18
+ 1180 0127 9742     		.uleb128 0x2117
+ 1181 0129 19       		.uleb128 0x19
+ 1182 012a 00       		.byte	0
+ 1183 012b 00       		.byte	0
+ 1184 012c 17       		.uleb128 0x17
+ 1185 012d 898201   		.uleb128 0x4109
+ 1186 0130 01       		.byte	0x1
+ 1187 0131 11       		.uleb128 0x11
+ 1188 0132 01       		.uleb128 0x1
+ 1189 0133 9542     		.uleb128 0x2115
+ 1190 0135 19       		.uleb128 0x19
+ 1191 0136 31       		.uleb128 0x31
+ 1192 0137 13       		.uleb128 0x13
+ 1193 0138 00       		.byte	0
+ 1194 0139 00       		.byte	0
+ 1195 013a 18       		.uleb128 0x18
+ 1196 013b 34       		.uleb128 0x34
+ 1197 013c 00       		.byte	0
+ 1198 013d 03       		.uleb128 0x3
+ 1199 013e 0E       		.uleb128 0xe
+ 1200 013f 3A       		.uleb128 0x3a
+ 1201 0140 0B       		.uleb128 0xb
+ 1202 0141 3B       		.uleb128 0x3b
+ 1203 0142 05       		.uleb128 0x5
+ 1204 0143 49       		.uleb128 0x49
+ 1205 0144 13       		.uleb128 0x13
+ 1206 0145 3F       		.uleb128 0x3f
+ 1207 0146 19       		.uleb128 0x19
+ 1208 0147 3C       		.uleb128 0x3c
+ 1209 0148 19       		.uleb128 0x19
+ 1210 0149 00       		.byte	0
+ 1211 014a 00       		.byte	0
+ 1212 014b 19       		.uleb128 0x19
+ 1213 014c 35       		.uleb128 0x35
+ 1214 014d 00       		.byte	0
+ 1215 014e 49       		.uleb128 0x49
+ 1216 014f 13       		.uleb128 0x13
+ 1217 0150 00       		.byte	0
+ 1218 0151 00       		.byte	0
+ 1219 0152 1A       		.uleb128 0x1a
+ 1220 0153 34       		.uleb128 0x34
+ 1221 0154 00       		.byte	0
+ 1222 0155 03       		.uleb128 0x3
+ 1223 0156 0E       		.uleb128 0xe
+ 1224 0157 3A       		.uleb128 0x3a
+ 1225 0158 0B       		.uleb128 0xb
+ 1226 0159 3B       		.uleb128 0x3b
+ 1227 015a 0B       		.uleb128 0xb
+ 1228 015b 49       		.uleb128 0x49
+ 1229 015c 13       		.uleb128 0x13
+ 1230 015d 3F       		.uleb128 0x3f
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 25
+
+
+ 1231 015e 19       		.uleb128 0x19
+ 1232 015f 02       		.uleb128 0x2
+ 1233 0160 18       		.uleb128 0x18
+ 1234 0161 00       		.byte	0
+ 1235 0162 00       		.byte	0
+ 1236 0163 1B       		.uleb128 0x1b
+ 1237 0164 2E       		.uleb128 0x2e
+ 1238 0165 00       		.byte	0
+ 1239 0166 3F       		.uleb128 0x3f
+ 1240 0167 19       		.uleb128 0x19
+ 1241 0168 03       		.uleb128 0x3
+ 1242 0169 0E       		.uleb128 0xe
+ 1243 016a 3A       		.uleb128 0x3a
+ 1244 016b 0B       		.uleb128 0xb
+ 1245 016c 3B       		.uleb128 0x3b
+ 1246 016d 05       		.uleb128 0x5
+ 1247 016e 27       		.uleb128 0x27
+ 1248 016f 19       		.uleb128 0x19
+ 1249 0170 3C       		.uleb128 0x3c
+ 1250 0171 19       		.uleb128 0x19
+ 1251 0172 00       		.byte	0
+ 1252 0173 00       		.byte	0
+ 1253 0174 1C       		.uleb128 0x1c
+ 1254 0175 2E       		.uleb128 0x2e
+ 1255 0176 01       		.byte	0x1
+ 1256 0177 3F       		.uleb128 0x3f
+ 1257 0178 19       		.uleb128 0x19
+ 1258 0179 03       		.uleb128 0x3
+ 1259 017a 0E       		.uleb128 0xe
+ 1260 017b 3A       		.uleb128 0x3a
+ 1261 017c 0B       		.uleb128 0xb
+ 1262 017d 3B       		.uleb128 0x3b
+ 1263 017e 05       		.uleb128 0x5
+ 1264 017f 27       		.uleb128 0x27
+ 1265 0180 19       		.uleb128 0x19
+ 1266 0181 49       		.uleb128 0x49
+ 1267 0182 13       		.uleb128 0x13
+ 1268 0183 3C       		.uleb128 0x3c
+ 1269 0184 19       		.uleb128 0x19
+ 1270 0185 01       		.uleb128 0x1
+ 1271 0186 13       		.uleb128 0x13
+ 1272 0187 00       		.byte	0
+ 1273 0188 00       		.byte	0
+ 1274 0189 1D       		.uleb128 0x1d
+ 1275 018a 05       		.uleb128 0x5
+ 1276 018b 00       		.byte	0
+ 1277 018c 49       		.uleb128 0x49
+ 1278 018d 13       		.uleb128 0x13
+ 1279 018e 00       		.byte	0
+ 1280 018f 00       		.byte	0
+ 1281 0190 1E       		.uleb128 0x1e
+ 1282 0191 2E       		.uleb128 0x2e
+ 1283 0192 00       		.byte	0
+ 1284 0193 3F       		.uleb128 0x3f
+ 1285 0194 19       		.uleb128 0x19
+ 1286 0195 03       		.uleb128 0x3
+ 1287 0196 0E       		.uleb128 0xe
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 26
+
+
+ 1288 0197 3A       		.uleb128 0x3a
+ 1289 0198 0B       		.uleb128 0xb
+ 1290 0199 3B       		.uleb128 0x3b
+ 1291 019a 0B       		.uleb128 0xb
+ 1292 019b 27       		.uleb128 0x27
+ 1293 019c 19       		.uleb128 0x19
+ 1294 019d 49       		.uleb128 0x49
+ 1295 019e 13       		.uleb128 0x13
+ 1296 019f 3C       		.uleb128 0x3c
+ 1297 01a0 19       		.uleb128 0x19
+ 1298 01a1 00       		.byte	0
+ 1299 01a2 00       		.byte	0
+ 1300 01a3 00       		.byte	0
+ 1301              		.section	.debug_loc,"",%progbits
+ 1302              	.Ldebug_loc0:
+ 1303              	.LLST0:
+ 1304 0000 00000000 		.4byte	.LVL1
+ 1305 0004 12000000 		.4byte	.LVL3
+ 1306 0008 0200     		.2byte	0x2
+ 1307 000a 30       		.byte	0x30
+ 1308 000b 9F       		.byte	0x9f
+ 1309 000c 12000000 		.4byte	.LVL3
+ 1310 0010 18000000 		.4byte	.LVL4
+ 1311 0014 0500     		.2byte	0x5
+ 1312 0016 70       		.byte	0x70
+ 1313 0017 00       		.sleb128 0
+ 1314 0018 30       		.byte	0x30
+ 1315 0019 2E       		.byte	0x2e
+ 1316 001a 9F       		.byte	0x9f
+ 1317 001b 00000000 		.4byte	0
+ 1318 001f 00000000 		.4byte	0
+ 1319              	.LLST1:
+ 1320 0023 00000000 		.4byte	.LVL5
+ 1321 0027 13000000 		.4byte	.LVL7-1
+ 1322 002b 0100     		.2byte	0x1
+ 1323 002d 50       		.byte	0x50
+ 1324 002e 13000000 		.4byte	.LVL7-1
+ 1325 0032 3C000000 		.4byte	.LFE58
+ 1326 0036 0400     		.2byte	0x4
+ 1327 0038 F3       		.byte	0xf3
+ 1328 0039 01       		.uleb128 0x1
+ 1329 003a 50       		.byte	0x50
+ 1330 003b 9F       		.byte	0x9f
+ 1331 003c 00000000 		.4byte	0
+ 1332 0040 00000000 		.4byte	0
+ 1333              	.LLST2:
+ 1334 0044 00000000 		.4byte	.LVL5
+ 1335 0048 10000000 		.4byte	.LVL6
+ 1336 004c 0100     		.2byte	0x1
+ 1337 004e 51       		.byte	0x51
+ 1338 004f 10000000 		.4byte	.LVL6
+ 1339 0053 3C000000 		.4byte	.LFE58
+ 1340 0057 0400     		.2byte	0x4
+ 1341 0059 F3       		.byte	0xf3
+ 1342 005a 01       		.uleb128 0x1
+ 1343 005b 51       		.byte	0x51
+ 1344 005c 9F       		.byte	0x9f
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 27
+
+
+ 1345 005d 00000000 		.4byte	0
+ 1346 0061 00000000 		.4byte	0
+ 1347              	.LLST3:
+ 1348 0065 00000000 		.4byte	.LVL5
+ 1349 0069 13000000 		.4byte	.LVL7-1
+ 1350 006d 0100     		.2byte	0x1
+ 1351 006f 52       		.byte	0x52
+ 1352 0070 13000000 		.4byte	.LVL7-1
+ 1353 0074 3C000000 		.4byte	.LFE58
+ 1354 0078 0400     		.2byte	0x4
+ 1355 007a F3       		.byte	0xf3
+ 1356 007b 01       		.uleb128 0x1
+ 1357 007c 52       		.byte	0x52
+ 1358 007d 9F       		.byte	0x9f
+ 1359 007e 00000000 		.4byte	0
+ 1360 0082 00000000 		.4byte	0
+ 1361              	.LLST4:
+ 1362 0086 00000000 		.4byte	.LVL5
+ 1363 008a 20000000 		.4byte	.LVL8
+ 1364 008e 0200     		.2byte	0x2
+ 1365 0090 30       		.byte	0x30
+ 1366 0091 9F       		.byte	0x9f
+ 1367 0092 20000000 		.4byte	.LVL8
+ 1368 0096 36000000 		.4byte	.LVL10
+ 1369 009a 0500     		.2byte	0x5
+ 1370 009c 74       		.byte	0x74
+ 1371 009d 00       		.sleb128 0
+ 1372 009e 30       		.byte	0x30
+ 1373 009f 29       		.byte	0x29
+ 1374 00a0 9F       		.byte	0x9f
+ 1375 00a1 36000000 		.4byte	.LVL10
+ 1376 00a5 3C000000 		.4byte	.LFE58
+ 1377 00a9 0100     		.2byte	0x1
+ 1378 00ab 50       		.byte	0x50
+ 1379 00ac 00000000 		.4byte	0
+ 1380 00b0 00000000 		.4byte	0
+ 1381              	.LLST5:
+ 1382 00b4 00000000 		.4byte	.LVL11
+ 1383 00b8 0C000000 		.4byte	.LVL12
+ 1384 00bc 0100     		.2byte	0x1
+ 1385 00be 50       		.byte	0x50
+ 1386 00bf 0C000000 		.4byte	.LVL12
+ 1387 00c3 16000000 		.4byte	.LVL15
+ 1388 00c7 0400     		.2byte	0x4
+ 1389 00c9 F3       		.byte	0xf3
+ 1390 00ca 01       		.uleb128 0x1
+ 1391 00cb 50       		.byte	0x50
+ 1392 00cc 9F       		.byte	0x9f
+ 1393 00cd 16000000 		.4byte	.LVL15
+ 1394 00d1 18000000 		.4byte	.LVL16
+ 1395 00d5 0100     		.2byte	0x1
+ 1396 00d7 50       		.byte	0x50
+ 1397 00d8 18000000 		.4byte	.LVL16
+ 1398 00dc 20000000 		.4byte	.LFE59
+ 1399 00e0 0400     		.2byte	0x4
+ 1400 00e2 F3       		.byte	0xf3
+ 1401 00e3 01       		.uleb128 0x1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 28
+
+
+ 1402 00e4 50       		.byte	0x50
+ 1403 00e5 9F       		.byte	0x9f
+ 1404 00e6 00000000 		.4byte	0
+ 1405 00ea 00000000 		.4byte	0
+ 1406              	.LLST6:
+ 1407 00ee 00000000 		.4byte	.LVL11
+ 1408 00f2 14000000 		.4byte	.LVL14
+ 1409 00f6 0200     		.2byte	0x2
+ 1410 00f8 30       		.byte	0x30
+ 1411 00f9 9F       		.byte	0x9f
+ 1412 00fa 14000000 		.4byte	.LVL14
+ 1413 00fe 16000000 		.4byte	.LVL15
+ 1414 0102 0100     		.2byte	0x1
+ 1415 0104 50       		.byte	0x50
+ 1416 0105 16000000 		.4byte	.LVL15
+ 1417 0109 18000000 		.4byte	.LVL16
+ 1418 010d 0200     		.2byte	0x2
+ 1419 010f 30       		.byte	0x30
+ 1420 0110 9F       		.byte	0x9f
+ 1421 0111 18000000 		.4byte	.LVL16
+ 1422 0115 20000000 		.4byte	.LFE59
+ 1423 0119 0100     		.2byte	0x1
+ 1424 011b 50       		.byte	0x50
+ 1425 011c 00000000 		.4byte	0
+ 1426 0120 00000000 		.4byte	0
+ 1427              	.LLST7:
+ 1428 0124 00000000 		.4byte	.LVL17
+ 1429 0128 10000000 		.4byte	.LVL20
+ 1430 012c 0100     		.2byte	0x1
+ 1431 012e 50       		.byte	0x50
+ 1432 012f 10000000 		.4byte	.LVL20
+ 1433 0133 19000000 		.4byte	.LVL21-1
+ 1434 0137 0100     		.2byte	0x1
+ 1435 0139 51       		.byte	0x51
+ 1436 013a 19000000 		.4byte	.LVL21-1
+ 1437 013e 20000000 		.4byte	.LFE61
+ 1438 0142 0400     		.2byte	0x4
+ 1439 0144 F3       		.byte	0xf3
+ 1440 0145 01       		.uleb128 0x1
+ 1441 0146 50       		.byte	0x50
+ 1442 0147 9F       		.byte	0x9f
+ 1443 0148 00000000 		.4byte	0
+ 1444 014c 00000000 		.4byte	0
+ 1445              	.LLST8:
+ 1446 0150 00000000 		.4byte	.LVL17
+ 1447 0154 0A000000 		.4byte	.LVL18
+ 1448 0158 0100     		.2byte	0x1
+ 1449 015a 51       		.byte	0x51
+ 1450 015b 0A000000 		.4byte	.LVL18
+ 1451 015f 20000000 		.4byte	.LFE61
+ 1452 0163 0400     		.2byte	0x4
+ 1453 0165 F3       		.byte	0xf3
+ 1454 0166 01       		.uleb128 0x1
+ 1455 0167 51       		.byte	0x51
+ 1456 0168 9F       		.byte	0x9f
+ 1457 0169 00000000 		.4byte	0
+ 1458 016d 00000000 		.4byte	0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 29
+
+
+ 1459              	.LLST9:
+ 1460 0171 00000000 		.4byte	.LVL17
+ 1461 0175 0E000000 		.4byte	.LVL19
+ 1462 0179 0100     		.2byte	0x1
+ 1463 017b 52       		.byte	0x52
+ 1464 017c 0E000000 		.4byte	.LVL19
+ 1465 0180 20000000 		.4byte	.LFE61
+ 1466 0184 0400     		.2byte	0x4
+ 1467 0186 F3       		.byte	0xf3
+ 1468 0187 01       		.uleb128 0x1
+ 1469 0188 52       		.byte	0x52
+ 1470 0189 9F       		.byte	0x9f
+ 1471 018a 00000000 		.4byte	0
+ 1472 018e 00000000 		.4byte	0
+ 1473              	.LLST10:
+ 1474 0192 00000000 		.4byte	.LVL22
+ 1475 0196 06000000 		.4byte	.LVL23
+ 1476 019a 0100     		.2byte	0x1
+ 1477 019c 50       		.byte	0x50
+ 1478 019d 06000000 		.4byte	.LVL23
+ 1479 01a1 0C000000 		.4byte	.LFE62
+ 1480 01a5 0400     		.2byte	0x4
+ 1481 01a7 F3       		.byte	0xf3
+ 1482 01a8 01       		.uleb128 0x1
+ 1483 01a9 50       		.byte	0x50
+ 1484 01aa 9F       		.byte	0x9f
+ 1485 01ab 00000000 		.4byte	0
+ 1486 01af 00000000 		.4byte	0
+ 1487              	.LLST11:
+ 1488 01b3 00000000 		.4byte	.LVL22
+ 1489 01b7 0A000000 		.4byte	.LVL24
+ 1490 01bb 0200     		.2byte	0x2
+ 1491 01bd 30       		.byte	0x30
+ 1492 01be 9F       		.byte	0x9f
+ 1493 01bf 0A000000 		.4byte	.LVL24
+ 1494 01c3 0C000000 		.4byte	.LFE62
+ 1495 01c7 0100     		.2byte	0x1
+ 1496 01c9 50       		.byte	0x50
+ 1497 01ca 00000000 		.4byte	0
+ 1498 01ce 00000000 		.4byte	0
+ 1499              		.section	.debug_aranges,"",%progbits
+ 1500 0000 54000000 		.4byte	0x54
+ 1501 0004 0200     		.2byte	0x2
+ 1502 0006 00000000 		.4byte	.Ldebug_info0
+ 1503 000a 04       		.byte	0x4
+ 1504 000b 00       		.byte	0
+ 1505 000c 0000     		.2byte	0
+ 1506 000e 0000     		.2byte	0
+ 1507 0010 00000000 		.4byte	.LFB56
+ 1508 0014 14000000 		.4byte	.LFE56-.LFB56
+ 1509 0018 00000000 		.4byte	.LFB57
+ 1510 001c 1E000000 		.4byte	.LFE57-.LFB57
+ 1511 0020 00000000 		.4byte	.LFB58
+ 1512 0024 3C000000 		.4byte	.LFE58-.LFB58
+ 1513 0028 00000000 		.4byte	.LFB59
+ 1514 002c 20000000 		.4byte	.LFE59-.LFB59
+ 1515 0030 00000000 		.4byte	.LFB60
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 30
+
+
+ 1516 0034 02000000 		.4byte	.LFE60-.LFB60
+ 1517 0038 00000000 		.4byte	.LFB61
+ 1518 003c 20000000 		.4byte	.LFE61-.LFB61
+ 1519 0040 00000000 		.4byte	.LFB62
+ 1520 0044 0C000000 		.4byte	.LFE62-.LFB62
+ 1521 0048 00000000 		.4byte	.LFB63
+ 1522 004c 48000000 		.4byte	.LFE63-.LFB63
+ 1523 0050 00000000 		.4byte	0
+ 1524 0054 00000000 		.4byte	0
+ 1525              		.section	.debug_ranges,"",%progbits
+ 1526              	.Ldebug_ranges0:
+ 1527 0000 00000000 		.4byte	.LFB56
+ 1528 0004 14000000 		.4byte	.LFE56
+ 1529 0008 00000000 		.4byte	.LFB57
+ 1530 000c 1E000000 		.4byte	.LFE57
+ 1531 0010 00000000 		.4byte	.LFB58
+ 1532 0014 3C000000 		.4byte	.LFE58
+ 1533 0018 00000000 		.4byte	.LFB59
+ 1534 001c 20000000 		.4byte	.LFE59
+ 1535 0020 00000000 		.4byte	.LFB60
+ 1536 0024 02000000 		.4byte	.LFE60
+ 1537 0028 00000000 		.4byte	.LFB61
+ 1538 002c 20000000 		.4byte	.LFE61
+ 1539 0030 00000000 		.4byte	.LFB62
+ 1540 0034 0C000000 		.4byte	.LFE62
+ 1541 0038 00000000 		.4byte	.LFB63
+ 1542 003c 48000000 		.4byte	.LFE63
+ 1543 0040 00000000 		.4byte	0
+ 1544 0044 00000000 		.4byte	0
+ 1545              		.section	.debug_line,"",%progbits
+ 1546              	.Ldebug_line0:
+ 1547 0000 3B020000 		.section	.debug_str,"MS",%progbits,1
+ 1547      02008401 
+ 1547      00000201 
+ 1547      FB0E0D00 
+ 1547      01010101 
+ 1548              	.LASF32:
+ 1549 0000 75384275 		.ascii	"u8Buff\000"
+ 1549      666600
+ 1550              	.LASF46:
+ 1551 0007 46535F46 		.ascii	"FS_FClose\000"
+ 1551      436C6F73 
+ 1551      6500
+ 1552              	.LASF22:
+ 1553 0011 75385265 		.ascii	"u8Return\000"
+ 1553      7475726E 
+ 1553      00
+ 1554              	.LASF33:
+ 1555 001a 75313653 		.ascii	"u16Size\000"
+ 1555      697A6500 
+ 1556              	.LASF16:
+ 1557 0022 5F5F696E 		.ascii	"__int32_t\000"
+ 1557      7433325F 
+ 1557      7400
+ 1558              	.LASF25:
+ 1559 002c 5344435F 		.ascii	"SDC_OpenFile\000"
+ 1559      4F70656E 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 31
+
+
+ 1559      46696C65 
+ 1559      00
+ 1560              	.LASF35:
+ 1561 0039 5344435F 		.ascii	"SDC_Cnvrt_To_ASCII\000"
+ 1561      436E7672 
+ 1561      745F546F 
+ 1561      5F415343 
+ 1561      494900
+ 1562              	.LASF43:
+ 1563 004c 46535F46 		.ascii	"FS_FormatSD\000"
+ 1563      6F726D61 
+ 1563      74534400 
+ 1564              	.LASF29:
+ 1565 0058 5344435F 		.ascii	"SDC_CloseFile\000"
+ 1565      436C6F73 
+ 1565      6546696C 
+ 1565      6500
+ 1566              	.LASF51:
+ 1567 0066 2E5C7364 		.ascii	".\\sd_card.c\000"
+ 1567      5F636172 
+ 1567      642E6300 
+ 1568              	.LASF2:
+ 1569 0072 75696E74 		.ascii	"uint8\000"
+ 1569      3800
+ 1570              	.LASF37:
+ 1571 0078 75384F75 		.ascii	"u8Out\000"
+ 1571      7400
+ 1572              	.LASF15:
+ 1573 007e 7046696C 		.ascii	"pFile\000"
+ 1573      6500
+ 1574              	.LASF13:
+ 1575 0084 75333256 		.ascii	"u32VFile_Size\000"
+ 1575      46696C65 
+ 1575      5F53697A 
+ 1575      6500
+ 1576              	.LASF20:
+ 1577 0092 666C6F61 		.ascii	"float\000"
+ 1577      7400
+ 1578              	.LASF3:
+ 1579 0098 5F55494E 		.ascii	"_UINT16\000"
+ 1579      54313600 
+ 1580              	.LASF0:
+ 1581 00a0 756E7369 		.ascii	"unsigned char\000"
+ 1581      676E6564 
+ 1581      20636861 
+ 1581      7200
+ 1582              	.LASF27:
+ 1583 00ae 48616E64 		.ascii	"Handle\000"
+ 1583      6C6500
+ 1584              	.LASF6:
+ 1585 00b5 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1585      20756E73 
+ 1585      69676E65 
+ 1585      6420696E 
+ 1585      7400
+ 1586              	.LASF4:
+ 1587 00c7 73686F72 		.ascii	"short unsigned int\000"
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 32
+
+
+ 1587      7420756E 
+ 1587      7369676E 
+ 1587      65642069 
+ 1587      6E7400
+ 1588              	.LASF39:
+ 1589 00da 7538765F 		.ascii	"u8v_Debounce_Counter\000"
+ 1589      4465626F 
+ 1589      756E6365 
+ 1589      5F436F75 
+ 1589      6E746572 
+ 1590              	.LASF14:
+ 1591 00ef 496E6974 		.ascii	"Init\000"
+ 1591      00
+ 1592              	.LASF55:
+ 1593 00f4 50696E5F 		.ascii	"Pin_SD_Detect_Read\000"
+ 1593      53445F44 
+ 1593      65746563 
+ 1593      745F5265 
+ 1593      616400
+ 1594              	.LASF40:
+ 1595 0107 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1595      52784275 
+ 1595      66666572 
+ 1595      00
+ 1596              	.LASF52:
+ 1597 0114 433A5C55 		.ascii	"C:\\Users\\acer\\Desktop\\Saura-master\\2_Psoc\\Pla"
+ 1597      73657273 
+ 1597      5C616365 
+ 1597      725C4465 
+ 1597      736B746F 
+ 1598 0141 74666F72 		.ascii	"tform\\Design02.cydsn\000"
+ 1598      6D5C4465 
+ 1598      7369676E 
+ 1598      30322E63 
+ 1598      7964736E 
+ 1599              	.LASF44:
+ 1600 0156 46535F46 		.ascii	"FS_FOpen\000"
+ 1600      4F70656E 
+ 1600      00
+ 1601              	.LASF47:
+ 1602 015f 46535F57 		.ascii	"FS_Write\000"
+ 1602      72697465 
+ 1602      00
+ 1603              	.LASF54:
+ 1604 0168 5344435F 		.ascii	"SDC_LoadBuffer\000"
+ 1604      4C6F6164 
+ 1604      42756666 
+ 1604      657200
+ 1605              	.LASF5:
+ 1606 0177 73686F72 		.ascii	"short int\000"
+ 1606      7420696E 
+ 1606      7400
+ 1607              	.LASF48:
+ 1608 0181 46535F49 		.ascii	"FS_Init\000"
+ 1608      6E697400 
+ 1609              	.LASF26:
+ 1610 0189 73646669 		.ascii	"sdfile\000"
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 33
+
+
+ 1610      6C6500
+ 1611              	.LASF41:
+ 1612 0190 5364496E 		.ascii	"SdInf\000"
+ 1612      6600
+ 1613              	.LASF7:
+ 1614 0196 75696E74 		.ascii	"uint32\000"
+ 1614      333200
+ 1615              	.LASF34:
+ 1616 019d 75386861 		.ascii	"u8handle\000"
+ 1616      6E646C65 
+ 1616      00
+ 1617              	.LASF10:
+ 1618 01a6 756E7369 		.ascii	"unsigned int\000"
+ 1618      676E6564 
+ 1618      20696E74 
+ 1618      00
+ 1619              	.LASF18:
+ 1620 01b3 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1620      206C6F6E 
+ 1620      6720756E 
+ 1620      7369676E 
+ 1620      65642069 
+ 1621              	.LASF28:
+ 1622 01ca 6D6F6465 		.ascii	"mode\000"
+ 1622      00
+ 1623              	.LASF49:
+ 1624 01cf 46535F44 		.ascii	"FS_DeInit\000"
+ 1624      65496E69 
+ 1624      7400
+ 1625              	.LASF9:
+ 1626 01d9 46535F46 		.ascii	"FS_FILE\000"
+ 1626      494C4500 
+ 1627              	.LASF11:
+ 1628 01e1 73697A65 		.ascii	"sizetype\000"
+ 1628      74797065 
+ 1628      00
+ 1629              	.LASF45:
+ 1630 01ea 46535F47 		.ascii	"FS_GetFileSize\000"
+ 1630      65744669 
+ 1630      6C655369 
+ 1630      7A6500
+ 1631              	.LASF17:
+ 1632 01f9 6C6F6E67 		.ascii	"long long int\000"
+ 1632      206C6F6E 
+ 1632      6720696E 
+ 1632      7400
+ 1633              	.LASF12:
+ 1634 0207 63686172 		.ascii	"char\000"
+ 1634      00
+ 1635              	.LASF53:
+ 1636 020c 53645354 		.ascii	"SdSTSLST\000"
+ 1636      534C5354 
+ 1636      00
+ 1637              	.LASF19:
+ 1638 0215 696E7433 		.ascii	"int32_t\000"
+ 1638      325F7400 
+ 1639              	.LASF38:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 34
+
+
+ 1640 021d 5344435F 		.ascii	"SDC_CardDetection\000"
+ 1640      43617264 
+ 1640      44657465 
+ 1640      6374696F 
+ 1640      6E00
+ 1641              	.LASF30:
+ 1642 022f 5344435F 		.ascii	"SDC_InitializeCard\000"
+ 1642      496E6974 
+ 1642      69616C69 
+ 1642      7A654361 
+ 1642      726400
+ 1643              	.LASF50:
+ 1644 0242 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 1644      4320342E 
+ 1644      392E3320 
+ 1644      32303135 
+ 1644      30333033 
+ 1645 0275 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 1645      20726576 
+ 1645      6973696F 
+ 1645      6E203232 
+ 1645      31323230 
+ 1646 02a8 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 1646      66756E63 
+ 1646      74696F6E 
+ 1646      2D736563 
+ 1646      74696F6E 
+ 1647              	.LASF36:
+ 1648 02d0 7538496E 		.ascii	"u8Input\000"
+ 1648      70757400 
+ 1649              	.LASF42:
+ 1650 02d8 46535F47 		.ascii	"FS_GetVolumeName\000"
+ 1650      6574566F 
+ 1650      6C756D65 
+ 1650      4E616D65 
+ 1650      00
+ 1651              	.LASF23:
+ 1652 02e9 7364566F 		.ascii	"sdVolName\000"
+ 1652      6C4E616D 
+ 1652      6500
+ 1653              	.LASF8:
+ 1654 02f3 6C6F6E67 		.ascii	"long int\000"
+ 1654      20696E74 
+ 1654      00
+ 1655              	.LASF1:
+ 1656 02fc 7369676E 		.ascii	"signed char\000"
+ 1656      65642063 
+ 1656      68617200 
+ 1657              	.LASF21:
+ 1658 0308 646F7562 		.ascii	"double\000"
+ 1658      6C6500
+ 1659              	.LASF24:
+ 1660 030f 5344435F 		.ascii	"SDC_FormatCard\000"
+ 1660      466F726D 
+ 1660      61744361 
+ 1660      726400
+ 1661              	.LASF31:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccvJ6Cjo.s 			page 35
+
+
+ 1662 031e 5344435F 		.ascii	"SDC_WriteCrashData\000"
+ 1662      57726974 
+ 1662      65437261 
+ 1662      73684461 
+ 1662      746100
+ 1663              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

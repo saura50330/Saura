@@ -17,6 +17,12 @@
 
 #define INIT_SUCC 7 // INIT_COMP
 #define NOT_INIT 0 //IDLE
+//karnel tasks
+void MPU9250_Init(void); // 10ms
+void Read_From_ALL(void); // 10ms
+void I2C_Mgr(void); // 1ms task premptiv
+
+// API
 void IMU_Command(_UBYTE Command);
 _UBYTE IMU_Read_St(void);
 

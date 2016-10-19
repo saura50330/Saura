@@ -36,7 +36,7 @@ extern uint8 TMR_Os_Tmr_Co_Op_initVar;
 *           Parameter Defaults
 **************************************/
 
-#define TMR_Os_Tmr_Co_Op_Resolution                 8u
+#define TMR_Os_Tmr_Co_Op_Resolution                 16u
 #define TMR_Os_Tmr_Co_Op_UsingFixedFunction         1u
 #define TMR_Os_Tmr_Co_Op_UsingHWCaptureCounter      0u
 #define TMR_Os_Tmr_Co_Op_SoftwareCaptureMode        0u
@@ -69,7 +69,7 @@ typedef struct
     uint8 TimerEnableState;
     #if(!TMR_Os_Tmr_Co_Op_UsingFixedFunction)
 
-        uint8 TimerUdb;
+        uint16 TimerUdb;
         uint8 InterruptMaskValue;
         #if (TMR_Os_Tmr_Co_Op_UsingHWCaptureCounter)
             uint8 TimerCaptureCounter;
@@ -100,11 +100,11 @@ uint8   TMR_Os_Tmr_Co_Op_ReadStatusRegister(void) ;
     void    TMR_Os_Tmr_Co_Op_WriteControlRegister(uint8 control) ;
 #endif /* (!TMR_Os_Tmr_Co_Op_UDB_CONTROL_REG_REMOVED) */
 
-uint8  TMR_Os_Tmr_Co_Op_ReadPeriod(void) ;
-void    TMR_Os_Tmr_Co_Op_WritePeriod(uint8 period) ;
-uint8  TMR_Os_Tmr_Co_Op_ReadCounter(void) ;
-void    TMR_Os_Tmr_Co_Op_WriteCounter(uint8 counter) ;
-uint8  TMR_Os_Tmr_Co_Op_ReadCapture(void) ;
+uint16  TMR_Os_Tmr_Co_Op_ReadPeriod(void) ;
+void    TMR_Os_Tmr_Co_Op_WritePeriod(uint16 period) ;
+uint16  TMR_Os_Tmr_Co_Op_ReadCounter(void) ;
+void    TMR_Os_Tmr_Co_Op_WriteCounter(uint16 counter) ;
+uint16  TMR_Os_Tmr_Co_Op_ReadCapture(void) ;
 void    TMR_Os_Tmr_Co_Op_SoftwareCapture(void) ;
 
 #if(!TMR_Os_Tmr_Co_Op_UsingFixedFunction) /* UDB Prototypes */
@@ -168,7 +168,7 @@ void TMR_Os_Tmr_Co_Op_Wakeup(void)        ;
 *    Initialial Parameter Constants
 ***************************************/
 
-#define TMR_Os_Tmr_Co_Op_INIT_PERIOD             99u
+#define TMR_Os_Tmr_Co_Op_INIT_PERIOD             999u
 #define TMR_Os_Tmr_Co_Op_INIT_CAPTURE_MODE       ((uint8)((uint8)0u << TMR_Os_Tmr_Co_Op_CTRL_CAP_MODE_SHIFT))
 #define TMR_Os_Tmr_Co_Op_INIT_TRIGGER_MODE       ((uint8)((uint8)0u << TMR_Os_Tmr_Co_Op_CTRL_TRIG_MODE_SHIFT))
 #if (TMR_Os_Tmr_Co_Op_UsingFixedFunction)
@@ -313,54 +313,54 @@ void TMR_Os_Tmr_Co_Op_Wakeup(void)        ;
     #define TMR_Os_Tmr_Co_Op_CONTROL             (* (reg8 *) TMR_Os_Tmr_Co_Op_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_REG )
     
     #if(TMR_Os_Tmr_Co_Op_Resolution <= 8u) /* 8-bit Timer */
-        #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB         (* (reg8 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__F0_REG )
-        #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB_PTR       ((reg8 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__F0_REG )
-        #define TMR_Os_Tmr_Co_Op_PERIOD_LSB          (* (reg8 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__D0_REG )
-        #define TMR_Os_Tmr_Co_Op_PERIOD_LSB_PTR        ((reg8 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__D0_REG )
-        #define TMR_Os_Tmr_Co_Op_COUNTER_LSB         (* (reg8 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__A0_REG )
-        #define TMR_Os_Tmr_Co_Op_COUNTER_LSB_PTR       ((reg8 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__A0_REG )
+        #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB         (* (reg8 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__F0_REG )
+        #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB_PTR       ((reg8 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__F0_REG )
+        #define TMR_Os_Tmr_Co_Op_PERIOD_LSB          (* (reg8 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__D0_REG )
+        #define TMR_Os_Tmr_Co_Op_PERIOD_LSB_PTR        ((reg8 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__D0_REG )
+        #define TMR_Os_Tmr_Co_Op_COUNTER_LSB         (* (reg8 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__A0_REG )
+        #define TMR_Os_Tmr_Co_Op_COUNTER_LSB_PTR       ((reg8 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__A0_REG )
     #elif(TMR_Os_Tmr_Co_Op_Resolution <= 16u) /* 8-bit Timer */
         #if(CY_PSOC3) /* 8-bit addres space */
-            #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB         (* (reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__F0_REG )
-            #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB_PTR       ((reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__F0_REG )
-            #define TMR_Os_Tmr_Co_Op_PERIOD_LSB          (* (reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__D0_REG )
-            #define TMR_Os_Tmr_Co_Op_PERIOD_LSB_PTR        ((reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__D0_REG )
-            #define TMR_Os_Tmr_Co_Op_COUNTER_LSB         (* (reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__A0_REG )
-            #define TMR_Os_Tmr_Co_Op_COUNTER_LSB_PTR       ((reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__A0_REG )
+            #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB         (* (reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__F0_REG )
+            #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB_PTR       ((reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__F0_REG )
+            #define TMR_Os_Tmr_Co_Op_PERIOD_LSB          (* (reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__D0_REG )
+            #define TMR_Os_Tmr_Co_Op_PERIOD_LSB_PTR        ((reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__D0_REG )
+            #define TMR_Os_Tmr_Co_Op_COUNTER_LSB         (* (reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__A0_REG )
+            #define TMR_Os_Tmr_Co_Op_COUNTER_LSB_PTR       ((reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__A0_REG )
         #else /* 16-bit address space */
-            #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB         (* (reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__16BIT_F0_REG )
-            #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB_PTR       ((reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__16BIT_F0_REG )
-            #define TMR_Os_Tmr_Co_Op_PERIOD_LSB          (* (reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__16BIT_D0_REG )
-            #define TMR_Os_Tmr_Co_Op_PERIOD_LSB_PTR        ((reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__16BIT_D0_REG )
-            #define TMR_Os_Tmr_Co_Op_COUNTER_LSB         (* (reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__16BIT_A0_REG )
-            #define TMR_Os_Tmr_Co_Op_COUNTER_LSB_PTR       ((reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__16BIT_A0_REG )
+            #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB         (* (reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__16BIT_F0_REG )
+            #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB_PTR       ((reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__16BIT_F0_REG )
+            #define TMR_Os_Tmr_Co_Op_PERIOD_LSB          (* (reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__16BIT_D0_REG )
+            #define TMR_Os_Tmr_Co_Op_PERIOD_LSB_PTR        ((reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__16BIT_D0_REG )
+            #define TMR_Os_Tmr_Co_Op_COUNTER_LSB         (* (reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__16BIT_A0_REG )
+            #define TMR_Os_Tmr_Co_Op_COUNTER_LSB_PTR       ((reg16 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__16BIT_A0_REG )
         #endif /* CY_PSOC3 */
     #elif(TMR_Os_Tmr_Co_Op_Resolution <= 24u)/* 24-bit Timer */
-        #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB         (* (reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__F0_REG )
-        #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB_PTR       ((reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__F0_REG )
-        #define TMR_Os_Tmr_Co_Op_PERIOD_LSB          (* (reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__D0_REG )
-        #define TMR_Os_Tmr_Co_Op_PERIOD_LSB_PTR        ((reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__D0_REG )
-        #define TMR_Os_Tmr_Co_Op_COUNTER_LSB         (* (reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__A0_REG )
-        #define TMR_Os_Tmr_Co_Op_COUNTER_LSB_PTR       ((reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__A0_REG )
+        #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB         (* (reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__F0_REG )
+        #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB_PTR       ((reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__F0_REG )
+        #define TMR_Os_Tmr_Co_Op_PERIOD_LSB          (* (reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__D0_REG )
+        #define TMR_Os_Tmr_Co_Op_PERIOD_LSB_PTR        ((reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__D0_REG )
+        #define TMR_Os_Tmr_Co_Op_COUNTER_LSB         (* (reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__A0_REG )
+        #define TMR_Os_Tmr_Co_Op_COUNTER_LSB_PTR       ((reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__A0_REG )
     #else /* 32-bit Timer */
         #if(CY_PSOC3 || CY_PSOC5) /* 8-bit address space */
-            #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB         (* (reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__F0_REG )
-            #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB_PTR       ((reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__F0_REG )
-            #define TMR_Os_Tmr_Co_Op_PERIOD_LSB          (* (reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__D0_REG )
-            #define TMR_Os_Tmr_Co_Op_PERIOD_LSB_PTR        ((reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__D0_REG )
-            #define TMR_Os_Tmr_Co_Op_COUNTER_LSB         (* (reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__A0_REG )
-            #define TMR_Os_Tmr_Co_Op_COUNTER_LSB_PTR       ((reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__A0_REG )
+            #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB         (* (reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__F0_REG )
+            #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB_PTR       ((reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__F0_REG )
+            #define TMR_Os_Tmr_Co_Op_PERIOD_LSB          (* (reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__D0_REG )
+            #define TMR_Os_Tmr_Co_Op_PERIOD_LSB_PTR        ((reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__D0_REG )
+            #define TMR_Os_Tmr_Co_Op_COUNTER_LSB         (* (reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__A0_REG )
+            #define TMR_Os_Tmr_Co_Op_COUNTER_LSB_PTR       ((reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__A0_REG )
         #else /* 32-bit address space */
-            #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB         (* (reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__32BIT_F0_REG )
-            #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB_PTR       ((reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__32BIT_F0_REG )
-            #define TMR_Os_Tmr_Co_Op_PERIOD_LSB          (* (reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__32BIT_D0_REG )
-            #define TMR_Os_Tmr_Co_Op_PERIOD_LSB_PTR        ((reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__32BIT_D0_REG )
-            #define TMR_Os_Tmr_Co_Op_COUNTER_LSB         (* (reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__32BIT_A0_REG )
-            #define TMR_Os_Tmr_Co_Op_COUNTER_LSB_PTR       ((reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__32BIT_A0_REG )
+            #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB         (* (reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__32BIT_F0_REG )
+            #define TMR_Os_Tmr_Co_Op_CAPTURE_LSB_PTR       ((reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__32BIT_F0_REG )
+            #define TMR_Os_Tmr_Co_Op_PERIOD_LSB          (* (reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__32BIT_D0_REG )
+            #define TMR_Os_Tmr_Co_Op_PERIOD_LSB_PTR        ((reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__32BIT_D0_REG )
+            #define TMR_Os_Tmr_Co_Op_COUNTER_LSB         (* (reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__32BIT_A0_REG )
+            #define TMR_Os_Tmr_Co_Op_COUNTER_LSB_PTR       ((reg32 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__32BIT_A0_REG )
         #endif /* CY_PSOC3 || CY_PSOC5 */ 
     #endif
 
-    #define TMR_Os_Tmr_Co_Op_COUNTER_LSB_PTR_8BIT       ((reg8 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT8_timerdp_u0__A0_REG )
+    #define TMR_Os_Tmr_Co_Op_COUNTER_LSB_PTR_8BIT       ((reg8 *) TMR_Os_Tmr_Co_Op_TimerUDB_sT16_timerdp_u0__A0_REG )
     
     #if (TMR_Os_Tmr_Co_Op_UsingHWCaptureCounter)
         #define TMR_Os_Tmr_Co_Op_CAP_COUNT              (*(reg8 *) TMR_Os_Tmr_Co_Op_TimerUDB_sCapCount_counter__PERIOD_REG )

@@ -1,0 +1,8 @@
+testing:
+
+1) check output of accelrometer
+2) check if setting is +-2g
+2) at rest output of acc shuld be 1g ie:16384
+4) whwn accelrometer is flied ulta value should be negative
+
+// found output not correct : write and verify the registers by reading

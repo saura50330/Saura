@@ -1,0 +1,3535 @@
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"LCD1.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.LCD1_WrCntrlNib,"ax",%progbits
+  19              		.align	1
+  20              		.thumb
+  21              		.thumb_func
+  22              		.type	LCD1_WrCntrlNib, %function
+  23              	LCD1_WrCntrlNib:
+  24              	.LFB11:
+  25              		.file 1 ".\\Generated_Source\\PSoC5\\LCD1.c"
+   1:.\Generated_Source\PSoC5/LCD1.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/LCD1.c **** * File Name: LCD1.c
+   3:.\Generated_Source\PSoC5/LCD1.c **** * Version 1.1
+   4:.\Generated_Source\PSoC5/LCD1.c **** *
+   5:.\Generated_Source\PSoC5/LCD1.c **** * Description:
+   6:.\Generated_Source\PSoC5/LCD1.c **** *  This file provides source code for the Character LCD component's API.
+   7:.\Generated_Source\PSoC5/LCD1.c **** *
+   8:.\Generated_Source\PSoC5/LCD1.c **** * Note:
+   9:.\Generated_Source\PSoC5/LCD1.c **** *
+  10:.\Generated_Source\PSoC5/LCD1.c **** ********************************************************************************
+  11:.\Generated_Source\PSoC5/LCD1.c **** * Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  12:.\Generated_Source\PSoC5/LCD1.c **** * You may use this file only in accordance with the license, terms, conditions,
+  13:.\Generated_Source\PSoC5/LCD1.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  14:.\Generated_Source\PSoC5/LCD1.c **** * the software package with which this file was provided.
+  15:.\Generated_Source\PSoC5/LCD1.c **** *******************************************************************************/
+  16:.\Generated_Source\PSoC5/LCD1.c **** 
+  17:.\Generated_Source\PSoC5/LCD1.c **** #include "CyLib.h"
+  18:.\Generated_Source\PSoC5/LCD1.c **** #include "LCD1.h"
+  19:.\Generated_Source\PSoC5/LCD1.c **** 
+  20:.\Generated_Source\PSoC5/LCD1.c **** 
+  21:.\Generated_Source\PSoC5/LCD1.c **** static void LCD1_WrDatNib(uint8 nibble) ;
+  22:.\Generated_Source\PSoC5/LCD1.c **** static void LCD1_WrCntrlNib(uint8 nibble) ;
+  23:.\Generated_Source\PSoC5/LCD1.c **** 
+  24:.\Generated_Source\PSoC5/LCD1.c **** /* Stores the state of conponent. Indicates wherewer component is 
+  25:.\Generated_Source\PSoC5/LCD1.c **** * in enable state or not.
+  26:.\Generated_Source\PSoC5/LCD1.c **** */
+  27:.\Generated_Source\PSoC5/LCD1.c **** uint8 LCD1_enableState = 0u;
+  28:.\Generated_Source\PSoC5/LCD1.c **** 
+  29:.\Generated_Source\PSoC5/LCD1.c **** uint8 LCD1_initVar = 0u;
+  30:.\Generated_Source\PSoC5/LCD1.c **** 
+  31:.\Generated_Source\PSoC5/LCD1.c **** 
+  32:.\Generated_Source\PSoC5/LCD1.c **** /*******************************************************************************
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 2
+
+
+  33:.\Generated_Source\PSoC5/LCD1.c **** * Function Name: LCD1_Init
+  34:.\Generated_Source\PSoC5/LCD1.c **** ********************************************************************************
+  35:.\Generated_Source\PSoC5/LCD1.c **** *
+  36:.\Generated_Source\PSoC5/LCD1.c **** * Summary:
+  37:.\Generated_Source\PSoC5/LCD1.c **** *  Perform initialization required for components normal work.
+  38:.\Generated_Source\PSoC5/LCD1.c **** *  This function initializes the LCD hardware module as follows:
+  39:.\Generated_Source\PSoC5/LCD1.c **** *        Enable 4-bit interface
+  40:.\Generated_Source\PSoC5/LCD1.c **** *        Clear the display
+  41:.\Generated_Source\PSoC5/LCD1.c **** *        Enable auto cursor increment
+  42:.\Generated_Source\PSoC5/LCD1.c **** *        Resets the cursor to start position
+  43:.\Generated_Source\PSoC5/LCD1.c **** *  Also loads custom character set to LCD if it was defined in the customizer.
+  44:.\Generated_Source\PSoC5/LCD1.c **** *
+  45:.\Generated_Source\PSoC5/LCD1.c **** * Parameters:
+  46:.\Generated_Source\PSoC5/LCD1.c **** *  None.
+  47:.\Generated_Source\PSoC5/LCD1.c **** *
+  48:.\Generated_Source\PSoC5/LCD1.c **** * Return:
+  49:.\Generated_Source\PSoC5/LCD1.c **** *  None.
+  50:.\Generated_Source\PSoC5/LCD1.c **** *
+  51:.\Generated_Source\PSoC5/LCD1.c **** * Reentrant:
+  52:.\Generated_Source\PSoC5/LCD1.c **** *  No.
+  53:.\Generated_Source\PSoC5/LCD1.c **** *
+  54:.\Generated_Source\PSoC5/LCD1.c **** *******************************************************************************/
+  55:.\Generated_Source\PSoC5/LCD1.c **** void LCD1_Init(void) 
+  56:.\Generated_Source\PSoC5/LCD1.c **** {
+  57:.\Generated_Source\PSoC5/LCD1.c ****     /* INIT CODE */
+  58:.\Generated_Source\PSoC5/LCD1.c ****     CyDelay(40u);                                                        /* Delay 40 ms */
+  59:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WrCntrlNib(LCD1_DISPLAY_8_BIT_INIT);   /* Selects 8-bit mode */
+  60:.\Generated_Source\PSoC5/LCD1.c ****     CyDelay(5u);                                                         /* Delay 5 ms */
+  61:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WrCntrlNib(LCD1_DISPLAY_8_BIT_INIT);   /* Selects 8-bit mode */
+  62:.\Generated_Source\PSoC5/LCD1.c ****     CyDelay(15u);                                                        /* Delay 15 ms */
+  63:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WrCntrlNib(LCD1_DISPLAY_8_BIT_INIT);   /* Selects 8-bit mode */
+  64:.\Generated_Source\PSoC5/LCD1.c ****     CyDelay(1u);                                                         /* Delay 1 ms */
+  65:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WrCntrlNib(LCD1_DISPLAY_4_BIT_INIT);   /* Selects 4-bit mode */
+  66:.\Generated_Source\PSoC5/LCD1.c ****     CyDelay(5u);                                                         /* Delay 5 ms */
+  67:.\Generated_Source\PSoC5/LCD1.c **** 
+  68:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WriteControl(LCD1_CURSOR_AUTO_INCR_ON);    /* Incr Cursor After Writes */
+  69:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WriteControl(LCD1_DISPLAY_CURSOR_ON);      /* Turn Display, Cursor ON */
+  70:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WriteControl(LCD1_DISPLAY_2_LINES_5x10);   /* 2 Lines by 5x10 Characters */
+  71:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WriteControl(LCD1_DISPLAY_CURSOR_OFF);     /* Turn Display, Cursor OFF */
+  72:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WriteControl(LCD1_CLEAR_DISPLAY);          /* Clear LCD Screen */
+  73:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WriteControl(LCD1_DISPLAY_ON_CURSOR_OFF);  /* Turn Display ON, Cursor OFF */
+  74:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WriteControl(LCD1_RESET_CURSOR_POSITION);  /* Set Cursor to 0,0 */
+  75:.\Generated_Source\PSoC5/LCD1.c ****     CyDelay(5u);
+  76:.\Generated_Source\PSoC5/LCD1.c **** 
+  77:.\Generated_Source\PSoC5/LCD1.c ****     #if(LCD1_CUSTOM_CHAR_SET != LCD1_NONE)
+  78:.\Generated_Source\PSoC5/LCD1.c ****         LCD1_LoadCustomFonts(LCD1_customFonts);
+  79:.\Generated_Source\PSoC5/LCD1.c ****     #endif /* LCD1_CUSTOM_CHAR_SET != LCD1_NONE */
+  80:.\Generated_Source\PSoC5/LCD1.c **** }
+  81:.\Generated_Source\PSoC5/LCD1.c **** 
+  82:.\Generated_Source\PSoC5/LCD1.c **** 
+  83:.\Generated_Source\PSoC5/LCD1.c **** /*******************************************************************************
+  84:.\Generated_Source\PSoC5/LCD1.c **** * Function Name: LCD1_Enable
+  85:.\Generated_Source\PSoC5/LCD1.c **** ********************************************************************************
+  86:.\Generated_Source\PSoC5/LCD1.c **** *
+  87:.\Generated_Source\PSoC5/LCD1.c **** * Summary:
+  88:.\Generated_Source\PSoC5/LCD1.c **** *  Turns on the display.
+  89:.\Generated_Source\PSoC5/LCD1.c **** *
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 3
+
+
+  90:.\Generated_Source\PSoC5/LCD1.c **** * Parameters:
+  91:.\Generated_Source\PSoC5/LCD1.c **** *  None.
+  92:.\Generated_Source\PSoC5/LCD1.c **** *
+  93:.\Generated_Source\PSoC5/LCD1.c **** * Return:
+  94:.\Generated_Source\PSoC5/LCD1.c **** *  None.
+  95:.\Generated_Source\PSoC5/LCD1.c **** *
+  96:.\Generated_Source\PSoC5/LCD1.c **** * Reentrant:
+  97:.\Generated_Source\PSoC5/LCD1.c **** *  No.
+  98:.\Generated_Source\PSoC5/LCD1.c **** *
+  99:.\Generated_Source\PSoC5/LCD1.c **** * Theory:
+ 100:.\Generated_Source\PSoC5/LCD1.c **** *  This finction has no effect when it called first time as
+ 101:.\Generated_Source\PSoC5/LCD1.c **** *  LCD1_Init() turns on the LCD.
+ 102:.\Generated_Source\PSoC5/LCD1.c **** *
+ 103:.\Generated_Source\PSoC5/LCD1.c **** *******************************************************************************/
+ 104:.\Generated_Source\PSoC5/LCD1.c **** void LCD1_Enable(void) 
+ 105:.\Generated_Source\PSoC5/LCD1.c **** {
+ 106:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_DisplayOn();
+ 107:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_enableState = 1u;
+ 108:.\Generated_Source\PSoC5/LCD1.c **** }
+ 109:.\Generated_Source\PSoC5/LCD1.c **** 
+ 110:.\Generated_Source\PSoC5/LCD1.c **** 
+ 111:.\Generated_Source\PSoC5/LCD1.c **** /*******************************************************************************
+ 112:.\Generated_Source\PSoC5/LCD1.c **** * Function Name: LCD1_Start
+ 113:.\Generated_Source\PSoC5/LCD1.c **** ********************************************************************************
+ 114:.\Generated_Source\PSoC5/LCD1.c **** *
+ 115:.\Generated_Source\PSoC5/LCD1.c **** * Summary:
+ 116:.\Generated_Source\PSoC5/LCD1.c **** *  Perform initialization required for components normal work.
+ 117:.\Generated_Source\PSoC5/LCD1.c **** *  This function initializes the LCD hardware module as follows:
+ 118:.\Generated_Source\PSoC5/LCD1.c **** *        Enable 4-bit interface
+ 119:.\Generated_Source\PSoC5/LCD1.c **** *        Clear the display
+ 120:.\Generated_Source\PSoC5/LCD1.c **** *        Enable auto cursor increment
+ 121:.\Generated_Source\PSoC5/LCD1.c **** *        Resets the cursor to start position
+ 122:.\Generated_Source\PSoC5/LCD1.c **** *  Also loads custom character set to LCD if it was defined in the customizer.
+ 123:.\Generated_Source\PSoC5/LCD1.c **** *  If it was not the first call in this project then it just turns on the
+ 124:.\Generated_Source\PSoC5/LCD1.c **** *  display
+ 125:.\Generated_Source\PSoC5/LCD1.c **** *
+ 126:.\Generated_Source\PSoC5/LCD1.c **** *
+ 127:.\Generated_Source\PSoC5/LCD1.c **** * Parameters:
+ 128:.\Generated_Source\PSoC5/LCD1.c **** *  LCD1_initVar - global variable.
+ 129:.\Generated_Source\PSoC5/LCD1.c **** *
+ 130:.\Generated_Source\PSoC5/LCD1.c **** * Return:
+ 131:.\Generated_Source\PSoC5/LCD1.c **** *  LCD1_initVar - global variable.
+ 132:.\Generated_Source\PSoC5/LCD1.c **** *
+ 133:.\Generated_Source\PSoC5/LCD1.c **** * Reentrant:
+ 134:.\Generated_Source\PSoC5/LCD1.c **** *  No.
+ 135:.\Generated_Source\PSoC5/LCD1.c **** *
+ 136:.\Generated_Source\PSoC5/LCD1.c **** *******************************************************************************/
+ 137:.\Generated_Source\PSoC5/LCD1.c **** void LCD1_Start(void) 
+ 138:.\Generated_Source\PSoC5/LCD1.c **** {
+ 139:.\Generated_Source\PSoC5/LCD1.c ****     /* If not initialized then perform initialization */
+ 140:.\Generated_Source\PSoC5/LCD1.c ****     if(LCD1_initVar == 0u)
+ 141:.\Generated_Source\PSoC5/LCD1.c ****     {
+ 142:.\Generated_Source\PSoC5/LCD1.c ****         LCD1_Init();
+ 143:.\Generated_Source\PSoC5/LCD1.c ****         LCD1_initVar = 1u;
+ 144:.\Generated_Source\PSoC5/LCD1.c ****     }
+ 145:.\Generated_Source\PSoC5/LCD1.c **** 
+ 146:.\Generated_Source\PSoC5/LCD1.c ****     /* Turn on the LCD */
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 4
+
+
+ 147:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_Enable();
+ 148:.\Generated_Source\PSoC5/LCD1.c **** }
+ 149:.\Generated_Source\PSoC5/LCD1.c **** 
+ 150:.\Generated_Source\PSoC5/LCD1.c **** 
+ 151:.\Generated_Source\PSoC5/LCD1.c **** /*******************************************************************************
+ 152:.\Generated_Source\PSoC5/LCD1.c **** * Function Name: LCD1_Stop
+ 153:.\Generated_Source\PSoC5/LCD1.c **** ********************************************************************************
+ 154:.\Generated_Source\PSoC5/LCD1.c **** *
+ 155:.\Generated_Source\PSoC5/LCD1.c **** * Summary:
+ 156:.\Generated_Source\PSoC5/LCD1.c **** *  Turns off the display of the LCD screen.
+ 157:.\Generated_Source\PSoC5/LCD1.c **** *
+ 158:.\Generated_Source\PSoC5/LCD1.c **** * Parameters:
+ 159:.\Generated_Source\PSoC5/LCD1.c **** *  None.
+ 160:.\Generated_Source\PSoC5/LCD1.c **** *
+ 161:.\Generated_Source\PSoC5/LCD1.c **** * Return:
+ 162:.\Generated_Source\PSoC5/LCD1.c **** *  None.
+ 163:.\Generated_Source\PSoC5/LCD1.c **** *
+ 164:.\Generated_Source\PSoC5/LCD1.c **** * Reentrant:
+ 165:.\Generated_Source\PSoC5/LCD1.c **** *  No.
+ 166:.\Generated_Source\PSoC5/LCD1.c **** *
+ 167:.\Generated_Source\PSoC5/LCD1.c **** *******************************************************************************/
+ 168:.\Generated_Source\PSoC5/LCD1.c **** void LCD1_Stop(void) 
+ 169:.\Generated_Source\PSoC5/LCD1.c **** {
+ 170:.\Generated_Source\PSoC5/LCD1.c ****     /* Calls LCD Off Macro */
+ 171:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_DisplayOff();
+ 172:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_enableState = 0u;
+ 173:.\Generated_Source\PSoC5/LCD1.c **** }
+ 174:.\Generated_Source\PSoC5/LCD1.c **** 
+ 175:.\Generated_Source\PSoC5/LCD1.c **** 
+ 176:.\Generated_Source\PSoC5/LCD1.c **** /*******************************************************************************
+ 177:.\Generated_Source\PSoC5/LCD1.c **** *  Function Name: LCD1_Position
+ 178:.\Generated_Source\PSoC5/LCD1.c **** ********************************************************************************
+ 179:.\Generated_Source\PSoC5/LCD1.c **** *
+ 180:.\Generated_Source\PSoC5/LCD1.c **** * Summary:
+ 181:.\Generated_Source\PSoC5/LCD1.c **** *  Moves active cursor location to a point specified by the input arguments
+ 182:.\Generated_Source\PSoC5/LCD1.c **** *
+ 183:.\Generated_Source\PSoC5/LCD1.c **** * Parameters:
+ 184:.\Generated_Source\PSoC5/LCD1.c **** *  row:     Specific row of LCD module to be written
+ 185:.\Generated_Source\PSoC5/LCD1.c **** *  column:  Column of LCD module to be written
+ 186:.\Generated_Source\PSoC5/LCD1.c **** *
+ 187:.\Generated_Source\PSoC5/LCD1.c **** * Return:
+ 188:.\Generated_Source\PSoC5/LCD1.c **** *  None.
+ 189:.\Generated_Source\PSoC5/LCD1.c **** *
+ 190:.\Generated_Source\PSoC5/LCD1.c **** * Note:
+ 191:.\Generated_Source\PSoC5/LCD1.c **** *  This only applies for LCD displays which use the 2X40 address mode.
+ 192:.\Generated_Source\PSoC5/LCD1.c **** *  This results in Row 2 offset from row one by 0x28.
+ 193:.\Generated_Source\PSoC5/LCD1.c **** *  When there are more than 2 rows, each row must be fewer than 20 characters.
+ 194:.\Generated_Source\PSoC5/LCD1.c **** *
+ 195:.\Generated_Source\PSoC5/LCD1.c **** *******************************************************************************/
+ 196:.\Generated_Source\PSoC5/LCD1.c **** void LCD1_Position(uint8 row, uint8 column) 
+ 197:.\Generated_Source\PSoC5/LCD1.c **** {
+ 198:.\Generated_Source\PSoC5/LCD1.c ****     switch (row)
+ 199:.\Generated_Source\PSoC5/LCD1.c ****     {
+ 200:.\Generated_Source\PSoC5/LCD1.c ****         case (uint8)0:
+ 201:.\Generated_Source\PSoC5/LCD1.c ****             LCD1_WriteControl(LCD1_ROW_0_START + column);
+ 202:.\Generated_Source\PSoC5/LCD1.c ****             break;
+ 203:.\Generated_Source\PSoC5/LCD1.c ****         case (uint8) 1:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 5
+
+
+ 204:.\Generated_Source\PSoC5/LCD1.c ****             LCD1_WriteControl(LCD1_ROW_1_START + column);
+ 205:.\Generated_Source\PSoC5/LCD1.c ****             break;
+ 206:.\Generated_Source\PSoC5/LCD1.c ****         case (uint8) 2:
+ 207:.\Generated_Source\PSoC5/LCD1.c ****             LCD1_WriteControl(LCD1_ROW_2_START + column);
+ 208:.\Generated_Source\PSoC5/LCD1.c ****             break;
+ 209:.\Generated_Source\PSoC5/LCD1.c ****         case (uint8) 3:
+ 210:.\Generated_Source\PSoC5/LCD1.c ****             LCD1_WriteControl(LCD1_ROW_3_START + column);
+ 211:.\Generated_Source\PSoC5/LCD1.c ****             break;
+ 212:.\Generated_Source\PSoC5/LCD1.c ****         default:
+ 213:.\Generated_Source\PSoC5/LCD1.c ****             /* if default case is hit, invalid row argument was passed.*/
+ 214:.\Generated_Source\PSoC5/LCD1.c ****             break;
+ 215:.\Generated_Source\PSoC5/LCD1.c ****     }
+ 216:.\Generated_Source\PSoC5/LCD1.c **** }
+ 217:.\Generated_Source\PSoC5/LCD1.c **** 
+ 218:.\Generated_Source\PSoC5/LCD1.c **** 
+ 219:.\Generated_Source\PSoC5/LCD1.c **** /*******************************************************************************
+ 220:.\Generated_Source\PSoC5/LCD1.c **** * Function Name: LCD1_PrintString
+ 221:.\Generated_Source\PSoC5/LCD1.c **** ********************************************************************************
+ 222:.\Generated_Source\PSoC5/LCD1.c **** *
+ 223:.\Generated_Source\PSoC5/LCD1.c **** * Summary:
+ 224:.\Generated_Source\PSoC5/LCD1.c **** *  Writes a zero terminated string to the LCD.
+ 225:.\Generated_Source\PSoC5/LCD1.c **** *
+ 226:.\Generated_Source\PSoC5/LCD1.c **** * Parameters:
+ 227:.\Generated_Source\PSoC5/LCD1.c **** *  string:  pointer to head of char8 array to be written to the LCD module
+ 228:.\Generated_Source\PSoC5/LCD1.c **** *
+ 229:.\Generated_Source\PSoC5/LCD1.c **** * Return:
+ 230:.\Generated_Source\PSoC5/LCD1.c **** *  None.
+ 231:.\Generated_Source\PSoC5/LCD1.c **** *
+ 232:.\Generated_Source\PSoC5/LCD1.c **** *******************************************************************************/
+ 233:.\Generated_Source\PSoC5/LCD1.c **** void LCD1_PrintString(char8 const string[]) 
+ 234:.\Generated_Source\PSoC5/LCD1.c **** {
+ 235:.\Generated_Source\PSoC5/LCD1.c ****     uint8 indexU8 = 1u;
+ 236:.\Generated_Source\PSoC5/LCD1.c ****     char8 current = *string;
+ 237:.\Generated_Source\PSoC5/LCD1.c **** 
+ 238:.\Generated_Source\PSoC5/LCD1.c ****     /* Until null is reached, print next character */
+ 239:.\Generated_Source\PSoC5/LCD1.c ****     while((char8) '\0' != current)
+ 240:.\Generated_Source\PSoC5/LCD1.c ****     {
+ 241:.\Generated_Source\PSoC5/LCD1.c ****         LCD1_WriteData((uint8)current);
+ 242:.\Generated_Source\PSoC5/LCD1.c ****         current = string[indexU8];
+ 243:.\Generated_Source\PSoC5/LCD1.c ****         indexU8++;
+ 244:.\Generated_Source\PSoC5/LCD1.c ****     }
+ 245:.\Generated_Source\PSoC5/LCD1.c **** }
+ 246:.\Generated_Source\PSoC5/LCD1.c **** 
+ 247:.\Generated_Source\PSoC5/LCD1.c **** 
+ 248:.\Generated_Source\PSoC5/LCD1.c **** /*******************************************************************************
+ 249:.\Generated_Source\PSoC5/LCD1.c **** *  Function Name: LCD1_PutChar
+ 250:.\Generated_Source\PSoC5/LCD1.c **** ********************************************************************************
+ 251:.\Generated_Source\PSoC5/LCD1.c **** *
+ 252:.\Generated_Source\PSoC5/LCD1.c **** * Summary:
+ 253:.\Generated_Source\PSoC5/LCD1.c **** *  Writes a single character to the current cursor position of the LCD module.
+ 254:.\Generated_Source\PSoC5/LCD1.c **** *  Custom character names (_CUSTOM_0 through
+ 255:.\Generated_Source\PSoC5/LCD1.c **** *  _CUSTOM_7) are acceptable as inputs.
+ 256:.\Generated_Source\PSoC5/LCD1.c **** *
+ 257:.\Generated_Source\PSoC5/LCD1.c **** * Parameters:
+ 258:.\Generated_Source\PSoC5/LCD1.c **** *  character:  character to be written to the LCD
+ 259:.\Generated_Source\PSoC5/LCD1.c **** *
+ 260:.\Generated_Source\PSoC5/LCD1.c **** * Return:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 6
+
+
+ 261:.\Generated_Source\PSoC5/LCD1.c **** *  None.
+ 262:.\Generated_Source\PSoC5/LCD1.c **** *
+ 263:.\Generated_Source\PSoC5/LCD1.c **** *******************************************************************************/
+ 264:.\Generated_Source\PSoC5/LCD1.c **** void LCD1_PutChar(char8 character) 
+ 265:.\Generated_Source\PSoC5/LCD1.c **** {
+ 266:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WriteData((uint8)character);
+ 267:.\Generated_Source\PSoC5/LCD1.c **** }
+ 268:.\Generated_Source\PSoC5/LCD1.c **** 
+ 269:.\Generated_Source\PSoC5/LCD1.c **** 
+ 270:.\Generated_Source\PSoC5/LCD1.c **** /*******************************************************************************
+ 271:.\Generated_Source\PSoC5/LCD1.c **** *  Function Name: LCD1_WriteData
+ 272:.\Generated_Source\PSoC5/LCD1.c **** ********************************************************************************
+ 273:.\Generated_Source\PSoC5/LCD1.c **** *
+ 274:.\Generated_Source\PSoC5/LCD1.c **** * Summary:
+ 275:.\Generated_Source\PSoC5/LCD1.c **** *  Writes a data byte to the LCD module's Data Display RAM.
+ 276:.\Generated_Source\PSoC5/LCD1.c **** *
+ 277:.\Generated_Source\PSoC5/LCD1.c **** * Parameters:
+ 278:.\Generated_Source\PSoC5/LCD1.c **** *  dByte:  byte to be written to LCD module.
+ 279:.\Generated_Source\PSoC5/LCD1.c **** *
+ 280:.\Generated_Source\PSoC5/LCD1.c **** * Return:
+ 281:.\Generated_Source\PSoC5/LCD1.c **** *  None.
+ 282:.\Generated_Source\PSoC5/LCD1.c **** *
+ 283:.\Generated_Source\PSoC5/LCD1.c **** *******************************************************************************/
+ 284:.\Generated_Source\PSoC5/LCD1.c **** void LCD1_WriteData(uint8 dByte) 
+ 285:.\Generated_Source\PSoC5/LCD1.c **** {
+ 286:.\Generated_Source\PSoC5/LCD1.c ****     uint8 nibble;
+ 287:.\Generated_Source\PSoC5/LCD1.c **** 
+ 288:.\Generated_Source\PSoC5/LCD1.c ****     /* Write high nibble */
+ 289:.\Generated_Source\PSoC5/LCD1.c **** 	nibble = dByte >> LCD1_NIBBLE_SHIFT;
+ 290:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WrDatNib(nibble);
+ 291:.\Generated_Source\PSoC5/LCD1.c **** 
+ 292:.\Generated_Source\PSoC5/LCD1.c ****      CyDelayUs(LCD1_NIB_DELAY_US);
+ 293:.\Generated_Source\PSoC5/LCD1.c **** 	 
+ 294:.\Generated_Source\PSoC5/LCD1.c ****     /* Write low nibble */
+ 295:.\Generated_Source\PSoC5/LCD1.c **** 	nibble = dByte & LCD1_NIBBLE_MASK;
+ 296:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WrDatNib(nibble);
+ 297:.\Generated_Source\PSoC5/LCD1.c **** 	
+ 298:.\Generated_Source\PSoC5/LCD1.c **** 	CyDelayUs(LCD1_DATA_DELAY_US);
+ 299:.\Generated_Source\PSoC5/LCD1.c **** 
+ 300:.\Generated_Source\PSoC5/LCD1.c **** }
+ 301:.\Generated_Source\PSoC5/LCD1.c **** 
+ 302:.\Generated_Source\PSoC5/LCD1.c **** 
+ 303:.\Generated_Source\PSoC5/LCD1.c **** /*******************************************************************************
+ 304:.\Generated_Source\PSoC5/LCD1.c **** *  Function Name: LCD1_WriteControl
+ 305:.\Generated_Source\PSoC5/LCD1.c **** ********************************************************************************
+ 306:.\Generated_Source\PSoC5/LCD1.c **** *
+ 307:.\Generated_Source\PSoC5/LCD1.c **** * Summary:
+ 308:.\Generated_Source\PSoC5/LCD1.c **** *  Writes a command byte to the LCD module.
+ 309:.\Generated_Source\PSoC5/LCD1.c **** *
+ 310:.\Generated_Source\PSoC5/LCD1.c **** * Parameters:
+ 311:.\Generated_Source\PSoC5/LCD1.c **** *  cByte:   byte to be written to LCD module.
+ 312:.\Generated_Source\PSoC5/LCD1.c **** *
+ 313:.\Generated_Source\PSoC5/LCD1.c **** * Return:
+ 314:.\Generated_Source\PSoC5/LCD1.c **** *  None.
+ 315:.\Generated_Source\PSoC5/LCD1.c **** *
+ 316:.\Generated_Source\PSoC5/LCD1.c **** *******************************************************************************/
+ 317:.\Generated_Source\PSoC5/LCD1.c **** void LCD1_WriteControl(uint8 cByte) 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 7
+
+
+ 318:.\Generated_Source\PSoC5/LCD1.c **** {
+ 319:.\Generated_Source\PSoC5/LCD1.c ****     uint8 nibble;
+ 320:.\Generated_Source\PSoC5/LCD1.c **** 
+ 321:.\Generated_Source\PSoC5/LCD1.c ****     /* WrCntrlNib(High Nibble) */
+ 322:.\Generated_Source\PSoC5/LCD1.c **** 	 nibble = cByte >> LCD1_NIBBLE_SHIFT;
+ 323:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WrCntrlNib(nibble);
+ 324:.\Generated_Source\PSoC5/LCD1.c **** 
+ 325:.\Generated_Source\PSoC5/LCD1.c ****     CyDelayUs(LCD1_NIB_DELAY_US);
+ 326:.\Generated_Source\PSoC5/LCD1.c **** 	
+ 327:.\Generated_Source\PSoC5/LCD1.c ****     /* WrCntrlNib(Low Nibble) */
+ 328:.\Generated_Source\PSoC5/LCD1.c **** 	nibble = cByte & LCD1_NIBBLE_MASK;
+ 329:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WrCntrlNib(nibble);
+ 330:.\Generated_Source\PSoC5/LCD1.c **** 
+ 331:.\Generated_Source\PSoC5/LCD1.c ****      CyDelayUs(LCD1_CMD_DELAY_US);
+ 332:.\Generated_Source\PSoC5/LCD1.c **** }
+ 333:.\Generated_Source\PSoC5/LCD1.c **** 
+ 334:.\Generated_Source\PSoC5/LCD1.c **** 
+ 335:.\Generated_Source\PSoC5/LCD1.c **** /*******************************************************************************
+ 336:.\Generated_Source\PSoC5/LCD1.c **** * Function Name: LCD1_IsReady
+ 337:.\Generated_Source\PSoC5/LCD1.c **** ********************************************************************************
+ 338:.\Generated_Source\PSoC5/LCD1.c **** *
+ 339:.\Generated_Source\PSoC5/LCD1.c **** * Summary:
+ 340:.\Generated_Source\PSoC5/LCD1.c **** *  Polls LCD until the ready bit is set.
+ 341:.\Generated_Source\PSoC5/LCD1.c **** *
+ 342:.\Generated_Source\PSoC5/LCD1.c **** * Parameters:
+ 343:.\Generated_Source\PSoC5/LCD1.c **** *  None.
+ 344:.\Generated_Source\PSoC5/LCD1.c **** *
+ 345:.\Generated_Source\PSoC5/LCD1.c **** * Return:
+ 346:.\Generated_Source\PSoC5/LCD1.c **** *  None.
+ 347:.\Generated_Source\PSoC5/LCD1.c **** *
+ 348:.\Generated_Source\PSoC5/LCD1.c **** * Note:
+ 349:.\Generated_Source\PSoC5/LCD1.c **** *  Changes pins to High-Z.
+ 350:.\Generated_Source\PSoC5/LCD1.c **** *
+ 351:.\Generated_Source\PSoC5/LCD1.c **** *******************************************************************************/
+ 352:.\Generated_Source\PSoC5/LCD1.c **** void LCD1_IsReady(void) 
+ 353:.\Generated_Source\PSoC5/LCD1.c **** {
+ 354:.\Generated_Source\PSoC5/LCD1.c ****    
+ 355:.\Generated_Source\PSoC5/LCD1.c **** 	CyDelay(1u);
+ 356:.\Generated_Source\PSoC5/LCD1.c **** 	
+ 357:.\Generated_Source\PSoC5/LCD1.c **** }
+ 358:.\Generated_Source\PSoC5/LCD1.c **** 
+ 359:.\Generated_Source\PSoC5/LCD1.c **** 
+ 360:.\Generated_Source\PSoC5/LCD1.c **** /*******************************************************************************
+ 361:.\Generated_Source\PSoC5/LCD1.c **** *  Function Name: LCD1_WrDatNib
+ 362:.\Generated_Source\PSoC5/LCD1.c **** ********************************************************************************
+ 363:.\Generated_Source\PSoC5/LCD1.c **** *
+ 364:.\Generated_Source\PSoC5/LCD1.c **** * Summary:
+ 365:.\Generated_Source\PSoC5/LCD1.c **** *  Writes a data nibble to the LCD module.
+ 366:.\Generated_Source\PSoC5/LCD1.c **** *
+ 367:.\Generated_Source\PSoC5/LCD1.c **** * Parameters:
+ 368:.\Generated_Source\PSoC5/LCD1.c **** *  nibble:  byte containing nibble in least significant nibble to be written
+ 369:.\Generated_Source\PSoC5/LCD1.c **** *           to LCD module.
+ 370:.\Generated_Source\PSoC5/LCD1.c **** *
+ 371:.\Generated_Source\PSoC5/LCD1.c **** * Return:
+ 372:.\Generated_Source\PSoC5/LCD1.c **** *  None.
+ 373:.\Generated_Source\PSoC5/LCD1.c **** *
+ 374:.\Generated_Source\PSoC5/LCD1.c **** *******************************************************************************/
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 8
+
+
+ 375:.\Generated_Source\PSoC5/LCD1.c **** static void LCD1_WrDatNib(uint8 nibble) 
+ 376:.\Generated_Source\PSoC5/LCD1.c **** {
+ 377:.\Generated_Source\PSoC5/LCD1.c **** 
+ 378:.\Generated_Source\PSoC5/LCD1.c ****     /* RS shoul be low to select data register */
+ 379:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_CNTL_REG |= LCD1_RS;
+ 380:.\Generated_Source\PSoC5/LCD1.c ****     /* Reset RW for write operation */
+ 381:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_CNTL_REG &= ~LCD1_RW;
+ 382:.\Generated_Source\PSoC5/LCD1.c **** 
+ 383:.\Generated_Source\PSoC5/LCD1.c ****     /* Two following lines of code will provide us with 40ns delay */
+ 384:.\Generated_Source\PSoC5/LCD1.c ****     /* Clear data pins */
+ 385:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_CNTL_REG &= ~LCD1_DATA_MASK;
+ 386:.\Generated_Source\PSoC5/LCD1.c **** 
+ 387:.\Generated_Source\PSoC5/LCD1.c ****     /* Write in data, bring E high*/
+ 388:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_CNTL_REG |= (LCD1_E | nibble);
+ 389:.\Generated_Source\PSoC5/LCD1.c **** 
+ 390:.\Generated_Source\PSoC5/LCD1.c ****     /* Minimum of 230 ns delay */
+ 391:.\Generated_Source\PSoC5/LCD1.c ****     CyDelayUs(1u);
+ 392:.\Generated_Source\PSoC5/LCD1.c **** 
+ 393:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_CNTL_REG &= ~LCD1_E;
+ 394:.\Generated_Source\PSoC5/LCD1.c **** 	
+ 395:.\Generated_Source\PSoC5/LCD1.c **** }
+ 396:.\Generated_Source\PSoC5/LCD1.c **** 
+ 397:.\Generated_Source\PSoC5/LCD1.c **** 
+ 398:.\Generated_Source\PSoC5/LCD1.c **** /*******************************************************************************
+ 399:.\Generated_Source\PSoC5/LCD1.c **** *  Function Name: LCD1_WrCntrlNib
+ 400:.\Generated_Source\PSoC5/LCD1.c **** ********************************************************************************
+ 401:.\Generated_Source\PSoC5/LCD1.c **** *
+ 402:.\Generated_Source\PSoC5/LCD1.c **** * Summary:
+ 403:.\Generated_Source\PSoC5/LCD1.c **** *  Writes a control nibble to the LCD module.
+ 404:.\Generated_Source\PSoC5/LCD1.c **** *
+ 405:.\Generated_Source\PSoC5/LCD1.c **** * Parameters:
+ 406:.\Generated_Source\PSoC5/LCD1.c **** *  nibble:  byte containing nibble in least significant nibble to be written
+ 407:.\Generated_Source\PSoC5/LCD1.c **** *           to LCD module.
+ 408:.\Generated_Source\PSoC5/LCD1.c **** *
+ 409:.\Generated_Source\PSoC5/LCD1.c **** * Return:
+ 410:.\Generated_Source\PSoC5/LCD1.c **** *  None.
+ 411:.\Generated_Source\PSoC5/LCD1.c **** *
+ 412:.\Generated_Source\PSoC5/LCD1.c **** *******************************************************************************/
+ 413:.\Generated_Source\PSoC5/LCD1.c **** static void LCD1_WrCntrlNib(uint8 nibble) 
+ 414:.\Generated_Source\PSoC5/LCD1.c **** {
+  26              		.loc 1 414 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              	.LVL0:
+  31 0000 10B5     		push	{r4, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 4, -8
+  34              		.cfi_offset 14, -4
+ 415:.\Generated_Source\PSoC5/LCD1.c **** 	
+ 416:.\Generated_Source\PSoC5/LCD1.c **** 	/* RS and RW shoul be low to select instruction register and  write operation respectively */
+ 417:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_CNTL_REG &= ~(LCD1_RS | LCD1_RW);
+  35              		.loc 1 417 0
+  36 0002 0B4C     		ldr	r4, .L2
+  37 0004 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+  38 0006 03F09F03 		and	r3, r3, #159
+  39 000a 2370     		strb	r3, [r4]
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 9
+
+
+ 418:.\Generated_Source\PSoC5/LCD1.c **** 
+ 419:.\Generated_Source\PSoC5/LCD1.c ****     /* Two following lines of code will give provide ua with 40ns delay */
+ 420:.\Generated_Source\PSoC5/LCD1.c ****     /* Clear data pins */
+ 421:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_CNTL_REG &= ~LCD1_DATA_MASK;
+  40              		.loc 1 421 0
+  41 000c 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+  42 000e 03F0F003 		and	r3, r3, #240
+  43 0012 2370     		strb	r3, [r4]
+ 422:.\Generated_Source\PSoC5/LCD1.c **** 
+ 423:.\Generated_Source\PSoC5/LCD1.c ****     /* Write control data and set enable signal */
+ 424:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_CNTL_REG |= (LCD1_E | nibble);
+  44              		.loc 1 424 0
+  45 0014 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+  46 0016 43F01003 		orr	r3, r3, #16
+  47 001a 1843     		orrs	r0, r0, r3
+  48              	.LVL1:
+  49 001c 2070     		strb	r0, [r4]
+ 425:.\Generated_Source\PSoC5/LCD1.c **** 
+ 426:.\Generated_Source\PSoC5/LCD1.c ****     /* Minimum of 230 ns delay */
+ 427:.\Generated_Source\PSoC5/LCD1.c ****     CyDelayUs(1u);
+  50              		.loc 1 427 0
+  51 001e 0120     		movs	r0, #1
+  52 0020 FFF7FEFF 		bl	CyDelayUs
+  53              	.LVL2:
+ 428:.\Generated_Source\PSoC5/LCD1.c **** 
+ 429:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_CNTL_REG &= ~LCD1_E;
+  54              		.loc 1 429 0
+  55 0024 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+  56 0026 03F0EF03 		and	r3, r3, #239
+  57 002a 2370     		strb	r3, [r4]
+  58 002c 10BD     		pop	{r4, pc}
+  59              	.L3:
+  60 002e 00BF     		.align	2
+  61              	.L2:
+  62 0030 75640040 		.word	1073767541
+  63              		.cfi_endproc
+  64              	.LFE11:
+  65              		.size	LCD1_WrCntrlNib, .-LCD1_WrCntrlNib
+  66              		.section	.text.LCD1_WrDatNib,"ax",%progbits
+  67              		.align	1
+  68              		.thumb
+  69              		.thumb_func
+  70              		.type	LCD1_WrDatNib, %function
+  71              	LCD1_WrDatNib:
+  72              	.LFB10:
+ 376:.\Generated_Source\PSoC5/LCD1.c **** 
+  73              		.loc 1 376 0
+  74              		.cfi_startproc
+  75              		@ args = 0, pretend = 0, frame = 0
+  76              		@ frame_needed = 0, uses_anonymous_args = 0
+  77              	.LVL3:
+  78 0000 10B5     		push	{r4, lr}
+  79              		.cfi_def_cfa_offset 8
+  80              		.cfi_offset 4, -8
+  81              		.cfi_offset 14, -4
+ 379:.\Generated_Source\PSoC5/LCD1.c ****     /* Reset RW for write operation */
+  82              		.loc 1 379 0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 10
+
+
+  83 0002 0D4C     		ldr	r4, .L5
+  84 0004 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+  85 0006 43F02003 		orr	r3, r3, #32
+  86 000a 2370     		strb	r3, [r4]
+ 381:.\Generated_Source\PSoC5/LCD1.c **** 
+  87              		.loc 1 381 0
+  88 000c 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+  89 000e 03F0BF03 		and	r3, r3, #191
+  90 0012 2370     		strb	r3, [r4]
+ 385:.\Generated_Source\PSoC5/LCD1.c **** 
+  91              		.loc 1 385 0
+  92 0014 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+  93 0016 03F0F003 		and	r3, r3, #240
+  94 001a 2370     		strb	r3, [r4]
+ 388:.\Generated_Source\PSoC5/LCD1.c **** 
+  95              		.loc 1 388 0
+  96 001c 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+  97 001e 43F01003 		orr	r3, r3, #16
+  98 0022 1843     		orrs	r0, r0, r3
+  99              	.LVL4:
+ 100 0024 2070     		strb	r0, [r4]
+ 391:.\Generated_Source\PSoC5/LCD1.c **** 
+ 101              		.loc 1 391 0
+ 102 0026 0120     		movs	r0, #1
+ 103 0028 FFF7FEFF 		bl	CyDelayUs
+ 104              	.LVL5:
+ 393:.\Generated_Source\PSoC5/LCD1.c **** 	
+ 105              		.loc 1 393 0
+ 106 002c 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 107 002e 03F0EF03 		and	r3, r3, #239
+ 108 0032 2370     		strb	r3, [r4]
+ 109 0034 10BD     		pop	{r4, pc}
+ 110              	.L6:
+ 111 0036 00BF     		.align	2
+ 112              	.L5:
+ 113 0038 75640040 		.word	1073767541
+ 114              		.cfi_endproc
+ 115              	.LFE10:
+ 116              		.size	LCD1_WrDatNib, .-LCD1_WrDatNib
+ 117              		.section	.text.LCD1_WriteData,"ax",%progbits
+ 118              		.align	1
+ 119              		.global	LCD1_WriteData
+ 120              		.thumb
+ 121              		.thumb_func
+ 122              		.type	LCD1_WriteData, %function
+ 123              	LCD1_WriteData:
+ 124              	.LFB7:
+ 285:.\Generated_Source\PSoC5/LCD1.c ****     uint8 nibble;
+ 125              		.loc 1 285 0
+ 126              		.cfi_startproc
+ 127              		@ args = 0, pretend = 0, frame = 0
+ 128              		@ frame_needed = 0, uses_anonymous_args = 0
+ 129              	.LVL6:
+ 130 0000 10B5     		push	{r4, lr}
+ 131              		.cfi_def_cfa_offset 8
+ 132              		.cfi_offset 4, -8
+ 133              		.cfi_offset 14, -4
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 11
+
+
+ 285:.\Generated_Source\PSoC5/LCD1.c ****     uint8 nibble;
+ 134              		.loc 1 285 0
+ 135 0002 0446     		mov	r4, r0
+ 290:.\Generated_Source\PSoC5/LCD1.c **** 
+ 136              		.loc 1 290 0
+ 137 0004 0009     		lsrs	r0, r0, #4
+ 138              	.LVL7:
+ 139 0006 FFF7FEFF 		bl	LCD1_WrDatNib
+ 140              	.LVL8:
+ 292:.\Generated_Source\PSoC5/LCD1.c **** 	 
+ 141              		.loc 1 292 0
+ 142 000a 6420     		movs	r0, #100
+ 143 000c FFF7FEFF 		bl	CyDelayUs
+ 144              	.LVL9:
+ 296:.\Generated_Source\PSoC5/LCD1.c **** 	
+ 145              		.loc 1 296 0
+ 146 0010 04F00F00 		and	r0, r4, #15
+ 147 0014 FFF7FEFF 		bl	LCD1_WrDatNib
+ 148              	.LVL10:
+ 300:.\Generated_Source\PSoC5/LCD1.c **** 
+ 149              		.loc 1 300 0
+ 150 0018 BDE81040 		pop	{r4, lr}
+ 151              		.cfi_restore 14
+ 152              		.cfi_restore 4
+ 153              		.cfi_def_cfa_offset 0
+ 154              	.LVL11:
+ 298:.\Generated_Source\PSoC5/LCD1.c **** 
+ 155              		.loc 1 298 0
+ 156 001c 9620     		movs	r0, #150
+ 157 001e FFF7FEBF 		b	CyDelayUs
+ 158              	.LVL12:
+ 159              		.cfi_endproc
+ 160              	.LFE7:
+ 161              		.size	LCD1_WriteData, .-LCD1_WriteData
+ 162              		.section	.text.LCD1_PrintString,"ax",%progbits
+ 163              		.align	1
+ 164              		.global	LCD1_PrintString
+ 165              		.thumb
+ 166              		.thumb_func
+ 167              		.type	LCD1_PrintString, %function
+ 168              	LCD1_PrintString:
+ 169              	.LFB5:
+ 234:.\Generated_Source\PSoC5/LCD1.c ****     uint8 indexU8 = 1u;
+ 170              		.loc 1 234 0
+ 171              		.cfi_startproc
+ 172              		@ args = 0, pretend = 0, frame = 0
+ 173              		@ frame_needed = 0, uses_anonymous_args = 0
+ 174              	.LVL13:
+ 175 0000 38B5     		push	{r3, r4, r5, lr}
+ 176              		.cfi_def_cfa_offset 16
+ 177              		.cfi_offset 3, -16
+ 178              		.cfi_offset 4, -12
+ 179              		.cfi_offset 5, -8
+ 180              		.cfi_offset 14, -4
+ 234:.\Generated_Source\PSoC5/LCD1.c ****     uint8 indexU8 = 1u;
+ 181              		.loc 1 234 0
+ 182 0002 0546     		mov	r5, r0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 12
+
+
+ 236:.\Generated_Source\PSoC5/LCD1.c **** 
+ 183              		.loc 1 236 0
+ 184 0004 0078     		ldrb	r0, [r0]	@ zero_extendqisi2
+ 185              	.LVL14:
+ 235:.\Generated_Source\PSoC5/LCD1.c ****     char8 current = *string;
+ 186              		.loc 1 235 0
+ 187 0006 0124     		movs	r4, #1
+ 188              	.LVL15:
+ 189              	.L9:
+ 239:.\Generated_Source\PSoC5/LCD1.c ****     {
+ 190              		.loc 1 239 0
+ 191 0008 28B1     		cbz	r0, .L12
+ 241:.\Generated_Source\PSoC5/LCD1.c ****         current = string[indexU8];
+ 192              		.loc 1 241 0
+ 193 000a FFF7FEFF 		bl	LCD1_WriteData
+ 194              	.LVL16:
+ 242:.\Generated_Source\PSoC5/LCD1.c ****         indexU8++;
+ 195              		.loc 1 242 0
+ 196 000e 285D     		ldrb	r0, [r5, r4]	@ zero_extendqisi2
+ 197              	.LVL17:
+ 243:.\Generated_Source\PSoC5/LCD1.c ****     }
+ 198              		.loc 1 243 0
+ 199 0010 0134     		adds	r4, r4, #1
+ 200              	.LVL18:
+ 201 0012 E4B2     		uxtb	r4, r4
+ 202              	.LVL19:
+ 203 0014 F8E7     		b	.L9
+ 204              	.L12:
+ 245:.\Generated_Source\PSoC5/LCD1.c **** 
+ 205              		.loc 1 245 0
+ 206 0016 38BD     		pop	{r3, r4, r5, pc}
+ 207              		.cfi_endproc
+ 208              	.LFE5:
+ 209              		.size	LCD1_PrintString, .-LCD1_PrintString
+ 210              		.section	.text.LCD1_PutChar,"ax",%progbits
+ 211              		.align	1
+ 212              		.global	LCD1_PutChar
+ 213              		.thumb
+ 214              		.thumb_func
+ 215              		.type	LCD1_PutChar, %function
+ 216              	LCD1_PutChar:
+ 217              	.LFB6:
+ 265:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WriteData((uint8)character);
+ 218              		.loc 1 265 0
+ 219              		.cfi_startproc
+ 220              		@ args = 0, pretend = 0, frame = 0
+ 221              		@ frame_needed = 0, uses_anonymous_args = 0
+ 222              		@ link register save eliminated.
+ 223              	.LVL20:
+ 266:.\Generated_Source\PSoC5/LCD1.c **** }
+ 224              		.loc 1 266 0
+ 225 0000 FFF7FEBF 		b	LCD1_WriteData
+ 226              	.LVL21:
+ 227              		.cfi_endproc
+ 228              	.LFE6:
+ 229              		.size	LCD1_PutChar, .-LCD1_PutChar
+ 230              		.section	.text.LCD1_WriteControl,"ax",%progbits
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 13
+
+
+ 231              		.align	1
+ 232              		.global	LCD1_WriteControl
+ 233              		.thumb
+ 234              		.thumb_func
+ 235              		.type	LCD1_WriteControl, %function
+ 236              	LCD1_WriteControl:
+ 237              	.LFB8:
+ 318:.\Generated_Source\PSoC5/LCD1.c ****     uint8 nibble;
+ 238              		.loc 1 318 0
+ 239              		.cfi_startproc
+ 240              		@ args = 0, pretend = 0, frame = 0
+ 241              		@ frame_needed = 0, uses_anonymous_args = 0
+ 242              	.LVL22:
+ 243 0000 10B5     		push	{r4, lr}
+ 244              		.cfi_def_cfa_offset 8
+ 245              		.cfi_offset 4, -8
+ 246              		.cfi_offset 14, -4
+ 318:.\Generated_Source\PSoC5/LCD1.c ****     uint8 nibble;
+ 247              		.loc 1 318 0
+ 248 0002 0446     		mov	r4, r0
+ 323:.\Generated_Source\PSoC5/LCD1.c **** 
+ 249              		.loc 1 323 0
+ 250 0004 0009     		lsrs	r0, r0, #4
+ 251              	.LVL23:
+ 252 0006 FFF7FEFF 		bl	LCD1_WrCntrlNib
+ 253              	.LVL24:
+ 325:.\Generated_Source\PSoC5/LCD1.c **** 	
+ 254              		.loc 1 325 0
+ 255 000a 6420     		movs	r0, #100
+ 256 000c FFF7FEFF 		bl	CyDelayUs
+ 257              	.LVL25:
+ 329:.\Generated_Source\PSoC5/LCD1.c **** 
+ 258              		.loc 1 329 0
+ 259 0010 04F00F00 		and	r0, r4, #15
+ 260 0014 FFF7FEFF 		bl	LCD1_WrCntrlNib
+ 261              	.LVL26:
+ 332:.\Generated_Source\PSoC5/LCD1.c **** 
+ 262              		.loc 1 332 0
+ 263 0018 BDE81040 		pop	{r4, lr}
+ 264              		.cfi_restore 14
+ 265              		.cfi_restore 4
+ 266              		.cfi_def_cfa_offset 0
+ 267              	.LVL27:
+ 331:.\Generated_Source\PSoC5/LCD1.c **** }
+ 268              		.loc 1 331 0
+ 269 001c 40F2DC50 		movw	r0, #1500
+ 270 0020 FFF7FEBF 		b	CyDelayUs
+ 271              	.LVL28:
+ 272              		.cfi_endproc
+ 273              	.LFE8:
+ 274              		.size	LCD1_WriteControl, .-LCD1_WriteControl
+ 275              		.section	.text.LCD1_Init,"ax",%progbits
+ 276              		.align	1
+ 277              		.global	LCD1_Init
+ 278              		.thumb
+ 279              		.thumb_func
+ 280              		.type	LCD1_Init, %function
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 14
+
+
+ 281              	LCD1_Init:
+ 282              	.LFB0:
+  56:.\Generated_Source\PSoC5/LCD1.c ****     /* INIT CODE */
+ 283              		.loc 1 56 0
+ 284              		.cfi_startproc
+ 285              		@ args = 0, pretend = 0, frame = 0
+ 286              		@ frame_needed = 0, uses_anonymous_args = 0
+ 287 0000 08B5     		push	{r3, lr}
+ 288              		.cfi_def_cfa_offset 8
+ 289              		.cfi_offset 3, -8
+ 290              		.cfi_offset 14, -4
+  58:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WrCntrlNib(LCD1_DISPLAY_8_BIT_INIT);   /* Selects 8-bit mode */
+ 291              		.loc 1 58 0
+ 292 0002 2820     		movs	r0, #40
+ 293 0004 FFF7FEFF 		bl	CyDelay
+ 294              	.LVL29:
+  59:.\Generated_Source\PSoC5/LCD1.c ****     CyDelay(5u);                                                         /* Delay 5 ms */
+ 295              		.loc 1 59 0
+ 296 0008 0320     		movs	r0, #3
+ 297 000a FFF7FEFF 		bl	LCD1_WrCntrlNib
+ 298              	.LVL30:
+  60:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WrCntrlNib(LCD1_DISPLAY_8_BIT_INIT);   /* Selects 8-bit mode */
+ 299              		.loc 1 60 0
+ 300 000e 0520     		movs	r0, #5
+ 301 0010 FFF7FEFF 		bl	CyDelay
+ 302              	.LVL31:
+  61:.\Generated_Source\PSoC5/LCD1.c ****     CyDelay(15u);                                                        /* Delay 15 ms */
+ 303              		.loc 1 61 0
+ 304 0014 0320     		movs	r0, #3
+ 305 0016 FFF7FEFF 		bl	LCD1_WrCntrlNib
+ 306              	.LVL32:
+  62:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WrCntrlNib(LCD1_DISPLAY_8_BIT_INIT);   /* Selects 8-bit mode */
+ 307              		.loc 1 62 0
+ 308 001a 0F20     		movs	r0, #15
+ 309 001c FFF7FEFF 		bl	CyDelay
+ 310              	.LVL33:
+  63:.\Generated_Source\PSoC5/LCD1.c ****     CyDelay(1u);                                                         /* Delay 1 ms */
+ 311              		.loc 1 63 0
+ 312 0020 0320     		movs	r0, #3
+ 313 0022 FFF7FEFF 		bl	LCD1_WrCntrlNib
+ 314              	.LVL34:
+  64:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WrCntrlNib(LCD1_DISPLAY_4_BIT_INIT);   /* Selects 4-bit mode */
+ 315              		.loc 1 64 0
+ 316 0026 0120     		movs	r0, #1
+ 317 0028 FFF7FEFF 		bl	CyDelay
+ 318              	.LVL35:
+  65:.\Generated_Source\PSoC5/LCD1.c ****     CyDelay(5u);                                                         /* Delay 5 ms */
+ 319              		.loc 1 65 0
+ 320 002c 0220     		movs	r0, #2
+ 321 002e FFF7FEFF 		bl	LCD1_WrCntrlNib
+ 322              	.LVL36:
+  66:.\Generated_Source\PSoC5/LCD1.c **** 
+ 323              		.loc 1 66 0
+ 324 0032 0520     		movs	r0, #5
+ 325 0034 FFF7FEFF 		bl	CyDelay
+ 326              	.LVL37:
+  68:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WriteControl(LCD1_DISPLAY_CURSOR_ON);      /* Turn Display, Cursor ON */
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 15
+
+
+ 327              		.loc 1 68 0
+ 328 0038 0620     		movs	r0, #6
+ 329 003a FFF7FEFF 		bl	LCD1_WriteControl
+ 330              	.LVL38:
+  69:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WriteControl(LCD1_DISPLAY_2_LINES_5x10);   /* 2 Lines by 5x10 Characters */
+ 331              		.loc 1 69 0
+ 332 003e 0E20     		movs	r0, #14
+ 333 0040 FFF7FEFF 		bl	LCD1_WriteControl
+ 334              	.LVL39:
+  70:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WriteControl(LCD1_DISPLAY_CURSOR_OFF);     /* Turn Display, Cursor OFF */
+ 335              		.loc 1 70 0
+ 336 0044 2C20     		movs	r0, #44
+ 337 0046 FFF7FEFF 		bl	LCD1_WriteControl
+ 338              	.LVL40:
+  71:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WriteControl(LCD1_CLEAR_DISPLAY);          /* Clear LCD Screen */
+ 339              		.loc 1 71 0
+ 340 004a 0820     		movs	r0, #8
+ 341 004c FFF7FEFF 		bl	LCD1_WriteControl
+ 342              	.LVL41:
+  72:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WriteControl(LCD1_DISPLAY_ON_CURSOR_OFF);  /* Turn Display ON, Cursor OFF */
+ 343              		.loc 1 72 0
+ 344 0050 0120     		movs	r0, #1
+ 345 0052 FFF7FEFF 		bl	LCD1_WriteControl
+ 346              	.LVL42:
+  73:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_WriteControl(LCD1_RESET_CURSOR_POSITION);  /* Set Cursor to 0,0 */
+ 347              		.loc 1 73 0
+ 348 0056 0C20     		movs	r0, #12
+ 349 0058 FFF7FEFF 		bl	LCD1_WriteControl
+ 350              	.LVL43:
+  74:.\Generated_Source\PSoC5/LCD1.c ****     CyDelay(5u);
+ 351              		.loc 1 74 0
+ 352 005c 0320     		movs	r0, #3
+ 353 005e FFF7FEFF 		bl	LCD1_WriteControl
+ 354              	.LVL44:
+  80:.\Generated_Source\PSoC5/LCD1.c **** 
+ 355              		.loc 1 80 0
+ 356 0062 BDE80840 		pop	{r3, lr}
+ 357              		.cfi_restore 14
+ 358              		.cfi_restore 3
+ 359              		.cfi_def_cfa_offset 0
+  75:.\Generated_Source\PSoC5/LCD1.c **** 
+ 360              		.loc 1 75 0
+ 361 0066 0520     		movs	r0, #5
+ 362 0068 FFF7FEBF 		b	CyDelay
+ 363              	.LVL45:
+ 364              		.cfi_endproc
+ 365              	.LFE0:
+ 366              		.size	LCD1_Init, .-LCD1_Init
+ 367              		.section	.text.LCD1_Enable,"ax",%progbits
+ 368              		.align	1
+ 369              		.global	LCD1_Enable
+ 370              		.thumb
+ 371              		.thumb_func
+ 372              		.type	LCD1_Enable, %function
+ 373              	LCD1_Enable:
+ 374              	.LFB1:
+ 105:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_DisplayOn();
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 16
+
+
+ 375              		.loc 1 105 0
+ 376              		.cfi_startproc
+ 377              		@ args = 0, pretend = 0, frame = 0
+ 378              		@ frame_needed = 0, uses_anonymous_args = 0
+ 379 0000 08B5     		push	{r3, lr}
+ 380              		.cfi_def_cfa_offset 8
+ 381              		.cfi_offset 3, -8
+ 382              		.cfi_offset 14, -4
+ 106:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_enableState = 1u;
+ 383              		.loc 1 106 0
+ 384 0002 0C20     		movs	r0, #12
+ 385 0004 FFF7FEFF 		bl	LCD1_WriteControl
+ 386              	.LVL46:
+ 107:.\Generated_Source\PSoC5/LCD1.c **** }
+ 387              		.loc 1 107 0
+ 388 0008 014B     		ldr	r3, .L17
+ 389 000a 0122     		movs	r2, #1
+ 390 000c 1A70     		strb	r2, [r3]
+ 391 000e 08BD     		pop	{r3, pc}
+ 392              	.L18:
+ 393              		.align	2
+ 394              	.L17:
+ 395 0010 00000000 		.word	.LANCHOR0
+ 396              		.cfi_endproc
+ 397              	.LFE1:
+ 398              		.size	LCD1_Enable, .-LCD1_Enable
+ 399              		.section	.text.LCD1_Start,"ax",%progbits
+ 400              		.align	1
+ 401              		.global	LCD1_Start
+ 402              		.thumb
+ 403              		.thumb_func
+ 404              		.type	LCD1_Start, %function
+ 405              	LCD1_Start:
+ 406              	.LFB2:
+ 138:.\Generated_Source\PSoC5/LCD1.c ****     /* If not initialized then perform initialization */
+ 407              		.loc 1 138 0
+ 408              		.cfi_startproc
+ 409              		@ args = 0, pretend = 0, frame = 0
+ 410              		@ frame_needed = 0, uses_anonymous_args = 0
+ 411 0000 10B5     		push	{r4, lr}
+ 412              		.cfi_def_cfa_offset 8
+ 413              		.cfi_offset 4, -8
+ 414              		.cfi_offset 14, -4
+ 140:.\Generated_Source\PSoC5/LCD1.c ****     {
+ 415              		.loc 1 140 0
+ 416 0002 054C     		ldr	r4, .L21
+ 417 0004 6378     		ldrb	r3, [r4, #1]	@ zero_extendqisi2
+ 418 0006 1BB9     		cbnz	r3, .L20
+ 142:.\Generated_Source\PSoC5/LCD1.c ****         LCD1_initVar = 1u;
+ 419              		.loc 1 142 0
+ 420 0008 FFF7FEFF 		bl	LCD1_Init
+ 421              	.LVL47:
+ 143:.\Generated_Source\PSoC5/LCD1.c ****     }
+ 422              		.loc 1 143 0
+ 423 000c 0123     		movs	r3, #1
+ 424 000e 6370     		strb	r3, [r4, #1]
+ 425              	.L20:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 17
+
+
+ 148:.\Generated_Source\PSoC5/LCD1.c **** 
+ 426              		.loc 1 148 0
+ 427 0010 BDE81040 		pop	{r4, lr}
+ 428              		.cfi_restore 14
+ 429              		.cfi_restore 4
+ 430              		.cfi_def_cfa_offset 0
+ 147:.\Generated_Source\PSoC5/LCD1.c **** }
+ 431              		.loc 1 147 0
+ 432 0014 FFF7FEBF 		b	LCD1_Enable
+ 433              	.LVL48:
+ 434              	.L22:
+ 435              		.align	2
+ 436              	.L21:
+ 437 0018 00000000 		.word	.LANCHOR0
+ 438              		.cfi_endproc
+ 439              	.LFE2:
+ 440              		.size	LCD1_Start, .-LCD1_Start
+ 441              		.section	.text.LCD1_Stop,"ax",%progbits
+ 442              		.align	1
+ 443              		.global	LCD1_Stop
+ 444              		.thumb
+ 445              		.thumb_func
+ 446              		.type	LCD1_Stop, %function
+ 447              	LCD1_Stop:
+ 448              	.LFB3:
+ 169:.\Generated_Source\PSoC5/LCD1.c ****     /* Calls LCD Off Macro */
+ 449              		.loc 1 169 0
+ 450              		.cfi_startproc
+ 451              		@ args = 0, pretend = 0, frame = 0
+ 452              		@ frame_needed = 0, uses_anonymous_args = 0
+ 453 0000 08B5     		push	{r3, lr}
+ 454              		.cfi_def_cfa_offset 8
+ 455              		.cfi_offset 3, -8
+ 456              		.cfi_offset 14, -4
+ 171:.\Generated_Source\PSoC5/LCD1.c ****     LCD1_enableState = 0u;
+ 457              		.loc 1 171 0
+ 458 0002 0820     		movs	r0, #8
+ 459 0004 FFF7FEFF 		bl	LCD1_WriteControl
+ 460              	.LVL49:
+ 172:.\Generated_Source\PSoC5/LCD1.c **** }
+ 461              		.loc 1 172 0
+ 462 0008 014B     		ldr	r3, .L24
+ 463 000a 0022     		movs	r2, #0
+ 464 000c 1A70     		strb	r2, [r3]
+ 465 000e 08BD     		pop	{r3, pc}
+ 466              	.L25:
+ 467              		.align	2
+ 468              	.L24:
+ 469 0010 00000000 		.word	.LANCHOR0
+ 470              		.cfi_endproc
+ 471              	.LFE3:
+ 472              		.size	LCD1_Stop, .-LCD1_Stop
+ 473              		.section	.text.LCD1_Position,"ax",%progbits
+ 474              		.align	1
+ 475              		.global	LCD1_Position
+ 476              		.thumb
+ 477              		.thumb_func
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 18
+
+
+ 478              		.type	LCD1_Position, %function
+ 479              	LCD1_Position:
+ 480              	.LFB4:
+ 197:.\Generated_Source\PSoC5/LCD1.c ****     switch (row)
+ 481              		.loc 1 197 0
+ 482              		.cfi_startproc
+ 483              		@ args = 0, pretend = 0, frame = 0
+ 484              		@ frame_needed = 0, uses_anonymous_args = 0
+ 485              		@ link register save eliminated.
+ 486              	.LVL50:
+ 198:.\Generated_Source\PSoC5/LCD1.c ****     {
+ 487              		.loc 1 198 0
+ 488 0000 0328     		cmp	r0, #3
+ 489 0002 11D8     		bhi	.L26
+ 490 0004 DFE800F0 		tbb	[pc, r0]
+ 491              	.L29:
+ 492 0008 02       		.byte	(.L28-.L29)/2
+ 493 0009 05       		.byte	(.L30-.L29)/2
+ 494 000a 08       		.byte	(.L31-.L29)/2
+ 495 000b 0B       		.byte	(.L32-.L29)/2
+ 496              		.p2align 1
+ 497              	.L28:
+ 201:.\Generated_Source\PSoC5/LCD1.c ****             break;
+ 498              		.loc 1 201 0
+ 499 000c 81F08000 		eor	r0, r1, #128
+ 500              	.LVL51:
+ 501 0010 08E0     		b	.L33
+ 502              	.LVL52:
+ 503              	.L30:
+ 204:.\Generated_Source\PSoC5/LCD1.c ****             break;
+ 504              		.loc 1 204 0
+ 505 0012 A1F14000 		sub	r0, r1, #64
+ 506              	.LVL53:
+ 507 0016 04E0     		b	.L34
+ 508              	.LVL54:
+ 509              	.L31:
+ 207:.\Generated_Source\PSoC5/LCD1.c ****             break;
+ 510              		.loc 1 207 0
+ 511 0018 A1F16C00 		sub	r0, r1, #108
+ 512              	.LVL55:
+ 513 001c 01E0     		b	.L34
+ 514              	.LVL56:
+ 515              	.L32:
+ 210:.\Generated_Source\PSoC5/LCD1.c ****             break;
+ 516              		.loc 1 210 0
+ 517 001e A1F12C00 		sub	r0, r1, #44
+ 518              	.LVL57:
+ 519              	.L34:
+ 520 0022 C0B2     		uxtb	r0, r0
+ 521              	.L33:
+ 522 0024 FFF7FEBF 		b	LCD1_WriteControl
+ 523              	.LVL58:
+ 524              	.L26:
+ 525 0028 7047     		bx	lr
+ 526              		.cfi_endproc
+ 527              	.LFE4:
+ 528              		.size	LCD1_Position, .-LCD1_Position
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 19
+
+
+ 529              		.section	.text.LCD1_IsReady,"ax",%progbits
+ 530              		.align	1
+ 531              		.global	LCD1_IsReady
+ 532              		.thumb
+ 533              		.thumb_func
+ 534              		.type	LCD1_IsReady, %function
+ 535              	LCD1_IsReady:
+ 536              	.LFB9:
+ 353:.\Generated_Source\PSoC5/LCD1.c ****    
+ 537              		.loc 1 353 0
+ 538              		.cfi_startproc
+ 539              		@ args = 0, pretend = 0, frame = 0
+ 540              		@ frame_needed = 0, uses_anonymous_args = 0
+ 541              		@ link register save eliminated.
+ 355:.\Generated_Source\PSoC5/LCD1.c **** 	
+ 542              		.loc 1 355 0
+ 543 0000 0120     		movs	r0, #1
+ 544 0002 FFF7FEBF 		b	CyDelay
+ 545              	.LVL59:
+ 546              		.cfi_endproc
+ 547              	.LFE9:
+ 548              		.size	LCD1_IsReady, .-LCD1_IsReady
+ 549              		.section	.text.LCD1_PrintInt8,"ax",%progbits
+ 550              		.align	1
+ 551              		.global	LCD1_PrintInt8
+ 552              		.thumb
+ 553              		.thumb_func
+ 554              		.type	LCD1_PrintInt8, %function
+ 555              	LCD1_PrintInt8:
+ 556              	.LFB12:
+ 430:.\Generated_Source\PSoC5/LCD1.c **** }
+ 431:.\Generated_Source\PSoC5/LCD1.c **** 
+ 432:.\Generated_Source\PSoC5/LCD1.c **** 
+ 433:.\Generated_Source\PSoC5/LCD1.c **** #if(LCD1_CONVERSION_ROUTINES == 1u)
+ 434:.\Generated_Source\PSoC5/LCD1.c **** 
+ 435:.\Generated_Source\PSoC5/LCD1.c ****     /*******************************************************************************
+ 436:.\Generated_Source\PSoC5/LCD1.c ****     *  Function Name: LCD1_PrintInt8
+ 437:.\Generated_Source\PSoC5/LCD1.c ****     ********************************************************************************
+ 438:.\Generated_Source\PSoC5/LCD1.c ****     *
+ 439:.\Generated_Source\PSoC5/LCD1.c ****     * Summary:
+ 440:.\Generated_Source\PSoC5/LCD1.c ****     *  Print a byte as two ASCII characters.
+ 441:.\Generated_Source\PSoC5/LCD1.c ****     *
+ 442:.\Generated_Source\PSoC5/LCD1.c ****     * Parameters:
+ 443:.\Generated_Source\PSoC5/LCD1.c ****     *  value:  The byte to be printed out as ASCII characters.
+ 444:.\Generated_Source\PSoC5/LCD1.c ****     *
+ 445:.\Generated_Source\PSoC5/LCD1.c ****     * Return:
+ 446:.\Generated_Source\PSoC5/LCD1.c ****     *  None.
+ 447:.\Generated_Source\PSoC5/LCD1.c ****     *
+ 448:.\Generated_Source\PSoC5/LCD1.c ****     *******************************************************************************/
+ 449:.\Generated_Source\PSoC5/LCD1.c ****     void LCD1_PrintInt8(uint8 value) 
+ 450:.\Generated_Source\PSoC5/LCD1.c ****     {
+ 557              		.loc 1 450 0
+ 558              		.cfi_startproc
+ 559              		@ args = 0, pretend = 0, frame = 0
+ 560              		@ frame_needed = 0, uses_anonymous_args = 0
+ 561              	.LVL60:
+ 562 0000 38B5     		push	{r3, r4, r5, lr}
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 20
+
+
+ 563              		.cfi_def_cfa_offset 16
+ 564              		.cfi_offset 3, -16
+ 565              		.cfi_offset 4, -12
+ 566              		.cfi_offset 5, -8
+ 567              		.cfi_offset 14, -4
+ 568              		.loc 1 450 0
+ 569 0002 0446     		mov	r4, r0
+ 451:.\Generated_Source\PSoC5/LCD1.c ****         static char8 const CYCODE LCD1_hex[16u] = "0123456789ABCDEF";
+ 452:.\Generated_Source\PSoC5/LCD1.c ****         
+ 453:.\Generated_Source\PSoC5/LCD1.c ****         LCD1_PutChar((char8) LCD1_hex[value >> LCD1_BYTE_UPPER_NIBBLE_SHIFT]);
+ 570              		.loc 1 453 0
+ 571 0004 054D     		ldr	r5, .L37
+ 572 0006 0309     		lsrs	r3, r0, #4
+ 573              	.LBB6:
+ 574              	.LBB7:
+ 266:.\Generated_Source\PSoC5/LCD1.c **** }
+ 575              		.loc 1 266 0
+ 576 0008 E85C     		ldrb	r0, [r5, r3]	@ zero_extendqisi2
+ 577              	.LVL61:
+ 578              	.LBE7:
+ 579              	.LBE6:
+ 454:.\Generated_Source\PSoC5/LCD1.c ****         LCD1_PutChar((char8) LCD1_hex[value & LCD1_BYTE_LOWER_NIBBLE_MASK]);
+ 580              		.loc 1 454 0
+ 581 000a 04F00F04 		and	r4, r4, #15
+ 582              	.LBB9:
+ 583              	.LBB8:
+ 266:.\Generated_Source\PSoC5/LCD1.c **** }
+ 584              		.loc 1 266 0
+ 585 000e FFF7FEFF 		bl	LCD1_WriteData
+ 586              	.LVL62:
+ 587              	.LBE8:
+ 588              	.LBE9:
+ 589              	.LBB10:
+ 590              	.LBB11:
+ 591 0012 285D     		ldrb	r0, [r5, r4]	@ zero_extendqisi2
+ 592              	.LBE11:
+ 593              	.LBE10:
+ 455:.\Generated_Source\PSoC5/LCD1.c ****     }
+ 594              		.loc 1 455 0
+ 595 0014 BDE83840 		pop	{r3, r4, r5, lr}
+ 596              		.cfi_restore 14
+ 597              		.cfi_restore 5
+ 598              		.cfi_restore 4
+ 599              		.cfi_restore 3
+ 600              		.cfi_def_cfa_offset 0
+ 601              	.LBB13:
+ 602              	.LBB12:
+ 266:.\Generated_Source\PSoC5/LCD1.c **** }
+ 603              		.loc 1 266 0
+ 604 0018 FFF7FEBF 		b	LCD1_WriteData
+ 605              	.LVL63:
+ 606              	.L38:
+ 607              		.align	2
+ 608              	.L37:
+ 609 001c 00000000 		.word	.LANCHOR1
+ 610              	.LBE12:
+ 611              	.LBE13:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 21
+
+
+ 612              		.cfi_endproc
+ 613              	.LFE12:
+ 614              		.size	LCD1_PrintInt8, .-LCD1_PrintInt8
+ 615              		.section	.text.LCD1_PrintInt16,"ax",%progbits
+ 616              		.align	1
+ 617              		.global	LCD1_PrintInt16
+ 618              		.thumb
+ 619              		.thumb_func
+ 620              		.type	LCD1_PrintInt16, %function
+ 621              	LCD1_PrintInt16:
+ 622              	.LFB13:
+ 456:.\Generated_Source\PSoC5/LCD1.c **** 
+ 457:.\Generated_Source\PSoC5/LCD1.c **** 
+ 458:.\Generated_Source\PSoC5/LCD1.c ****     /*******************************************************************************
+ 459:.\Generated_Source\PSoC5/LCD1.c ****     *  Function Name: LCD1_PrintInt16
+ 460:.\Generated_Source\PSoC5/LCD1.c ****     ********************************************************************************
+ 461:.\Generated_Source\PSoC5/LCD1.c ****     *
+ 462:.\Generated_Source\PSoC5/LCD1.c ****     * Summary:
+ 463:.\Generated_Source\PSoC5/LCD1.c ****     *  Print a uint16 as four ASCII characters.
+ 464:.\Generated_Source\PSoC5/LCD1.c ****     *
+ 465:.\Generated_Source\PSoC5/LCD1.c ****     * Parameters:
+ 466:.\Generated_Source\PSoC5/LCD1.c ****     *  value:   The uint16 to be printed out as ASCII characters.
+ 467:.\Generated_Source\PSoC5/LCD1.c ****     *
+ 468:.\Generated_Source\PSoC5/LCD1.c ****     * Return:
+ 469:.\Generated_Source\PSoC5/LCD1.c ****     *  None.
+ 470:.\Generated_Source\PSoC5/LCD1.c ****     *
+ 471:.\Generated_Source\PSoC5/LCD1.c ****     *******************************************************************************/
+ 472:.\Generated_Source\PSoC5/LCD1.c ****     void LCD1_PrintInt16(uint16 value) 
+ 473:.\Generated_Source\PSoC5/LCD1.c ****     {
+ 623              		.loc 1 473 0
+ 624              		.cfi_startproc
+ 625              		@ args = 0, pretend = 0, frame = 0
+ 626              		@ frame_needed = 0, uses_anonymous_args = 0
+ 627              	.LVL64:
+ 628 0000 10B5     		push	{r4, lr}
+ 629              		.cfi_def_cfa_offset 8
+ 630              		.cfi_offset 4, -8
+ 631              		.cfi_offset 14, -4
+ 632              		.loc 1 473 0
+ 633 0002 0446     		mov	r4, r0
+ 474:.\Generated_Source\PSoC5/LCD1.c ****         LCD1_PrintInt8((uint8)(value >> LCD1_U16_UPPER_BYTE_SHIFT));
+ 634              		.loc 1 474 0
+ 635 0004 000A     		lsrs	r0, r0, #8
+ 636              	.LVL65:
+ 637 0006 FFF7FEFF 		bl	LCD1_PrintInt8
+ 638              	.LVL66:
+ 475:.\Generated_Source\PSoC5/LCD1.c ****         LCD1_PrintInt8((uint8)(value & LCD1_U16_LOWER_BYTE_MASK));
+ 639              		.loc 1 475 0
+ 640 000a E0B2     		uxtb	r0, r4
+ 476:.\Generated_Source\PSoC5/LCD1.c ****     }
+ 641              		.loc 1 476 0
+ 642 000c BDE81040 		pop	{r4, lr}
+ 643              		.cfi_restore 14
+ 644              		.cfi_restore 4
+ 645              		.cfi_def_cfa_offset 0
+ 475:.\Generated_Source\PSoC5/LCD1.c ****         LCD1_PrintInt8((uint8)(value & LCD1_U16_LOWER_BYTE_MASK));
+ 646              		.loc 1 475 0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 22
+
+
+ 647 0010 FFF7FEBF 		b	LCD1_PrintInt8
+ 648              	.LVL67:
+ 649              		.cfi_endproc
+ 650              	.LFE13:
+ 651              		.size	LCD1_PrintInt16, .-LCD1_PrintInt16
+ 652              		.section	.text.LCD1_PrintNumber,"ax",%progbits
+ 653              		.align	1
+ 654              		.global	LCD1_PrintNumber
+ 655              		.thumb
+ 656              		.thumb_func
+ 657              		.type	LCD1_PrintNumber, %function
+ 658              	LCD1_PrintNumber:
+ 659              	.LFB14:
+ 477:.\Generated_Source\PSoC5/LCD1.c **** 
+ 478:.\Generated_Source\PSoC5/LCD1.c **** 
+ 479:.\Generated_Source\PSoC5/LCD1.c ****     /*******************************************************************************
+ 480:.\Generated_Source\PSoC5/LCD1.c ****     *  Function Name: LCD1_PrintNumber
+ 481:.\Generated_Source\PSoC5/LCD1.c ****     ********************************************************************************
+ 482:.\Generated_Source\PSoC5/LCD1.c ****     *
+ 483:.\Generated_Source\PSoC5/LCD1.c ****     * Summary:
+ 484:.\Generated_Source\PSoC5/LCD1.c ****     *  Print an uint32 value as a left-justified decimal value.
+ 485:.\Generated_Source\PSoC5/LCD1.c ****     *
+ 486:.\Generated_Source\PSoC5/LCD1.c ****     * Parameters:
+ 487:.\Generated_Source\PSoC5/LCD1.c ****     *  value:  The byte to be printed out as ASCII characters.
+ 488:.\Generated_Source\PSoC5/LCD1.c ****     *
+ 489:.\Generated_Source\PSoC5/LCD1.c ****     * Return:
+ 490:.\Generated_Source\PSoC5/LCD1.c ****     *  None.
+ 491:.\Generated_Source\PSoC5/LCD1.c ****     *
+ 492:.\Generated_Source\PSoC5/LCD1.c ****     *******************************************************************************/
+ 493:.\Generated_Source\PSoC5/LCD1.c ****     void LCD1_PrintNumber(uint16 value) 
+ 494:.\Generated_Source\PSoC5/LCD1.c ****     {
+ 660              		.loc 1 494 0
+ 661              		.cfi_startproc
+ 662              		@ args = 0, pretend = 0, frame = 16
+ 663              		@ frame_needed = 0, uses_anonymous_args = 0
+ 664              	.LVL68:
+ 665 0000 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
+ 666              		.cfi_def_cfa_offset 32
+ 667              		.cfi_offset 4, -16
+ 668              		.cfi_offset 5, -12
+ 669              		.cfi_offset 6, -8
+ 670              		.cfi_offset 14, -4
+ 495:.\Generated_Source\PSoC5/LCD1.c **** 
+ 496:.\Generated_Source\PSoC5/LCD1.c ****         char8 number[LCD1_NUMBER_OF_REMAINDERS];
+ 497:.\Generated_Source\PSoC5/LCD1.c ****         char8 temp[LCD1_NUMBER_OF_REMAINDERS];
+ 498:.\Generated_Source\PSoC5/LCD1.c **** 
+ 499:.\Generated_Source\PSoC5/LCD1.c ****         uint8 digIndex = 0u;
+ 500:.\Generated_Source\PSoC5/LCD1.c ****         uint8 numDigits;
+ 501:.\Generated_Source\PSoC5/LCD1.c **** 
+ 502:.\Generated_Source\PSoC5/LCD1.c ****         /* Load these in reverse order */
+ 503:.\Generated_Source\PSoC5/LCD1.c ****         while(value >= LCD1_TEN)
+ 671              		.loc 1 503 0
+ 672 0002 0022     		movs	r2, #0
+ 673              	.LVL69:
+ 674              	.L41:
+ 675 0004 D3B2     		uxtb	r3, r2
+ 676              	.LVL70:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 23
+
+
+ 677 0006 511C     		adds	r1, r2, #1
+ 678 0008 0928     		cmp	r0, #9
+ 679 000a 04AA     		add	r2, sp, #16
+ 680 000c 02EB0306 		add	r6, r2, r3
+ 681 0010 4FF00A02 		mov	r2, #10
+ 682 0014 09D9     		bls	.L45
+ 504:.\Generated_Source\PSoC5/LCD1.c ****         {
+ 505:.\Generated_Source\PSoC5/LCD1.c ****             temp[digIndex] = (value % LCD1_TEN) + '0';
+ 683              		.loc 1 505 0
+ 684 0016 B0FBF2F3 		udiv	r3, r0, r2
+ 685              	.LVL71:
+ 686 001a 02FB1302 		mls	r2, r2, r3, r0
+ 687 001e 3032     		adds	r2, r2, #48
+ 688 0020 06F8082C 		strb	r2, [r6, #-8]
+ 506:.\Generated_Source\PSoC5/LCD1.c ****             value /= LCD1_TEN;
+ 689              		.loc 1 506 0
+ 690 0024 98B2     		uxth	r0, r3
+ 691              	.LVL72:
+ 692 0026 0A46     		mov	r2, r1
+ 693 0028 ECE7     		b	.L41
+ 694              	.LVL73:
+ 695              	.L45:
+ 507:.\Generated_Source\PSoC5/LCD1.c ****             digIndex++;
+ 508:.\Generated_Source\PSoC5/LCD1.c ****         }
+ 509:.\Generated_Source\PSoC5/LCD1.c **** 
+ 510:.\Generated_Source\PSoC5/LCD1.c ****         temp[digIndex] = (value % LCD1_TEN) + '0';
+ 696              		.loc 1 510 0
+ 697 002a B0FBF2F1 		udiv	r1, r0, r2
+ 698 002e 1D46     		mov	r5, r3
+ 699 0030 1C46     		mov	r4, r3
+ 700 0032 02FB1102 		mls	r2, r2, r1, r0
+ 701 0036 3032     		adds	r2, r2, #48
+ 702 0038 06F8082C 		strb	r2, [r6, #-8]
+ 703              	.LVL74:
+ 704              	.L43:
+ 511:.\Generated_Source\PSoC5/LCD1.c ****         numDigits = digIndex;
+ 512:.\Generated_Source\PSoC5/LCD1.c **** 
+ 513:.\Generated_Source\PSoC5/LCD1.c ****         /* While index is greater than or equal to zero copy number
+ 514:.\Generated_Source\PSoC5/LCD1.c ****         * from temporary array to number[].
+ 515:.\Generated_Source\PSoC5/LCD1.c ****         */
+ 516:.\Generated_Source\PSoC5/LCD1.c ****         while (digIndex != 0u)
+ 705              		.loc 1 516 0
+ 706 003c 53B1     		cbz	r3, .L46
+ 517:.\Generated_Source\PSoC5/LCD1.c ****         {
+ 518:.\Generated_Source\PSoC5/LCD1.c ****             number[numDigits - digIndex] = temp[digIndex];
+ 707              		.loc 1 518 0
+ 708 003e E21A     		subs	r2, r4, r3
+ 709 0040 04A9     		add	r1, sp, #16
+ 710 0042 0A44     		add	r2, r2, r1
+ 711 0044 1944     		add	r1, r1, r3
+ 712 0046 11F8081C 		ldrb	r1, [r1, #-8]	@ zero_extendqisi2
+ 519:.\Generated_Source\PSoC5/LCD1.c ****             digIndex--;
+ 713              		.loc 1 519 0
+ 714 004a 013B     		subs	r3, r3, #1
+ 715              	.LVL75:
+ 518:.\Generated_Source\PSoC5/LCD1.c ****             digIndex--;
+ 716              		.loc 1 518 0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 24
+
+
+ 717 004c 02F8101C 		strb	r1, [r2, #-16]
+ 718              		.loc 1 519 0
+ 719 0050 DBB2     		uxtb	r3, r3
+ 720              	.LVL76:
+ 721 0052 F3E7     		b	.L43
+ 722              	.L46:
+ 520:.\Generated_Source\PSoC5/LCD1.c ****         }
+ 521:.\Generated_Source\PSoC5/LCD1.c ****         
+ 522:.\Generated_Source\PSoC5/LCD1.c ****         /* Copy last digit */
+ 523:.\Generated_Source\PSoC5/LCD1.c ****         number[numDigits] = temp[0u];
+ 723              		.loc 1 523 0
+ 724 0054 04AA     		add	r2, sp, #16
+ 725 0056 1444     		add	r4, r4, r2
+ 726              	.LVL77:
+ 727 0058 9DF80820 		ldrb	r2, [sp, #8]	@ zero_extendqisi2
+ 524:.\Generated_Source\PSoC5/LCD1.c **** 
+ 525:.\Generated_Source\PSoC5/LCD1.c ****         /* Null Termination */
+ 526:.\Generated_Source\PSoC5/LCD1.c ****         number[numDigits + 1u] = (char8) '\0';
+ 527:.\Generated_Source\PSoC5/LCD1.c **** 
+ 528:.\Generated_Source\PSoC5/LCD1.c ****         /* Print out number */
+ 529:.\Generated_Source\PSoC5/LCD1.c ****         LCD1_PrintString(&number[0u]);
+ 728              		.loc 1 529 0
+ 729 005c 6846     		mov	r0, sp
+ 730              	.LVL78:
+ 523:.\Generated_Source\PSoC5/LCD1.c **** 
+ 731              		.loc 1 523 0
+ 732 005e 04F8102C 		strb	r2, [r4, #-16]
+ 526:.\Generated_Source\PSoC5/LCD1.c **** 
+ 733              		.loc 1 526 0
+ 734 0062 04AA     		add	r2, sp, #16
+ 735 0064 2A44     		add	r2, r2, r5
+ 736 0066 02F80F3C 		strb	r3, [r2, #-15]
+ 737              		.loc 1 529 0
+ 738 006a FFF7FEFF 		bl	LCD1_PrintString
+ 739              	.LVL79:
+ 530:.\Generated_Source\PSoC5/LCD1.c ****     }
+ 740              		.loc 1 530 0
+ 741 006e 04B0     		add	sp, sp, #16
+ 742              		.cfi_def_cfa_offset 16
+ 743              		@ sp needed
+ 744 0070 70BD     		pop	{r4, r5, r6, pc}
+ 745              		.cfi_endproc
+ 746              	.LFE14:
+ 747              		.size	LCD1_PrintNumber, .-LCD1_PrintNumber
+ 748              		.global	LCD1_initVar
+ 749              		.global	LCD1_enableState
+ 750              		.section	.rodata
+ 751              		.set	.LANCHOR1,. + 0
+ 752              		.type	LCD1_hex.4893, %object
+ 753              		.size	LCD1_hex.4893, 16
+ 754              	LCD1_hex.4893:
+ 755 0000 30313233 		.ascii	"0123456789ABCDEF"
+ 755      34353637 
+ 755      38394142 
+ 755      43444546 
+ 756              		.bss
+ 757              		.set	.LANCHOR0,. + 0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 25
+
+
+ 758              		.type	LCD1_enableState, %object
+ 759              		.size	LCD1_enableState, 1
+ 760              	LCD1_enableState:
+ 761 0000 00       		.space	1
+ 762              		.type	LCD1_initVar, %object
+ 763              		.size	LCD1_initVar, 1
+ 764              	LCD1_initVar:
+ 765 0001 00       		.space	1
+ 766              		.text
+ 767              	.Letext0:
+ 768              		.file 2 ".\\Generated_Source\\PSoC5\\cytypes.h"
+ 769              		.file 3 ".\\Generated_Source\\PSoC5\\CyLib.h"
+ 770              		.section	.debug_info,"",%progbits
+ 771              	.Ldebug_info0:
+ 772 0000 9E060000 		.4byte	0x69e
+ 773 0004 0400     		.2byte	0x4
+ 774 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 775 000a 04       		.byte	0x4
+ 776 000b 01       		.uleb128 0x1
+ 777 000c E8010000 		.4byte	.LASF49
+ 778 0010 01       		.byte	0x1
+ 779 0011 C9020000 		.4byte	.LASF50
+ 780 0015 C1000000 		.4byte	.LASF51
+ 781 0019 30000000 		.4byte	.Ldebug_ranges0+0x30
+ 782 001d 00000000 		.4byte	0
+ 783 0021 00000000 		.4byte	.Ldebug_line0
+ 784 0025 02       		.uleb128 0x2
+ 785 0026 04       		.byte	0x4
+ 786 0027 05       		.byte	0x5
+ 787 0028 696E7400 		.ascii	"int\000"
+ 788 002c 03       		.uleb128 0x3
+ 789 002d 04       		.byte	0x4
+ 790 002e 07       		.byte	0x7
+ 791 002f 4A010000 		.4byte	.LASF0
+ 792 0033 03       		.uleb128 0x3
+ 793 0034 01       		.byte	0x1
+ 794 0035 06       		.byte	0x6
+ 795 0036 B7020000 		.4byte	.LASF1
+ 796 003a 03       		.uleb128 0x3
+ 797 003b 01       		.byte	0x1
+ 798 003c 08       		.byte	0x8
+ 799 003d 6C000000 		.4byte	.LASF2
+ 800 0041 03       		.uleb128 0x3
+ 801 0042 02       		.byte	0x2
+ 802 0043 05       		.byte	0x5
+ 803 0044 CE010000 		.4byte	.LASF3
+ 804 0048 03       		.uleb128 0x3
+ 805 0049 02       		.byte	0x2
+ 806 004a 07       		.byte	0x7
+ 807 004b 2C000000 		.4byte	.LASF4
+ 808 004f 03       		.uleb128 0x3
+ 809 0050 04       		.byte	0x4
+ 810 0051 05       		.byte	0x5
+ 811 0052 8F020000 		.4byte	.LASF5
+ 812 0056 03       		.uleb128 0x3
+ 813 0057 04       		.byte	0x4
+ 814 0058 07       		.byte	0x7
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 26
+
+
+ 815 0059 89000000 		.4byte	.LASF6
+ 816 005d 03       		.uleb128 0x3
+ 817 005e 08       		.byte	0x8
+ 818 005f 05       		.byte	0x5
+ 819 0060 A3010000 		.4byte	.LASF7
+ 820 0064 03       		.uleb128 0x3
+ 821 0065 08       		.byte	0x8
+ 822 0066 07       		.byte	0x7
+ 823 0067 66010000 		.4byte	.LASF8
+ 824 006b 03       		.uleb128 0x3
+ 825 006c 04       		.byte	0x4
+ 826 006d 07       		.byte	0x7
+ 827 006e 8E010000 		.4byte	.LASF9
+ 828 0072 03       		.uleb128 0x3
+ 829 0073 01       		.byte	0x1
+ 830 0074 08       		.byte	0x8
+ 831 0075 BB010000 		.4byte	.LASF10
+ 832 0079 04       		.uleb128 0x4
+ 833 007a A0000000 		.4byte	.LASF11
+ 834 007e 02       		.byte	0x2
+ 835 007f A1       		.byte	0xa1
+ 836 0080 3A000000 		.4byte	0x3a
+ 837 0084 04       		.uleb128 0x4
+ 838 0085 33010000 		.4byte	.LASF12
+ 839 0089 02       		.byte	0x2
+ 840 008a A2       		.byte	0xa2
+ 841 008b 48000000 		.4byte	0x48
+ 842 008f 04       		.uleb128 0x4
+ 843 0090 43010000 		.4byte	.LASF13
+ 844 0094 02       		.byte	0x2
+ 845 0095 A3       		.byte	0xa3
+ 846 0096 56000000 		.4byte	0x56
+ 847 009a 03       		.uleb128 0x3
+ 848 009b 04       		.byte	0x4
+ 849 009c 04       		.byte	0x4
+ 850 009d 5C000000 		.4byte	.LASF14
+ 851 00a1 03       		.uleb128 0x3
+ 852 00a2 08       		.byte	0x8
+ 853 00a3 04       		.byte	0x4
+ 854 00a4 47000000 		.4byte	.LASF15
+ 855 00a8 04       		.uleb128 0x4
+ 856 00a9 97010000 		.4byte	.LASF16
+ 857 00ad 02       		.byte	0x2
+ 858 00ae B2       		.byte	0xb2
+ 859 00af 72000000 		.4byte	0x72
+ 860 00b3 05       		.uleb128 0x5
+ 861 00b4 7A000000 		.4byte	.LASF17
+ 862 00b8 02       		.byte	0x2
+ 863 00b9 4B01     		.2byte	0x14b
+ 864 00bb BF000000 		.4byte	0xbf
+ 865 00bf 06       		.uleb128 0x6
+ 866 00c0 79000000 		.4byte	0x79
+ 867 00c4 07       		.uleb128 0x7
+ 868 00c5 14010000 		.4byte	.LASF47
+ 869 00c9 01       		.byte	0x1
+ 870 00ca 0801     		.2byte	0x108
+ 871 00cc 01       		.byte	0x1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 27
+
+
+ 872 00cd DE000000 		.4byte	0xde
+ 873 00d1 08       		.uleb128 0x8
+ 874 00d2 1C000000 		.4byte	.LASF52
+ 875 00d6 01       		.byte	0x1
+ 876 00d7 0801     		.2byte	0x108
+ 877 00d9 A8000000 		.4byte	0xa8
+ 878 00dd 00       		.byte	0
+ 879 00de 09       		.uleb128 0x9
+ 880 00df D8010000 		.4byte	.LASF18
+ 881 00e3 01       		.byte	0x1
+ 882 00e4 9D01     		.2byte	0x19d
+ 883 00e6 00000000 		.4byte	.LFB11
+ 884 00ea 34000000 		.4byte	.LFE11-.LFB11
+ 885 00ee 01       		.uleb128 0x1
+ 886 00ef 9C       		.byte	0x9c
+ 887 00f0 14010000 		.4byte	0x114
+ 888 00f4 0A       		.uleb128 0xa
+ 889 00f5 00000000 		.4byte	.LASF20
+ 890 00f9 01       		.byte	0x1
+ 891 00fa 9D01     		.2byte	0x19d
+ 892 00fc 79000000 		.4byte	0x79
+ 893 0100 00000000 		.4byte	.LLST0
+ 894 0104 0B       		.uleb128 0xb
+ 895 0105 24000000 		.4byte	.LVL2
+ 896 0109 83060000 		.4byte	0x683
+ 897 010d 0C       		.uleb128 0xc
+ 898 010e 01       		.uleb128 0x1
+ 899 010f 50       		.byte	0x50
+ 900 0110 01       		.uleb128 0x1
+ 901 0111 31       		.byte	0x31
+ 902 0112 00       		.byte	0
+ 903 0113 00       		.byte	0
+ 904 0114 09       		.uleb128 0x9
+ 905 0115 A6000000 		.4byte	.LASF19
+ 906 0119 01       		.byte	0x1
+ 907 011a 7701     		.2byte	0x177
+ 908 011c 00000000 		.4byte	.LFB10
+ 909 0120 3C000000 		.4byte	.LFE10-.LFB10
+ 910 0124 01       		.uleb128 0x1
+ 911 0125 9C       		.byte	0x9c
+ 912 0126 4A010000 		.4byte	0x14a
+ 913 012a 0A       		.uleb128 0xa
+ 914 012b 00000000 		.4byte	.LASF20
+ 915 012f 01       		.byte	0x1
+ 916 0130 7701     		.2byte	0x177
+ 917 0132 79000000 		.4byte	0x79
+ 918 0136 21000000 		.4byte	.LLST1
+ 919 013a 0B       		.uleb128 0xb
+ 920 013b 2C000000 		.4byte	.LVL5
+ 921 013f 83060000 		.4byte	0x683
+ 922 0143 0C       		.uleb128 0xc
+ 923 0144 01       		.uleb128 0x1
+ 924 0145 50       		.byte	0x50
+ 925 0146 01       		.uleb128 0x1
+ 926 0147 31       		.byte	0x31
+ 927 0148 00       		.byte	0
+ 928 0149 00       		.byte	0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 28
+
+
+ 929 014a 0D       		.uleb128 0xd
+ 930 014b 57010000 		.4byte	.LASF22
+ 931 014f 01       		.byte	0x1
+ 932 0150 1C01     		.2byte	0x11c
+ 933 0152 00000000 		.4byte	.LFB7
+ 934 0156 22000000 		.4byte	.LFE7-.LFB7
+ 935 015a 01       		.uleb128 0x1
+ 936 015b 9C       		.byte	0x9c
+ 937 015c D1010000 		.4byte	0x1d1
+ 938 0160 0A       		.uleb128 0xa
+ 939 0161 C3020000 		.4byte	.LASF21
+ 940 0165 01       		.byte	0x1
+ 941 0166 1C01     		.2byte	0x11c
+ 942 0168 79000000 		.4byte	0x79
+ 943 016c 42000000 		.4byte	.LLST2
+ 944 0170 0E       		.uleb128 0xe
+ 945 0171 00000000 		.4byte	.LASF20
+ 946 0175 01       		.byte	0x1
+ 947 0176 1E01     		.2byte	0x11e
+ 948 0178 79000000 		.4byte	0x79
+ 949 017c 63000000 		.4byte	.LLST3
+ 950 0180 0F       		.uleb128 0xf
+ 951 0181 0A000000 		.4byte	.LVL8
+ 952 0185 14010000 		.4byte	0x114
+ 953 0189 96010000 		.4byte	0x196
+ 954 018d 0C       		.uleb128 0xc
+ 955 018e 01       		.uleb128 0x1
+ 956 018f 50       		.byte	0x50
+ 957 0190 04       		.uleb128 0x4
+ 958 0191 74       		.byte	0x74
+ 959 0192 00       		.sleb128 0
+ 960 0193 34       		.byte	0x34
+ 961 0194 25       		.byte	0x25
+ 962 0195 00       		.byte	0
+ 963 0196 0F       		.uleb128 0xf
+ 964 0197 10000000 		.4byte	.LVL9
+ 965 019b 83060000 		.4byte	0x683
+ 966 019f AA010000 		.4byte	0x1aa
+ 967 01a3 0C       		.uleb128 0xc
+ 968 01a4 01       		.uleb128 0x1
+ 969 01a5 50       		.byte	0x50
+ 970 01a6 02       		.uleb128 0x2
+ 971 01a7 08       		.byte	0x8
+ 972 01a8 64       		.byte	0x64
+ 973 01a9 00       		.byte	0
+ 974 01aa 0F       		.uleb128 0xf
+ 975 01ab 18000000 		.4byte	.LVL10
+ 976 01af 14010000 		.4byte	0x114
+ 977 01b3 C0010000 		.4byte	0x1c0
+ 978 01b7 0C       		.uleb128 0xc
+ 979 01b8 01       		.uleb128 0x1
+ 980 01b9 50       		.byte	0x50
+ 981 01ba 04       		.uleb128 0x4
+ 982 01bb 74       		.byte	0x74
+ 983 01bc 00       		.sleb128 0
+ 984 01bd 3F       		.byte	0x3f
+ 985 01be 1A       		.byte	0x1a
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 29
+
+
+ 986 01bf 00       		.byte	0
+ 987 01c0 10       		.uleb128 0x10
+ 988 01c1 22000000 		.4byte	.LVL12
+ 989 01c5 83060000 		.4byte	0x683
+ 990 01c9 0C       		.uleb128 0xc
+ 991 01ca 01       		.uleb128 0x1
+ 992 01cb 50       		.byte	0x50
+ 993 01cc 02       		.uleb128 0x2
+ 994 01cd 08       		.byte	0x8
+ 995 01ce 96       		.byte	0x96
+ 996 01cf 00       		.byte	0
+ 997 01d0 00       		.byte	0
+ 998 01d1 11       		.uleb128 0x11
+ 999 01d2 7E020000 		.4byte	.LASF23
+ 1000 01d6 01       		.byte	0x1
+ 1001 01d7 E9       		.byte	0xe9
+ 1002 01d8 00000000 		.4byte	.LFB5
+ 1003 01dc 18000000 		.4byte	.LFE5-.LFB5
+ 1004 01e0 01       		.uleb128 0x1
+ 1005 01e1 9C       		.byte	0x9c
+ 1006 01e2 1D020000 		.4byte	0x21d
+ 1007 01e6 12       		.uleb128 0x12
+ 1008 01e7 4E000000 		.4byte	.LASF24
+ 1009 01eb 01       		.byte	0x1
+ 1010 01ec E9       		.byte	0xe9
+ 1011 01ed 1D020000 		.4byte	0x21d
+ 1012 01f1 99000000 		.4byte	.LLST4
+ 1013 01f5 13       		.uleb128 0x13
+ 1014 01f6 3F000000 		.4byte	.LASF25
+ 1015 01fa 01       		.byte	0x1
+ 1016 01fb EB       		.byte	0xeb
+ 1017 01fc 79000000 		.4byte	0x79
+ 1018 0200 B7000000 		.4byte	.LLST5
+ 1019 0204 13       		.uleb128 0x13
+ 1020 0205 76020000 		.4byte	.LASF26
+ 1021 0209 01       		.byte	0x1
+ 1022 020a EC       		.byte	0xec
+ 1023 020b A8000000 		.4byte	0xa8
+ 1024 020f E1000000 		.4byte	.LLST6
+ 1025 0213 14       		.uleb128 0x14
+ 1026 0214 0E000000 		.4byte	.LVL16
+ 1027 0218 4A010000 		.4byte	0x14a
+ 1028 021c 00       		.byte	0
+ 1029 021d 15       		.uleb128 0x15
+ 1030 021e 04       		.byte	0x4
+ 1031 021f 23020000 		.4byte	0x223
+ 1032 0223 16       		.uleb128 0x16
+ 1033 0224 A8000000 		.4byte	0xa8
+ 1034 0228 17       		.uleb128 0x17
+ 1035 0229 C4000000 		.4byte	0xc4
+ 1036 022d 00000000 		.4byte	.LFB6
+ 1037 0231 04000000 		.4byte	.LFE6-.LFB6
+ 1038 0235 01       		.uleb128 0x1
+ 1039 0236 9C       		.byte	0x9c
+ 1040 0237 4E020000 		.4byte	0x24e
+ 1041 023b 18       		.uleb128 0x18
+ 1042 023c D1000000 		.4byte	0xd1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 30
+
+
+ 1043 0240 FF000000 		.4byte	.LLST7
+ 1044 0244 19       		.uleb128 0x19
+ 1045 0245 04000000 		.4byte	.LVL21
+ 1046 0249 4A010000 		.4byte	0x14a
+ 1047 024d 00       		.byte	0
+ 1048 024e 0D       		.uleb128 0xd
+ 1049 024f 21010000 		.4byte	.LASF27
+ 1050 0253 01       		.byte	0x1
+ 1051 0254 3D01     		.2byte	0x13d
+ 1052 0256 00000000 		.4byte	.LFB8
+ 1053 025a 24000000 		.4byte	.LFE8-.LFB8
+ 1054 025e 01       		.uleb128 0x1
+ 1055 025f 9C       		.byte	0x9c
+ 1056 0260 D6020000 		.4byte	0x2d6
+ 1057 0264 0A       		.uleb128 0xa
+ 1058 0265 9D010000 		.4byte	.LASF28
+ 1059 0269 01       		.byte	0x1
+ 1060 026a 3D01     		.2byte	0x13d
+ 1061 026c 79000000 		.4byte	0x79
+ 1062 0270 20010000 		.4byte	.LLST8
+ 1063 0274 0E       		.uleb128 0xe
+ 1064 0275 00000000 		.4byte	.LASF20
+ 1065 0279 01       		.byte	0x1
+ 1066 027a 3F01     		.2byte	0x13f
+ 1067 027c 79000000 		.4byte	0x79
+ 1068 0280 41010000 		.4byte	.LLST9
+ 1069 0284 0F       		.uleb128 0xf
+ 1070 0285 0A000000 		.4byte	.LVL24
+ 1071 0289 DE000000 		.4byte	0xde
+ 1072 028d 9A020000 		.4byte	0x29a
+ 1073 0291 0C       		.uleb128 0xc
+ 1074 0292 01       		.uleb128 0x1
+ 1075 0293 50       		.byte	0x50
+ 1076 0294 04       		.uleb128 0x4
+ 1077 0295 74       		.byte	0x74
+ 1078 0296 00       		.sleb128 0
+ 1079 0297 34       		.byte	0x34
+ 1080 0298 25       		.byte	0x25
+ 1081 0299 00       		.byte	0
+ 1082 029a 0F       		.uleb128 0xf
+ 1083 029b 10000000 		.4byte	.LVL25
+ 1084 029f 83060000 		.4byte	0x683
+ 1085 02a3 AE020000 		.4byte	0x2ae
+ 1086 02a7 0C       		.uleb128 0xc
+ 1087 02a8 01       		.uleb128 0x1
+ 1088 02a9 50       		.byte	0x50
+ 1089 02aa 02       		.uleb128 0x2
+ 1090 02ab 08       		.byte	0x8
+ 1091 02ac 64       		.byte	0x64
+ 1092 02ad 00       		.byte	0
+ 1093 02ae 0F       		.uleb128 0xf
+ 1094 02af 18000000 		.4byte	.LVL26
+ 1095 02b3 DE000000 		.4byte	0xde
+ 1096 02b7 C4020000 		.4byte	0x2c4
+ 1097 02bb 0C       		.uleb128 0xc
+ 1098 02bc 01       		.uleb128 0x1
+ 1099 02bd 50       		.byte	0x50
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 31
+
+
+ 1100 02be 04       		.uleb128 0x4
+ 1101 02bf 74       		.byte	0x74
+ 1102 02c0 00       		.sleb128 0
+ 1103 02c1 3F       		.byte	0x3f
+ 1104 02c2 1A       		.byte	0x1a
+ 1105 02c3 00       		.byte	0
+ 1106 02c4 10       		.uleb128 0x10
+ 1107 02c5 24000000 		.4byte	.LVL28
+ 1108 02c9 83060000 		.4byte	0x683
+ 1109 02cd 0C       		.uleb128 0xc
+ 1110 02ce 01       		.uleb128 0x1
+ 1111 02cf 50       		.byte	0x50
+ 1112 02d0 03       		.uleb128 0x3
+ 1113 02d1 0A       		.byte	0xa
+ 1114 02d2 DC05     		.2byte	0x5dc
+ 1115 02d4 00       		.byte	0
+ 1116 02d5 00       		.byte	0
+ 1117 02d6 11       		.uleb128 0x11
+ 1118 02d7 62000000 		.4byte	.LASF29
+ 1119 02db 01       		.byte	0x1
+ 1120 02dc 37       		.byte	0x37
+ 1121 02dd 00000000 		.4byte	.LFB0
+ 1122 02e1 6C000000 		.4byte	.LFE0-.LFB0
+ 1123 02e5 01       		.uleb128 0x1
+ 1124 02e6 9C       		.byte	0x9c
+ 1125 02e7 2D040000 		.4byte	0x42d
+ 1126 02eb 0F       		.uleb128 0xf
+ 1127 02ec 08000000 		.4byte	.LVL29
+ 1128 02f0 94060000 		.4byte	0x694
+ 1129 02f4 FF020000 		.4byte	0x2ff
+ 1130 02f8 0C       		.uleb128 0xc
+ 1131 02f9 01       		.uleb128 0x1
+ 1132 02fa 50       		.byte	0x50
+ 1133 02fb 02       		.uleb128 0x2
+ 1134 02fc 08       		.byte	0x8
+ 1135 02fd 28       		.byte	0x28
+ 1136 02fe 00       		.byte	0
+ 1137 02ff 0F       		.uleb128 0xf
+ 1138 0300 0E000000 		.4byte	.LVL30
+ 1139 0304 DE000000 		.4byte	0xde
+ 1140 0308 12030000 		.4byte	0x312
+ 1141 030c 0C       		.uleb128 0xc
+ 1142 030d 01       		.uleb128 0x1
+ 1143 030e 50       		.byte	0x50
+ 1144 030f 01       		.uleb128 0x1
+ 1145 0310 33       		.byte	0x33
+ 1146 0311 00       		.byte	0
+ 1147 0312 0F       		.uleb128 0xf
+ 1148 0313 14000000 		.4byte	.LVL31
+ 1149 0317 94060000 		.4byte	0x694
+ 1150 031b 25030000 		.4byte	0x325
+ 1151 031f 0C       		.uleb128 0xc
+ 1152 0320 01       		.uleb128 0x1
+ 1153 0321 50       		.byte	0x50
+ 1154 0322 01       		.uleb128 0x1
+ 1155 0323 35       		.byte	0x35
+ 1156 0324 00       		.byte	0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 32
+
+
+ 1157 0325 0F       		.uleb128 0xf
+ 1158 0326 1A000000 		.4byte	.LVL32
+ 1159 032a DE000000 		.4byte	0xde
+ 1160 032e 38030000 		.4byte	0x338
+ 1161 0332 0C       		.uleb128 0xc
+ 1162 0333 01       		.uleb128 0x1
+ 1163 0334 50       		.byte	0x50
+ 1164 0335 01       		.uleb128 0x1
+ 1165 0336 33       		.byte	0x33
+ 1166 0337 00       		.byte	0
+ 1167 0338 0F       		.uleb128 0xf
+ 1168 0339 20000000 		.4byte	.LVL33
+ 1169 033d 94060000 		.4byte	0x694
+ 1170 0341 4B030000 		.4byte	0x34b
+ 1171 0345 0C       		.uleb128 0xc
+ 1172 0346 01       		.uleb128 0x1
+ 1173 0347 50       		.byte	0x50
+ 1174 0348 01       		.uleb128 0x1
+ 1175 0349 3F       		.byte	0x3f
+ 1176 034a 00       		.byte	0
+ 1177 034b 0F       		.uleb128 0xf
+ 1178 034c 26000000 		.4byte	.LVL34
+ 1179 0350 DE000000 		.4byte	0xde
+ 1180 0354 5E030000 		.4byte	0x35e
+ 1181 0358 0C       		.uleb128 0xc
+ 1182 0359 01       		.uleb128 0x1
+ 1183 035a 50       		.byte	0x50
+ 1184 035b 01       		.uleb128 0x1
+ 1185 035c 33       		.byte	0x33
+ 1186 035d 00       		.byte	0
+ 1187 035e 0F       		.uleb128 0xf
+ 1188 035f 2C000000 		.4byte	.LVL35
+ 1189 0363 94060000 		.4byte	0x694
+ 1190 0367 71030000 		.4byte	0x371
+ 1191 036b 0C       		.uleb128 0xc
+ 1192 036c 01       		.uleb128 0x1
+ 1193 036d 50       		.byte	0x50
+ 1194 036e 01       		.uleb128 0x1
+ 1195 036f 31       		.byte	0x31
+ 1196 0370 00       		.byte	0
+ 1197 0371 0F       		.uleb128 0xf
+ 1198 0372 32000000 		.4byte	.LVL36
+ 1199 0376 DE000000 		.4byte	0xde
+ 1200 037a 84030000 		.4byte	0x384
+ 1201 037e 0C       		.uleb128 0xc
+ 1202 037f 01       		.uleb128 0x1
+ 1203 0380 50       		.byte	0x50
+ 1204 0381 01       		.uleb128 0x1
+ 1205 0382 32       		.byte	0x32
+ 1206 0383 00       		.byte	0
+ 1207 0384 0F       		.uleb128 0xf
+ 1208 0385 38000000 		.4byte	.LVL37
+ 1209 0389 94060000 		.4byte	0x694
+ 1210 038d 97030000 		.4byte	0x397
+ 1211 0391 0C       		.uleb128 0xc
+ 1212 0392 01       		.uleb128 0x1
+ 1213 0393 50       		.byte	0x50
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 33
+
+
+ 1214 0394 01       		.uleb128 0x1
+ 1215 0395 35       		.byte	0x35
+ 1216 0396 00       		.byte	0
+ 1217 0397 0F       		.uleb128 0xf
+ 1218 0398 3E000000 		.4byte	.LVL38
+ 1219 039c 4E020000 		.4byte	0x24e
+ 1220 03a0 AA030000 		.4byte	0x3aa
+ 1221 03a4 0C       		.uleb128 0xc
+ 1222 03a5 01       		.uleb128 0x1
+ 1223 03a6 50       		.byte	0x50
+ 1224 03a7 01       		.uleb128 0x1
+ 1225 03a8 36       		.byte	0x36
+ 1226 03a9 00       		.byte	0
+ 1227 03aa 0F       		.uleb128 0xf
+ 1228 03ab 44000000 		.4byte	.LVL39
+ 1229 03af 4E020000 		.4byte	0x24e
+ 1230 03b3 BD030000 		.4byte	0x3bd
+ 1231 03b7 0C       		.uleb128 0xc
+ 1232 03b8 01       		.uleb128 0x1
+ 1233 03b9 50       		.byte	0x50
+ 1234 03ba 01       		.uleb128 0x1
+ 1235 03bb 3E       		.byte	0x3e
+ 1236 03bc 00       		.byte	0
+ 1237 03bd 0F       		.uleb128 0xf
+ 1238 03be 4A000000 		.4byte	.LVL40
+ 1239 03c2 4E020000 		.4byte	0x24e
+ 1240 03c6 D1030000 		.4byte	0x3d1
+ 1241 03ca 0C       		.uleb128 0xc
+ 1242 03cb 01       		.uleb128 0x1
+ 1243 03cc 50       		.byte	0x50
+ 1244 03cd 02       		.uleb128 0x2
+ 1245 03ce 08       		.byte	0x8
+ 1246 03cf 2C       		.byte	0x2c
+ 1247 03d0 00       		.byte	0
+ 1248 03d1 0F       		.uleb128 0xf
+ 1249 03d2 50000000 		.4byte	.LVL41
+ 1250 03d6 4E020000 		.4byte	0x24e
+ 1251 03da E4030000 		.4byte	0x3e4
+ 1252 03de 0C       		.uleb128 0xc
+ 1253 03df 01       		.uleb128 0x1
+ 1254 03e0 50       		.byte	0x50
+ 1255 03e1 01       		.uleb128 0x1
+ 1256 03e2 38       		.byte	0x38
+ 1257 03e3 00       		.byte	0
+ 1258 03e4 0F       		.uleb128 0xf
+ 1259 03e5 56000000 		.4byte	.LVL42
+ 1260 03e9 4E020000 		.4byte	0x24e
+ 1261 03ed F7030000 		.4byte	0x3f7
+ 1262 03f1 0C       		.uleb128 0xc
+ 1263 03f2 01       		.uleb128 0x1
+ 1264 03f3 50       		.byte	0x50
+ 1265 03f4 01       		.uleb128 0x1
+ 1266 03f5 31       		.byte	0x31
+ 1267 03f6 00       		.byte	0
+ 1268 03f7 0F       		.uleb128 0xf
+ 1269 03f8 5C000000 		.4byte	.LVL43
+ 1270 03fc 4E020000 		.4byte	0x24e
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 34
+
+
+ 1271 0400 0A040000 		.4byte	0x40a
+ 1272 0404 0C       		.uleb128 0xc
+ 1273 0405 01       		.uleb128 0x1
+ 1274 0406 50       		.byte	0x50
+ 1275 0407 01       		.uleb128 0x1
+ 1276 0408 3C       		.byte	0x3c
+ 1277 0409 00       		.byte	0
+ 1278 040a 0F       		.uleb128 0xf
+ 1279 040b 62000000 		.4byte	.LVL44
+ 1280 040f 4E020000 		.4byte	0x24e
+ 1281 0413 1D040000 		.4byte	0x41d
+ 1282 0417 0C       		.uleb128 0xc
+ 1283 0418 01       		.uleb128 0x1
+ 1284 0419 50       		.byte	0x50
+ 1285 041a 01       		.uleb128 0x1
+ 1286 041b 33       		.byte	0x33
+ 1287 041c 00       		.byte	0
+ 1288 041d 10       		.uleb128 0x10
+ 1289 041e 6C000000 		.4byte	.LVL45
+ 1290 0422 94060000 		.4byte	0x694
+ 1291 0426 0C       		.uleb128 0xc
+ 1292 0427 01       		.uleb128 0x1
+ 1293 0428 50       		.byte	0x50
+ 1294 0429 01       		.uleb128 0x1
+ 1295 042a 35       		.byte	0x35
+ 1296 042b 00       		.byte	0
+ 1297 042c 00       		.byte	0
+ 1298 042d 11       		.uleb128 0x11
+ 1299 042e 10000000 		.4byte	.LASF30
+ 1300 0432 01       		.byte	0x1
+ 1301 0433 68       		.byte	0x68
+ 1302 0434 00000000 		.4byte	.LFB1
+ 1303 0438 14000000 		.4byte	.LFE1-.LFB1
+ 1304 043c 01       		.uleb128 0x1
+ 1305 043d 9C       		.byte	0x9c
+ 1306 043e 52040000 		.4byte	0x452
+ 1307 0442 0B       		.uleb128 0xb
+ 1308 0443 08000000 		.4byte	.LVL46
+ 1309 0447 4E020000 		.4byte	0x24e
+ 1310 044b 0C       		.uleb128 0xc
+ 1311 044c 01       		.uleb128 0x1
+ 1312 044d 50       		.byte	0x50
+ 1313 044e 01       		.uleb128 0x1
+ 1314 044f 3C       		.byte	0x3c
+ 1315 0450 00       		.byte	0
+ 1316 0451 00       		.byte	0
+ 1317 0452 11       		.uleb128 0x11
+ 1318 0453 02030000 		.4byte	.LASF31
+ 1319 0457 01       		.byte	0x1
+ 1320 0458 89       		.byte	0x89
+ 1321 0459 00000000 		.4byte	.LFB2
+ 1322 045d 1C000000 		.4byte	.LFE2-.LFB2
+ 1323 0461 01       		.uleb128 0x1
+ 1324 0462 9C       		.byte	0x9c
+ 1325 0463 7A040000 		.4byte	0x47a
+ 1326 0467 14       		.uleb128 0x14
+ 1327 0468 0C000000 		.4byte	.LVL47
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 35
+
+
+ 1328 046c D6020000 		.4byte	0x2d6
+ 1329 0470 19       		.uleb128 0x19
+ 1330 0471 18000000 		.4byte	.LVL48
+ 1331 0475 2D040000 		.4byte	0x42d
+ 1332 0479 00       		.byte	0
+ 1333 047a 11       		.uleb128 0x11
+ 1334 047b 7D010000 		.4byte	.LASF32
+ 1335 047f 01       		.byte	0x1
+ 1336 0480 A8       		.byte	0xa8
+ 1337 0481 00000000 		.4byte	.LFB3
+ 1338 0485 14000000 		.4byte	.LFE3-.LFB3
+ 1339 0489 01       		.uleb128 0x1
+ 1340 048a 9C       		.byte	0x9c
+ 1341 048b 9F040000 		.4byte	0x49f
+ 1342 048f 0B       		.uleb128 0xb
+ 1343 0490 08000000 		.4byte	.LVL49
+ 1344 0494 4E020000 		.4byte	0x24e
+ 1345 0498 0C       		.uleb128 0xc
+ 1346 0499 01       		.uleb128 0x1
+ 1347 049a 50       		.byte	0x50
+ 1348 049b 01       		.uleb128 0x1
+ 1349 049c 38       		.byte	0x38
+ 1350 049d 00       		.byte	0
+ 1351 049e 00       		.byte	0
+ 1352 049f 11       		.uleb128 0x11
+ 1353 04a0 C0010000 		.4byte	.LASF33
+ 1354 04a4 01       		.byte	0x1
+ 1355 04a5 C4       		.byte	0xc4
+ 1356 04a6 00000000 		.4byte	.LFB4
+ 1357 04aa 2A000000 		.4byte	.LFE4-.LFB4
+ 1358 04ae 01       		.uleb128 0x1
+ 1359 04af 9C       		.byte	0x9c
+ 1360 04b0 DC040000 		.4byte	0x4dc
+ 1361 04b4 1A       		.uleb128 0x1a
+ 1362 04b5 726F7700 		.ascii	"row\000"
+ 1363 04b9 01       		.byte	0x1
+ 1364 04ba C4       		.byte	0xc4
+ 1365 04bb 79000000 		.4byte	0x79
+ 1366 04bf 77010000 		.4byte	.LLST10
+ 1367 04c3 12       		.uleb128 0x12
+ 1368 04c4 55000000 		.4byte	.LASF34
+ 1369 04c8 01       		.byte	0x1
+ 1370 04c9 C4       		.byte	0xc4
+ 1371 04ca 79000000 		.4byte	0x79
+ 1372 04ce EE010000 		.4byte	.LLST11
+ 1373 04d2 19       		.uleb128 0x19
+ 1374 04d3 28000000 		.4byte	.LVL58
+ 1375 04d7 4E020000 		.4byte	0x24e
+ 1376 04db 00       		.byte	0
+ 1377 04dc 0D       		.uleb128 0xd
+ 1378 04dd B4000000 		.4byte	.LASF35
+ 1379 04e1 01       		.byte	0x1
+ 1380 04e2 6001     		.2byte	0x160
+ 1381 04e4 00000000 		.4byte	.LFB9
+ 1382 04e8 06000000 		.4byte	.LFE9-.LFB9
+ 1383 04ec 01       		.uleb128 0x1
+ 1384 04ed 9C       		.byte	0x9c
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 36
+
+
+ 1385 04ee 02050000 		.4byte	0x502
+ 1386 04f2 10       		.uleb128 0x10
+ 1387 04f3 06000000 		.4byte	.LVL59
+ 1388 04f7 94060000 		.4byte	0x694
+ 1389 04fb 0C       		.uleb128 0xc
+ 1390 04fc 01       		.uleb128 0x1
+ 1391 04fd 50       		.byte	0x50
+ 1392 04fe 01       		.uleb128 0x1
+ 1393 04ff 31       		.byte	0x31
+ 1394 0500 00       		.byte	0
+ 1395 0501 00       		.byte	0
+ 1396 0502 0D       		.uleb128 0xd
+ 1397 0503 A8020000 		.4byte	.LASF36
+ 1398 0507 01       		.byte	0x1
+ 1399 0508 C101     		.2byte	0x1c1
+ 1400 050a 00000000 		.4byte	.LFB12
+ 1401 050e 20000000 		.4byte	.LFE12-.LFB12
+ 1402 0512 01       		.uleb128 0x1
+ 1403 0513 9C       		.byte	0x9c
+ 1404 0514 81050000 		.4byte	0x581
+ 1405 0518 0A       		.uleb128 0xa
+ 1406 0519 26000000 		.4byte	.LASF37
+ 1407 051d 01       		.byte	0x1
+ 1408 051e C101     		.2byte	0x1c1
+ 1409 0520 79000000 		.4byte	0x79
+ 1410 0524 1A020000 		.4byte	.LLST12
+ 1411 0528 1B       		.uleb128 0x1b
+ 1412 0529 07000000 		.4byte	.LASF38
+ 1413 052d 01       		.byte	0x1
+ 1414 052e C301     		.2byte	0x1c3
+ 1415 0530 91050000 		.4byte	0x591
+ 1416 0534 05       		.uleb128 0x5
+ 1417 0535 03       		.byte	0x3
+ 1418 0536 00000000 		.4byte	LCD1_hex.4893
+ 1419 053a 1C       		.uleb128 0x1c
+ 1420 053b C4000000 		.4byte	0xc4
+ 1421 053f 08000000 		.4byte	.LBB6
+ 1422 0543 00000000 		.4byte	.Ldebug_ranges0+0
+ 1423 0547 01       		.byte	0x1
+ 1424 0548 C501     		.2byte	0x1c5
+ 1425 054a 61050000 		.4byte	0x561
+ 1426 054e 18       		.uleb128 0x18
+ 1427 054f D1000000 		.4byte	0xd1
+ 1428 0553 3B020000 		.4byte	.LLST13
+ 1429 0557 14       		.uleb128 0x14
+ 1430 0558 12000000 		.4byte	.LVL62
+ 1431 055c 4A010000 		.4byte	0x14a
+ 1432 0560 00       		.byte	0
+ 1433 0561 1D       		.uleb128 0x1d
+ 1434 0562 C4000000 		.4byte	0xc4
+ 1435 0566 12000000 		.4byte	.LBB10
+ 1436 056a 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 1437 056e 01       		.byte	0x1
+ 1438 056f C601     		.2byte	0x1c6
+ 1439 0571 1E       		.uleb128 0x1e
+ 1440 0572 D1000000 		.4byte	0xd1
+ 1441 0576 19       		.uleb128 0x19
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 37
+
+
+ 1442 0577 1C000000 		.4byte	.LVL63
+ 1443 057b 4A010000 		.4byte	0x14a
+ 1444 057f 00       		.byte	0
+ 1445 0580 00       		.byte	0
+ 1446 0581 1F       		.uleb128 0x1f
+ 1447 0582 A8000000 		.4byte	0xa8
+ 1448 0586 91050000 		.4byte	0x591
+ 1449 058a 20       		.uleb128 0x20
+ 1450 058b 6B000000 		.4byte	0x6b
+ 1451 058f 0F       		.byte	0xf
+ 1452 0590 00       		.byte	0
+ 1453 0591 16       		.uleb128 0x16
+ 1454 0592 81050000 		.4byte	0x581
+ 1455 0596 0D       		.uleb128 0xd
+ 1456 0597 98020000 		.4byte	.LASF39
+ 1457 059b 01       		.byte	0x1
+ 1458 059c D801     		.2byte	0x1d8
+ 1459 059e 00000000 		.4byte	.LFB13
+ 1460 05a2 14000000 		.4byte	.LFE13-.LFB13
+ 1461 05a6 01       		.uleb128 0x1
+ 1462 05a7 9C       		.byte	0x9c
+ 1463 05a8 DC050000 		.4byte	0x5dc
+ 1464 05ac 0A       		.uleb128 0xa
+ 1465 05ad 26000000 		.4byte	.LASF37
+ 1466 05b1 01       		.byte	0x1
+ 1467 05b2 D801     		.2byte	0x1d8
+ 1468 05b4 84000000 		.4byte	0x84
+ 1469 05b8 72020000 		.4byte	.LLST14
+ 1470 05bc 0F       		.uleb128 0xf
+ 1471 05bd 0A000000 		.4byte	.LVL66
+ 1472 05c1 02050000 		.4byte	0x502
+ 1473 05c5 D2050000 		.4byte	0x5d2
+ 1474 05c9 0C       		.uleb128 0xc
+ 1475 05ca 01       		.uleb128 0x1
+ 1476 05cb 50       		.byte	0x50
+ 1477 05cc 04       		.uleb128 0x4
+ 1478 05cd 74       		.byte	0x74
+ 1479 05ce 00       		.sleb128 0
+ 1480 05cf 38       		.byte	0x38
+ 1481 05d0 25       		.byte	0x25
+ 1482 05d1 00       		.byte	0
+ 1483 05d2 19       		.uleb128 0x19
+ 1484 05d3 14000000 		.4byte	.LVL67
+ 1485 05d7 02050000 		.4byte	0x502
+ 1486 05db 00       		.byte	0
+ 1487 05dc 0D       		.uleb128 0xd
+ 1488 05dd E9020000 		.4byte	.LASF40
+ 1489 05e1 01       		.byte	0x1
+ 1490 05e2 ED01     		.2byte	0x1ed
+ 1491 05e4 00000000 		.4byte	.LFB14
+ 1492 05e8 72000000 		.4byte	.LFE14-.LFB14
+ 1493 05ec 01       		.uleb128 0x1
+ 1494 05ed 9C       		.byte	0x9c
+ 1495 05ee 51060000 		.4byte	0x651
+ 1496 05f2 0A       		.uleb128 0xa
+ 1497 05f3 26000000 		.4byte	.LASF37
+ 1498 05f7 01       		.byte	0x1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 38
+
+
+ 1499 05f8 ED01     		.2byte	0x1ed
+ 1500 05fa 84000000 		.4byte	0x84
+ 1501 05fe 93020000 		.4byte	.LLST15
+ 1502 0602 1B       		.uleb128 0x1b
+ 1503 0603 87010000 		.4byte	.LASF41
+ 1504 0607 01       		.byte	0x1
+ 1505 0608 F001     		.2byte	0x1f0
+ 1506 060a 51060000 		.4byte	0x651
+ 1507 060e 02       		.uleb128 0x2
+ 1508 060f 91       		.byte	0x91
+ 1509 0610 60       		.sleb128 -32
+ 1510 0611 1B       		.uleb128 0x1b
+ 1511 0612 9B000000 		.4byte	.LASF42
+ 1512 0616 01       		.byte	0x1
+ 1513 0617 F101     		.2byte	0x1f1
+ 1514 0619 51060000 		.4byte	0x651
+ 1515 061d 02       		.uleb128 0x2
+ 1516 061e 91       		.byte	0x91
+ 1517 061f 68       		.sleb128 -24
+ 1518 0620 0E       		.uleb128 0xe
+ 1519 0621 3A010000 		.4byte	.LASF43
+ 1520 0625 01       		.byte	0x1
+ 1521 0626 F301     		.2byte	0x1f3
+ 1522 0628 79000000 		.4byte	0x79
+ 1523 062c B1020000 		.4byte	.LLST16
+ 1524 0630 0E       		.uleb128 0xe
+ 1525 0631 7F000000 		.4byte	.LASF44
+ 1526 0635 01       		.byte	0x1
+ 1527 0636 F401     		.2byte	0x1f4
+ 1528 0638 79000000 		.4byte	0x79
+ 1529 063c F1020000 		.4byte	.LLST17
+ 1530 0640 0B       		.uleb128 0xb
+ 1531 0641 6E000000 		.4byte	.LVL79
+ 1532 0645 D1010000 		.4byte	0x1d1
+ 1533 0649 0C       		.uleb128 0xc
+ 1534 064a 01       		.uleb128 0x1
+ 1535 064b 50       		.byte	0x50
+ 1536 064c 02       		.uleb128 0x2
+ 1537 064d 7D       		.byte	0x7d
+ 1538 064e 00       		.sleb128 0
+ 1539 064f 00       		.byte	0
+ 1540 0650 00       		.byte	0
+ 1541 0651 1F       		.uleb128 0x1f
+ 1542 0652 A8000000 		.4byte	0xa8
+ 1543 0656 61060000 		.4byte	0x661
+ 1544 065a 20       		.uleb128 0x20
+ 1545 065b 6B000000 		.4byte	0x6b
+ 1546 065f 04       		.byte	0x4
+ 1547 0660 00       		.byte	0
+ 1548 0661 21       		.uleb128 0x21
+ 1549 0662 0D030000 		.4byte	.LASF45
+ 1550 0666 01       		.byte	0x1
+ 1551 0667 1D       		.byte	0x1d
+ 1552 0668 79000000 		.4byte	0x79
+ 1553 066c 05       		.uleb128 0x5
+ 1554 066d 03       		.byte	0x3
+ 1555 066e 00000000 		.4byte	LCD1_initVar
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 39
+
+
+ 1556 0672 21       		.uleb128 0x21
+ 1557 0673 03010000 		.4byte	.LASF46
+ 1558 0677 01       		.byte	0x1
+ 1559 0678 1B       		.byte	0x1b
+ 1560 0679 79000000 		.4byte	0x79
+ 1561 067d 05       		.uleb128 0x5
+ 1562 067e 03       		.byte	0x3
+ 1563 067f 00000000 		.4byte	LCD1_enableState
+ 1564 0683 22       		.uleb128 0x22
+ 1565 0684 B1010000 		.4byte	.LASF48
+ 1566 0688 03       		.byte	0x3
+ 1567 0689 78       		.byte	0x78
+ 1568 068a 94060000 		.4byte	0x694
+ 1569 068e 23       		.uleb128 0x23
+ 1570 068f 84000000 		.4byte	0x84
+ 1571 0693 00       		.byte	0
+ 1572 0694 24       		.uleb128 0x24
+ 1573 0695 FA020000 		.4byte	.LASF53
+ 1574 0699 03       		.byte	0x3
+ 1575 069a 77       		.byte	0x77
+ 1576 069b 23       		.uleb128 0x23
+ 1577 069c 8F000000 		.4byte	0x8f
+ 1578 06a0 00       		.byte	0
+ 1579 06a1 00       		.byte	0
+ 1580              		.section	.debug_abbrev,"",%progbits
+ 1581              	.Ldebug_abbrev0:
+ 1582 0000 01       		.uleb128 0x1
+ 1583 0001 11       		.uleb128 0x11
+ 1584 0002 01       		.byte	0x1
+ 1585 0003 25       		.uleb128 0x25
+ 1586 0004 0E       		.uleb128 0xe
+ 1587 0005 13       		.uleb128 0x13
+ 1588 0006 0B       		.uleb128 0xb
+ 1589 0007 03       		.uleb128 0x3
+ 1590 0008 0E       		.uleb128 0xe
+ 1591 0009 1B       		.uleb128 0x1b
+ 1592 000a 0E       		.uleb128 0xe
+ 1593 000b 55       		.uleb128 0x55
+ 1594 000c 17       		.uleb128 0x17
+ 1595 000d 11       		.uleb128 0x11
+ 1596 000e 01       		.uleb128 0x1
+ 1597 000f 10       		.uleb128 0x10
+ 1598 0010 17       		.uleb128 0x17
+ 1599 0011 00       		.byte	0
+ 1600 0012 00       		.byte	0
+ 1601 0013 02       		.uleb128 0x2
+ 1602 0014 24       		.uleb128 0x24
+ 1603 0015 00       		.byte	0
+ 1604 0016 0B       		.uleb128 0xb
+ 1605 0017 0B       		.uleb128 0xb
+ 1606 0018 3E       		.uleb128 0x3e
+ 1607 0019 0B       		.uleb128 0xb
+ 1608 001a 03       		.uleb128 0x3
+ 1609 001b 08       		.uleb128 0x8
+ 1610 001c 00       		.byte	0
+ 1611 001d 00       		.byte	0
+ 1612 001e 03       		.uleb128 0x3
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 40
+
+
+ 1613 001f 24       		.uleb128 0x24
+ 1614 0020 00       		.byte	0
+ 1615 0021 0B       		.uleb128 0xb
+ 1616 0022 0B       		.uleb128 0xb
+ 1617 0023 3E       		.uleb128 0x3e
+ 1618 0024 0B       		.uleb128 0xb
+ 1619 0025 03       		.uleb128 0x3
+ 1620 0026 0E       		.uleb128 0xe
+ 1621 0027 00       		.byte	0
+ 1622 0028 00       		.byte	0
+ 1623 0029 04       		.uleb128 0x4
+ 1624 002a 16       		.uleb128 0x16
+ 1625 002b 00       		.byte	0
+ 1626 002c 03       		.uleb128 0x3
+ 1627 002d 0E       		.uleb128 0xe
+ 1628 002e 3A       		.uleb128 0x3a
+ 1629 002f 0B       		.uleb128 0xb
+ 1630 0030 3B       		.uleb128 0x3b
+ 1631 0031 0B       		.uleb128 0xb
+ 1632 0032 49       		.uleb128 0x49
+ 1633 0033 13       		.uleb128 0x13
+ 1634 0034 00       		.byte	0
+ 1635 0035 00       		.byte	0
+ 1636 0036 05       		.uleb128 0x5
+ 1637 0037 16       		.uleb128 0x16
+ 1638 0038 00       		.byte	0
+ 1639 0039 03       		.uleb128 0x3
+ 1640 003a 0E       		.uleb128 0xe
+ 1641 003b 3A       		.uleb128 0x3a
+ 1642 003c 0B       		.uleb128 0xb
+ 1643 003d 3B       		.uleb128 0x3b
+ 1644 003e 05       		.uleb128 0x5
+ 1645 003f 49       		.uleb128 0x49
+ 1646 0040 13       		.uleb128 0x13
+ 1647 0041 00       		.byte	0
+ 1648 0042 00       		.byte	0
+ 1649 0043 06       		.uleb128 0x6
+ 1650 0044 35       		.uleb128 0x35
+ 1651 0045 00       		.byte	0
+ 1652 0046 49       		.uleb128 0x49
+ 1653 0047 13       		.uleb128 0x13
+ 1654 0048 00       		.byte	0
+ 1655 0049 00       		.byte	0
+ 1656 004a 07       		.uleb128 0x7
+ 1657 004b 2E       		.uleb128 0x2e
+ 1658 004c 01       		.byte	0x1
+ 1659 004d 3F       		.uleb128 0x3f
+ 1660 004e 19       		.uleb128 0x19
+ 1661 004f 03       		.uleb128 0x3
+ 1662 0050 0E       		.uleb128 0xe
+ 1663 0051 3A       		.uleb128 0x3a
+ 1664 0052 0B       		.uleb128 0xb
+ 1665 0053 3B       		.uleb128 0x3b
+ 1666 0054 05       		.uleb128 0x5
+ 1667 0055 27       		.uleb128 0x27
+ 1668 0056 19       		.uleb128 0x19
+ 1669 0057 20       		.uleb128 0x20
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 41
+
+
+ 1670 0058 0B       		.uleb128 0xb
+ 1671 0059 01       		.uleb128 0x1
+ 1672 005a 13       		.uleb128 0x13
+ 1673 005b 00       		.byte	0
+ 1674 005c 00       		.byte	0
+ 1675 005d 08       		.uleb128 0x8
+ 1676 005e 05       		.uleb128 0x5
+ 1677 005f 00       		.byte	0
+ 1678 0060 03       		.uleb128 0x3
+ 1679 0061 0E       		.uleb128 0xe
+ 1680 0062 3A       		.uleb128 0x3a
+ 1681 0063 0B       		.uleb128 0xb
+ 1682 0064 3B       		.uleb128 0x3b
+ 1683 0065 05       		.uleb128 0x5
+ 1684 0066 49       		.uleb128 0x49
+ 1685 0067 13       		.uleb128 0x13
+ 1686 0068 00       		.byte	0
+ 1687 0069 00       		.byte	0
+ 1688 006a 09       		.uleb128 0x9
+ 1689 006b 2E       		.uleb128 0x2e
+ 1690 006c 01       		.byte	0x1
+ 1691 006d 03       		.uleb128 0x3
+ 1692 006e 0E       		.uleb128 0xe
+ 1693 006f 3A       		.uleb128 0x3a
+ 1694 0070 0B       		.uleb128 0xb
+ 1695 0071 3B       		.uleb128 0x3b
+ 1696 0072 05       		.uleb128 0x5
+ 1697 0073 27       		.uleb128 0x27
+ 1698 0074 19       		.uleb128 0x19
+ 1699 0075 11       		.uleb128 0x11
+ 1700 0076 01       		.uleb128 0x1
+ 1701 0077 12       		.uleb128 0x12
+ 1702 0078 06       		.uleb128 0x6
+ 1703 0079 40       		.uleb128 0x40
+ 1704 007a 18       		.uleb128 0x18
+ 1705 007b 9742     		.uleb128 0x2117
+ 1706 007d 19       		.uleb128 0x19
+ 1707 007e 01       		.uleb128 0x1
+ 1708 007f 13       		.uleb128 0x13
+ 1709 0080 00       		.byte	0
+ 1710 0081 00       		.byte	0
+ 1711 0082 0A       		.uleb128 0xa
+ 1712 0083 05       		.uleb128 0x5
+ 1713 0084 00       		.byte	0
+ 1714 0085 03       		.uleb128 0x3
+ 1715 0086 0E       		.uleb128 0xe
+ 1716 0087 3A       		.uleb128 0x3a
+ 1717 0088 0B       		.uleb128 0xb
+ 1718 0089 3B       		.uleb128 0x3b
+ 1719 008a 05       		.uleb128 0x5
+ 1720 008b 49       		.uleb128 0x49
+ 1721 008c 13       		.uleb128 0x13
+ 1722 008d 02       		.uleb128 0x2
+ 1723 008e 17       		.uleb128 0x17
+ 1724 008f 00       		.byte	0
+ 1725 0090 00       		.byte	0
+ 1726 0091 0B       		.uleb128 0xb
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 42
+
+
+ 1727 0092 898201   		.uleb128 0x4109
+ 1728 0095 01       		.byte	0x1
+ 1729 0096 11       		.uleb128 0x11
+ 1730 0097 01       		.uleb128 0x1
+ 1731 0098 31       		.uleb128 0x31
+ 1732 0099 13       		.uleb128 0x13
+ 1733 009a 00       		.byte	0
+ 1734 009b 00       		.byte	0
+ 1735 009c 0C       		.uleb128 0xc
+ 1736 009d 8A8201   		.uleb128 0x410a
+ 1737 00a0 00       		.byte	0
+ 1738 00a1 02       		.uleb128 0x2
+ 1739 00a2 18       		.uleb128 0x18
+ 1740 00a3 9142     		.uleb128 0x2111
+ 1741 00a5 18       		.uleb128 0x18
+ 1742 00a6 00       		.byte	0
+ 1743 00a7 00       		.byte	0
+ 1744 00a8 0D       		.uleb128 0xd
+ 1745 00a9 2E       		.uleb128 0x2e
+ 1746 00aa 01       		.byte	0x1
+ 1747 00ab 3F       		.uleb128 0x3f
+ 1748 00ac 19       		.uleb128 0x19
+ 1749 00ad 03       		.uleb128 0x3
+ 1750 00ae 0E       		.uleb128 0xe
+ 1751 00af 3A       		.uleb128 0x3a
+ 1752 00b0 0B       		.uleb128 0xb
+ 1753 00b1 3B       		.uleb128 0x3b
+ 1754 00b2 05       		.uleb128 0x5
+ 1755 00b3 27       		.uleb128 0x27
+ 1756 00b4 19       		.uleb128 0x19
+ 1757 00b5 11       		.uleb128 0x11
+ 1758 00b6 01       		.uleb128 0x1
+ 1759 00b7 12       		.uleb128 0x12
+ 1760 00b8 06       		.uleb128 0x6
+ 1761 00b9 40       		.uleb128 0x40
+ 1762 00ba 18       		.uleb128 0x18
+ 1763 00bb 9742     		.uleb128 0x2117
+ 1764 00bd 19       		.uleb128 0x19
+ 1765 00be 01       		.uleb128 0x1
+ 1766 00bf 13       		.uleb128 0x13
+ 1767 00c0 00       		.byte	0
+ 1768 00c1 00       		.byte	0
+ 1769 00c2 0E       		.uleb128 0xe
+ 1770 00c3 34       		.uleb128 0x34
+ 1771 00c4 00       		.byte	0
+ 1772 00c5 03       		.uleb128 0x3
+ 1773 00c6 0E       		.uleb128 0xe
+ 1774 00c7 3A       		.uleb128 0x3a
+ 1775 00c8 0B       		.uleb128 0xb
+ 1776 00c9 3B       		.uleb128 0x3b
+ 1777 00ca 05       		.uleb128 0x5
+ 1778 00cb 49       		.uleb128 0x49
+ 1779 00cc 13       		.uleb128 0x13
+ 1780 00cd 02       		.uleb128 0x2
+ 1781 00ce 17       		.uleb128 0x17
+ 1782 00cf 00       		.byte	0
+ 1783 00d0 00       		.byte	0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 43
+
+
+ 1784 00d1 0F       		.uleb128 0xf
+ 1785 00d2 898201   		.uleb128 0x4109
+ 1786 00d5 01       		.byte	0x1
+ 1787 00d6 11       		.uleb128 0x11
+ 1788 00d7 01       		.uleb128 0x1
+ 1789 00d8 31       		.uleb128 0x31
+ 1790 00d9 13       		.uleb128 0x13
+ 1791 00da 01       		.uleb128 0x1
+ 1792 00db 13       		.uleb128 0x13
+ 1793 00dc 00       		.byte	0
+ 1794 00dd 00       		.byte	0
+ 1795 00de 10       		.uleb128 0x10
+ 1796 00df 898201   		.uleb128 0x4109
+ 1797 00e2 01       		.byte	0x1
+ 1798 00e3 11       		.uleb128 0x11
+ 1799 00e4 01       		.uleb128 0x1
+ 1800 00e5 9542     		.uleb128 0x2115
+ 1801 00e7 19       		.uleb128 0x19
+ 1802 00e8 31       		.uleb128 0x31
+ 1803 00e9 13       		.uleb128 0x13
+ 1804 00ea 00       		.byte	0
+ 1805 00eb 00       		.byte	0
+ 1806 00ec 11       		.uleb128 0x11
+ 1807 00ed 2E       		.uleb128 0x2e
+ 1808 00ee 01       		.byte	0x1
+ 1809 00ef 3F       		.uleb128 0x3f
+ 1810 00f0 19       		.uleb128 0x19
+ 1811 00f1 03       		.uleb128 0x3
+ 1812 00f2 0E       		.uleb128 0xe
+ 1813 00f3 3A       		.uleb128 0x3a
+ 1814 00f4 0B       		.uleb128 0xb
+ 1815 00f5 3B       		.uleb128 0x3b
+ 1816 00f6 0B       		.uleb128 0xb
+ 1817 00f7 27       		.uleb128 0x27
+ 1818 00f8 19       		.uleb128 0x19
+ 1819 00f9 11       		.uleb128 0x11
+ 1820 00fa 01       		.uleb128 0x1
+ 1821 00fb 12       		.uleb128 0x12
+ 1822 00fc 06       		.uleb128 0x6
+ 1823 00fd 40       		.uleb128 0x40
+ 1824 00fe 18       		.uleb128 0x18
+ 1825 00ff 9742     		.uleb128 0x2117
+ 1826 0101 19       		.uleb128 0x19
+ 1827 0102 01       		.uleb128 0x1
+ 1828 0103 13       		.uleb128 0x13
+ 1829 0104 00       		.byte	0
+ 1830 0105 00       		.byte	0
+ 1831 0106 12       		.uleb128 0x12
+ 1832 0107 05       		.uleb128 0x5
+ 1833 0108 00       		.byte	0
+ 1834 0109 03       		.uleb128 0x3
+ 1835 010a 0E       		.uleb128 0xe
+ 1836 010b 3A       		.uleb128 0x3a
+ 1837 010c 0B       		.uleb128 0xb
+ 1838 010d 3B       		.uleb128 0x3b
+ 1839 010e 0B       		.uleb128 0xb
+ 1840 010f 49       		.uleb128 0x49
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 44
+
+
+ 1841 0110 13       		.uleb128 0x13
+ 1842 0111 02       		.uleb128 0x2
+ 1843 0112 17       		.uleb128 0x17
+ 1844 0113 00       		.byte	0
+ 1845 0114 00       		.byte	0
+ 1846 0115 13       		.uleb128 0x13
+ 1847 0116 34       		.uleb128 0x34
+ 1848 0117 00       		.byte	0
+ 1849 0118 03       		.uleb128 0x3
+ 1850 0119 0E       		.uleb128 0xe
+ 1851 011a 3A       		.uleb128 0x3a
+ 1852 011b 0B       		.uleb128 0xb
+ 1853 011c 3B       		.uleb128 0x3b
+ 1854 011d 0B       		.uleb128 0xb
+ 1855 011e 49       		.uleb128 0x49
+ 1856 011f 13       		.uleb128 0x13
+ 1857 0120 02       		.uleb128 0x2
+ 1858 0121 17       		.uleb128 0x17
+ 1859 0122 00       		.byte	0
+ 1860 0123 00       		.byte	0
+ 1861 0124 14       		.uleb128 0x14
+ 1862 0125 898201   		.uleb128 0x4109
+ 1863 0128 00       		.byte	0
+ 1864 0129 11       		.uleb128 0x11
+ 1865 012a 01       		.uleb128 0x1
+ 1866 012b 31       		.uleb128 0x31
+ 1867 012c 13       		.uleb128 0x13
+ 1868 012d 00       		.byte	0
+ 1869 012e 00       		.byte	0
+ 1870 012f 15       		.uleb128 0x15
+ 1871 0130 0F       		.uleb128 0xf
+ 1872 0131 00       		.byte	0
+ 1873 0132 0B       		.uleb128 0xb
+ 1874 0133 0B       		.uleb128 0xb
+ 1875 0134 49       		.uleb128 0x49
+ 1876 0135 13       		.uleb128 0x13
+ 1877 0136 00       		.byte	0
+ 1878 0137 00       		.byte	0
+ 1879 0138 16       		.uleb128 0x16
+ 1880 0139 26       		.uleb128 0x26
+ 1881 013a 00       		.byte	0
+ 1882 013b 49       		.uleb128 0x49
+ 1883 013c 13       		.uleb128 0x13
+ 1884 013d 00       		.byte	0
+ 1885 013e 00       		.byte	0
+ 1886 013f 17       		.uleb128 0x17
+ 1887 0140 2E       		.uleb128 0x2e
+ 1888 0141 01       		.byte	0x1
+ 1889 0142 31       		.uleb128 0x31
+ 1890 0143 13       		.uleb128 0x13
+ 1891 0144 11       		.uleb128 0x11
+ 1892 0145 01       		.uleb128 0x1
+ 1893 0146 12       		.uleb128 0x12
+ 1894 0147 06       		.uleb128 0x6
+ 1895 0148 40       		.uleb128 0x40
+ 1896 0149 18       		.uleb128 0x18
+ 1897 014a 9742     		.uleb128 0x2117
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 45
+
+
+ 1898 014c 19       		.uleb128 0x19
+ 1899 014d 01       		.uleb128 0x1
+ 1900 014e 13       		.uleb128 0x13
+ 1901 014f 00       		.byte	0
+ 1902 0150 00       		.byte	0
+ 1903 0151 18       		.uleb128 0x18
+ 1904 0152 05       		.uleb128 0x5
+ 1905 0153 00       		.byte	0
+ 1906 0154 31       		.uleb128 0x31
+ 1907 0155 13       		.uleb128 0x13
+ 1908 0156 02       		.uleb128 0x2
+ 1909 0157 17       		.uleb128 0x17
+ 1910 0158 00       		.byte	0
+ 1911 0159 00       		.byte	0
+ 1912 015a 19       		.uleb128 0x19
+ 1913 015b 898201   		.uleb128 0x4109
+ 1914 015e 00       		.byte	0
+ 1915 015f 11       		.uleb128 0x11
+ 1916 0160 01       		.uleb128 0x1
+ 1917 0161 9542     		.uleb128 0x2115
+ 1918 0163 19       		.uleb128 0x19
+ 1919 0164 31       		.uleb128 0x31
+ 1920 0165 13       		.uleb128 0x13
+ 1921 0166 00       		.byte	0
+ 1922 0167 00       		.byte	0
+ 1923 0168 1A       		.uleb128 0x1a
+ 1924 0169 05       		.uleb128 0x5
+ 1925 016a 00       		.byte	0
+ 1926 016b 03       		.uleb128 0x3
+ 1927 016c 08       		.uleb128 0x8
+ 1928 016d 3A       		.uleb128 0x3a
+ 1929 016e 0B       		.uleb128 0xb
+ 1930 016f 3B       		.uleb128 0x3b
+ 1931 0170 0B       		.uleb128 0xb
+ 1932 0171 49       		.uleb128 0x49
+ 1933 0172 13       		.uleb128 0x13
+ 1934 0173 02       		.uleb128 0x2
+ 1935 0174 17       		.uleb128 0x17
+ 1936 0175 00       		.byte	0
+ 1937 0176 00       		.byte	0
+ 1938 0177 1B       		.uleb128 0x1b
+ 1939 0178 34       		.uleb128 0x34
+ 1940 0179 00       		.byte	0
+ 1941 017a 03       		.uleb128 0x3
+ 1942 017b 0E       		.uleb128 0xe
+ 1943 017c 3A       		.uleb128 0x3a
+ 1944 017d 0B       		.uleb128 0xb
+ 1945 017e 3B       		.uleb128 0x3b
+ 1946 017f 05       		.uleb128 0x5
+ 1947 0180 49       		.uleb128 0x49
+ 1948 0181 13       		.uleb128 0x13
+ 1949 0182 02       		.uleb128 0x2
+ 1950 0183 18       		.uleb128 0x18
+ 1951 0184 00       		.byte	0
+ 1952 0185 00       		.byte	0
+ 1953 0186 1C       		.uleb128 0x1c
+ 1954 0187 1D       		.uleb128 0x1d
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 46
+
+
+ 1955 0188 01       		.byte	0x1
+ 1956 0189 31       		.uleb128 0x31
+ 1957 018a 13       		.uleb128 0x13
+ 1958 018b 52       		.uleb128 0x52
+ 1959 018c 01       		.uleb128 0x1
+ 1960 018d 55       		.uleb128 0x55
+ 1961 018e 17       		.uleb128 0x17
+ 1962 018f 58       		.uleb128 0x58
+ 1963 0190 0B       		.uleb128 0xb
+ 1964 0191 59       		.uleb128 0x59
+ 1965 0192 05       		.uleb128 0x5
+ 1966 0193 01       		.uleb128 0x1
+ 1967 0194 13       		.uleb128 0x13
+ 1968 0195 00       		.byte	0
+ 1969 0196 00       		.byte	0
+ 1970 0197 1D       		.uleb128 0x1d
+ 1971 0198 1D       		.uleb128 0x1d
+ 1972 0199 01       		.byte	0x1
+ 1973 019a 31       		.uleb128 0x31
+ 1974 019b 13       		.uleb128 0x13
+ 1975 019c 52       		.uleb128 0x52
+ 1976 019d 01       		.uleb128 0x1
+ 1977 019e 55       		.uleb128 0x55
+ 1978 019f 17       		.uleb128 0x17
+ 1979 01a0 58       		.uleb128 0x58
+ 1980 01a1 0B       		.uleb128 0xb
+ 1981 01a2 59       		.uleb128 0x59
+ 1982 01a3 05       		.uleb128 0x5
+ 1983 01a4 00       		.byte	0
+ 1984 01a5 00       		.byte	0
+ 1985 01a6 1E       		.uleb128 0x1e
+ 1986 01a7 05       		.uleb128 0x5
+ 1987 01a8 00       		.byte	0
+ 1988 01a9 31       		.uleb128 0x31
+ 1989 01aa 13       		.uleb128 0x13
+ 1990 01ab 00       		.byte	0
+ 1991 01ac 00       		.byte	0
+ 1992 01ad 1F       		.uleb128 0x1f
+ 1993 01ae 01       		.uleb128 0x1
+ 1994 01af 01       		.byte	0x1
+ 1995 01b0 49       		.uleb128 0x49
+ 1996 01b1 13       		.uleb128 0x13
+ 1997 01b2 01       		.uleb128 0x1
+ 1998 01b3 13       		.uleb128 0x13
+ 1999 01b4 00       		.byte	0
+ 2000 01b5 00       		.byte	0
+ 2001 01b6 20       		.uleb128 0x20
+ 2002 01b7 21       		.uleb128 0x21
+ 2003 01b8 00       		.byte	0
+ 2004 01b9 49       		.uleb128 0x49
+ 2005 01ba 13       		.uleb128 0x13
+ 2006 01bb 2F       		.uleb128 0x2f
+ 2007 01bc 0B       		.uleb128 0xb
+ 2008 01bd 00       		.byte	0
+ 2009 01be 00       		.byte	0
+ 2010 01bf 21       		.uleb128 0x21
+ 2011 01c0 34       		.uleb128 0x34
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 47
+
+
+ 2012 01c1 00       		.byte	0
+ 2013 01c2 03       		.uleb128 0x3
+ 2014 01c3 0E       		.uleb128 0xe
+ 2015 01c4 3A       		.uleb128 0x3a
+ 2016 01c5 0B       		.uleb128 0xb
+ 2017 01c6 3B       		.uleb128 0x3b
+ 2018 01c7 0B       		.uleb128 0xb
+ 2019 01c8 49       		.uleb128 0x49
+ 2020 01c9 13       		.uleb128 0x13
+ 2021 01ca 3F       		.uleb128 0x3f
+ 2022 01cb 19       		.uleb128 0x19
+ 2023 01cc 02       		.uleb128 0x2
+ 2024 01cd 18       		.uleb128 0x18
+ 2025 01ce 00       		.byte	0
+ 2026 01cf 00       		.byte	0
+ 2027 01d0 22       		.uleb128 0x22
+ 2028 01d1 2E       		.uleb128 0x2e
+ 2029 01d2 01       		.byte	0x1
+ 2030 01d3 3F       		.uleb128 0x3f
+ 2031 01d4 19       		.uleb128 0x19
+ 2032 01d5 03       		.uleb128 0x3
+ 2033 01d6 0E       		.uleb128 0xe
+ 2034 01d7 3A       		.uleb128 0x3a
+ 2035 01d8 0B       		.uleb128 0xb
+ 2036 01d9 3B       		.uleb128 0x3b
+ 2037 01da 0B       		.uleb128 0xb
+ 2038 01db 27       		.uleb128 0x27
+ 2039 01dc 19       		.uleb128 0x19
+ 2040 01dd 3C       		.uleb128 0x3c
+ 2041 01de 19       		.uleb128 0x19
+ 2042 01df 01       		.uleb128 0x1
+ 2043 01e0 13       		.uleb128 0x13
+ 2044 01e1 00       		.byte	0
+ 2045 01e2 00       		.byte	0
+ 2046 01e3 23       		.uleb128 0x23
+ 2047 01e4 05       		.uleb128 0x5
+ 2048 01e5 00       		.byte	0
+ 2049 01e6 49       		.uleb128 0x49
+ 2050 01e7 13       		.uleb128 0x13
+ 2051 01e8 00       		.byte	0
+ 2052 01e9 00       		.byte	0
+ 2053 01ea 24       		.uleb128 0x24
+ 2054 01eb 2E       		.uleb128 0x2e
+ 2055 01ec 01       		.byte	0x1
+ 2056 01ed 3F       		.uleb128 0x3f
+ 2057 01ee 19       		.uleb128 0x19
+ 2058 01ef 03       		.uleb128 0x3
+ 2059 01f0 0E       		.uleb128 0xe
+ 2060 01f1 3A       		.uleb128 0x3a
+ 2061 01f2 0B       		.uleb128 0xb
+ 2062 01f3 3B       		.uleb128 0x3b
+ 2063 01f4 0B       		.uleb128 0xb
+ 2064 01f5 27       		.uleb128 0x27
+ 2065 01f6 19       		.uleb128 0x19
+ 2066 01f7 3C       		.uleb128 0x3c
+ 2067 01f8 19       		.uleb128 0x19
+ 2068 01f9 00       		.byte	0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 48
+
+
+ 2069 01fa 00       		.byte	0
+ 2070 01fb 00       		.byte	0
+ 2071              		.section	.debug_loc,"",%progbits
+ 2072              	.Ldebug_loc0:
+ 2073              	.LLST0:
+ 2074 0000 00000000 		.4byte	.LVL0
+ 2075 0004 1C000000 		.4byte	.LVL1
+ 2076 0008 0100     		.2byte	0x1
+ 2077 000a 50       		.byte	0x50
+ 2078 000b 1C000000 		.4byte	.LVL1
+ 2079 000f 34000000 		.4byte	.LFE11
+ 2080 0013 0400     		.2byte	0x4
+ 2081 0015 F3       		.byte	0xf3
+ 2082 0016 01       		.uleb128 0x1
+ 2083 0017 50       		.byte	0x50
+ 2084 0018 9F       		.byte	0x9f
+ 2085 0019 00000000 		.4byte	0
+ 2086 001d 00000000 		.4byte	0
+ 2087              	.LLST1:
+ 2088 0021 00000000 		.4byte	.LVL3
+ 2089 0025 24000000 		.4byte	.LVL4
+ 2090 0029 0100     		.2byte	0x1
+ 2091 002b 50       		.byte	0x50
+ 2092 002c 24000000 		.4byte	.LVL4
+ 2093 0030 3C000000 		.4byte	.LFE10
+ 2094 0034 0400     		.2byte	0x4
+ 2095 0036 F3       		.byte	0xf3
+ 2096 0037 01       		.uleb128 0x1
+ 2097 0038 50       		.byte	0x50
+ 2098 0039 9F       		.byte	0x9f
+ 2099 003a 00000000 		.4byte	0
+ 2100 003e 00000000 		.4byte	0
+ 2101              	.LLST2:
+ 2102 0042 00000000 		.4byte	.LVL6
+ 2103 0046 06000000 		.4byte	.LVL7
+ 2104 004a 0100     		.2byte	0x1
+ 2105 004c 50       		.byte	0x50
+ 2106 004d 06000000 		.4byte	.LVL7
+ 2107 0051 22000000 		.4byte	.LFE7
+ 2108 0055 0400     		.2byte	0x4
+ 2109 0057 F3       		.byte	0xf3
+ 2110 0058 01       		.uleb128 0x1
+ 2111 0059 50       		.byte	0x50
+ 2112 005a 9F       		.byte	0x9f
+ 2113 005b 00000000 		.4byte	0
+ 2114 005f 00000000 		.4byte	0
+ 2115              	.LLST3:
+ 2116 0063 00000000 		.4byte	.LVL6
+ 2117 0067 06000000 		.4byte	.LVL7
+ 2118 006b 0500     		.2byte	0x5
+ 2119 006d 70       		.byte	0x70
+ 2120 006e 00       		.sleb128 0
+ 2121 006f 34       		.byte	0x34
+ 2122 0070 25       		.byte	0x25
+ 2123 0071 9F       		.byte	0x9f
+ 2124 0072 06000000 		.4byte	.LVL7
+ 2125 0076 10000000 		.4byte	.LVL9
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 49
+
+
+ 2126 007a 0600     		.2byte	0x6
+ 2127 007c F3       		.byte	0xf3
+ 2128 007d 01       		.uleb128 0x1
+ 2129 007e 50       		.byte	0x50
+ 2130 007f 34       		.byte	0x34
+ 2131 0080 25       		.byte	0x25
+ 2132 0081 9F       		.byte	0x9f
+ 2133 0082 10000000 		.4byte	.LVL9
+ 2134 0086 1C000000 		.4byte	.LVL11
+ 2135 008a 0500     		.2byte	0x5
+ 2136 008c 74       		.byte	0x74
+ 2137 008d 00       		.sleb128 0
+ 2138 008e 3F       		.byte	0x3f
+ 2139 008f 1A       		.byte	0x1a
+ 2140 0090 9F       		.byte	0x9f
+ 2141 0091 00000000 		.4byte	0
+ 2142 0095 00000000 		.4byte	0
+ 2143              	.LLST4:
+ 2144 0099 00000000 		.4byte	.LVL13
+ 2145 009d 06000000 		.4byte	.LVL14
+ 2146 00a1 0100     		.2byte	0x1
+ 2147 00a3 50       		.byte	0x50
+ 2148 00a4 06000000 		.4byte	.LVL14
+ 2149 00a8 18000000 		.4byte	.LFE5
+ 2150 00ac 0100     		.2byte	0x1
+ 2151 00ae 55       		.byte	0x55
+ 2152 00af 00000000 		.4byte	0
+ 2153 00b3 00000000 		.4byte	0
+ 2154              	.LLST5:
+ 2155 00b7 00000000 		.4byte	.LVL13
+ 2156 00bb 08000000 		.4byte	.LVL15
+ 2157 00bf 0200     		.2byte	0x2
+ 2158 00c1 31       		.byte	0x31
+ 2159 00c2 9F       		.byte	0x9f
+ 2160 00c3 08000000 		.4byte	.LVL15
+ 2161 00c7 12000000 		.4byte	.LVL18
+ 2162 00cb 0100     		.2byte	0x1
+ 2163 00cd 54       		.byte	0x54
+ 2164 00ce 14000000 		.4byte	.LVL19
+ 2165 00d2 18000000 		.4byte	.LFE5
+ 2166 00d6 0100     		.2byte	0x1
+ 2167 00d8 54       		.byte	0x54
+ 2168 00d9 00000000 		.4byte	0
+ 2169 00dd 00000000 		.4byte	0
+ 2170              	.LLST6:
+ 2171 00e1 06000000 		.4byte	.LVL14
+ 2172 00e5 0D000000 		.4byte	.LVL16-1
+ 2173 00e9 0100     		.2byte	0x1
+ 2174 00eb 50       		.byte	0x50
+ 2175 00ec 10000000 		.4byte	.LVL17
+ 2176 00f0 18000000 		.4byte	.LFE5
+ 2177 00f4 0100     		.2byte	0x1
+ 2178 00f6 50       		.byte	0x50
+ 2179 00f7 00000000 		.4byte	0
+ 2180 00fb 00000000 		.4byte	0
+ 2181              	.LLST7:
+ 2182 00ff 00000000 		.4byte	.LVL20
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 50
+
+
+ 2183 0103 03000000 		.4byte	.LVL21-1
+ 2184 0107 0100     		.2byte	0x1
+ 2185 0109 50       		.byte	0x50
+ 2186 010a 03000000 		.4byte	.LVL21-1
+ 2187 010e 04000000 		.4byte	.LFE6
+ 2188 0112 0400     		.2byte	0x4
+ 2189 0114 F3       		.byte	0xf3
+ 2190 0115 01       		.uleb128 0x1
+ 2191 0116 50       		.byte	0x50
+ 2192 0117 9F       		.byte	0x9f
+ 2193 0118 00000000 		.4byte	0
+ 2194 011c 00000000 		.4byte	0
+ 2195              	.LLST8:
+ 2196 0120 00000000 		.4byte	.LVL22
+ 2197 0124 06000000 		.4byte	.LVL23
+ 2198 0128 0100     		.2byte	0x1
+ 2199 012a 50       		.byte	0x50
+ 2200 012b 06000000 		.4byte	.LVL23
+ 2201 012f 24000000 		.4byte	.LFE8
+ 2202 0133 0400     		.2byte	0x4
+ 2203 0135 F3       		.byte	0xf3
+ 2204 0136 01       		.uleb128 0x1
+ 2205 0137 50       		.byte	0x50
+ 2206 0138 9F       		.byte	0x9f
+ 2207 0139 00000000 		.4byte	0
+ 2208 013d 00000000 		.4byte	0
+ 2209              	.LLST9:
+ 2210 0141 00000000 		.4byte	.LVL22
+ 2211 0145 06000000 		.4byte	.LVL23
+ 2212 0149 0500     		.2byte	0x5
+ 2213 014b 70       		.byte	0x70
+ 2214 014c 00       		.sleb128 0
+ 2215 014d 34       		.byte	0x34
+ 2216 014e 25       		.byte	0x25
+ 2217 014f 9F       		.byte	0x9f
+ 2218 0150 06000000 		.4byte	.LVL23
+ 2219 0154 10000000 		.4byte	.LVL25
+ 2220 0158 0600     		.2byte	0x6
+ 2221 015a F3       		.byte	0xf3
+ 2222 015b 01       		.uleb128 0x1
+ 2223 015c 50       		.byte	0x50
+ 2224 015d 34       		.byte	0x34
+ 2225 015e 25       		.byte	0x25
+ 2226 015f 9F       		.byte	0x9f
+ 2227 0160 10000000 		.4byte	.LVL25
+ 2228 0164 1C000000 		.4byte	.LVL27
+ 2229 0168 0500     		.2byte	0x5
+ 2230 016a 74       		.byte	0x74
+ 2231 016b 00       		.sleb128 0
+ 2232 016c 3F       		.byte	0x3f
+ 2233 016d 1A       		.byte	0x1a
+ 2234 016e 9F       		.byte	0x9f
+ 2235 016f 00000000 		.4byte	0
+ 2236 0173 00000000 		.4byte	0
+ 2237              	.LLST10:
+ 2238 0177 00000000 		.4byte	.LVL50
+ 2239 017b 10000000 		.4byte	.LVL51
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 51
+
+
+ 2240 017f 0100     		.2byte	0x1
+ 2241 0181 50       		.byte	0x50
+ 2242 0182 10000000 		.4byte	.LVL51
+ 2243 0186 12000000 		.4byte	.LVL52
+ 2244 018a 0400     		.2byte	0x4
+ 2245 018c F3       		.byte	0xf3
+ 2246 018d 01       		.uleb128 0x1
+ 2247 018e 50       		.byte	0x50
+ 2248 018f 9F       		.byte	0x9f
+ 2249 0190 12000000 		.4byte	.LVL52
+ 2250 0194 16000000 		.4byte	.LVL53
+ 2251 0198 0100     		.2byte	0x1
+ 2252 019a 50       		.byte	0x50
+ 2253 019b 16000000 		.4byte	.LVL53
+ 2254 019f 18000000 		.4byte	.LVL54
+ 2255 01a3 0400     		.2byte	0x4
+ 2256 01a5 F3       		.byte	0xf3
+ 2257 01a6 01       		.uleb128 0x1
+ 2258 01a7 50       		.byte	0x50
+ 2259 01a8 9F       		.byte	0x9f
+ 2260 01a9 18000000 		.4byte	.LVL54
+ 2261 01ad 1C000000 		.4byte	.LVL55
+ 2262 01b1 0100     		.2byte	0x1
+ 2263 01b3 50       		.byte	0x50
+ 2264 01b4 1C000000 		.4byte	.LVL55
+ 2265 01b8 1E000000 		.4byte	.LVL56
+ 2266 01bc 0400     		.2byte	0x4
+ 2267 01be F3       		.byte	0xf3
+ 2268 01bf 01       		.uleb128 0x1
+ 2269 01c0 50       		.byte	0x50
+ 2270 01c1 9F       		.byte	0x9f
+ 2271 01c2 1E000000 		.4byte	.LVL56
+ 2272 01c6 22000000 		.4byte	.LVL57
+ 2273 01ca 0100     		.2byte	0x1
+ 2274 01cc 50       		.byte	0x50
+ 2275 01cd 22000000 		.4byte	.LVL57
+ 2276 01d1 28000000 		.4byte	.LVL58
+ 2277 01d5 0400     		.2byte	0x4
+ 2278 01d7 F3       		.byte	0xf3
+ 2279 01d8 01       		.uleb128 0x1
+ 2280 01d9 50       		.byte	0x50
+ 2281 01da 9F       		.byte	0x9f
+ 2282 01db 28000000 		.4byte	.LVL58
+ 2283 01df 2A000000 		.4byte	.LFE4
+ 2284 01e3 0100     		.2byte	0x1
+ 2285 01e5 50       		.byte	0x50
+ 2286 01e6 00000000 		.4byte	0
+ 2287 01ea 00000000 		.4byte	0
+ 2288              	.LLST11:
+ 2289 01ee 00000000 		.4byte	.LVL50
+ 2290 01f2 27000000 		.4byte	.LVL58-1
+ 2291 01f6 0100     		.2byte	0x1
+ 2292 01f8 51       		.byte	0x51
+ 2293 01f9 27000000 		.4byte	.LVL58-1
+ 2294 01fd 28000000 		.4byte	.LVL58
+ 2295 0201 0400     		.2byte	0x4
+ 2296 0203 F3       		.byte	0xf3
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 52
+
+
+ 2297 0204 01       		.uleb128 0x1
+ 2298 0205 51       		.byte	0x51
+ 2299 0206 9F       		.byte	0x9f
+ 2300 0207 28000000 		.4byte	.LVL58
+ 2301 020b 2A000000 		.4byte	.LFE4
+ 2302 020f 0100     		.2byte	0x1
+ 2303 0211 51       		.byte	0x51
+ 2304 0212 00000000 		.4byte	0
+ 2305 0216 00000000 		.4byte	0
+ 2306              	.LLST12:
+ 2307 021a 00000000 		.4byte	.LVL60
+ 2308 021e 0A000000 		.4byte	.LVL61
+ 2309 0222 0100     		.2byte	0x1
+ 2310 0224 50       		.byte	0x50
+ 2311 0225 0A000000 		.4byte	.LVL61
+ 2312 0229 20000000 		.4byte	.LFE12
+ 2313 022d 0400     		.2byte	0x4
+ 2314 022f F3       		.byte	0xf3
+ 2315 0230 01       		.uleb128 0x1
+ 2316 0231 50       		.byte	0x50
+ 2317 0232 9F       		.byte	0x9f
+ 2318 0233 00000000 		.4byte	0
+ 2319 0237 00000000 		.4byte	0
+ 2320              	.LLST13:
+ 2321 023b 00000000 		.4byte	.LVL60
+ 2322 023f 0A000000 		.4byte	.LVL61
+ 2323 0243 0D00     		.2byte	0xd
+ 2324 0245 70       		.byte	0x70
+ 2325 0246 00       		.sleb128 0
+ 2326 0247 34       		.byte	0x34
+ 2327 0248 25       		.byte	0x25
+ 2328 0249 08       		.byte	0x8
+ 2329 024a FF       		.byte	0xff
+ 2330 024b 1A       		.byte	0x1a
+ 2331 024c 03       		.byte	0x3
+ 2332 024d 00000000 		.4byte	LCD1_hex.4893
+ 2333 0251 22       		.byte	0x22
+ 2334 0252 0A000000 		.4byte	.LVL61
+ 2335 0256 20000000 		.4byte	.LFE12
+ 2336 025a 0E00     		.2byte	0xe
+ 2337 025c F3       		.byte	0xf3
+ 2338 025d 01       		.uleb128 0x1
+ 2339 025e 50       		.byte	0x50
+ 2340 025f 34       		.byte	0x34
+ 2341 0260 25       		.byte	0x25
+ 2342 0261 08       		.byte	0x8
+ 2343 0262 FF       		.byte	0xff
+ 2344 0263 1A       		.byte	0x1a
+ 2345 0264 03       		.byte	0x3
+ 2346 0265 00000000 		.4byte	LCD1_hex.4893
+ 2347 0269 22       		.byte	0x22
+ 2348 026a 00000000 		.4byte	0
+ 2349 026e 00000000 		.4byte	0
+ 2350              	.LLST14:
+ 2351 0272 00000000 		.4byte	.LVL64
+ 2352 0276 06000000 		.4byte	.LVL65
+ 2353 027a 0100     		.2byte	0x1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 53
+
+
+ 2354 027c 50       		.byte	0x50
+ 2355 027d 06000000 		.4byte	.LVL65
+ 2356 0281 14000000 		.4byte	.LFE13
+ 2357 0285 0400     		.2byte	0x4
+ 2358 0287 F3       		.byte	0xf3
+ 2359 0288 01       		.uleb128 0x1
+ 2360 0289 50       		.byte	0x50
+ 2361 028a 9F       		.byte	0x9f
+ 2362 028b 00000000 		.4byte	0
+ 2363 028f 00000000 		.4byte	0
+ 2364              	.LLST15:
+ 2365 0293 00000000 		.4byte	.LVL68
+ 2366 0297 26000000 		.4byte	.LVL72
+ 2367 029b 0100     		.2byte	0x1
+ 2368 029d 50       		.byte	0x50
+ 2369 029e 26000000 		.4byte	.LVL72
+ 2370 02a2 5E000000 		.4byte	.LVL78
+ 2371 02a6 0100     		.2byte	0x1
+ 2372 02a8 50       		.byte	0x50
+ 2373 02a9 00000000 		.4byte	0
+ 2374 02ad 00000000 		.4byte	0
+ 2375              	.LLST16:
+ 2376 02b1 00000000 		.4byte	.LVL68
+ 2377 02b5 04000000 		.4byte	.LVL69
+ 2378 02b9 0200     		.2byte	0x2
+ 2379 02bb 30       		.byte	0x30
+ 2380 02bc 9F       		.byte	0x9f
+ 2381 02bd 06000000 		.4byte	.LVL70
+ 2382 02c1 1A000000 		.4byte	.LVL71
+ 2383 02c5 0100     		.2byte	0x1
+ 2384 02c7 53       		.byte	0x53
+ 2385 02c8 26000000 		.4byte	.LVL72
+ 2386 02cc 2A000000 		.4byte	.LVL73
+ 2387 02d0 0100     		.2byte	0x1
+ 2388 02d2 51       		.byte	0x51
+ 2389 02d3 2A000000 		.4byte	.LVL73
+ 2390 02d7 4C000000 		.4byte	.LVL75
+ 2391 02db 0100     		.2byte	0x1
+ 2392 02dd 53       		.byte	0x53
+ 2393 02de 52000000 		.4byte	.LVL76
+ 2394 02e2 6D000000 		.4byte	.LVL79-1
+ 2395 02e6 0100     		.2byte	0x1
+ 2396 02e8 53       		.byte	0x53
+ 2397 02e9 00000000 		.4byte	0
+ 2398 02ed 00000000 		.4byte	0
+ 2399              	.LLST17:
+ 2400 02f1 3C000000 		.4byte	.LVL74
+ 2401 02f5 58000000 		.4byte	.LVL77
+ 2402 02f9 0100     		.2byte	0x1
+ 2403 02fb 54       		.byte	0x54
+ 2404 02fc 58000000 		.4byte	.LVL77
+ 2405 0300 72000000 		.4byte	.LFE14
+ 2406 0304 0100     		.2byte	0x1
+ 2407 0306 55       		.byte	0x55
+ 2408 0307 00000000 		.4byte	0
+ 2409 030b 00000000 		.4byte	0
+ 2410              		.section	.debug_aranges,"",%progbits
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 54
+
+
+ 2411 0000 8C000000 		.4byte	0x8c
+ 2412 0004 0200     		.2byte	0x2
+ 2413 0006 00000000 		.4byte	.Ldebug_info0
+ 2414 000a 04       		.byte	0x4
+ 2415 000b 00       		.byte	0
+ 2416 000c 0000     		.2byte	0
+ 2417 000e 0000     		.2byte	0
+ 2418 0010 00000000 		.4byte	.LFB11
+ 2419 0014 34000000 		.4byte	.LFE11-.LFB11
+ 2420 0018 00000000 		.4byte	.LFB10
+ 2421 001c 3C000000 		.4byte	.LFE10-.LFB10
+ 2422 0020 00000000 		.4byte	.LFB7
+ 2423 0024 22000000 		.4byte	.LFE7-.LFB7
+ 2424 0028 00000000 		.4byte	.LFB5
+ 2425 002c 18000000 		.4byte	.LFE5-.LFB5
+ 2426 0030 00000000 		.4byte	.LFB6
+ 2427 0034 04000000 		.4byte	.LFE6-.LFB6
+ 2428 0038 00000000 		.4byte	.LFB8
+ 2429 003c 24000000 		.4byte	.LFE8-.LFB8
+ 2430 0040 00000000 		.4byte	.LFB0
+ 2431 0044 6C000000 		.4byte	.LFE0-.LFB0
+ 2432 0048 00000000 		.4byte	.LFB1
+ 2433 004c 14000000 		.4byte	.LFE1-.LFB1
+ 2434 0050 00000000 		.4byte	.LFB2
+ 2435 0054 1C000000 		.4byte	.LFE2-.LFB2
+ 2436 0058 00000000 		.4byte	.LFB3
+ 2437 005c 14000000 		.4byte	.LFE3-.LFB3
+ 2438 0060 00000000 		.4byte	.LFB4
+ 2439 0064 2A000000 		.4byte	.LFE4-.LFB4
+ 2440 0068 00000000 		.4byte	.LFB9
+ 2441 006c 06000000 		.4byte	.LFE9-.LFB9
+ 2442 0070 00000000 		.4byte	.LFB12
+ 2443 0074 20000000 		.4byte	.LFE12-.LFB12
+ 2444 0078 00000000 		.4byte	.LFB13
+ 2445 007c 14000000 		.4byte	.LFE13-.LFB13
+ 2446 0080 00000000 		.4byte	.LFB14
+ 2447 0084 72000000 		.4byte	.LFE14-.LFB14
+ 2448 0088 00000000 		.4byte	0
+ 2449 008c 00000000 		.4byte	0
+ 2450              		.section	.debug_ranges,"",%progbits
+ 2451              	.Ldebug_ranges0:
+ 2452 0000 08000000 		.4byte	.LBB6
+ 2453 0004 0A000000 		.4byte	.LBE6
+ 2454 0008 0E000000 		.4byte	.LBB9
+ 2455 000c 12000000 		.4byte	.LBE9
+ 2456 0010 00000000 		.4byte	0
+ 2457 0014 00000000 		.4byte	0
+ 2458 0018 12000000 		.4byte	.LBB10
+ 2459 001c 14000000 		.4byte	.LBE10
+ 2460 0020 18000000 		.4byte	.LBB13
+ 2461 0024 20000000 		.4byte	.LBE13
+ 2462 0028 00000000 		.4byte	0
+ 2463 002c 00000000 		.4byte	0
+ 2464 0030 00000000 		.4byte	.LFB11
+ 2465 0034 34000000 		.4byte	.LFE11
+ 2466 0038 00000000 		.4byte	.LFB10
+ 2467 003c 3C000000 		.4byte	.LFE10
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 55
+
+
+ 2468 0040 00000000 		.4byte	.LFB7
+ 2469 0044 22000000 		.4byte	.LFE7
+ 2470 0048 00000000 		.4byte	.LFB5
+ 2471 004c 18000000 		.4byte	.LFE5
+ 2472 0050 00000000 		.4byte	.LFB6
+ 2473 0054 04000000 		.4byte	.LFE6
+ 2474 0058 00000000 		.4byte	.LFB8
+ 2475 005c 24000000 		.4byte	.LFE8
+ 2476 0060 00000000 		.4byte	.LFB0
+ 2477 0064 6C000000 		.4byte	.LFE0
+ 2478 0068 00000000 		.4byte	.LFB1
+ 2479 006c 14000000 		.4byte	.LFE1
+ 2480 0070 00000000 		.4byte	.LFB2
+ 2481 0074 1C000000 		.4byte	.LFE2
+ 2482 0078 00000000 		.4byte	.LFB3
+ 2483 007c 14000000 		.4byte	.LFE3
+ 2484 0080 00000000 		.4byte	.LFB4
+ 2485 0084 2A000000 		.4byte	.LFE4
+ 2486 0088 00000000 		.4byte	.LFB9
+ 2487 008c 06000000 		.4byte	.LFE9
+ 2488 0090 00000000 		.4byte	.LFB12
+ 2489 0094 20000000 		.4byte	.LFE12
+ 2490 0098 00000000 		.4byte	.LFB13
+ 2491 009c 14000000 		.4byte	.LFE13
+ 2492 00a0 00000000 		.4byte	.LFB14
+ 2493 00a4 72000000 		.4byte	.LFE14
+ 2494 00a8 00000000 		.4byte	0
+ 2495 00ac 00000000 		.4byte	0
+ 2496              		.section	.debug_line,"",%progbits
+ 2497              	.Ldebug_line0:
+ 2498 0000 B2010000 		.section	.debug_str,"MS",%progbits,1
+ 2498      02004E00 
+ 2498      00000201 
+ 2498      FB0E0D00 
+ 2498      01010101 
+ 2499              	.LASF20:
+ 2500 0000 6E696262 		.ascii	"nibble\000"
+ 2500      6C6500
+ 2501              	.LASF38:
+ 2502 0007 4C434431 		.ascii	"LCD1_hex\000"
+ 2502      5F686578 
+ 2502      00
+ 2503              	.LASF30:
+ 2504 0010 4C434431 		.ascii	"LCD1_Enable\000"
+ 2504      5F456E61 
+ 2504      626C6500 
+ 2505              	.LASF52:
+ 2506 001c 63686172 		.ascii	"character\000"
+ 2506      61637465 
+ 2506      7200
+ 2507              	.LASF37:
+ 2508 0026 76616C75 		.ascii	"value\000"
+ 2508      6500
+ 2509              	.LASF4:
+ 2510 002c 73686F72 		.ascii	"short unsigned int\000"
+ 2510      7420756E 
+ 2510      7369676E 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 56
+
+
+ 2510      65642069 
+ 2510      6E7400
+ 2511              	.LASF25:
+ 2512 003f 696E6465 		.ascii	"indexU8\000"
+ 2512      78553800 
+ 2513              	.LASF15:
+ 2514 0047 646F7562 		.ascii	"double\000"
+ 2514      6C6500
+ 2515              	.LASF24:
+ 2516 004e 73747269 		.ascii	"string\000"
+ 2516      6E6700
+ 2517              	.LASF34:
+ 2518 0055 636F6C75 		.ascii	"column\000"
+ 2518      6D6E00
+ 2519              	.LASF14:
+ 2520 005c 666C6F61 		.ascii	"float\000"
+ 2520      7400
+ 2521              	.LASF29:
+ 2522 0062 4C434431 		.ascii	"LCD1_Init\000"
+ 2522      5F496E69 
+ 2522      7400
+ 2523              	.LASF2:
+ 2524 006c 756E7369 		.ascii	"unsigned char\000"
+ 2524      676E6564 
+ 2524      20636861 
+ 2524      7200
+ 2525              	.LASF17:
+ 2526 007a 72656738 		.ascii	"reg8\000"
+ 2526      00
+ 2527              	.LASF44:
+ 2528 007f 6E756D44 		.ascii	"numDigits\000"
+ 2528      69676974 
+ 2528      7300
+ 2529              	.LASF6:
+ 2530 0089 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2530      20756E73 
+ 2530      69676E65 
+ 2530      6420696E 
+ 2530      7400
+ 2531              	.LASF42:
+ 2532 009b 74656D70 		.ascii	"temp\000"
+ 2532      00
+ 2533              	.LASF11:
+ 2534 00a0 75696E74 		.ascii	"uint8\000"
+ 2534      3800
+ 2535              	.LASF19:
+ 2536 00a6 4C434431 		.ascii	"LCD1_WrDatNib\000"
+ 2536      5F577244 
+ 2536      61744E69 
+ 2536      6200
+ 2537              	.LASF35:
+ 2538 00b4 4C434431 		.ascii	"LCD1_IsReady\000"
+ 2538      5F497352 
+ 2538      65616479 
+ 2538      00
+ 2539              	.LASF51:
+ 2540 00c1 433A5C55 		.ascii	"C:\\Users\\acer\\Desktop\\Saura-master\\2_Psoc\\Pla"
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 57
+
+
+ 2540      73657273 
+ 2540      5C616365 
+ 2540      725C4465 
+ 2540      736B746F 
+ 2541 00ee 74666F72 		.ascii	"tform\\Design02.cydsn\000"
+ 2541      6D5C4465 
+ 2541      7369676E 
+ 2541      30322E63 
+ 2541      7964736E 
+ 2542              	.LASF46:
+ 2543 0103 4C434431 		.ascii	"LCD1_enableState\000"
+ 2543      5F656E61 
+ 2543      626C6553 
+ 2543      74617465 
+ 2543      00
+ 2544              	.LASF47:
+ 2545 0114 4C434431 		.ascii	"LCD1_PutChar\000"
+ 2545      5F507574 
+ 2545      43686172 
+ 2545      00
+ 2546              	.LASF27:
+ 2547 0121 4C434431 		.ascii	"LCD1_WriteControl\000"
+ 2547      5F577269 
+ 2547      7465436F 
+ 2547      6E74726F 
+ 2547      6C00
+ 2548              	.LASF12:
+ 2549 0133 75696E74 		.ascii	"uint16\000"
+ 2549      313600
+ 2550              	.LASF43:
+ 2551 013a 64696749 		.ascii	"digIndex\000"
+ 2551      6E646578 
+ 2551      00
+ 2552              	.LASF13:
+ 2553 0143 75696E74 		.ascii	"uint32\000"
+ 2553      333200
+ 2554              	.LASF0:
+ 2555 014a 756E7369 		.ascii	"unsigned int\000"
+ 2555      676E6564 
+ 2555      20696E74 
+ 2555      00
+ 2556              	.LASF22:
+ 2557 0157 4C434431 		.ascii	"LCD1_WriteData\000"
+ 2557      5F577269 
+ 2557      74654461 
+ 2557      746100
+ 2558              	.LASF8:
+ 2559 0166 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2559      206C6F6E 
+ 2559      6720756E 
+ 2559      7369676E 
+ 2559      65642069 
+ 2560              	.LASF32:
+ 2561 017d 4C434431 		.ascii	"LCD1_Stop\000"
+ 2561      5F53746F 
+ 2561      7000
+ 2562              	.LASF41:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 58
+
+
+ 2563 0187 6E756D62 		.ascii	"number\000"
+ 2563      657200
+ 2564              	.LASF9:
+ 2565 018e 73697A65 		.ascii	"sizetype\000"
+ 2565      74797065 
+ 2565      00
+ 2566              	.LASF16:
+ 2567 0197 63686172 		.ascii	"char8\000"
+ 2567      3800
+ 2568              	.LASF28:
+ 2569 019d 63427974 		.ascii	"cByte\000"
+ 2569      6500
+ 2570              	.LASF7:
+ 2571 01a3 6C6F6E67 		.ascii	"long long int\000"
+ 2571      206C6F6E 
+ 2571      6720696E 
+ 2571      7400
+ 2572              	.LASF48:
+ 2573 01b1 43794465 		.ascii	"CyDelayUs\000"
+ 2573      6C617955 
+ 2573      7300
+ 2574              	.LASF10:
+ 2575 01bb 63686172 		.ascii	"char\000"
+ 2575      00
+ 2576              	.LASF33:
+ 2577 01c0 4C434431 		.ascii	"LCD1_Position\000"
+ 2577      5F506F73 
+ 2577      6974696F 
+ 2577      6E00
+ 2578              	.LASF3:
+ 2579 01ce 73686F72 		.ascii	"short int\000"
+ 2579      7420696E 
+ 2579      7400
+ 2580              	.LASF18:
+ 2581 01d8 4C434431 		.ascii	"LCD1_WrCntrlNib\000"
+ 2581      5F577243 
+ 2581      6E74726C 
+ 2581      4E696200 
+ 2582              	.LASF49:
+ 2583 01e8 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 2583      4320342E 
+ 2583      392E3320 
+ 2583      32303135 
+ 2583      30333033 
+ 2584 021b 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 2584      20726576 
+ 2584      6973696F 
+ 2584      6E203232 
+ 2584      31323230 
+ 2585 024e 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 2585      66756E63 
+ 2585      74696F6E 
+ 2585      2D736563 
+ 2585      74696F6E 
+ 2586              	.LASF26:
+ 2587 0276 63757272 		.ascii	"current\000"
+ 2587      656E7400 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\cchBuRDU.s 			page 59
+
+
+ 2588              	.LASF23:
+ 2589 027e 4C434431 		.ascii	"LCD1_PrintString\000"
+ 2589      5F507269 
+ 2589      6E745374 
+ 2589      72696E67 
+ 2589      00
+ 2590              	.LASF5:
+ 2591 028f 6C6F6E67 		.ascii	"long int\000"
+ 2591      20696E74 
+ 2591      00
+ 2592              	.LASF39:
+ 2593 0298 4C434431 		.ascii	"LCD1_PrintInt16\000"
+ 2593      5F507269 
+ 2593      6E74496E 
+ 2593      74313600 
+ 2594              	.LASF36:
+ 2595 02a8 4C434431 		.ascii	"LCD1_PrintInt8\000"
+ 2595      5F507269 
+ 2595      6E74496E 
+ 2595      743800
+ 2596              	.LASF1:
+ 2597 02b7 7369676E 		.ascii	"signed char\000"
+ 2597      65642063 
+ 2597      68617200 
+ 2598              	.LASF21:
+ 2599 02c3 64427974 		.ascii	"dByte\000"
+ 2599      6500
+ 2600              	.LASF50:
+ 2601 02c9 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\LCD1.c\000"
+ 2601      6E657261 
+ 2601      7465645F 
+ 2601      536F7572 
+ 2601      63655C50 
+ 2602              	.LASF40:
+ 2603 02e9 4C434431 		.ascii	"LCD1_PrintNumber\000"
+ 2603      5F507269 
+ 2603      6E744E75 
+ 2603      6D626572 
+ 2603      00
+ 2604              	.LASF53:
+ 2605 02fa 43794465 		.ascii	"CyDelay\000"
+ 2605      6C617900 
+ 2606              	.LASF31:
+ 2607 0302 4C434431 		.ascii	"LCD1_Start\000"
+ 2607      5F537461 
+ 2607      727400
+ 2608              	.LASF45:
+ 2609 030d 4C434431 		.ascii	"LCD1_initVar\000"
+ 2609      5F696E69 
+ 2609      74566172 
+ 2609      00
+ 2610              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

@@ -6,8 +6,8 @@
     <Toolchain Name="ARM GCC Generic" Selected="True">
       <Tool Name="prebuild" Command="" Options="" />
       <Tool Name="assembler" Command="arm-none-eabi-as.exe" Options="-mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -alh=${OutputDir}/${CompileFile}.lst -g -W" />
-      <Tool Name="compiler" Command="arm-none-eabi-gcc.exe" Options="-mcpu=cortex-m3 -mthumb -Wno-main -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects" />
-      <Tool Name="linker" Command="arm-none-eabi-gcc.exe" Options="-mcpu=cortex-m3 -mthumb -g -ffunction-sections -Os -L Generated_Source\PSoC5 -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -Wl,--gc-sections" />
+      <Tool Name="compiler" Command="arm-none-eabi-gcc.exe" Options="-mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects" />
+      <Tool Name="linker" Command="arm-none-eabi-gcc.exe" Options="-mcpu=cortex-m3 -mthumb -g -ffunction-sections -Os -l m -l emf32nosnlfn -L Generated_Source\PSoC5 -L .\Inc\sd\GCC -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -Wl,--gc-sections" />
       <Tool Name="postbuild" Command="" Options="" />
     </Toolchain>
     <Toolchain Name="ARM MDK Generic" Selected="False">
@@ -25,7 +25,7 @@
       <Tool Name="postbuild" Command="" Options="" />
     </Toolchain>
   </Toolchains>
-  <Project Name="Design02" Path="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn" Version="4.20" Type="Normal">
+  <Project Name="Design02" Path="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn" Version="4.20" Type="Normal">
     <CMSIS_SVD_File>Design02.svd</CMSIS_SVD_File>
     <Datasheet />
     <LinkerFiles>
@@ -34,8 +34,8 @@
       <LinkerFile Toolchain="ARM IAR Generic">.\Generated_Source\PSoC5\Cm3Iar.icf</LinkerFile>
     </LinkerFiles>
     <Folders>
-      <Folder BuildType="BUILD" Path="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn">
-        <Files Root="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn">
+      <Folder BuildType="BUILD" Path="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn">
+        <Files Root="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn">
           <File BuildType="BUILD" Toolchain="">.\main.c</File>
           <File BuildType="BUILD" Toolchain="">.\os_kernel.c</File>
           <File BuildType="BUILD" Toolchain="">.\uart.c</File>
@@ -43,6 +43,8 @@
           <File BuildType="BUILD" Toolchain="">.\wifi.c</File>
           <File BuildType="BUILD" Toolchain="">.\imu_i2c.c</File>
           <File BuildType="BUILD" Toolchain="">.\bt_module.c</File>
+          <File BuildType="BUILD" Toolchain="">.\sd_card.c</File>
+          <File BuildType="BUILD" Toolchain="">.\lcd.c</File>
           <File BuildType="BUILD" Toolchain="">.\os_kernel.h</File>
           <File BuildType="BUILD" Toolchain="">.\os_kernel_pub.h</File>
           <File BuildType="BUILD" Toolchain="">.\TODO.h</File>
@@ -54,14 +56,18 @@
           <File BuildType="BUILD" Toolchain="">.\dio_pub.h</File>
           <File BuildType="BUILD" Toolchain="">.\wifi.h</File>
           <File BuildType="BUILD" Toolchain="">.\imu_i2c.h</File>
+          <File BuildType="BUILD" Toolchain="">.\imu_i2c_pub.h</File>
           <File BuildType="BUILD" Toolchain="">.\bt_module.h</File>
+          <File BuildType="BUILD" Toolchain="">.\sd_card.h</File>
+          <File BuildType="BUILD" Toolchain="">.\lcd.h</File>
           <File BuildType="BUILD" Toolchain="">.\app_1.c</File>
           <File BuildType="BUILD" Toolchain="">.\app_1.h</File>
           <File BuildType="BUILD" Toolchain="">.\app_1_pub.h</File>
+          <File BuildType="BUILD" Toolchain="">.\app_config_pub.h</File>
         </Files>
       </Folder>
-      <Folder BuildType="STRICT" Path="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn\Generated_Source\PSoC5">
-        <Files Root="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn">
+      <Folder BuildType="STRICT" Path="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn\Generated_Source\PSoC5">
+        <Files Root="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn">
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\cyfitter_cfg.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\cyfitter_cfg.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\cymetadata.c</File>
@@ -90,8 +96,6 @@
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\CLK_pre_emp_timer_clock.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\ISR_Pre_Emp_1ms.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\ISR_Pre_Emp_1ms.h</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\ISR_Co_Op_1ms.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\ISR_Co_Op_1ms.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\Cm3Start.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\core_cm3_psoc5.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\core_cm3.h</File>
@@ -119,8 +123,6 @@
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\UART_1_PM.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\UART_1_INT.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\UART_1_BOOT.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\UART_Rx_ISR.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\UART_Rx_ISR.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\UART_1_IntClock.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\UART_1_IntClock.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\System_Switch_aliases.h</File>
@@ -154,49 +156,100 @@
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\I2C_1_SLAVE.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\I2C_1_MASTER.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\I2C_1_PVT.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\ISR_Co_Op_10ms.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\ISR_Co_Op_10ms.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_ConfigMMC_SPI.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_MMC_HW_SPI.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_SPI0.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_SPI0.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_SPI0_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_SPI0_INT.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_SPI0_PVT.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_mosi0_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_mosi0.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_mosi0.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_Clock_1.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_Clock_1.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_miso0_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_miso0.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_miso0.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_sclk0_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_sclk0.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_sclk0.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_SPI0_CS_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_SPI0_CS.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\emFile_1_SPI0_CS.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\Pin_SD_Detect_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\Pin_SD_Detect.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\Pin_SD_Detect.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\D7_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\D7.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\D7.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\D6_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\D6.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\D6.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\D5_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\D5.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\D5.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\D4_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\D4.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\D4.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\E_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\E.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\E.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\RS_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\RS.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\RS.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\LCD1.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\LCD1.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\LCD1_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\LCD1_Cntl_Port.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\LCD1_Cntl_Port.h</File>
         </Files>
       </Folder>
-      <Folder BuildType="STRICT" Path="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn\Export\ARM_GCC_Generic">
-        <Files Root="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn">
+      <Folder BuildType="STRICT" Path="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn\Export\ARM_GCC_Generic">
+        <Files Root="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn">
           <File BuildType="BUILD" Toolchain="ARM GCC Generic">.\Export\ARM_GCC_Generic\CyComponentLibrary.a</File>
         </Files>
       </Folder>
-      <Folder BuildType="STRICT" Path="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn\Export\ARM_MDK_Generic">
-        <Files Root="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn">
+      <Folder BuildType="STRICT" Path="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn\Export\ARM_MDK_Generic">
+        <Files Root="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn">
           <File BuildType="BUILD" Toolchain="ARM MDK Generic">.\Export\ARM_MDK_Generic\CyComponentLibrary.a</File>
         </Files>
       </Folder>
-      <Folder BuildType="STRICT" Path="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn\Export\ARM_IAR_Generic">
-        <Files Root="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn">
+      <Folder BuildType="STRICT" Path="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn\Export\ARM_IAR_Generic">
+        <Files Root="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn">
           <File BuildType="BUILD" Toolchain="ARM IAR Generic">.\Export\ARM_IAR_Generic\CyComponentLibrary.a</File>
         </Files>
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\codegentemp">
-        <Files Root="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn" />
+        <Files Root="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\ARM_GCC_441">
-        <Files Root="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn" />
+        <Files Root="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\ARM_GCC_473">
-        <Files Root="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn" />
+        <Files Root="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\DP8051_Keil_952">
-        <Files Root="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn" />
+        <Files Root="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\DP8051">
-        <Files Root="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn" />
+        <Files Root="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\CortexM0">
-        <Files Root="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn" />
+        <Files Root="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\CortexM3">
-        <Files Root="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn" />
+        <Files Root="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\Generated_Source\PSoC3">
-        <Files Root="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn" />
+        <Files Root="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\Generated_Source\PSoC4">
-        <Files Root="D:\START_UP\COMPANY_STARTUP\3_platform_based_developments\PSOC_PROJECTS\platform\platform\Psoc_Platform\Design02.cydsn" />
+        <Files Root="C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn" />
       </Folder>
     </Folders>
   </Project>

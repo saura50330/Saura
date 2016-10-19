@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
   29:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** volatile uint8   I2C_1_mstrRdBufIndex;   /* Master Read buffer Index      */
   30:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** 
   31:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** /* Receive buffer variables */
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 2
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 2
 
 
   32:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** volatile uint8 * I2C_1_mstrWrBufPtr;     /* Pointer to Master Write buffer */
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
   30              		@ frame_needed = 0, uses_anonymous_args = 0
   31              	.LVL0:
   32 0000 70B5     		push	{r4, r5, r6, lr}
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 3
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 3
 
 
   33              		.cfi_def_cfa_offset 16
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
   62 001e 1A4D     		ldr	r5, .L19+8
   63 0020 4FF40046 		mov	r6, #32768
   64 0024 2E60     		str	r6, [r5]
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 4
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 4
 
 
  108:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****             I2C_1_mstrStatus &= (uint8) ~I2C_1_MSTAT_XFER_HALT;
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
   92 0044 2270     		strb	r2, [r4]
  123:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****             I2C_1_mstrWrBufPtr   = (volatile uint8 *) wrData;
   93              		.loc 1 123 0
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 5
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 5
 
 
   94 0046 144A     		ldr	r2, .L19+24
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  133 0072 1A70     		strb	r2, [r3]
  141:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****             }
  142:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** 
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 6
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 6
 
 
  143:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****             /* Enable interrupt to complete transfer */
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  166:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** *             begin of the transfer and complete the transfer or halt before
  167:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** *             generating a stop.
  168:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** *
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 7
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 7
 
 
  169:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** * Return:
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  181 0008 102D     		cmp	r5, #16
  182 000a 05D1     		bne	.L23
  207:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****         {
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 8
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 8
 
 
  208:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****             /* Master is ready to transaction: check if bus is free */
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  227:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****         {
  228:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****             /* errStatus = I2C_1_MSTR_NOT_READY was set before */
  229:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****         }
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 9
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 9
 
 
  230:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** 
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  245:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** 
  246              		.loc 1 245 0
  247 0054 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 10
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 10
 
 
  248              		.loc 1 248 0
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  287 0090 00000000 		.word	I2C_1_mstrStatus
  288 0094 00000000 		.word	I2C_1_mstrRdBufIndex
  289 0098 00000000 		.word	I2C_1_mstrRdBufSize
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 11
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 11
 
 
  290 009c 00000000 		.word	I2C_1_mstrRdBufPtr
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  308              		@ args = 0, pretend = 0, frame = 0
  309              		@ frame_needed = 0, uses_anonymous_args = 0
  310              	.LVL26:
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 12
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 12
 
 
  311 0000 30B5     		push	{r4, r5, lr}
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  345 0026 00E0     		b	.L50
  346              	.LVL31:
  347              	.L42:
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 13
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 13
 
 
  317:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****             }
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  354:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****         #endif /* (I2C_1_MODE_MULTI_MASTER_ENABLED) */
  355:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** 
  356:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****             if(I2C_1_CHECK_ADDR_NAK(I2C_1_CSR_REG))
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 14
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 14
 
 
  365              		.loc 1 356 0
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  398 005a 00BF     		.align	2
  399              	.L51:
  400 005c 00000000 		.word	I2C_1_state
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 15
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 15
 
 
  401 0060 D9490040 		.word	1073760729
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  409:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****     errStatus = I2C_1_MSTR_NOT_READY;
  410:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** 
  411:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****     /* Check if START condition was generated */
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 16
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 16
 
 
  412:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****     if(I2C_1_CHECK_MASTER_MODE(I2C_1_MCSR_REG))
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  429:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** 
  430:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****         /* Wait until address has been transferred */
  431:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****         while(I2C_1_WAIT_BYTE_COMPLETE(I2C_1_CSR_REG))
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 17
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 17
 
 
  459              		.loc 1 431 0 discriminator 1
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  487              	.LVL53:
  457:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****         }
  458:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****     }
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 18
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 18
 
 
  459:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** 
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  509              		.cfi_startproc
  510              		@ args = 0, pretend = 0, frame = 0
  511              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 19
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 19
 
 
  512              		@ link register save eliminated.
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  517:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****     #endif /* (I2C_1_MODE_MULTI_MASTER_ENABLED) */
  518:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****     }
  519:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** 
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 20
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 20
 
 
  520:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****     return(errStatus);
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  550:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****     uint8 errStatus;
  551:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** 
  552:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****     errStatus = I2C_1_MSTR_NOT_READY;
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 21
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 21
 
 
  553:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** 
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  590 0022 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
  580:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****         {
  581:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****             I2C_1_state = I2C_1_SM_MSTR_HALT;
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 22
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 22
 
 
  591              		.loc 1 581 0
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  595:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** /*******************************************************************************
  596:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** * Function Name: I2C_1_MasterReadByte
  597:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** ********************************************************************************
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 23
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 23
 
 
  598:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** *
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  645              		.loc 1 635 0
  646 0010 0D4A     		ldr	r2, .L90+4
  647 0012 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 24
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 24
 
 
  648 0014 492B     		cmp	r3, #73
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  679 003c 7047     		bx	lr
  680              	.LVL65:
  681              	.L87:
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 25
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 25
 
 
  627:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** 
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  708              		@ frame_needed = 0, uses_anonymous_args = 0
  709              		@ link register save eliminated.
  686:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****     uint8 status;
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 26
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 26
 
 
  687:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** 
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  746              		.align	1
  747              		.global	I2C_1_MasterClearStatus
  748              		.thumb
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 27
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 27
 
 
  749              		.thumb_func
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  770 000e 1170     		strb	r1, [r2]
  735:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** 
  736:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****     I2C_1_EnableInt(); /* Release lock */
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 28
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 28
 
 
  771              		.loc 1 736 0
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  764:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****     return (I2C_1_mstrRdBufIndex);
  798              		.loc 1 764 0
  799 0000 014B     		ldr	r3, .L103
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 29
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 29
 
 
  800 0002 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  827 0004 7047     		bx	lr
  828              	.L107:
  829 0006 00BF     		.align	2
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 30
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 30
 
 
  830              	.L106:
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  854 000a 0021     		movs	r1, #0
  855 000c 1970     		strb	r1, [r3]
  822:.\Generated_Source\PSoC5/I2C_1_MASTER.c ****     I2C_1_mstrStatus    &= (uint8) ~I2C_1_MSTAT_RD_CMPLT;
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 31
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 31
 
 
  856              		.loc 1 822 0
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  850:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** *******************************************************************************/
  851:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** void I2C_1_MasterClearWriteBuf(void) 
  852:.\Generated_Source\PSoC5/I2C_1_MASTER.c **** {
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 32
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 32
 
 
  883              		.loc 1 852 0
@@ -1918,20 +1918,20 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  931 0006 00000000 		.4byte	.Ldebug_abbrev0
  932 000a 04       		.byte	0x4
  933 000b 01       		.uleb128 0x1
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 33
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 33
 
 
- 934 000c C3020000 		.4byte	.LASF48
+ 934 000c 8E020000 		.4byte	.LASF48
  935 0010 01       		.byte	0x1
- 936 0011 95030000 		.4byte	.LASF49
- 937 0015 74010000 		.4byte	.LASF50
+ 936 0011 60030000 		.4byte	.LASF49
+ 937 0015 FC000000 		.4byte	.LASF50
  938 0019 00000000 		.4byte	.Ldebug_ranges0+0
  939 001d 00000000 		.4byte	0
  940 0021 00000000 		.4byte	.Ldebug_line0
  941 0025 02       		.uleb128 0x2
  942 0026 01       		.byte	0x1
  943 0027 06       		.byte	0x6
- 944 0028 89030000 		.4byte	.LASF0
+ 944 0028 54030000 		.4byte	.LASF0
  945 002c 02       		.uleb128 0x2
  946 002d 01       		.byte	0x1
  947 002e 08       		.byte	0x8
@@ -1939,7 +1939,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  949 0033 02       		.uleb128 0x2
  950 0034 02       		.byte	0x2
  951 0035 05       		.byte	0x5
- 952 0036 99020000 		.4byte	.LASF2
+ 952 0036 64020000 		.4byte	.LASF2
  953 003a 02       		.uleb128 0x2
  954 003b 02       		.byte	0x2
  955 003c 07       		.byte	0x7
@@ -1947,7 +1947,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  957 0041 02       		.uleb128 0x2
  958 0042 04       		.byte	0x4
  959 0043 05       		.byte	0x5
- 960 0044 7B030000 		.4byte	.LASF4
+ 960 0044 46030000 		.4byte	.LASF4
  961 0048 02       		.uleb128 0x2
  962 0049 04       		.byte	0x4
  963 004a 07       		.byte	0x7
@@ -1955,11 +1955,11 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  965 004f 02       		.uleb128 0x2
  966 0050 08       		.byte	0x8
  967 0051 05       		.byte	0x5
- 968 0052 1A020000 		.4byte	.LASF6
+ 968 0052 E5010000 		.4byte	.LASF6
  969 0056 02       		.uleb128 0x2
  970 0057 08       		.byte	0x8
  971 0058 07       		.byte	0x7
- 972 0059 5D010000 		.4byte	.LASF7
+ 972 0059 9F010000 		.4byte	.LASF7
  973 005d 03       		.uleb128 0x3
  974 005e 04       		.byte	0x4
  975 005f 05       		.byte	0x5
@@ -1974,11 +1974,11 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  984 0071 A1       		.byte	0xa1
  985 0072 2C000000 		.4byte	0x2c
  986 0076 04       		.uleb128 0x4
- 987 0077 3B010000 		.4byte	.LASF10
+ 987 0077 7D010000 		.4byte	.LASF10
  988 007b 02       		.byte	0x2
  989 007c A3       		.byte	0xa3
  990 007d 48000000 		.4byte	0x48
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 34
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 34
 
 
  991 0081 02       		.uleb128 0x2
@@ -1988,11 +1988,11 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  995 0088 02       		.uleb128 0x2
  996 0089 08       		.byte	0x8
  997 008a 04       		.byte	0x4
- 998 008b FC000000 		.4byte	.LASF12
+ 998 008b 3E010000 		.4byte	.LASF12
  999 008f 02       		.uleb128 0x2
  1000 0090 01       		.byte	0x1
  1001 0091 08       		.byte	0x8
- 1002 0092 84030000 		.4byte	.LASF13
+ 1002 0092 4F030000 		.4byte	.LASF13
  1003 0096 05       		.uleb128 0x5
  1004 0097 D5000000 		.4byte	.LASF14
  1005 009b 02       		.byte	0x2
@@ -2010,7 +2010,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1017 00b8 02       		.uleb128 0x2
  1018 00b9 04       		.byte	0x4
  1019 00ba 07       		.byte	0x7
- 1020 00bb 11020000 		.4byte	.LASF16
+ 1020 00bb DC010000 		.4byte	.LASF16
  1021 00bf 07       		.uleb128 0x7
  1022 00c0 AC000000 		.4byte	.LASF20
  1023 00c4 01       		.byte	0x1
@@ -2022,13 +2022,13 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1029 00d3 9C       		.byte	0x9c
  1030 00d4 24010000 		.4byte	0x124
  1031 00d8 08       		.uleb128 0x8
- 1032 00d9 F0010000 		.4byte	.LASF17
+ 1032 00d9 BB010000 		.4byte	.LASF17
  1033 00dd 01       		.byte	0x1
  1034 00de 50       		.byte	0x50
  1035 00df 6B000000 		.4byte	0x6b
  1036 00e3 00000000 		.4byte	.LLST0
  1037 00e7 08       		.uleb128 0x8
- 1038 00e8 56010000 		.4byte	.LASF18
+ 1038 00e8 98010000 		.4byte	.LASF18
  1039 00ec 01       		.byte	0x1
  1040 00ed 50       		.byte	0x50
  1041 00ee 24010000 		.4byte	0x124
@@ -2038,12 +2038,12 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1045 00fb 01       		.byte	0x1
  1046 00fc 50       		.byte	0x50
  1047 00fd 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 35
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 35
 
 
  1048 0101 83000000 		.4byte	.LLST2
  1049 0105 08       		.uleb128 0x8
- 1050 0106 EB010000 		.4byte	.LASF19
+ 1050 0106 B6010000 		.4byte	.LASF19
  1051 010a 01       		.byte	0x1
  1052 010b 50       		.byte	0x50
  1053 010c 6B000000 		.4byte	0x6b
@@ -2059,7 +2059,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1063 0125 04       		.byte	0x4
  1064 0126 6B000000 		.4byte	0x6b
  1065 012a 07       		.uleb128 0x7
- 1066 012b 1B010000 		.4byte	.LASF21
+ 1066 012b 5D010000 		.4byte	.LASF21
  1067 012f 01       		.byte	0x1
  1068 0130 C4       		.byte	0xc4
  1069 0131 6B000000 		.4byte	0x6b
@@ -2069,13 +2069,13 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1073 013e 9C       		.byte	0x9c
  1074 013f 8F010000 		.4byte	0x18f
  1075 0143 08       		.uleb128 0x8
- 1076 0144 F0010000 		.4byte	.LASF17
+ 1076 0144 BB010000 		.4byte	.LASF17
  1077 0148 01       		.byte	0x1
  1078 0149 C4       		.byte	0xc4
  1079 014a 6B000000 		.4byte	0x6b
  1080 014e 17010000 		.4byte	.LLST5
  1081 0152 08       		.uleb128 0x8
- 1082 0153 34010000 		.4byte	.LASF22
+ 1082 0153 76010000 		.4byte	.LASF22
  1083 0157 01       		.byte	0x1
  1084 0158 C4       		.byte	0xc4
  1085 0159 24010000 		.4byte	0x124
@@ -2087,7 +2087,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1091 0168 6B000000 		.4byte	0x6b
  1092 016c 9A010000 		.4byte	.LLST7
  1093 0170 08       		.uleb128 0x8
- 1094 0171 EB010000 		.4byte	.LASF19
+ 1094 0171 B6010000 		.4byte	.LASF19
  1095 0175 01       		.byte	0x1
  1096 0176 C4       		.byte	0xc4
  1097 0177 6B000000 		.4byte	0x6b
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1102 0185 C7       		.byte	0xc7
  1103 0186 6B000000 		.4byte	0x6b
  1104 018a EB010000 		.4byte	.LLST9
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 36
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 36
 
 
  1105 018e 00       		.byte	0
@@ -2113,13 +2113,13 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1114 01a4 9C       		.byte	0x9c
  1115 01a5 DA010000 		.4byte	0x1da
  1116 01a9 0D       		.uleb128 0xd
- 1117 01aa F0010000 		.4byte	.LASF17
+ 1117 01aa BB010000 		.4byte	.LASF17
  1118 01ae 01       		.byte	0x1
  1119 01af 2701     		.2byte	0x127
  1120 01b1 6B000000 		.4byte	0x6b
  1121 01b5 2E020000 		.4byte	.LLST10
  1122 01b9 0D       		.uleb128 0xd
- 1123 01ba 2F010000 		.4byte	.LASF25
+ 1123 01ba 71010000 		.4byte	.LASF25
  1124 01be 01       		.byte	0x1
  1125 01bf 2701     		.2byte	0x127
  1126 01c1 6B000000 		.4byte	0x6b
@@ -2132,7 +2132,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1133 01d5 EA020000 		.4byte	.LLST12
  1134 01d9 00       		.byte	0
  1135 01da 0C       		.uleb128 0xc
- 1136 01db 03010000 		.4byte	.LASF26
+ 1136 01db 45010000 		.4byte	.LASF26
  1137 01df 01       		.byte	0x1
  1138 01e0 9401     		.2byte	0x194
  1139 01e2 6B000000 		.4byte	0x6b
@@ -2142,13 +2142,13 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1143 01ef 9C       		.byte	0x9c
  1144 01f0 25020000 		.4byte	0x225
  1145 01f4 0D       		.uleb128 0xd
- 1146 01f5 F0010000 		.4byte	.LASF17
+ 1146 01f5 BB010000 		.4byte	.LASF17
  1147 01f9 01       		.byte	0x1
  1148 01fa 9401     		.2byte	0x194
  1149 01fc 6B000000 		.4byte	0x6b
  1150 0200 21030000 		.4byte	.LLST13
  1151 0204 0D       		.uleb128 0xd
- 1152 0205 2F010000 		.4byte	.LASF25
+ 1152 0205 71010000 		.4byte	.LASF25
  1153 0209 01       		.byte	0x1
  1154 020a 9401     		.2byte	0x194
  1155 020c 6B000000 		.4byte	0x6b
@@ -2158,13 +2158,13 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1159 0219 01       		.byte	0x1
  1160 021a 9701     		.2byte	0x197
  1161 021c 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 37
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 37
 
 
  1162 0220 C4030000 		.4byte	.LLST15
  1163 0224 00       		.byte	0
  1164 0225 0C       		.uleb128 0xc
- 1165 0226 66030000 		.4byte	.LASF27
+ 1165 0226 31030000 		.4byte	.LASF27
  1166 022a 01       		.byte	0x1
  1167 022b EA01     		.2byte	0x1ea
  1168 022d 6B000000 		.4byte	0x6b
@@ -2181,7 +2181,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1179 024b FB030000 		.4byte	.LLST16
  1180 024f 00       		.byte	0
  1181 0250 0C       		.uleb128 0xc
- 1182 0251 56020000 		.4byte	.LASF28
+ 1182 0251 21020000 		.4byte	.LASF28
  1183 0255 01       		.byte	0x1
  1184 0256 2402     		.2byte	0x224
  1185 0258 6B000000 		.4byte	0x6b
@@ -2191,7 +2191,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1189 0265 9C       		.byte	0x9c
  1190 0266 8B020000 		.4byte	0x28b
  1191 026a 0D       		.uleb128 0xd
- 1192 026b A3020000 		.4byte	.LASF29
+ 1192 026b 6E020000 		.4byte	.LASF29
  1193 026f 01       		.byte	0x1
  1194 0270 2402     		.2byte	0x224
  1195 0272 6B000000 		.4byte	0x6b
@@ -2204,7 +2204,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1202 0286 54040000 		.4byte	.LLST18
  1203 028a 00       		.byte	0
  1204 028b 0C       		.uleb128 0xc
- 1205 028c 28020000 		.4byte	.LASF30
+ 1205 028c F3010000 		.4byte	.LASF30
  1206 0290 01       		.byte	0x1
  1207 0291 6F02     		.2byte	0x26f
  1208 0293 6B000000 		.4byte	0x6b
@@ -2214,23 +2214,23 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1212 02a0 9C       		.byte	0x9c
  1213 02a1 C6020000 		.4byte	0x2c6
  1214 02a5 0D       		.uleb128 0xd
- 1215 02a6 4E010000 		.4byte	.LASF31
+ 1215 02a6 90010000 		.4byte	.LASF31
  1216 02aa 01       		.byte	0x1
  1217 02ab 6F02     		.2byte	0x26f
  1218 02ad 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 38
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 38
 
 
  1219 02b1 97040000 		.4byte	.LLST19
  1220 02b5 0E       		.uleb128 0xe
- 1221 02b6 A3020000 		.4byte	.LASF29
+ 1221 02b6 6E020000 		.4byte	.LASF29
  1222 02ba 01       		.byte	0x1
  1223 02bb 7102     		.2byte	0x271
  1224 02bd 6B000000 		.4byte	0x6b
  1225 02c1 D1040000 		.4byte	.LLST20
  1226 02c5 00       		.byte	0
  1227 02c6 0C       		.uleb128 0xc
- 1228 02c7 BD030000 		.4byte	.LASF32
+ 1228 02c7 88030000 		.4byte	.LASF32
  1229 02cb 01       		.byte	0x1
  1230 02cc AC02     		.2byte	0x2ac
  1231 02ce 6B000000 		.4byte	0x6b
@@ -2248,7 +2248,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1243 02ed 50       		.byte	0x50
  1244 02ee 00       		.byte	0
  1245 02ef 0C       		.uleb128 0xc
- 1246 02f0 AB020000 		.4byte	.LASF34
+ 1246 02f0 76020000 		.4byte	.LASF34
  1247 02f4 01       		.byte	0x1
  1248 02f5 D602     		.2byte	0x2d6
  1249 02f7 6B000000 		.4byte	0x6b
@@ -2266,7 +2266,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1261 0316 50       		.byte	0x50
  1262 0317 00       		.byte	0
  1263 0318 10       		.uleb128 0x10
- 1264 0319 D0030000 		.4byte	.LASF35
+ 1264 0319 9B030000 		.4byte	.LASF35
  1265 031d 01       		.byte	0x1
  1266 031e FA02     		.2byte	0x2fa
  1267 0320 6B000000 		.4byte	0x6b
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1273 032f 90000000 		.4byte	.LASF36
  1274 0333 01       		.byte	0x1
  1275 0334 1403     		.2byte	0x314
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 39
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 39
 
 
  1276 0336 6B000000 		.4byte	0x6b
@@ -2287,7 +2287,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1279 0342 01       		.uleb128 0x1
  1280 0343 9C       		.byte	0x9c
  1281 0344 11       		.uleb128 0x11
- 1282 0345 3D020000 		.4byte	.LASF37
+ 1282 0345 08020000 		.4byte	.LASF37
  1283 0349 01       		.byte	0x1
  1284 034a 3103     		.2byte	0x331
  1285 034c 00000000 		.4byte	.LFB11
@@ -2295,7 +2295,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1287 0354 01       		.uleb128 0x1
  1288 0355 9C       		.byte	0x9c
  1289 0356 11       		.uleb128 0x11
- 1290 0357 6C020000 		.4byte	.LASF38
+ 1290 0357 37020000 		.4byte	.LASF38
  1291 035b 01       		.byte	0x1
  1292 035c 5303     		.2byte	0x353
  1293 035e 00000000 		.4byte	.LFB12
@@ -2303,7 +2303,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1295 0366 01       		.uleb128 0x1
  1296 0367 9C       		.byte	0x9c
  1297 0368 12       		.uleb128 0x12
- 1298 0369 42010000 		.4byte	.LASF39
+ 1298 0369 84010000 		.4byte	.LASF39
  1299 036d 03       		.byte	0x3
  1300 036e 23       		.byte	0x23
  1301 036f A2000000 		.4byte	0xa2
@@ -2316,7 +2316,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1308 037f 03       		.byte	0x3
  1309 0380 00000000 		.4byte	I2C_1_mstrStatus
  1310 0384 13       		.uleb128 0x13
- 1311 0385 EB030000 		.4byte	.LASF41
+ 1311 0385 B6030000 		.4byte	.LASF41
  1312 0389 01       		.byte	0x1
  1313 038a 18       		.byte	0x18
  1314 038b A2000000 		.4byte	0xa2
@@ -2324,7 +2324,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1316 0390 03       		.byte	0x3
  1317 0391 00000000 		.4byte	I2C_1_mstrControl
  1318 0395 13       		.uleb128 0x13
- 1319 0396 86020000 		.4byte	.LASF42
+ 1319 0396 51020000 		.4byte	.LASF42
  1320 039a 01       		.byte	0x1
  1321 039b 1B       		.byte	0x1b
  1322 039c A6030000 		.4byte	0x3a6
@@ -2335,10 +2335,10 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1327 03a7 04       		.byte	0x4
  1328 03a8 A2000000 		.4byte	0xa2
  1329 03ac 13       		.uleb128 0x13
- 1330 03ad FD010000 		.4byte	.LASF43
+ 1330 03ad C8010000 		.4byte	.LASF43
  1331 03b1 01       		.byte	0x1
  1332 03b2 1C       		.byte	0x1c
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 40
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 40
 
 
  1333 03b3 A2000000 		.4byte	0xa2
@@ -2370,7 +2370,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1359 03eb 03       		.byte	0x3
  1360 03ec 00000000 		.4byte	I2C_1_mstrWrBufSize
  1361 03f0 13       		.uleb128 0x13
- 1362 03f1 51030000 		.4byte	.LASF47
+ 1362 03f1 1C030000 		.4byte	.LASF47
  1363 03f5 01       		.byte	0x1
  1364 03f6 22       		.byte	0x22
  1365 03f7 A2000000 		.4byte	0xa2
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1387 000f 10       		.uleb128 0x10
  1388 0010 17       		.uleb128 0x17
  1389 0011 00       		.byte	0
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 41
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 41
 
 
  1390 0012 00       		.byte	0
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1444 0048 00       		.byte	0
  1445 0049 00       		.byte	0
  1446 004a 07       		.uleb128 0x7
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 42
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 42
 
 
  1447 004b 2E       		.uleb128 0x2e
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1501 0082 00       		.byte	0
  1502 0083 00       		.byte	0
  1503 0084 0A       		.uleb128 0xa
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 43
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 43
 
 
  1504 0085 34       		.uleb128 0x34
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1558 00bc 0E       		.uleb128 0xe
  1559 00bd 3A       		.uleb128 0x3a
  1560 00be 0B       		.uleb128 0xb
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 44
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 44
 
 
  1561 00bf 3B       		.uleb128 0x3b
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1615 00f5 01       		.uleb128 0x1
  1616 00f6 12       		.uleb128 0x12
  1617 00f7 06       		.uleb128 0x6
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 45
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 45
 
 
  1618 00f8 40       		.uleb128 0x40
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1672 0130 0B       		.uleb128 0xb
  1673 0131 49       		.uleb128 0x49
  1674 0132 13       		.uleb128 0x13
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 46
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 46
 
 
  1675 0133 3F       		.uleb128 0x3f
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1729 0069 00000000 		.4byte	I2C_1_mstrWrBufPtr
  1730 006d 64000000 		.4byte	.LVL12
  1731 0071 AC000000 		.4byte	.LFE0
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 47
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 47
 
 
  1732 0075 0400     		.2byte	0x4
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1786 00f6 32       		.byte	0x32
  1787 00f7 9F       		.byte	0x9f
  1788 00f8 34000000 		.4byte	.LVL5
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 48
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 48
 
 
  1789 00fc 36000000 		.4byte	.LVL6
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1843 017f 03       		.byte	0x3
  1844 0180 00000000 		.4byte	I2C_1_mstrRdBufPtr
  1845 0184 66000000 		.4byte	.LVL24
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 49
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 49
 
 
  1846 0188 B0000000 		.4byte	.LFE1
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1900 020b 0200     		.2byte	0x2
  1901 020d 32       		.byte	0x32
  1902 020e 9F       		.byte	0x9f
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 50
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 50
 
 
  1903 020f 34000000 		.4byte	.LVL18
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  1957 0293 00000000 		.4byte	0
  1958              	.LLST11:
  1959 0297 00000000 		.4byte	.LVL26
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 51
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 51
 
 
  1960 029b 26000000 		.4byte	.LVL30
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  2014 0319 00000000 		.4byte	0
  2015 031d 00000000 		.4byte	0
  2016              	.LLST13:
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 52
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 52
 
 
  2017 0321 00000000 		.4byte	.LVL41
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  2071 03a2 9F       		.byte	0x9f
  2072 03a3 44000000 		.4byte	.LVL50
  2073 03a7 48000000 		.4byte	.LVL52
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 53
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 53
 
 
  2074 03ab 0100     		.2byte	0x1
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  2128 0430 01       		.uleb128 0x1
  2129 0431 50       		.byte	0x50
  2130 0432 9F       		.byte	0x9f
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 54
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 54
 
 
  2131 0433 36000000 		.4byte	.LVL60
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  2185 04b8 0100     		.2byte	0x1
  2186 04ba 50       		.byte	0x50
  2187 04bb 40000000 		.4byte	.LVL66
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 55
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 55
 
 
  2188 04bf 54000000 		.4byte	.LFE6
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  2242 0054 24000000 		.4byte	.LFE8-.LFB8
  2243 0058 00000000 		.4byte	.LFB9
  2244 005c 0C000000 		.4byte	.LFE9-.LFB9
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 56
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 56
 
 
  2245 0060 00000000 		.4byte	.LFB10
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  2291      74725264 
  2291      42756649 
  2291      6E646578 
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 57
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 57
 
 
  2292              	.LASF45:
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  2311      7200
  2312              	.LASF14:
  2313 00d5 72656738 		.ascii	"reg8\000"
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 58
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 58
 
 
  2313      00
@@ -3435,198 +3435,193 @@ ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 1
  2319 00f2 65727253 		.ascii	"errStatus\000"
  2319      74617475 
  2319      7300
- 2320              	.LASF12:
- 2321 00fc 646F7562 		.ascii	"double\000"
- 2321      6C6500
- 2322              	.LASF26:
- 2323 0103 4932435F 		.ascii	"I2C_1_MasterSendRestart\000"
- 2323      315F4D61 
- 2323      73746572 
- 2323      53656E64 
- 2323      52657374 
- 2324              	.LASF21:
- 2325 011b 4932435F 		.ascii	"I2C_1_MasterReadBuf\000"
- 2325      315F4D61 
- 2325      73746572 
- 2325      52656164 
- 2325      42756600 
- 2326              	.LASF25:
- 2327 012f 525F6E57 		.ascii	"R_nW\000"
- 2327      00
- 2328              	.LASF22:
- 2329 0134 72644461 		.ascii	"rdData\000"
- 2329      746100
- 2330              	.LASF10:
- 2331 013b 75696E74 		.ascii	"uint32\000"
- 2331      333200
- 2332              	.LASF39:
- 2333 0142 4932435F 		.ascii	"I2C_1_state\000"
- 2333      315F7374 
- 2333      61746500 
- 2334              	.LASF31:
- 2335 014e 61636B6E 		.ascii	"acknNak\000"
- 2335      4E616B00 
- 2336              	.LASF18:
- 2337 0156 77724461 		.ascii	"wrData\000"
- 2337      746100
- 2338              	.LASF7:
- 2339 015d 6C6F6E67 		.ascii	"long long unsigned int\000"
- 2339      206C6F6E 
- 2339      6720756E 
- 2339      7369676E 
- 2339      65642069 
- 2340              	.LASF50:
- 2341 0174 443A5C53 		.ascii	"D:\\START_UP\\COMPANY_STARTUP\\3_platform_based_dev"
- 2341      54415254 
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 59
+ 2320              	.LASF50:
+ 2321 00fc 433A5C55 		.ascii	"C:\\Users\\acer\\Desktop\\Saura-master\\2_Psoc\\Pla"
+ 2321      73657273 
+ 2321      5C616365 
+ 2321      725C4465 
+ 2321      736B746F 
+ 2322 0129 74666F72 		.ascii	"tform\\Design02.cydsn\000"
+ 2322      6D5C4465 
+ 2322      7369676E 
+ 2322      30322E63 
+ 2322      7964736E 
+ 2323              	.LASF12:
+ 2324 013e 646F7562 		.ascii	"double\000"
+ 2324      6C6500
+ 2325              	.LASF26:
+ 2326 0145 4932435F 		.ascii	"I2C_1_MasterSendRestart\000"
+ 2326      315F4D61 
+ 2326      73746572 
+ 2326      53656E64 
+ 2326      52657374 
+ 2327              	.LASF21:
+ 2328 015d 4932435F 		.ascii	"I2C_1_MasterReadBuf\000"
+ 2328      315F4D61 
+ 2328      73746572 
+ 2328      52656164 
+ 2328      42756600 
+ 2329              	.LASF25:
+ 2330 0171 525F6E57 		.ascii	"R_nW\000"
+ 2330      00
+ 2331              	.LASF22:
+ 2332 0176 72644461 		.ascii	"rdData\000"
+ 2332      746100
+ 2333              	.LASF10:
+ 2334 017d 75696E74 		.ascii	"uint32\000"
+ 2334      333200
+ 2335              	.LASF39:
+ 2336 0184 4932435F 		.ascii	"I2C_1_state\000"
+ 2336      315F7374 
+ 2336      61746500 
+ 2337              	.LASF31:
+ 2338 0190 61636B6E 		.ascii	"acknNak\000"
+ 2338      4E616B00 
+ 2339              	.LASF18:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 59
 
 
- 2341      5F55505C 
- 2341      434F4D50 
- 2341      414E595F 
- 2342 01a4 656C6F70 		.ascii	"elopments\\PSOC_PROJECTS\\platform\\platform\\Psoc_"
- 2342      6D656E74 
- 2342      735C5053 
- 2342      4F435F50 
- 2342      524F4A45 
- 2343 01d3 506C6174 		.ascii	"Platform\\Design02.cydsn\000"
- 2343      666F726D 
- 2343      5C446573 
- 2343      69676E30 
- 2343      322E6379 
- 2344              	.LASF19:
- 2345 01eb 6D6F6465 		.ascii	"mode\000"
- 2345      00
- 2346              	.LASF17:
- 2347 01f0 736C6176 		.ascii	"slaveAddress\000"
- 2347      65416464 
- 2347      72657373 
- 2347      00
- 2348              	.LASF43:
- 2349 01fd 4932435F 		.ascii	"I2C_1_mstrRdBufSize\000"
- 2349      315F6D73 
- 2349      74725264 
- 2349      42756653 
- 2349      697A6500 
- 2350              	.LASF16:
- 2351 0211 73697A65 		.ascii	"sizetype\000"
- 2351      74797065 
- 2351      00
- 2352              	.LASF6:
- 2353 021a 6C6F6E67 		.ascii	"long long int\000"
- 2353      206C6F6E 
- 2353      6720696E 
- 2353      7400
- 2354              	.LASF30:
- 2355 0228 4932435F 		.ascii	"I2C_1_MasterReadByte\000"
- 2355      315F4D61 
- 2355      73746572 
- 2355      52656164 
- 2355      42797465 
- 2356              	.LASF37:
- 2357 023d 4932435F 		.ascii	"I2C_1_MasterClearReadBuf\000"
- 2357      315F4D61 
- 2357      73746572 
- 2357      436C6561 
- 2357      72526561 
- 2358              	.LASF28:
- 2359 0256 4932435F 		.ascii	"I2C_1_MasterWriteByte\000"
- 2359      315F4D61 
- 2359      73746572 
- 2359      57726974 
- 2359      65427974 
- 2360              	.LASF38:
- 2361 026c 4932435F 		.ascii	"I2C_1_MasterClearWriteBuf\000"
- 2361      315F4D61 
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 60
+ 2340 0198 77724461 		.ascii	"wrData\000"
+ 2340      746100
+ 2341              	.LASF7:
+ 2342 019f 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2342      206C6F6E 
+ 2342      6720756E 
+ 2342      7369676E 
+ 2342      65642069 
+ 2343              	.LASF19:
+ 2344 01b6 6D6F6465 		.ascii	"mode\000"
+ 2344      00
+ 2345              	.LASF17:
+ 2346 01bb 736C6176 		.ascii	"slaveAddress\000"
+ 2346      65416464 
+ 2346      72657373 
+ 2346      00
+ 2347              	.LASF43:
+ 2348 01c8 4932435F 		.ascii	"I2C_1_mstrRdBufSize\000"
+ 2348      315F6D73 
+ 2348      74725264 
+ 2348      42756653 
+ 2348      697A6500 
+ 2349              	.LASF16:
+ 2350 01dc 73697A65 		.ascii	"sizetype\000"
+ 2350      74797065 
+ 2350      00
+ 2351              	.LASF6:
+ 2352 01e5 6C6F6E67 		.ascii	"long long int\000"
+ 2352      206C6F6E 
+ 2352      6720696E 
+ 2352      7400
+ 2353              	.LASF30:
+ 2354 01f3 4932435F 		.ascii	"I2C_1_MasterReadByte\000"
+ 2354      315F4D61 
+ 2354      73746572 
+ 2354      52656164 
+ 2354      42797465 
+ 2355              	.LASF37:
+ 2356 0208 4932435F 		.ascii	"I2C_1_MasterClearReadBuf\000"
+ 2356      315F4D61 
+ 2356      73746572 
+ 2356      436C6561 
+ 2356      72526561 
+ 2357              	.LASF28:
+ 2358 0221 4932435F 		.ascii	"I2C_1_MasterWriteByte\000"
+ 2358      315F4D61 
+ 2358      73746572 
+ 2358      57726974 
+ 2358      65427974 
+ 2359              	.LASF38:
+ 2360 0237 4932435F 		.ascii	"I2C_1_MasterClearWriteBuf\000"
+ 2360      315F4D61 
+ 2360      73746572 
+ 2360      436C6561 
+ 2360      72577269 
+ 2361              	.LASF42:
+ 2362 0251 4932435F 		.ascii	"I2C_1_mstrRdBufPtr\000"
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 60
 
 
- 2361      73746572 
- 2361      436C6561 
- 2361      72577269 
- 2362              	.LASF42:
- 2363 0286 4932435F 		.ascii	"I2C_1_mstrRdBufPtr\000"
- 2363      315F6D73 
- 2363      74725264 
- 2363      42756650 
- 2363      747200
- 2364              	.LASF2:
- 2365 0299 73686F72 		.ascii	"short int\000"
- 2365      7420696E 
- 2365      7400
- 2366              	.LASF29:
- 2367 02a3 74686542 		.ascii	"theByte\000"
- 2367      79746500 
- 2368              	.LASF34:
- 2369 02ab 4932435F 		.ascii	"I2C_1_MasterClearStatus\000"
- 2369      315F4D61 
- 2369      73746572 
- 2369      436C6561 
- 2369      72537461 
- 2370              	.LASF48:
- 2371 02c3 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
- 2371      4320342E 
- 2371      392E3320 
- 2371      32303135 
- 2371      30333033 
- 2372 02f6 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
- 2372      20726576 
- 2372      6973696F 
- 2372      6E203232 
- 2372      31323230 
- 2373 0329 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
- 2373      66756E63 
- 2373      74696F6E 
- 2373      2D736563 
- 2373      74696F6E 
- 2374              	.LASF47:
- 2375 0351 4932435F 		.ascii	"I2C_1_mstrWrBufIndex\000"
- 2375      315F6D73 
- 2375      74725772 
- 2375      42756649 
- 2375      6E646578 
- 2376              	.LASF27:
- 2377 0366 4932435F 		.ascii	"I2C_1_MasterSendStop\000"
- 2377      315F4D61 
- 2377      73746572 
- 2377      53656E64 
- 2377      53746F70 
- 2378              	.LASF4:
- 2379 037b 6C6F6E67 		.ascii	"long int\000"
- 2379      20696E74 
- 2379      00
- 2380              	.LASF13:
- 2381 0384 63686172 		.ascii	"char\000"
- 2381      00
-ARM GAS  C:\Users\acer\AppData\Local\Temp\cc8ylTO0.s 			page 61
+ 2362      315F6D73 
+ 2362      74725264 
+ 2362      42756650 
+ 2362      747200
+ 2363              	.LASF2:
+ 2364 0264 73686F72 		.ascii	"short int\000"
+ 2364      7420696E 
+ 2364      7400
+ 2365              	.LASF29:
+ 2366 026e 74686542 		.ascii	"theByte\000"
+ 2366      79746500 
+ 2367              	.LASF34:
+ 2368 0276 4932435F 		.ascii	"I2C_1_MasterClearStatus\000"
+ 2368      315F4D61 
+ 2368      73746572 
+ 2368      436C6561 
+ 2368      72537461 
+ 2369              	.LASF48:
+ 2370 028e 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 2370      4320342E 
+ 2370      392E3320 
+ 2370      32303135 
+ 2370      30333033 
+ 2371 02c1 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 2371      20726576 
+ 2371      6973696F 
+ 2371      6E203232 
+ 2371      31323230 
+ 2372 02f4 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 2372      66756E63 
+ 2372      74696F6E 
+ 2372      2D736563 
+ 2372      74696F6E 
+ 2373              	.LASF47:
+ 2374 031c 4932435F 		.ascii	"I2C_1_mstrWrBufIndex\000"
+ 2374      315F6D73 
+ 2374      74725772 
+ 2374      42756649 
+ 2374      6E646578 
+ 2375              	.LASF27:
+ 2376 0331 4932435F 		.ascii	"I2C_1_MasterSendStop\000"
+ 2376      315F4D61 
+ 2376      73746572 
+ 2376      53656E64 
+ 2376      53746F70 
+ 2377              	.LASF4:
+ 2378 0346 6C6F6E67 		.ascii	"long int\000"
+ 2378      20696E74 
+ 2378      00
+ 2379              	.LASF13:
+ 2380 034f 63686172 		.ascii	"char\000"
+ 2380      00
+ 2381              	.LASF0:
+ 2382 0354 7369676E 		.ascii	"signed char\000"
+ 2382      65642063 
+ 2382      68617200 
+ 2383              	.LASF49:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccJ7mpj2.s 			page 61
 
 
- 2382              	.LASF0:
- 2383 0389 7369676E 		.ascii	"signed char\000"
- 2383      65642063 
- 2383      68617200 
- 2384              	.LASF49:
- 2385 0395 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\I2C_1_MASTER.c\000"
- 2385      6E657261 
- 2385      7465645F 
- 2385      536F7572 
- 2385      63655C50 
- 2386              	.LASF32:
- 2387 03bd 4932435F 		.ascii	"I2C_1_MasterStatus\000"
- 2387      315F4D61 
- 2387      73746572 
- 2387      53746174 
- 2387      757300
- 2388              	.LASF35:
- 2389 03d0 4932435F 		.ascii	"I2C_1_MasterGetReadBufSize\000"
- 2389      315F4D61 
- 2389      73746572 
- 2389      47657452 
- 2389      65616442 
- 2390              	.LASF41:
- 2391 03eb 4932435F 		.ascii	"I2C_1_mstrControl\000"
- 2391      315F6D73 
- 2391      7472436F 
- 2391      6E74726F 
- 2391      6C00
- 2392              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br
+ 2384 0360 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\I2C_1_MASTER.c\000"
+ 2384      6E657261 
+ 2384      7465645F 
+ 2384      536F7572 
+ 2384      63655C50 
+ 2385              	.LASF32:
+ 2386 0388 4932435F 		.ascii	"I2C_1_MasterStatus\000"
+ 2386      315F4D61 
+ 2386      73746572 
+ 2386      53746174 
+ 2386      757300
+ 2387              	.LASF35:
+ 2388 039b 4932435F 		.ascii	"I2C_1_MasterGetReadBufSize\000"
+ 2388      315F4D61 
+ 2388      73746572 
+ 2388      47657452 
+ 2388      65616442 
+ 2389              	.LASF41:
+ 2390 03b6 4932435F 		.ascii	"I2C_1_mstrControl\000"
+ 2390      315F6D73 
+ 2390      7472436F 
+ 2390      6E74726F 
+ 2390      6C00
+ 2391              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

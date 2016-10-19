@@ -1,0 +1,3124 @@
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"emFile_1_MMC_HW_SPI.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.emFile_1_ReadWriteSPI,"ax",%progbits
+  19              		.align	1
+  20              		.thumb
+  21              		.thumb_func
+  22              		.type	emFile_1_ReadWriteSPI, %function
+  23              	emFile_1_ReadWriteSPI:
+  24              	.LFB57:
+  25              		.file 1 ".\\Generated_Source\\PSoC5\\emFile_1_MMC_HW_SPI.c"
+   1:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * File Name: emFile_1_MMC_HW_SPI.c
+   3:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Version 1.20
+   4:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+   5:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Description:
+   6:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Contains a set of File System APIs that implements SPI mode driver operation.
+   7:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+   8:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Note:
+   9:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+  10:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+  11:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Copyright 2011-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  12:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * You may use this file only in accordance with the license, terms, conditions,
+  13:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  14:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * the software package with which this file was provided.
+  15:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+  16:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  17:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #include "FS.h"
+  18:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #include "emFile_1.h"
+  19:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #include "MMC_X_HW.h"
+  20:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #include "project.h"
+  21:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  22:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  23:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*********************************************************************
+  24:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *             Macros
+  25:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *********************************************************************/
+  26:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /* in mV, example means 3.3V */
+  27:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #define emFile_1_MMC_DEFAULT_SUPPLY_VOLTAGE    (3300u)
+  28:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  29:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /* Max. startup frequency (KHz) */
+  30:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #define emFile_1_STARTUP_FREQ                   (400u)
+  31:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  32:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 2
+
+
+  33:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*********************************************************************
+  34:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *       Static data
+  35:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *********************************************************************/
+  36:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  37:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** static char emFile_1_isInited0;
+  38:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  39:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #if (emFile_1_NUMBER_SD_CARDS >= 2u)
+  40:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  41:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     static char emFile_1_isInited1;
+  42:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  43:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #endif /* (emFile_1_NUMBER_SD_CARDS >= 2u) */
+  44:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  45:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #if (emFile_1_NUMBER_SD_CARDS >= 3u)
+  46:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  47:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     static char emFile_1_isInited2;
+  48:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  49:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #endif /* (emFile_1_NUMBER_SD_CARDS >= 3u) */
+  50:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  51:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #if (emFile_1_NUMBER_SD_CARDS == 4u)
+  52:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  53:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     static char emFile_1_isInited3;
+  54:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  55:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #endif /* (emFile_1_NUMBER_SD_CARDS == 4u) */
+  56:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  57:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  58:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+  59:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: emFile_1_Init
+  60:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+  61:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+  62:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+  63:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Initialize SPI Masters.
+  64:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+  65:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+  66:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Unit - Unit (SPIM) number.
+  67:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+  68:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+  69:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  None
+  70:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+  71:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+  72:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+  73:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+  74:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+  75:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** static void emFile_1_Init(U8 Unit) CYREENTRANT
+  76:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** {
+  77:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     switch(Unit)
+  78:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+  79:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 0u:
+  80:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  81:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         if (emFile_1_isInited0 == 0u)
+  82:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+  83:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Indicate that SPI 0 was initialized */
+  84:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_isInited0 = 1u;
+  85:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  86:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Initialize SPI */
+  87:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  88:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Stop the clock to set a required divider */
+  89:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_Stop();
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 3
+
+
+  90:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  91:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Set the inital clock frequency to 400 KHz */
+  92:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_SetDividerValue(BCLK__BUS_CLK__KHZ/emFile_1_STARTUP_FREQ);
+  93:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  94:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Start the clock */
+  95:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_Start();
+  96:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  97:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Start SPI 0 */
+  98:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI0_Start();
+  99:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         }
+ 100:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 101:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 102:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 103:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_NUMBER_SD_CARDS >= 2u)
+ 104:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 105:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             case 1u:
+ 106:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 107:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 if (emFile_1_isInited1 == 0u)
+ 108:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 {
+ 109:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Indicate that SPI 1 was initialized */
+ 110:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_isInited1 = 1u;
+ 111:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 112:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Stop the clock to set a required divider */
+ 113:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_Clock_2_Stop();
+ 114:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 115:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Set the inital clock frequency to 400 KHz */
+ 116:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_Clock_2_SetDividerValue(BCLK__BUS_CLK__KHZ/emFile_1_STARTUP_FREQ);
+ 117:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 118:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Start the clock */
+ 119:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_Clock_2_Start();
+ 120:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 121:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Start SPI 1 */
+ 122:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_SPI1_Start();
+ 123:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 }
+ 124:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 125:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 break;
+ 126:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 127:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_NUMBER_SD_CARDS >= 2u) */
+ 128:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 129:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_NUMBER_SD_CARDS >= 3u)
+ 130:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 131:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             case 2u:
+ 132:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 133:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 if (emFile_1_isInited2 == 0u)
+ 134:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 {
+ 135:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Indicate that SPI 2 was initialized */
+ 136:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_isInited2 = 1u;
+ 137:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 138:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Stop the clock to set a required divider */
+ 139:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_Clock_3_Stop();
+ 140:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 141:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Set the inital clock frequency to 400 KHz */
+ 142:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_Clock_3_SetDividerValue(BCLK__BUS_CLK__KHZ/emFile_1_STARTUP_FREQ);
+ 143:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 144:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Start the clock */
+ 145:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_Clock_3_Start();
+ 146:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 4
+
+
+ 147:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Start SPI 2 */
+ 148:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_SPI2_Start();
+ 149:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 }
+ 150:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 151:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 break;
+ 152:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 153:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_NUMBER_SD_CARDS >= 3u) */
+ 154:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 155:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_NUMBER_SD_CARDS == 4u)
+ 156:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 157:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             case 3u:
+ 158:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 159:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 if (emFile_1_isInited3 == 0u)
+ 160:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 {
+ 161:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Indicate that SPI 3 was initialized */
+ 162:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_isInited3 = 1u;
+ 163:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 164:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Stop the clock to set a required divider */
+ 165:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_Clock_4_Stop();
+ 166:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 167:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Set the inital clock frequency to 400 KHz */
+ 168:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_Clock_4_SetDividerValue(BCLK__BUS_CLK__KHZ/emFile_1_STARTUP_FREQ);
+ 169:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 170:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Start the clock */
+ 171:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_Clock_4_Start();
+ 172:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 173:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Start SPI 3 */
+ 174:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_SPI3_Start();
+ 175:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 }
+ 176:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 177:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 break;
+ 178:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 179:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_NUMBER_SD_CARDS == 4u) */
+ 180:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 181:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     default:
+ 182:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 183:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         if (emFile_1_isInited0 == 0u)
+ 184:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+ 185:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Indicate that SPI 0 was initialized */
+ 186:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_isInited0 = 1u;
+ 187:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 188:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Stop the clock to set a required divider */
+ 189:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_Stop();
+ 190:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 191:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Set the inital clock frequency to 400 KHz */
+ 192:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_SetDividerValue(BCLK__BUS_CLK__KHZ/emFile_1_STARTUP_FREQ);
+ 193:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 194:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Start the clock */
+ 195:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_Start();
+ 196:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 197:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Start SPI 0 */
+ 198:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI0_Start();
+ 199:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         }
+ 200:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         
+ 201:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 202:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****       }
+ 203:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** }
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 5
+
+
+ 204:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 205:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 206:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+ 207:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: emFile_1_ReadWriteSPI
+ 208:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+ 209:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 210:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+ 211:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Reads and Writes data via SPI.
+ 212:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 213:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+ 214:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Unit - Unit number;
+ 215:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Data - data to be written.
+ 216:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 217:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+ 218:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Data received from SD card.
+ 219:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 220:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+ 221:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+ 222:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 223:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+ 224:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** static U8 emFile_1_ReadWriteSPI(U8 Unit, U8 Data) CYREENTRANT
+ 225:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** {
+  26              		.loc 1 225 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              	.LVL0:
+  31 0000 08B5     		push	{r3, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 3, -8
+  34              		.cfi_offset 14, -4
+ 226:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     U8 spiData;
+ 227:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 228:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     switch(Unit)
+  35              		.loc 1 228 0
+  36 0002 38B9     		cbnz	r0, .L10
+ 229:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 230:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 0u:
+ 231:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 232:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         /* Send Data */
+ 233:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         emFile_1_SPI0_WriteTxData(Data);
+  37              		.loc 1 233 0
+  38 0004 0846     		mov	r0, r1
+  39              	.LVL1:
+  40 0006 FFF7FEFF 		bl	emFile_1_SPI0_WriteTxData
+  41              	.LVL2:
+  42              	.L4:
+ 234:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 235:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         /* Wait until all bits are shifted */
+ 236:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         while (0u == (emFile_1_SPI0_STS_SPI_DONE & emFile_1_SPI0_ReadTxStatus()));
+  43              		.loc 1 236 0 discriminator 1
+  44 000a FFF7FEFF 		bl	emFile_1_SPI0_ReadTxStatus
+  45              	.LVL3:
+  46 000e C207     		lsls	r2, r0, #31
+  47 0010 FBD5     		bpl	.L4
+  48 0012 06E0     		b	.L11
+  49              	.LVL4:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 6
+
+
+  50              	.L10:
+  51              	.LBB4:
+  52              	.LBB5:
+ 237:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 238:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         /* Read data */
+ 239:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         spiData = emFile_1_SPI0_ReadRxData();
+ 240:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 241:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 242:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 243:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #if (emFile_1_NUMBER_SD_CARDS >= 2u)
+ 244:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 245:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 1u:
+ 246:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 247:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Send Data */
+ 248:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI1_WriteTxData(Data);
+ 249:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 250:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Wait until all bits are shifted */
+ 251:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             while (0u == (emFile_1_SPI1_STS_SPI_DONE & emFile_1_SPI1_ReadTxStatus()));
+ 252:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 253:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Read data */
+ 254:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             spiData = emFile_1_SPI1_ReadRxData();
+ 255:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 256:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 257:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 258:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #endif /* (emFile_1_NUMBER_SD_CARDS >= 2u) */
+ 259:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 260:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #if (emFile_1_NUMBER_SD_CARDS >= 3u)
+ 261:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 262:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 2u:
+ 263:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 264:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Send Data */
+ 265:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI2_WriteTxData(Data);
+ 266:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 267:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Wait until all bits are shifted */
+ 268:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             while (0u == (emFile_1_SPI2_STS_SPI_DONE & emFile_1_SPI2_ReadTxStatus()));
+ 269:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 270:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Read data */
+ 271:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             spiData = emFile_1_SPI2_ReadRxData();
+ 272:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 273:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 274:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 275:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #endif /* (emFile_1_NUMBER_SD_CARDS >= 2u) */
+ 276:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 277:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #if (emFile_1_NUMBER_SD_CARDS >= 4u)
+ 278:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 279:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 3u:
+ 280:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 281:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Send Data */
+ 282:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI3_WriteTxData(Data);
+ 283:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 284:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Wait until all bits are shifted */
+ 285:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             while (0u == (emFile_1_SPI3_STS_SPI_DONE & emFile_1_SPI3_ReadTxStatus()));
+ 286:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 287:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Read data */
+ 288:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             spiData = emFile_1_SPI3_ReadRxData();
+ 289:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 290:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 7
+
+
+ 291:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 292:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #endif /* (emFile_1_NUMBER_SD_CARDS >= 4u) */
+ 293:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 294:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     default:
+ 295:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 296:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         /* Send Data */
+ 297:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         emFile_1_SPI0_WriteTxData(Data);
+  53              		.loc 1 297 0
+  54 0014 0846     		mov	r0, r1
+  55              	.LVL5:
+  56 0016 FFF7FEFF 		bl	emFile_1_SPI0_WriteTxData
+  57              	.LVL6:
+  58              	.L5:
+ 298:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 299:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         /* Wait until all bits are shifted */
+ 300:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         while (0u == (emFile_1_SPI0_STS_SPI_DONE & emFile_1_SPI0_ReadTxStatus()));
+  59              		.loc 1 300 0
+  60 001a FFF7FEFF 		bl	emFile_1_SPI0_ReadTxStatus
+  61              	.LVL7:
+  62 001e C307     		lsls	r3, r0, #31
+  63 0020 FBD5     		bpl	.L5
+  64              	.LVL8:
+  65              	.L11:
+  66              	.LBE5:
+  67              	.LBE4:
+ 301:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 302:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         /* Read data */
+ 303:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         spiData = emFile_1_SPI0_ReadRxData();
+ 304:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         
+ 305:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 306:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 307:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 308:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     return(spiData);
+ 309:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** }
+  68              		.loc 1 309 0
+  69 0022 BDE80840 		pop	{r3, lr}
+  70              		.cfi_restore 14
+  71              		.cfi_restore 3
+  72              		.cfi_def_cfa_offset 0
+  73              	.LBB7:
+  74              	.LBB6:
+ 303:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         
+  75              		.loc 1 303 0
+  76 0026 FFF7FEBF 		b	emFile_1_SPI0_ReadRxData
+  77              	.LVL9:
+  78              	.LBE6:
+  79              	.LBE7:
+  80              		.cfi_endproc
+  81              	.LFE57:
+  82              		.size	emFile_1_ReadWriteSPI, .-emFile_1_ReadWriteSPI
+  83              		.section	.text.FS_MMC_HW_X_EnableCS,"ax",%progbits
+  84              		.align	1
+  85              		.global	FS_MMC_HW_X_EnableCS
+  86              		.thumb
+  87              		.thumb_func
+  88              		.type	FS_MMC_HW_X_EnableCS, %function
+  89              	FS_MMC_HW_X_EnableCS:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 8
+
+
+  90              	.LFB58:
+ 310:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 311:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+ 312:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_EnableCS
+ 313:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+ 314:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 315:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+ 316:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS low level function. Sets the card slot active using the
+ 317:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  chip select (CS) line.
+ 318:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 319:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+ 320:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Unit      - Device Index.
+ 321:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 322:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+ 323:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  None
+ 324:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 325:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+ 326:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+ 327:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 328:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+ 329:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** void FS_MMC_HW_X_EnableCS(U8 Unit)
+ 330:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** {
+  91              		.loc 1 330 0
+  92              		.cfi_startproc
+  93              		@ args = 0, pretend = 0, frame = 0
+  94              		@ frame_needed = 0, uses_anonymous_args = 0
+  95              		@ link register save eliminated.
+  96              	.LVL10:
+ 331:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     switch(Unit)
+  97              		.loc 1 331 0
+  98 0000 00B1     		cbz	r0, .L17
+ 332:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 333:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 0u:
+ 334:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 335:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Set CS to 0 */
+ 336:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI0_CS_Write(0u);
+ 337:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 338:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 339:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 340:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_NUMBER_SD_CARDS >= 2u)
+ 341:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 342:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             case 1u:
+ 343:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 344:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 /* Set CS to 0 */
+ 345:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 emFile_1_SPI1_CS_Write(0u);
+ 346:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 347:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 break;
+ 348:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 349:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_NUMBER_SD_CARDS >= 2u) */
+ 350:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 351:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_NUMBER_SD_CARDS >= 3u)
+ 352:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 353:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             case 2u:
+ 354:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 355:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 /* Set CS to 0 */
+ 356:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 emFile_1_SPI2_CS_Write(0u);
+ 357:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 9
+
+
+ 358:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 break;
+ 359:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 360:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_NUMBER_SD_CARDS >= 3u) */
+ 361:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 362:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_NUMBER_SD_CARDS == 4u)
+ 363:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 364:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             case 3u:
+ 365:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 366:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 /* Set CS to 0 */
+ 367:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 emFile_1_SPI3_CS_Write(0u);
+ 368:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 369:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 break;
+ 370:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 371:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_NUMBER_SD_CARDS == 4u) */
+ 372:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 373:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         default:
+ 374:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 375:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI0_CS_Write(0u);
+  99              		.loc 1 375 0
+ 100 0002 0020     		movs	r0, #0
+ 101              	.LVL11:
+ 102              	.L17:
+ 103 0004 FFF7FEBF 		b	emFile_1_SPI0_CS_Write
+ 104              	.LVL12:
+ 105              		.cfi_endproc
+ 106              	.LFE58:
+ 107              		.size	FS_MMC_HW_X_EnableCS, .-FS_MMC_HW_X_EnableCS
+ 108              		.section	.text.FS_MMC_HW_X_DisableCS,"ax",%progbits
+ 109              		.align	1
+ 110              		.global	FS_MMC_HW_X_DisableCS
+ 111              		.thumb
+ 112              		.thumb_func
+ 113              		.type	FS_MMC_HW_X_DisableCS, %function
+ 114              	FS_MMC_HW_X_DisableCS:
+ 115              	.LFB59:
+ 376:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 377:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 378:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 379:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** }
+ 380:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 381:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 382:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+ 383:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_DisableCS
+ 384:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+ 385:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 386:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+ 387:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS low level function. Clears the card slot inactive using the
+ 388:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  chip select (CS) line.
+ 389:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 390:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+ 391:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Unit      - Device Index.
+ 392:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 393:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+ 394:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  None
+ 395:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 396:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+ 397:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 10
+
+
+ 398:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 399:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+ 400:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** void FS_MMC_HW_X_DisableCS(U8 Unit)
+ 401:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** {
+ 116              		.loc 1 401 0
+ 117              		.cfi_startproc
+ 118              		@ args = 0, pretend = 0, frame = 0
+ 119              		@ frame_needed = 0, uses_anonymous_args = 0
+ 120              		@ link register save eliminated.
+ 121              	.LVL13:
+ 402:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     switch(Unit)
+ 403:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 404:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 0u:
+ 405:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 406:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         emFile_1_SPI0_CS_Write(1u);
+ 407:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 408:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 409:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 410:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #if (emFile_1_NUMBER_SD_CARDS >= 2u)
+ 411:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 412:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 1u:
+ 413:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 414:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI1_CS_Write(1u);
+ 415:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 416:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 417:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 418:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #endif /* (emFile_1_NUMBER_SD_CARDS >= 2u) */
+ 419:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 420:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #if (emFile_1_NUMBER_SD_CARDS >= 3u)
+ 421:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 422:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 2u:
+ 423:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 424:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI2_CS_Write(1u);
+ 425:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 426:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 427:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 428:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #endif /* (emFile_1_NUMBER_SD_CARDS >= 3u) */
+ 429:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 430:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #if (emFile_1_NUMBER_SD_CARDS == 4u)
+ 431:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 432:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 3u:
+ 433:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 434:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI3_CS_Write(1u);
+ 435:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 436:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 437:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 438:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #endif /* (emFile_1_NUMBER_SD_CARDS == 4u) */
+ 439:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 440:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     default:
+ 441:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 442:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         emFile_1_SPI0_CS_Write(1u);
+ 122              		.loc 1 442 0
+ 123 0000 0120     		movs	r0, #1
+ 124              	.LVL14:
+ 125 0002 FFF7FEBF 		b	emFile_1_SPI0_CS_Write
+ 126              	.LVL15:
+ 127              		.cfi_endproc
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 11
+
+
+ 128              	.LFE59:
+ 129              		.size	FS_MMC_HW_X_DisableCS, .-FS_MMC_HW_X_DisableCS
+ 130              		.section	.text.FS_MMC_HW_X_IsWriteProtected,"ax",%progbits
+ 131              		.align	1
+ 132              		.global	FS_MMC_HW_X_IsWriteProtected
+ 133              		.thumb
+ 134              		.thumb_func
+ 135              		.type	FS_MMC_HW_X_IsWriteProtected, %function
+ 136              	FS_MMC_HW_X_IsWriteProtected:
+ 137              	.LFB60:
+ 443:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         
+ 444:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 445:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 446:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** }
+ 447:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 448:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 449:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+ 450:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_IsWriteProtected
+ 451:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+ 452:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 453:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+ 454:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS low level function. Returns the state of the physical write
+ 455:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  protection of the SD cards.
+ 456:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 457:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+ 458:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Unit      - Device Index.
+ 459:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 460:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+ 461:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *    1       - the card is write protected;
+ 462:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *    0       - the card is not write protected.
+ 463:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 464:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+ 465:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+ 466:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 467:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+ 468:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** int FS_MMC_HW_X_IsWriteProtected(U8 Unit)
+ 469:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** {
+ 138              		.loc 1 469 0
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142              		@ link register save eliminated.
+ 143              	.LVL16:
+ 470:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****    int wpState;
+ 471:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 472:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     switch(Unit)
+ 473:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 474:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 0u:
+ 475:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 476:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_WP0_EN)
+ 477:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 478:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Based on physical switch state */
+ 479:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****               wpState = (int)emFile_1_SPI0_WP_Read();
+ 480:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 481:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #else
+ 482:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 483:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             wpState = 0;
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 12
+
+
+ 484:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 485:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_WP0_EN) */
+ 486:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 487:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 488:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 489:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #if (emFile_1_NUMBER_SD_CARDS >= 2u)
+ 490:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 491:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 1u:
+ 492:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 493:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             #if (emFile_1_WP1_EN)
+ 494:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 495:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                    /* Based on physical switch state */
+ 496:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 wpState = (int)emFile_1_SPI1_WP_Read();
+ 497:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 498:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             #else
+ 499:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 500:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 wpState = 0;
+ 501:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 502:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             #endif /* (emFile_1_WP1_EN) */
+ 503:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 504:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 505:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 506:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #endif /* (emFile_1_NUMBER_SD_CARDS >= 2u) */
+ 507:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 508:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #if (emFile_1_NUMBER_SD_CARDS >= 3u)
+ 509:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 510:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 2u:
+ 511:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 512:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             #if (emFile_1_WP2_EN)
+ 513:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 514:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                   /* Based on physical switch state */
+ 515:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 wpState = (int)emFile_1_SPI2_WP_Read();
+ 516:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 517:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             #else
+ 518:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 519:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 wpState = 0;
+ 520:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 521:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             #endif /* (emFile_1_WP2_EN) */
+ 522:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 523:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 524:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 525:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #endif /* (emFile_1_NUMBER_SD_CARDS >= 3u) */
+ 526:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 527:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #if (emFile_1_NUMBER_SD_CARDS == 4u)
+ 528:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 529:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 3u:
+ 530:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 531:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             #if (emFile_1_WP3_EN)
+ 532:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 533:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 /* Based on physical switch state */
+ 534:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 wpState = (int)emFile_1_SPI3_WP_Read();
+ 535:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 536:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             #else
+ 537:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 538:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 wpState = 0;
+ 539:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 540:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             #endif /* (emFile_1_WP3_EN) */
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 13
+
+
+ 541:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 542:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 543:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 544:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #endif /* (emFile_1_NUMBER_SD_CARDS == 4u) */
+ 545:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 546:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     default:
+ 547:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 548:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_WP0_EN)
+ 549:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 550:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****               /* Based on physical switch state */
+ 551:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             wpState = (int)emFile_1_SPI0_WP_Read();
+ 552:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 553:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #else
+ 554:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 555:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             wpState = 0;
+ 556:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 557:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_WP0_EN) */
+ 558:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         
+ 559:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 560:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 561:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 562:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     return(wpState);
+ 563:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** }
+ 144              		.loc 1 563 0
+ 145 0000 0020     		movs	r0, #0
+ 146              	.LVL17:
+ 147 0002 7047     		bx	lr
+ 148              		.cfi_endproc
+ 149              	.LFE60:
+ 150              		.size	FS_MMC_HW_X_IsWriteProtected, .-FS_MMC_HW_X_IsWriteProtected
+ 151              		.section	.text.FS_MMC_HW_X_SetMaxSpeed,"ax",%progbits
+ 152              		.align	1
+ 153              		.global	FS_MMC_HW_X_SetMaxSpeed
+ 154              		.thumb
+ 155              		.thumb_func
+ 156              		.type	FS_MMC_HW_X_SetMaxSpeed, %function
+ 157              	FS_MMC_HW_X_SetMaxSpeed:
+ 158              	.LFB61:
+ 564:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 565:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 566:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+ 567:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_SetMaxSpeed
+ 568:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+ 569:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 570:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+ 571:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS low level function. Sets the SPI interface to a maximum frequency.
+ 572:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Make sure that you set the frequency lower or equal but never higher
+ 573:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  than the given value. Recommended startup frequency is 100kHz - 400kHz.
+ 574:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 575:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+ 576:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Unit             - Device Index;
+ 577:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  MaxFreq          - SPI clock frequency in kHz.
+ 578:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 579:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+ 580:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  max. frequency   - the maximum frequency set in kHz;
+ 581:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  0                - the frequency could not be set.
+ 582:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 14
+
+
+ 583:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+ 584:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+ 585:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 586:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+ 587:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** U16 FS_MMC_HW_X_SetMaxSpeed(U8 Unit, U16 MaxFreq)
+ 588:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** {
+ 159              		.loc 1 588 0
+ 160              		.cfi_startproc
+ 161              		@ args = 0, pretend = 0, frame = 0
+ 162              		@ frame_needed = 0, uses_anonymous_args = 0
+ 163              	.LVL18:
+ 589:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     U16 freq;
+ 590:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     U32 divResult;
+ 591:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 592:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     if(MaxFreq < emFile_1_STARTUP_FREQ)
+ 164              		.loc 1 592 0
+ 165 0000 B1F5C87F 		cmp	r1, #400
+ 588:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     U16 freq;
+ 166              		.loc 1 588 0
+ 167 0004 38B5     		push	{r3, r4, r5, lr}
+ 168              		.cfi_def_cfa_offset 16
+ 169              		.cfi_offset 3, -16
+ 170              		.cfi_offset 4, -12
+ 171              		.cfi_offset 5, -8
+ 172              		.cfi_offset 14, -4
+ 173              		.loc 1 592 0
+ 174 0006 06D3     		bcc	.L28
+ 175 0008 46F2A813 		movw	r3, #25000
+ 176 000c 9942     		cmp	r1, r3
+ 177 000e 28BF     		it	cs
+ 178 0010 1946     		movcs	r1, r3
+ 179              	.LVL19:
+ 180 0012 0D46     		mov	r5, r1
+ 181 0014 01E0     		b	.L24
+ 182              	.LVL20:
+ 183              	.L28:
+ 593:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 594:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         MaxFreq = emFile_1_STARTUP_FREQ;
+ 184              		.loc 1 594 0
+ 185 0016 4FF4C875 		mov	r5, #400
+ 186              	.LVL21:
+ 187              	.L24:
+ 595:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 596:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     else if(MaxFreq > emFile_1_MAX_SPI_FREQ)
+ 597:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 598:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         MaxFreq = emFile_1_MAX_SPI_FREQ;
+ 599:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 600:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     else
+ 601:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 602:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         /* Do nothing */
+ 603:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 604:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 605:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     freq = MaxFreq << 1u;
+ 606:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 607:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     divResult = ((U32) BCLK__BUS_CLK__KHZ)/((U32) freq);
+ 188              		.loc 1 607 0
+ 189 001a 45F6C053 		movw	r3, #24000
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 15
+
+
+ 605:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 190              		.loc 1 605 0
+ 191 001e 6C00     		lsls	r4, r5, #1
+ 192              		.loc 1 607 0
+ 193 0020 A4B2     		uxth	r4, r4
+ 194 0022 B3FBF4F4 		udiv	r4, r3, r4
+ 195              	.LVL22:
+ 196 0026 013C     		subs	r4, r4, #1
+ 197              	.LVL23:
+ 608:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 609:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     switch(Unit)
+ 610:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 611:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 0u:
+ 612:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_Stop();
+ 613:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_SetDividerValue((U16)divResult);    /* update the frequency */
+ 614:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_Start();
+ 615:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 616:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 617:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_NUMBER_SD_CARDS >= 2u)
+ 618:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 619:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 1u:
+ 620:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 621:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_2_Stop();
+ 622:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_2_SetDividerValue((U16)divResult);    /* update the frequency */
+ 623:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_2_Start();
+ 624:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 625:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 626:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_NUMBER_SD_CARDS >= 2u) */
+ 627:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 628:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_NUMBER_SD_CARDS >= 3u)
+ 629:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 630:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 2u:
+ 631:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 632:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_3_Stop();
+ 633:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_3_SetDividerValue((U16)divResult);    /* update the frequency */
+ 634:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_3_Start();
+ 635:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 636:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 637:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_NUMBER_SD_CARDS >= 3u) */
+ 638:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 639:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_NUMBER_SD_CARDS == 4u)
+ 640:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 641:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 3u:
+ 642:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 643:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_4_Stop();
+ 644:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_4_SetDividerValue((U16)divResult);    /* update the frequency */
+ 645:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_4_Start();
+ 646:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 647:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 648:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_NUMBER_SD_CARDS == 4u) */
+ 649:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 650:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         default:
+ 651:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_Stop();
+ 198              		.loc 1 651 0
+ 199 0028 FFF7FEFF 		bl	emFile_1_Clock_1_Stop
+ 200              	.LVL24:
+ 652:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_SetDividerValue((U16)divResult);    /* update the frequency */
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 16
+
+
+ 201              		.loc 1 652 0
+ 202 002c A0B2     		uxth	r0, r4
+ 203 002e 0121     		movs	r1, #1
+ 204 0030 FFF7FEFF 		bl	emFile_1_Clock_1_SetDividerRegister
+ 205              	.LVL25:
+ 653:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_Start();
+ 206              		.loc 1 653 0
+ 207 0034 FFF7FEFF 		bl	emFile_1_Clock_1_Start
+ 208              	.LVL26:
+ 654:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 655:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 656:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 657:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     return (MaxFreq);
+ 658:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 659:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** }
+ 209              		.loc 1 659 0
+ 210 0038 2846     		mov	r0, r5
+ 211 003a 38BD     		pop	{r3, r4, r5, pc}
+ 212              		.cfi_endproc
+ 213              	.LFE61:
+ 214              		.size	FS_MMC_HW_X_SetMaxSpeed, .-FS_MMC_HW_X_SetMaxSpeed
+ 215              		.section	.text.FS_MMC_HW_X_SetVoltage,"ax",%progbits
+ 216              		.align	1
+ 217              		.global	FS_MMC_HW_X_SetVoltage
+ 218              		.thumb
+ 219              		.thumb_func
+ 220              		.type	FS_MMC_HW_X_SetVoltage, %function
+ 221              	FS_MMC_HW_X_SetVoltage:
+ 222              	.LFB62:
+ 660:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 661:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 662:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+ 663:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_SetVoltage
+ 664:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+ 665:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 666:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+ 667:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS low level function. Be sure that your card slot si within the given
+ 668:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  voltage range. Return 1 if your slot can support the required voltage,
+ 669:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  and if not, return 0.
+ 670:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 671:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+ 672:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Unit             - Device Index;
+ 673:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Vmin             - Minimum supply voltage in mV;
+ 674:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Vmin             - Maximum supply voltage in mV.
+ 675:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 676:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+ 677:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  1                - the card slot supports the voltage range;
+ 678:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  0                - the card slot does not support the voltage range.
+ 679:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 680:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+ 681:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+ 682:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 683:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+ 684:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** int FS_MMC_HW_X_SetVoltage(U8 Unit, U16 Vmin, U16 Vmax)
+ 685:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** {
+ 223              		.loc 1 685 0
+ 224              		.cfi_startproc
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 17
+
+
+ 225              		@ args = 0, pretend = 0, frame = 0
+ 226              		@ frame_needed = 0, uses_anonymous_args = 0
+ 227              		@ link register save eliminated.
+ 228              	.LVL27:
+ 229 0000 40F6E443 		movw	r3, #3300
+ 686:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     int result;
+ 687:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 688:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     switch(Unit)
+ 689:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 690:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 0u:
+ 691:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 692:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 1u:
+ 693:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 694:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 2u:
+ 695:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 696:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 3u:
+ 697:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 698:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         if((Vmin <= emFile_1_MMC_DEFAULT_SUPPLY_VOLTAGE) &&
+ 699:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             (emFile_1_MMC_DEFAULT_SUPPLY_VOLTAGE <= Vmax))
+ 700:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+ 701:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             result = emFile_1_RET_SUCCCESS;
+ 702:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         }
+ 703:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         else
+ 704:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+ 705:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             result = emFile_1_RET_FAIL;
+ 706:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         }
+ 707:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 708:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 709:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 710:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     default:
+ 711:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 712:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         if((Vmin <= emFile_1_MMC_DEFAULT_SUPPLY_VOLTAGE) &&
+ 230              		.loc 1 712 0
+ 231 0004 9942     		cmp	r1, r3
+ 232 0006 06D8     		bhi	.L35
+ 233              		.loc 1 712 0 is_stmt 0 discriminator 1
+ 234 0008 40F6E340 		movw	r0, #3299
+ 235              	.LVL28:
+ 236 000c 8242     		cmp	r2, r0
+ 237 000e 94BF     		ite	ls
+ 238 0010 0020     		movls	r0, #0
+ 239 0012 0120     		movhi	r0, #1
+ 240 0014 7047     		bx	lr
+ 241              	.LVL29:
+ 242              	.L35:
+ 705:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         }
+ 243              		.loc 1 705 0 is_stmt 1
+ 244 0016 0020     		movs	r0, #0
+ 245              	.LVL30:
+ 713:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             (emFile_1_MMC_DEFAULT_SUPPLY_VOLTAGE <= Vmax))
+ 714:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+ 715:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             result = emFile_1_RET_SUCCCESS;
+ 716:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         }
+ 717:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         else
+ 718:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+ 719:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             result = emFile_1_RET_FAIL;
+ 720:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         }
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 18
+
+
+ 721:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         
+ 722:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 723:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 724:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 725:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     return(result);
+ 726:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** }
+ 246              		.loc 1 726 0
+ 247 0018 7047     		bx	lr
+ 248              		.cfi_endproc
+ 249              	.LFE62:
+ 250              		.size	FS_MMC_HW_X_SetVoltage, .-FS_MMC_HW_X_SetVoltage
+ 251              		.section	.text.FS_MMC_HW_X_IsPresent,"ax",%progbits
+ 252              		.align	1
+ 253              		.global	FS_MMC_HW_X_IsPresent
+ 254              		.thumb
+ 255              		.thumb_func
+ 256              		.type	FS_MMC_HW_X_IsPresent, %function
+ 257              	FS_MMC_HW_X_IsPresent:
+ 258              	.LFB63:
+ 727:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 728:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 729:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+ 730:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_IsPresent
+ 731:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+ 732:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 733:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+ 734:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Returns the state of the media. If you do not know the state, return
+ 735:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS_MEDIA_STATE_UNKNOWN and the higher layer will try to figure out if
+ 736:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  a media is present.
+ 737:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 738:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+ 739:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Unit                      - Device Index.
+ 740:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 741:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+ 742:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS_MEDIA_STATE_UNKNOWN    - Media state is unknown;
+ 743:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS_MEDIA_NOT_PRESENT      - Media is not present;
+ 744:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS_MEDIA_IS_PRESENT       - Media is present.
+ 745:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 746:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+ 747:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+ 748:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 749:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+ 750:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** int FS_MMC_HW_X_IsPresent(U8 Unit)
+ 751:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** {
+ 259              		.loc 1 751 0
+ 260              		.cfi_startproc
+ 261              		@ args = 0, pretend = 0, frame = 0
+ 262              		@ frame_needed = 0, uses_anonymous_args = 0
+ 263              	.LVL31:
+ 264 0000 10B5     		push	{r4, lr}
+ 265              		.cfi_def_cfa_offset 8
+ 266              		.cfi_offset 4, -8
+ 267              		.cfi_offset 14, -4
+ 268 0002 084B     		ldr	r3, .L48
+ 269              	.LBB10:
+ 270              	.LBB11:
+  81:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 19
+
+
+ 271              		.loc 1 81 0
+ 272 0004 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 273 0006 5AB9     		cbnz	r2, .L41
+  84:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 274              		.loc 1 84 0
+ 275 0008 0124     		movs	r4, #1
+ 276 000a 1C70     		strb	r4, [r3]
+  89:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 277              		.loc 1 89 0
+ 278 000c FFF7FEFF 		bl	emFile_1_Clock_1_Stop
+ 279              	.LVL32:
+  92:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 280              		.loc 1 92 0
+ 281 0010 3B20     		movs	r0, #59
+ 282 0012 2146     		mov	r1, r4
+ 283 0014 FFF7FEFF 		bl	emFile_1_Clock_1_SetDividerRegister
+ 284              	.LVL33:
+  95:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 285              		.loc 1 95 0
+ 286 0018 FFF7FEFF 		bl	emFile_1_Clock_1_Start
+ 287              	.LVL34:
+  98:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         }
+ 288              		.loc 1 98 0
+ 289 001c FFF7FEFF 		bl	emFile_1_SPI0_Start
+ 290              	.LVL35:
+ 291              	.L41:
+ 292              	.LBE11:
+ 293              	.LBE10:
+ 752:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****      int result;
+ 753:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 754:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     emFile_1_Init(Unit);
+ 755:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 756:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     switch(Unit)
+ 757:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 758:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 0u:
+ 759:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 760:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 1u:
+ 761:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 762:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 2u:
+ 763:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 764:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 3u:
+ 765:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 766:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         result = FS_MEDIA_STATE_UNKNOWN;
+ 767:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 768:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 769:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     default:
+ 770:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 771:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         result = FS_MEDIA_STATE_UNKNOWN;
+ 772:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 773:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 774:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 775:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     return(result);
+ 776:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** }
+ 294              		.loc 1 776 0
+ 295 0020 0220     		movs	r0, #2
+ 296 0022 10BD     		pop	{r4, pc}
+ 297              	.L49:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 20
+
+
+ 298              		.align	2
+ 299              	.L48:
+ 300 0024 00000000 		.word	.LANCHOR0
+ 301              		.cfi_endproc
+ 302              	.LFE63:
+ 303              		.size	FS_MMC_HW_X_IsPresent, .-FS_MMC_HW_X_IsPresent
+ 304              		.section	.text.FS_MMC_HW_X_Read,"ax",%progbits
+ 305              		.align	1
+ 306              		.global	FS_MMC_HW_X_Read
+ 307              		.thumb
+ 308              		.thumb_func
+ 309              		.type	FS_MMC_HW_X_Read, %function
+ 310              	FS_MMC_HW_X_Read:
+ 311              	.LFB64:
+ 777:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 778:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 779:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+ 780:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_Read
+ 781:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+ 782:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 783:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+ 784:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS low level function. Reads a specified number of bytes from MMC card to 
+ 785:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  buffer.
+ 786:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 787:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+ 788:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *    Unit             - Device Index;
+ 789:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *    pData            - Pointer to a data buffer;
+ 790:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *    NumBytes         - Number of bytes.
+ 791:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 792:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+ 793:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  None
+ 794:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 795:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+ 796:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+ 797:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 798:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+ 799:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #if (CY_PSOC5)
+ 800:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     void  FS_MMC_HW_X_Read (U8 Unit, U8 * pData, int NumBytes)
+ 801:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 312              		.loc 1 801 0
+ 313              		.cfi_startproc
+ 314              		@ args = 0, pretend = 0, frame = 0
+ 315              		@ frame_needed = 0, uses_anonymous_args = 0
+ 316              	.LVL36:
+ 317 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 318              		.cfi_def_cfa_offset 24
+ 319              		.cfi_offset 3, -24
+ 320              		.cfi_offset 4, -20
+ 321              		.cfi_offset 5, -16
+ 322              		.cfi_offset 6, -12
+ 323              		.cfi_offset 7, -8
+ 324              		.cfi_offset 14, -4
+ 325              		.loc 1 801 0
+ 326 0002 0746     		mov	r7, r0
+ 327 0004 0D46     		mov	r5, r1
+ 328 0006 1646     		mov	r6, r2
+ 329 0008 0C46     		mov	r4, r1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 21
+
+
+ 330              	.LVL37:
+ 331              	.L51:
+ 802:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         do
+ 803:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+ 804:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             *pData++ = emFile_1_ReadWriteSPI(Unit, 0xff);
+ 332              		.loc 1 804 0 discriminator 1
+ 333 000a 3846     		mov	r0, r7
+ 334 000c FF21     		movs	r1, #255
+ 335 000e FFF7FEFF 		bl	emFile_1_ReadWriteSPI
+ 336              	.LVL38:
+ 337 0012 04F8010B 		strb	r0, [r4], #1
+ 338              	.LVL39:
+ 339 0016 331B     		subs	r3, r6, r4
+ 805:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         } while (--NumBytes);
+ 340              		.loc 1 805 0 discriminator 1
+ 341 0018 DD42     		cmn	r5, r3
+ 342 001a F6D1     		bne	.L51
+ 806:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 343              		.loc 1 806 0
+ 344 001c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 345              		.cfi_endproc
+ 346              	.LFE64:
+ 347              		.size	FS_MMC_HW_X_Read, .-FS_MMC_HW_X_Read
+ 348              		.section	.text.FS_MMC_HW_X_Write,"ax",%progbits
+ 349              		.align	1
+ 350              		.global	FS_MMC_HW_X_Write
+ 351              		.thumb
+ 352              		.thumb_func
+ 353              		.type	FS_MMC_HW_X_Write, %function
+ 354              	FS_MMC_HW_X_Write:
+ 355              	.LFB65:
+ 807:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #else
+ 808:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     void  FS_MMC_HW_X_Read (U8 Unit, U8 xdata * pData, int NumBytes)
+ 809:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 810:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         do
+ 811:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+ 812:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             *pData++ = emFile_1_ReadWriteSPI(Unit, 0xff);
+ 813:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         } while (--NumBytes);
+ 814:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 815:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #endif /* (CY_PSOC5) */
+ 816:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 817:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 818:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+ 819:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_Write
+ 820:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+ 821:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 822:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+ 823:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS low level function. Writes a specified number of bytes from
+ 824:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  data buffer to the MMC/SD card.
+ 825:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 826:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+ 827:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *    Unit             - Device Index;
+ 828:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *    pData            - Pointer to a data buffer;
+ 829:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *    NumBytes         - Number of bytes.
+ 830:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 831:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+ 832:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  None
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 22
+
+
+ 833:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 834:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+ 835:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+ 836:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 837:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+ 838:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #if (CY_PSOC5)
+ 839:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     void  FS_MMC_HW_X_Write(U8 Unit, const U8 * pData, int NumBytes) 
+ 840:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 356              		.loc 1 840 0
+ 357              		.cfi_startproc
+ 358              		@ args = 0, pretend = 0, frame = 0
+ 359              		@ frame_needed = 0, uses_anonymous_args = 0
+ 360              	.LVL40:
+ 361 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 362              		.cfi_def_cfa_offset 24
+ 363              		.cfi_offset 3, -24
+ 364              		.cfi_offset 4, -20
+ 365              		.cfi_offset 5, -16
+ 366              		.cfi_offset 6, -12
+ 367              		.cfi_offset 7, -8
+ 368              		.cfi_offset 14, -4
+ 369              		.loc 1 840 0
+ 370 0002 0746     		mov	r7, r0
+ 371 0004 0D46     		mov	r5, r1
+ 372 0006 1646     		mov	r6, r2
+ 373 0008 0C46     		mov	r4, r1
+ 374              	.LVL41:
+ 375              	.L54:
+ 841:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         do
+ 842:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+ 843:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_ReadWriteSPI(Unit, *pData++);
+ 376              		.loc 1 843 0 discriminator 1
+ 377 000a 14F8011B 		ldrb	r1, [r4], #1	@ zero_extendqisi2
+ 378              	.LVL42:
+ 379 000e 3846     		mov	r0, r7
+ 380 0010 FFF7FEFF 		bl	emFile_1_ReadWriteSPI
+ 381              	.LVL43:
+ 382 0014 331B     		subs	r3, r6, r4
+ 844:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         } while (--NumBytes);
+ 383              		.loc 1 844 0 discriminator 1
+ 384 0016 DD42     		cmn	r5, r3
+ 385 0018 F7D1     		bne	.L54
+ 845:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 386              		.loc 1 845 0
+ 387 001a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 388              		.cfi_endproc
+ 389              	.LFE65:
+ 390              		.size	FS_MMC_HW_X_Write, .-FS_MMC_HW_X_Write
+ 391              		.bss
+ 392              		.set	.LANCHOR0,. + 0
+ 393              		.type	emFile_1_isInited0, %object
+ 394              		.size	emFile_1_isInited0, 1
+ 395              	emFile_1_isInited0:
+ 396 0000 00       		.space	1
+ 397              		.text
+ 398              	.Letext0:
+ 399              		.file 2 "c:\\program files\\cypress\\psoc creator\\3.3\\psoc creator\\import\\gnu\\arm\\4.9.3\\arm
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 23
+
+
+ 400              		.file 3 "c:\\program files\\cypress\\psoc creator\\3.3\\psoc creator\\import\\gnu\\arm\\4.9.3\\arm
+ 401              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 402              		.file 5 ".\\Generated_Source\\PSoC5\\emFile_1_SPI0.h"
+ 403              		.file 6 ".\\Generated_Source\\PSoC5\\emFile_1_SPI0_CS.h"
+ 404              		.file 7 ".\\Generated_Source\\PSoC5\\emFile_1_Clock_1.h"
+ 405              		.file 8 "Generated_Source\\PSoC5/core_cm3.h"
+ 406              		.section	.debug_info,"",%progbits
+ 407              	.Ldebug_info0:
+ 408 0000 C1040000 		.4byte	0x4c1
+ 409 0004 0400     		.2byte	0x4
+ 410 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 411 000a 04       		.byte	0x4
+ 412 000b 01       		.uleb128 0x1
+ 413 000c E0020000 		.4byte	.LASF45
+ 414 0010 01       		.byte	0x1
+ 415 0011 68000000 		.4byte	.LASF46
+ 416 0015 41010000 		.4byte	.LASF47
+ 417 0019 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 418 001d 00000000 		.4byte	0
+ 419 0021 00000000 		.4byte	.Ldebug_line0
+ 420 0025 02       		.uleb128 0x2
+ 421 0026 02       		.byte	0x2
+ 422 0027 07       		.byte	0x7
+ 423 0028 10010000 		.4byte	.LASF0
+ 424 002c 02       		.uleb128 0x2
+ 425 002d 04       		.byte	0x4
+ 426 002e 07       		.byte	0x7
+ 427 002f 9D010000 		.4byte	.LASF1
+ 428 0033 02       		.uleb128 0x2
+ 429 0034 04       		.byte	0x4
+ 430 0035 07       		.byte	0x7
+ 431 0036 FF010000 		.4byte	.LASF2
+ 432 003a 03       		.uleb128 0x3
+ 433 003b 04       		.byte	0x4
+ 434 003c 05       		.byte	0x5
+ 435 003d 696E7400 		.ascii	"int\000"
+ 436 0041 02       		.uleb128 0x2
+ 437 0042 01       		.byte	0x1
+ 438 0043 08       		.byte	0x8
+ 439 0044 E2000000 		.4byte	.LASF3
+ 440 0048 02       		.uleb128 0x2
+ 441 0049 04       		.byte	0x4
+ 442 004a 07       		.byte	0x7
+ 443 004b 68020000 		.4byte	.LASF4
+ 444 004f 02       		.uleb128 0x2
+ 445 0050 01       		.byte	0x1
+ 446 0051 08       		.byte	0x8
+ 447 0052 9C020000 		.4byte	.LASF5
+ 448 0056 02       		.uleb128 0x2
+ 449 0057 02       		.byte	0x2
+ 450 0058 05       		.byte	0x5
+ 451 0059 CD010000 		.4byte	.LASF6
+ 452 005d 02       		.uleb128 0x2
+ 453 005e 04       		.byte	0x4
+ 454 005f 05       		.byte	0x5
+ 455 0060 6E030000 		.4byte	.LASF7
+ 456 0064 04       		.uleb128 0x4
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 24
+
+
+ 457 0065 04       		.byte	0x4
+ 458 0066 41000000 		.4byte	0x41
+ 459 006a 02       		.uleb128 0x2
+ 460 006b 01       		.byte	0x1
+ 461 006c 06       		.byte	0x6
+ 462 006d 42020000 		.4byte	.LASF8
+ 463 0071 05       		.uleb128 0x5
+ 464 0072 5E000000 		.4byte	.LASF11
+ 465 0076 02       		.byte	0x2
+ 466 0077 3F       		.byte	0x3f
+ 467 0078 5D000000 		.4byte	0x5d
+ 468 007c 02       		.uleb128 0x2
+ 469 007d 08       		.byte	0x8
+ 470 007e 05       		.byte	0x5
+ 471 007f 85020000 		.4byte	.LASF9
+ 472 0083 02       		.uleb128 0x2
+ 473 0084 08       		.byte	0x8
+ 474 0085 07       		.byte	0x7
+ 475 0086 1F020000 		.4byte	.LASF10
+ 476 008a 05       		.uleb128 0x5
+ 477 008b 60020000 		.4byte	.LASF12
+ 478 008f 03       		.byte	0x3
+ 479 0090 2C       		.byte	0x2c
+ 480 0091 71000000 		.4byte	0x71
+ 481 0095 05       		.uleb128 0x5
+ 482 0096 9E000000 		.4byte	.LASF13
+ 483 009a 04       		.byte	0x4
+ 484 009b A1       		.byte	0xa1
+ 485 009c 41000000 		.4byte	0x41
+ 486 00a0 05       		.uleb128 0x5
+ 487 00a1 AF010000 		.4byte	.LASF14
+ 488 00a5 04       		.byte	0x4
+ 489 00a6 A2       		.byte	0xa2
+ 490 00a7 25000000 		.4byte	0x25
+ 491 00ab 02       		.uleb128 0x2
+ 492 00ac 04       		.byte	0x4
+ 493 00ad 04       		.byte	0x4
+ 494 00ae DC000000 		.4byte	.LASF15
+ 495 00b2 02       		.uleb128 0x2
+ 496 00b3 08       		.byte	0x8
+ 497 00b4 04       		.byte	0x4
+ 498 00b5 97000000 		.4byte	.LASF16
+ 499 00b9 06       		.uleb128 0x6
+ 500 00ba B6030000 		.4byte	.LASF48
+ 501 00be 01       		.byte	0x1
+ 502 00bf E0       		.byte	0xe0
+ 503 00c0 41000000 		.4byte	0x41
+ 504 00c4 01       		.byte	0x1
+ 505 00c5 EB000000 		.4byte	0xeb
+ 506 00c9 07       		.uleb128 0x7
+ 507 00ca 9B030000 		.4byte	.LASF17
+ 508 00ce 01       		.byte	0x1
+ 509 00cf E0       		.byte	0xe0
+ 510 00d0 41000000 		.4byte	0x41
+ 511 00d4 07       		.uleb128 0x7
+ 512 00d5 A6020000 		.4byte	.LASF18
+ 513 00d9 01       		.byte	0x1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 25
+
+
+ 514 00da E0       		.byte	0xe0
+ 515 00db 41000000 		.4byte	0x41
+ 516 00df 08       		.uleb128 0x8
+ 517 00e0 08010000 		.4byte	.LASF49
+ 518 00e4 01       		.byte	0x1
+ 519 00e5 E2       		.byte	0xe2
+ 520 00e6 41000000 		.4byte	0x41
+ 521 00ea 00       		.byte	0
+ 522 00eb 09       		.uleb128 0x9
+ 523 00ec B9000000 		.4byte	0xb9
+ 524 00f0 00000000 		.4byte	.LFB57
+ 525 00f4 2A000000 		.4byte	.LFE57-.LFB57
+ 526 00f8 01       		.uleb128 0x1
+ 527 00f9 9C       		.byte	0x9c
+ 528 00fa 6A010000 		.4byte	0x16a
+ 529 00fe 0A       		.uleb128 0xa
+ 530 00ff C9000000 		.4byte	0xc9
+ 531 0103 00000000 		.4byte	.LLST0
+ 532 0107 0A       		.uleb128 0xa
+ 533 0108 D4000000 		.4byte	0xd4
+ 534 010c 3A000000 		.4byte	.LLST1
+ 535 0110 0B       		.uleb128 0xb
+ 536 0111 DF000000 		.4byte	0xdf
+ 537 0115 0C       		.uleb128 0xc
+ 538 0116 00000000 		.4byte	.Ldebug_ranges0+0
+ 539 011a 57010000 		.4byte	0x157
+ 540 011e 0A       		.uleb128 0xa
+ 541 011f C9000000 		.4byte	0xc9
+ 542 0123 74000000 		.4byte	.LLST2
+ 543 0127 0A       		.uleb128 0xa
+ 544 0128 D4000000 		.4byte	0xd4
+ 545 012c 87000000 		.4byte	.LLST3
+ 546 0130 0D       		.uleb128 0xd
+ 547 0131 00000000 		.4byte	.Ldebug_ranges0+0
+ 548 0135 0B       		.uleb128 0xb
+ 549 0136 DF000000 		.4byte	0xdf
+ 550 013a 0E       		.uleb128 0xe
+ 551 013b 1A000000 		.4byte	.LVL6
+ 552 013f 61040000 		.4byte	0x461
+ 553 0143 0E       		.uleb128 0xe
+ 554 0144 1E000000 		.4byte	.LVL7
+ 555 0148 72040000 		.4byte	0x472
+ 556 014c 0F       		.uleb128 0xf
+ 557 014d 2A000000 		.4byte	.LVL9
+ 558 0151 7D040000 		.4byte	0x47d
+ 559 0155 00       		.byte	0
+ 560 0156 00       		.byte	0
+ 561 0157 0E       		.uleb128 0xe
+ 562 0158 0A000000 		.4byte	.LVL2
+ 563 015c 61040000 		.4byte	0x461
+ 564 0160 0E       		.uleb128 0xe
+ 565 0161 0E000000 		.4byte	.LVL3
+ 566 0165 72040000 		.4byte	0x472
+ 567 0169 00       		.byte	0
+ 568 016a 10       		.uleb128 0x10
+ 569 016b 00000000 		.4byte	.LASF19
+ 570 016f 01       		.byte	0x1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 26
+
+
+ 571 0170 4901     		.2byte	0x149
+ 572 0172 00000000 		.4byte	.LFB58
+ 573 0176 08000000 		.4byte	.LFE58-.LFB58
+ 574 017a 01       		.uleb128 0x1
+ 575 017b 9C       		.byte	0x9c
+ 576 017c 9A010000 		.4byte	0x19a
+ 577 0180 11       		.uleb128 0x11
+ 578 0181 9B030000 		.4byte	.LASF17
+ 579 0185 01       		.byte	0x1
+ 580 0186 4901     		.2byte	0x149
+ 581 0188 41000000 		.4byte	0x41
+ 582 018c A8000000 		.4byte	.LLST4
+ 583 0190 0F       		.uleb128 0xf
+ 584 0191 08000000 		.4byte	.LVL12
+ 585 0195 88040000 		.4byte	0x488
+ 586 0199 00       		.byte	0
+ 587 019a 10       		.uleb128 0x10
+ 588 019b A0030000 		.4byte	.LASF20
+ 589 019f 01       		.byte	0x1
+ 590 01a0 9001     		.2byte	0x190
+ 591 01a2 00000000 		.4byte	.LFB59
+ 592 01a6 06000000 		.4byte	.LFE59-.LFB59
+ 593 01aa 01       		.uleb128 0x1
+ 594 01ab 9C       		.byte	0x9c
+ 595 01ac D0010000 		.4byte	0x1d0
+ 596 01b0 11       		.uleb128 0x11
+ 597 01b1 9B030000 		.4byte	.LASF17
+ 598 01b5 01       		.byte	0x1
+ 599 01b6 9001     		.2byte	0x190
+ 600 01b8 41000000 		.4byte	0x41
+ 601 01bc C9000000 		.4byte	.LLST5
+ 602 01c0 12       		.uleb128 0x12
+ 603 01c1 06000000 		.4byte	.LVL15
+ 604 01c5 88040000 		.4byte	0x488
+ 605 01c9 13       		.uleb128 0x13
+ 606 01ca 01       		.uleb128 0x1
+ 607 01cb 50       		.byte	0x50
+ 608 01cc 01       		.uleb128 0x1
+ 609 01cd 31       		.byte	0x31
+ 610 01ce 00       		.byte	0
+ 611 01cf 00       		.byte	0
+ 612 01d0 14       		.uleb128 0x14
+ 613 01d1 15000000 		.4byte	.LASF21
+ 614 01d5 01       		.byte	0x1
+ 615 01d6 D401     		.2byte	0x1d4
+ 616 01d8 3A000000 		.4byte	0x3a
+ 617 01dc 00000000 		.4byte	.LFB60
+ 618 01e0 04000000 		.4byte	.LFE60-.LFB60
+ 619 01e4 01       		.uleb128 0x1
+ 620 01e5 9C       		.byte	0x9c
+ 621 01e6 08020000 		.4byte	0x208
+ 622 01ea 11       		.uleb128 0x11
+ 623 01eb 9B030000 		.4byte	.LASF17
+ 624 01ef 01       		.byte	0x1
+ 625 01f0 D401     		.2byte	0x1d4
+ 626 01f2 41000000 		.4byte	0x41
+ 627 01f6 EA000000 		.4byte	.LLST6
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 27
+
+
+ 628 01fa 15       		.uleb128 0x15
+ 629 01fb 32000000 		.4byte	.LASF24
+ 630 01ff 01       		.byte	0x1
+ 631 0200 D601     		.2byte	0x1d6
+ 632 0202 3A000000 		.4byte	0x3a
+ 633 0206 00       		.byte	0
+ 634 0207 00       		.byte	0
+ 635 0208 14       		.uleb128 0x14
+ 636 0209 F0000000 		.4byte	.LASF22
+ 637 020d 01       		.byte	0x1
+ 638 020e 4B02     		.2byte	0x24b
+ 639 0210 25000000 		.4byte	0x25
+ 640 0214 00000000 		.4byte	.LFB61
+ 641 0218 3C000000 		.4byte	.LFE61-.LFB61
+ 642 021c 01       		.uleb128 0x1
+ 643 021d 9C       		.byte	0x9c
+ 644 021e 90020000 		.4byte	0x290
+ 645 0222 11       		.uleb128 0x11
+ 646 0223 9B030000 		.4byte	.LASF17
+ 647 0227 01       		.byte	0x1
+ 648 0228 4B02     		.2byte	0x24b
+ 649 022a 41000000 		.4byte	0x41
+ 650 022e 0B010000 		.4byte	.LLST7
+ 651 0232 11       		.uleb128 0x11
+ 652 0233 E1010000 		.4byte	.LASF23
+ 653 0237 01       		.byte	0x1
+ 654 0238 4B02     		.2byte	0x24b
+ 655 023a 25000000 		.4byte	0x25
+ 656 023e 2C010000 		.4byte	.LLST8
+ 657 0242 16       		.uleb128 0x16
+ 658 0243 C4020000 		.4byte	.LASF25
+ 659 0247 01       		.byte	0x1
+ 660 0248 4D02     		.2byte	0x24d
+ 661 024a 25000000 		.4byte	0x25
+ 662 024e 05       		.uleb128 0x5
+ 663 024f 75       		.byte	0x75
+ 664 0250 00       		.sleb128 0
+ 665 0251 31       		.byte	0x31
+ 666 0252 24       		.byte	0x24
+ 667 0253 9F       		.byte	0x9f
+ 668 0254 17       		.uleb128 0x17
+ 669 0255 D7010000 		.4byte	.LASF26
+ 670 0259 01       		.byte	0x1
+ 671 025a 4E02     		.2byte	0x24e
+ 672 025c 2C000000 		.4byte	0x2c
+ 673 0260 63010000 		.4byte	.LLST9
+ 674 0264 0E       		.uleb128 0xe
+ 675 0265 2C000000 		.4byte	.LVL24
+ 676 0269 99040000 		.4byte	0x499
+ 677 026d 18       		.uleb128 0x18
+ 678 026e 34000000 		.4byte	.LVL25
+ 679 0272 A0040000 		.4byte	0x4a0
+ 680 0276 86020000 		.4byte	0x286
+ 681 027a 13       		.uleb128 0x13
+ 682 027b 01       		.uleb128 0x1
+ 683 027c 51       		.byte	0x51
+ 684 027d 01       		.uleb128 0x1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 28
+
+
+ 685 027e 31       		.byte	0x31
+ 686 027f 13       		.uleb128 0x13
+ 687 0280 01       		.uleb128 0x1
+ 688 0281 50       		.byte	0x50
+ 689 0282 02       		.uleb128 0x2
+ 690 0283 74       		.byte	0x74
+ 691 0284 00       		.sleb128 0
+ 692 0285 00       		.byte	0
+ 693 0286 0E       		.uleb128 0xe
+ 694 0287 38000000 		.4byte	.LVL26
+ 695 028b B6040000 		.4byte	0x4b6
+ 696 028f 00       		.byte	0
+ 697 0290 14       		.uleb128 0x14
+ 698 0291 B6010000 		.4byte	.LASF27
+ 699 0295 01       		.byte	0x1
+ 700 0296 AC02     		.2byte	0x2ac
+ 701 0298 3A000000 		.4byte	0x3a
+ 702 029c 00000000 		.4byte	.LFB62
+ 703 02a0 1A000000 		.4byte	.LFE62-.LFB62
+ 704 02a4 01       		.uleb128 0x1
+ 705 02a5 9C       		.byte	0x9c
+ 706 02a6 E5020000 		.4byte	0x2e5
+ 707 02aa 11       		.uleb128 0x11
+ 708 02ab 9B030000 		.4byte	.LASF17
+ 709 02af 01       		.byte	0x1
+ 710 02b0 AC02     		.2byte	0x2ac
+ 711 02b2 41000000 		.4byte	0x41
+ 712 02b6 8D010000 		.4byte	.LLST10
+ 713 02ba 19       		.uleb128 0x19
+ 714 02bb A1020000 		.4byte	.LASF28
+ 715 02bf 01       		.byte	0x1
+ 716 02c0 AC02     		.2byte	0x2ac
+ 717 02c2 25000000 		.4byte	0x25
+ 718 02c6 01       		.uleb128 0x1
+ 719 02c7 51       		.byte	0x51
+ 720 02c8 19       		.uleb128 0x19
+ 721 02c9 36020000 		.4byte	.LASF29
+ 722 02cd 01       		.byte	0x1
+ 723 02ce AC02     		.2byte	0x2ac
+ 724 02d0 25000000 		.4byte	0x25
+ 725 02d4 01       		.uleb128 0x1
+ 726 02d5 52       		.byte	0x52
+ 727 02d6 16       		.uleb128 0x16
+ 728 02d7 3B020000 		.4byte	.LASF30
+ 729 02db 01       		.byte	0x1
+ 730 02dc AE02     		.2byte	0x2ae
+ 731 02de 3A000000 		.4byte	0x3a
+ 732 02e2 01       		.uleb128 0x1
+ 733 02e3 50       		.byte	0x50
+ 734 02e4 00       		.byte	0
+ 735 02e5 1A       		.uleb128 0x1a
+ 736 02e6 77030000 		.4byte	.LASF50
+ 737 02ea 01       		.byte	0x1
+ 738 02eb 4B       		.byte	0x4b
+ 739 02ec 01       		.byte	0x1
+ 740 02ed FD020000 		.4byte	0x2fd
+ 741 02f1 07       		.uleb128 0x7
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 29
+
+
+ 742 02f2 9B030000 		.4byte	.LASF17
+ 743 02f6 01       		.byte	0x1
+ 744 02f7 4B       		.byte	0x4b
+ 745 02f8 41000000 		.4byte	0x41
+ 746 02fc 00       		.byte	0
+ 747 02fd 14       		.uleb128 0x14
+ 748 02fe E9010000 		.4byte	.LASF31
+ 749 0302 01       		.byte	0x1
+ 750 0303 EE02     		.2byte	0x2ee
+ 751 0305 3A000000 		.4byte	0x3a
+ 752 0309 00000000 		.4byte	.LFB63
+ 753 030d 28000000 		.4byte	.LFE63-.LFB63
+ 754 0311 01       		.uleb128 0x1
+ 755 0312 9C       		.byte	0x9c
+ 756 0313 80030000 		.4byte	0x380
+ 757 0317 11       		.uleb128 0x11
+ 758 0318 9B030000 		.4byte	.LASF17
+ 759 031c 01       		.byte	0x1
+ 760 031d EE02     		.2byte	0x2ee
+ 761 031f 41000000 		.4byte	0x41
+ 762 0323 C7010000 		.4byte	.LLST11
+ 763 0327 15       		.uleb128 0x15
+ 764 0328 3B020000 		.4byte	.LASF30
+ 765 032c 01       		.byte	0x1
+ 766 032d F002     		.2byte	0x2f0
+ 767 032f 3A000000 		.4byte	0x3a
+ 768 0333 02       		.byte	0x2
+ 769 0334 1B       		.uleb128 0x1b
+ 770 0335 E5020000 		.4byte	0x2e5
+ 771 0339 04000000 		.4byte	.LBB10
+ 772 033d 1C000000 		.4byte	.LBE10-.LBB10
+ 773 0341 01       		.byte	0x1
+ 774 0342 F202     		.2byte	0x2f2
+ 775 0344 1C       		.uleb128 0x1c
+ 776 0345 F1020000 		.4byte	0x2f1
+ 777 0349 0E       		.uleb128 0xe
+ 778 034a 10000000 		.4byte	.LVL32
+ 779 034e 99040000 		.4byte	0x499
+ 780 0352 18       		.uleb128 0x18
+ 781 0353 18000000 		.4byte	.LVL33
+ 782 0357 A0040000 		.4byte	0x4a0
+ 783 035b 6C030000 		.4byte	0x36c
+ 784 035f 13       		.uleb128 0x13
+ 785 0360 01       		.uleb128 0x1
+ 786 0361 51       		.byte	0x51
+ 787 0362 02       		.uleb128 0x2
+ 788 0363 74       		.byte	0x74
+ 789 0364 00       		.sleb128 0
+ 790 0365 13       		.uleb128 0x13
+ 791 0366 01       		.uleb128 0x1
+ 792 0367 50       		.byte	0x50
+ 793 0368 02       		.uleb128 0x2
+ 794 0369 08       		.byte	0x8
+ 795 036a 3B       		.byte	0x3b
+ 796 036b 00       		.byte	0
+ 797 036c 0E       		.uleb128 0xe
+ 798 036d 1C000000 		.4byte	.LVL34
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 30
+
+
+ 799 0371 B6040000 		.4byte	0x4b6
+ 800 0375 0E       		.uleb128 0xe
+ 801 0376 20000000 		.4byte	.LVL35
+ 802 037a BD040000 		.4byte	0x4bd
+ 803 037e 00       		.byte	0
+ 804 037f 00       		.byte	0
+ 805 0380 10       		.uleb128 0x10
+ 806 0381 23010000 		.4byte	.LASF32
+ 807 0385 01       		.byte	0x1
+ 808 0386 2003     		.2byte	0x320
+ 809 0388 00000000 		.4byte	.LFB64
+ 810 038c 1E000000 		.4byte	.LFE64-.LFB64
+ 811 0390 01       		.uleb128 0x1
+ 812 0391 9C       		.byte	0x9c
+ 813 0392 DD030000 		.4byte	0x3dd
+ 814 0396 11       		.uleb128 0x11
+ 815 0397 9B030000 		.4byte	.LASF17
+ 816 039b 01       		.byte	0x1
+ 817 039c 2003     		.2byte	0x320
+ 818 039e 41000000 		.4byte	0x41
+ 819 03a2 E8010000 		.4byte	.LLST12
+ 820 03a6 11       		.uleb128 0x11
+ 821 03a7 BB000000 		.4byte	.LASF33
+ 822 03ab 01       		.byte	0x1
+ 823 03ac 2003     		.2byte	0x320
+ 824 03ae 64000000 		.4byte	0x64
+ 825 03b2 09020000 		.4byte	.LLST13
+ 826 03b6 11       		.uleb128 0x11
+ 827 03b7 93020000 		.4byte	.LASF34
+ 828 03bb 01       		.byte	0x1
+ 829 03bc 2003     		.2byte	0x320
+ 830 03be 3A000000 		.4byte	0x3a
+ 831 03c2 34020000 		.4byte	.LLST14
+ 832 03c6 1D       		.uleb128 0x1d
+ 833 03c7 12000000 		.4byte	.LVL38
+ 834 03cb B9000000 		.4byte	0xb9
+ 835 03cf 13       		.uleb128 0x13
+ 836 03d0 01       		.uleb128 0x1
+ 837 03d1 51       		.byte	0x51
+ 838 03d2 02       		.uleb128 0x2
+ 839 03d3 09       		.byte	0x9
+ 840 03d4 FF       		.byte	0xff
+ 841 03d5 13       		.uleb128 0x13
+ 842 03d6 01       		.uleb128 0x1
+ 843 03d7 50       		.byte	0x50
+ 844 03d8 02       		.uleb128 0x2
+ 845 03d9 77       		.byte	0x77
+ 846 03da 00       		.sleb128 0
+ 847 03db 00       		.byte	0
+ 848 03dc 00       		.byte	0
+ 849 03dd 10       		.uleb128 0x10
+ 850 03de 4E020000 		.4byte	.LASF35
+ 851 03e2 01       		.byte	0x1
+ 852 03e3 4703     		.2byte	0x347
+ 853 03e5 00000000 		.4byte	.LFB65
+ 854 03e9 1C000000 		.4byte	.LFE65-.LFB65
+ 855 03ed 01       		.uleb128 0x1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 31
+
+
+ 856 03ee 9C       		.byte	0x9c
+ 857 03ef 34040000 		.4byte	0x434
+ 858 03f3 11       		.uleb128 0x11
+ 859 03f4 9B030000 		.4byte	.LASF17
+ 860 03f8 01       		.byte	0x1
+ 861 03f9 4703     		.2byte	0x347
+ 862 03fb 41000000 		.4byte	0x41
+ 863 03ff 5A020000 		.4byte	.LLST15
+ 864 0403 11       		.uleb128 0x11
+ 865 0404 BB000000 		.4byte	.LASF33
+ 866 0408 01       		.byte	0x1
+ 867 0409 4703     		.2byte	0x347
+ 868 040b 34040000 		.4byte	0x434
+ 869 040f 7B020000 		.4byte	.LLST16
+ 870 0413 11       		.uleb128 0x11
+ 871 0414 93020000 		.4byte	.LASF34
+ 872 0418 01       		.byte	0x1
+ 873 0419 4703     		.2byte	0x347
+ 874 041b 3A000000 		.4byte	0x3a
+ 875 041f A6020000 		.4byte	.LLST17
+ 876 0423 1D       		.uleb128 0x1d
+ 877 0424 14000000 		.4byte	.LVL43
+ 878 0428 B9000000 		.4byte	0xb9
+ 879 042c 13       		.uleb128 0x13
+ 880 042d 01       		.uleb128 0x1
+ 881 042e 50       		.byte	0x50
+ 882 042f 02       		.uleb128 0x2
+ 883 0430 77       		.byte	0x77
+ 884 0431 00       		.sleb128 0
+ 885 0432 00       		.byte	0
+ 886 0433 00       		.byte	0
+ 887 0434 04       		.uleb128 0x4
+ 888 0435 04       		.byte	0x4
+ 889 0436 3A040000 		.4byte	0x43a
+ 890 043a 1E       		.uleb128 0x1e
+ 891 043b 41000000 		.4byte	0x41
+ 892 043f 1F       		.uleb128 0x1f
+ 893 0440 0C020000 		.4byte	.LASF36
+ 894 0444 01       		.byte	0x1
+ 895 0445 25       		.byte	0x25
+ 896 0446 4F000000 		.4byte	0x4f
+ 897 044a 05       		.uleb128 0x5
+ 898 044b 03       		.byte	0x3
+ 899 044c 00000000 		.4byte	emFile_1_isInited0
+ 900 0450 20       		.uleb128 0x20
+ 901 0451 34010000 		.4byte	.LASF51
+ 902 0455 08       		.byte	0x8
+ 903 0456 1606     		.2byte	0x616
+ 904 0458 5C040000 		.4byte	0x45c
+ 905 045c 21       		.uleb128 0x21
+ 906 045d 8A000000 		.4byte	0x8a
+ 907 0461 22       		.uleb128 0x22
+ 908 0462 83010000 		.4byte	.LASF39
+ 909 0466 05       		.byte	0x5
+ 910 0467 69       		.byte	0x69
+ 911 0468 72040000 		.4byte	0x472
+ 912 046c 23       		.uleb128 0x23
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 32
+
+
+ 913 046d 95000000 		.4byte	0x95
+ 914 0471 00       		.byte	0
+ 915 0472 24       		.uleb128 0x24
+ 916 0473 C1000000 		.4byte	.LASF37
+ 917 0477 05       		.byte	0x5
+ 918 0478 67       		.byte	0x67
+ 919 0479 95000000 		.4byte	0x95
+ 920 047d 24       		.uleb128 0x24
+ 921 047e AB020000 		.4byte	.LASF38
+ 922 0482 05       		.byte	0x5
+ 923 0483 6B       		.byte	0x6b
+ 924 0484 95000000 		.4byte	0x95
+ 925 0488 22       		.uleb128 0x22
+ 926 0489 C9020000 		.4byte	.LASF40
+ 927 048d 06       		.byte	0x6
+ 928 048e 28       		.byte	0x28
+ 929 048f 99040000 		.4byte	0x499
+ 930 0493 23       		.uleb128 0x23
+ 931 0494 95000000 		.4byte	0x95
+ 932 0498 00       		.byte	0
+ 933 0499 25       		.uleb128 0x25
+ 934 049a 85030000 		.4byte	.LASF42
+ 935 049e 07       		.byte	0x7
+ 936 049f 28       		.byte	0x28
+ 937 04a0 22       		.uleb128 0x22
+ 938 04a1 3A000000 		.4byte	.LASF41
+ 939 04a5 07       		.byte	0x7
+ 940 04a6 2F       		.byte	0x2f
+ 941 04a7 B6040000 		.4byte	0x4b6
+ 942 04ab 23       		.uleb128 0x23
+ 943 04ac A0000000 		.4byte	0xa0
+ 944 04b0 23       		.uleb128 0x23
+ 945 04b1 95000000 		.4byte	0x95
+ 946 04b5 00       		.byte	0
+ 947 04b6 25       		.uleb128 0x25
+ 948 04b7 A4000000 		.4byte	.LASF43
+ 949 04bb 07       		.byte	0x7
+ 950 04bc 27       		.byte	0x27
+ 951 04bd 25       		.uleb128 0x25
+ 952 04be 71020000 		.4byte	.LASF44
+ 953 04c2 05       		.byte	0x5
+ 954 04c3 58       		.byte	0x58
+ 955 04c4 00       		.byte	0
+ 956              		.section	.debug_abbrev,"",%progbits
+ 957              	.Ldebug_abbrev0:
+ 958 0000 01       		.uleb128 0x1
+ 959 0001 11       		.uleb128 0x11
+ 960 0002 01       		.byte	0x1
+ 961 0003 25       		.uleb128 0x25
+ 962 0004 0E       		.uleb128 0xe
+ 963 0005 13       		.uleb128 0x13
+ 964 0006 0B       		.uleb128 0xb
+ 965 0007 03       		.uleb128 0x3
+ 966 0008 0E       		.uleb128 0xe
+ 967 0009 1B       		.uleb128 0x1b
+ 968 000a 0E       		.uleb128 0xe
+ 969 000b 55       		.uleb128 0x55
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 33
+
+
+ 970 000c 17       		.uleb128 0x17
+ 971 000d 11       		.uleb128 0x11
+ 972 000e 01       		.uleb128 0x1
+ 973 000f 10       		.uleb128 0x10
+ 974 0010 17       		.uleb128 0x17
+ 975 0011 00       		.byte	0
+ 976 0012 00       		.byte	0
+ 977 0013 02       		.uleb128 0x2
+ 978 0014 24       		.uleb128 0x24
+ 979 0015 00       		.byte	0
+ 980 0016 0B       		.uleb128 0xb
+ 981 0017 0B       		.uleb128 0xb
+ 982 0018 3E       		.uleb128 0x3e
+ 983 0019 0B       		.uleb128 0xb
+ 984 001a 03       		.uleb128 0x3
+ 985 001b 0E       		.uleb128 0xe
+ 986 001c 00       		.byte	0
+ 987 001d 00       		.byte	0
+ 988 001e 03       		.uleb128 0x3
+ 989 001f 24       		.uleb128 0x24
+ 990 0020 00       		.byte	0
+ 991 0021 0B       		.uleb128 0xb
+ 992 0022 0B       		.uleb128 0xb
+ 993 0023 3E       		.uleb128 0x3e
+ 994 0024 0B       		.uleb128 0xb
+ 995 0025 03       		.uleb128 0x3
+ 996 0026 08       		.uleb128 0x8
+ 997 0027 00       		.byte	0
+ 998 0028 00       		.byte	0
+ 999 0029 04       		.uleb128 0x4
+ 1000 002a 0F       		.uleb128 0xf
+ 1001 002b 00       		.byte	0
+ 1002 002c 0B       		.uleb128 0xb
+ 1003 002d 0B       		.uleb128 0xb
+ 1004 002e 49       		.uleb128 0x49
+ 1005 002f 13       		.uleb128 0x13
+ 1006 0030 00       		.byte	0
+ 1007 0031 00       		.byte	0
+ 1008 0032 05       		.uleb128 0x5
+ 1009 0033 16       		.uleb128 0x16
+ 1010 0034 00       		.byte	0
+ 1011 0035 03       		.uleb128 0x3
+ 1012 0036 0E       		.uleb128 0xe
+ 1013 0037 3A       		.uleb128 0x3a
+ 1014 0038 0B       		.uleb128 0xb
+ 1015 0039 3B       		.uleb128 0x3b
+ 1016 003a 0B       		.uleb128 0xb
+ 1017 003b 49       		.uleb128 0x49
+ 1018 003c 13       		.uleb128 0x13
+ 1019 003d 00       		.byte	0
+ 1020 003e 00       		.byte	0
+ 1021 003f 06       		.uleb128 0x6
+ 1022 0040 2E       		.uleb128 0x2e
+ 1023 0041 01       		.byte	0x1
+ 1024 0042 03       		.uleb128 0x3
+ 1025 0043 0E       		.uleb128 0xe
+ 1026 0044 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 34
+
+
+ 1027 0045 0B       		.uleb128 0xb
+ 1028 0046 3B       		.uleb128 0x3b
+ 1029 0047 0B       		.uleb128 0xb
+ 1030 0048 27       		.uleb128 0x27
+ 1031 0049 19       		.uleb128 0x19
+ 1032 004a 49       		.uleb128 0x49
+ 1033 004b 13       		.uleb128 0x13
+ 1034 004c 20       		.uleb128 0x20
+ 1035 004d 0B       		.uleb128 0xb
+ 1036 004e 01       		.uleb128 0x1
+ 1037 004f 13       		.uleb128 0x13
+ 1038 0050 00       		.byte	0
+ 1039 0051 00       		.byte	0
+ 1040 0052 07       		.uleb128 0x7
+ 1041 0053 05       		.uleb128 0x5
+ 1042 0054 00       		.byte	0
+ 1043 0055 03       		.uleb128 0x3
+ 1044 0056 0E       		.uleb128 0xe
+ 1045 0057 3A       		.uleb128 0x3a
+ 1046 0058 0B       		.uleb128 0xb
+ 1047 0059 3B       		.uleb128 0x3b
+ 1048 005a 0B       		.uleb128 0xb
+ 1049 005b 49       		.uleb128 0x49
+ 1050 005c 13       		.uleb128 0x13
+ 1051 005d 00       		.byte	0
+ 1052 005e 00       		.byte	0
+ 1053 005f 08       		.uleb128 0x8
+ 1054 0060 34       		.uleb128 0x34
+ 1055 0061 00       		.byte	0
+ 1056 0062 03       		.uleb128 0x3
+ 1057 0063 0E       		.uleb128 0xe
+ 1058 0064 3A       		.uleb128 0x3a
+ 1059 0065 0B       		.uleb128 0xb
+ 1060 0066 3B       		.uleb128 0x3b
+ 1061 0067 0B       		.uleb128 0xb
+ 1062 0068 49       		.uleb128 0x49
+ 1063 0069 13       		.uleb128 0x13
+ 1064 006a 00       		.byte	0
+ 1065 006b 00       		.byte	0
+ 1066 006c 09       		.uleb128 0x9
+ 1067 006d 2E       		.uleb128 0x2e
+ 1068 006e 01       		.byte	0x1
+ 1069 006f 31       		.uleb128 0x31
+ 1070 0070 13       		.uleb128 0x13
+ 1071 0071 11       		.uleb128 0x11
+ 1072 0072 01       		.uleb128 0x1
+ 1073 0073 12       		.uleb128 0x12
+ 1074 0074 06       		.uleb128 0x6
+ 1075 0075 40       		.uleb128 0x40
+ 1076 0076 18       		.uleb128 0x18
+ 1077 0077 9742     		.uleb128 0x2117
+ 1078 0079 19       		.uleb128 0x19
+ 1079 007a 01       		.uleb128 0x1
+ 1080 007b 13       		.uleb128 0x13
+ 1081 007c 00       		.byte	0
+ 1082 007d 00       		.byte	0
+ 1083 007e 0A       		.uleb128 0xa
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 35
+
+
+ 1084 007f 05       		.uleb128 0x5
+ 1085 0080 00       		.byte	0
+ 1086 0081 31       		.uleb128 0x31
+ 1087 0082 13       		.uleb128 0x13
+ 1088 0083 02       		.uleb128 0x2
+ 1089 0084 17       		.uleb128 0x17
+ 1090 0085 00       		.byte	0
+ 1091 0086 00       		.byte	0
+ 1092 0087 0B       		.uleb128 0xb
+ 1093 0088 34       		.uleb128 0x34
+ 1094 0089 00       		.byte	0
+ 1095 008a 31       		.uleb128 0x31
+ 1096 008b 13       		.uleb128 0x13
+ 1097 008c 00       		.byte	0
+ 1098 008d 00       		.byte	0
+ 1099 008e 0C       		.uleb128 0xc
+ 1100 008f 0B       		.uleb128 0xb
+ 1101 0090 01       		.byte	0x1
+ 1102 0091 55       		.uleb128 0x55
+ 1103 0092 17       		.uleb128 0x17
+ 1104 0093 01       		.uleb128 0x1
+ 1105 0094 13       		.uleb128 0x13
+ 1106 0095 00       		.byte	0
+ 1107 0096 00       		.byte	0
+ 1108 0097 0D       		.uleb128 0xd
+ 1109 0098 0B       		.uleb128 0xb
+ 1110 0099 01       		.byte	0x1
+ 1111 009a 55       		.uleb128 0x55
+ 1112 009b 17       		.uleb128 0x17
+ 1113 009c 00       		.byte	0
+ 1114 009d 00       		.byte	0
+ 1115 009e 0E       		.uleb128 0xe
+ 1116 009f 898201   		.uleb128 0x4109
+ 1117 00a2 00       		.byte	0
+ 1118 00a3 11       		.uleb128 0x11
+ 1119 00a4 01       		.uleb128 0x1
+ 1120 00a5 31       		.uleb128 0x31
+ 1121 00a6 13       		.uleb128 0x13
+ 1122 00a7 00       		.byte	0
+ 1123 00a8 00       		.byte	0
+ 1124 00a9 0F       		.uleb128 0xf
+ 1125 00aa 898201   		.uleb128 0x4109
+ 1126 00ad 00       		.byte	0
+ 1127 00ae 11       		.uleb128 0x11
+ 1128 00af 01       		.uleb128 0x1
+ 1129 00b0 9542     		.uleb128 0x2115
+ 1130 00b2 19       		.uleb128 0x19
+ 1131 00b3 31       		.uleb128 0x31
+ 1132 00b4 13       		.uleb128 0x13
+ 1133 00b5 00       		.byte	0
+ 1134 00b6 00       		.byte	0
+ 1135 00b7 10       		.uleb128 0x10
+ 1136 00b8 2E       		.uleb128 0x2e
+ 1137 00b9 01       		.byte	0x1
+ 1138 00ba 3F       		.uleb128 0x3f
+ 1139 00bb 19       		.uleb128 0x19
+ 1140 00bc 03       		.uleb128 0x3
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 36
+
+
+ 1141 00bd 0E       		.uleb128 0xe
+ 1142 00be 3A       		.uleb128 0x3a
+ 1143 00bf 0B       		.uleb128 0xb
+ 1144 00c0 3B       		.uleb128 0x3b
+ 1145 00c1 05       		.uleb128 0x5
+ 1146 00c2 27       		.uleb128 0x27
+ 1147 00c3 19       		.uleb128 0x19
+ 1148 00c4 11       		.uleb128 0x11
+ 1149 00c5 01       		.uleb128 0x1
+ 1150 00c6 12       		.uleb128 0x12
+ 1151 00c7 06       		.uleb128 0x6
+ 1152 00c8 40       		.uleb128 0x40
+ 1153 00c9 18       		.uleb128 0x18
+ 1154 00ca 9742     		.uleb128 0x2117
+ 1155 00cc 19       		.uleb128 0x19
+ 1156 00cd 01       		.uleb128 0x1
+ 1157 00ce 13       		.uleb128 0x13
+ 1158 00cf 00       		.byte	0
+ 1159 00d0 00       		.byte	0
+ 1160 00d1 11       		.uleb128 0x11
+ 1161 00d2 05       		.uleb128 0x5
+ 1162 00d3 00       		.byte	0
+ 1163 00d4 03       		.uleb128 0x3
+ 1164 00d5 0E       		.uleb128 0xe
+ 1165 00d6 3A       		.uleb128 0x3a
+ 1166 00d7 0B       		.uleb128 0xb
+ 1167 00d8 3B       		.uleb128 0x3b
+ 1168 00d9 05       		.uleb128 0x5
+ 1169 00da 49       		.uleb128 0x49
+ 1170 00db 13       		.uleb128 0x13
+ 1171 00dc 02       		.uleb128 0x2
+ 1172 00dd 17       		.uleb128 0x17
+ 1173 00de 00       		.byte	0
+ 1174 00df 00       		.byte	0
+ 1175 00e0 12       		.uleb128 0x12
+ 1176 00e1 898201   		.uleb128 0x4109
+ 1177 00e4 01       		.byte	0x1
+ 1178 00e5 11       		.uleb128 0x11
+ 1179 00e6 01       		.uleb128 0x1
+ 1180 00e7 9542     		.uleb128 0x2115
+ 1181 00e9 19       		.uleb128 0x19
+ 1182 00ea 31       		.uleb128 0x31
+ 1183 00eb 13       		.uleb128 0x13
+ 1184 00ec 00       		.byte	0
+ 1185 00ed 00       		.byte	0
+ 1186 00ee 13       		.uleb128 0x13
+ 1187 00ef 8A8201   		.uleb128 0x410a
+ 1188 00f2 00       		.byte	0
+ 1189 00f3 02       		.uleb128 0x2
+ 1190 00f4 18       		.uleb128 0x18
+ 1191 00f5 9142     		.uleb128 0x2111
+ 1192 00f7 18       		.uleb128 0x18
+ 1193 00f8 00       		.byte	0
+ 1194 00f9 00       		.byte	0
+ 1195 00fa 14       		.uleb128 0x14
+ 1196 00fb 2E       		.uleb128 0x2e
+ 1197 00fc 01       		.byte	0x1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 37
+
+
+ 1198 00fd 3F       		.uleb128 0x3f
+ 1199 00fe 19       		.uleb128 0x19
+ 1200 00ff 03       		.uleb128 0x3
+ 1201 0100 0E       		.uleb128 0xe
+ 1202 0101 3A       		.uleb128 0x3a
+ 1203 0102 0B       		.uleb128 0xb
+ 1204 0103 3B       		.uleb128 0x3b
+ 1205 0104 05       		.uleb128 0x5
+ 1206 0105 27       		.uleb128 0x27
+ 1207 0106 19       		.uleb128 0x19
+ 1208 0107 49       		.uleb128 0x49
+ 1209 0108 13       		.uleb128 0x13
+ 1210 0109 11       		.uleb128 0x11
+ 1211 010a 01       		.uleb128 0x1
+ 1212 010b 12       		.uleb128 0x12
+ 1213 010c 06       		.uleb128 0x6
+ 1214 010d 40       		.uleb128 0x40
+ 1215 010e 18       		.uleb128 0x18
+ 1216 010f 9742     		.uleb128 0x2117
+ 1217 0111 19       		.uleb128 0x19
+ 1218 0112 01       		.uleb128 0x1
+ 1219 0113 13       		.uleb128 0x13
+ 1220 0114 00       		.byte	0
+ 1221 0115 00       		.byte	0
+ 1222 0116 15       		.uleb128 0x15
+ 1223 0117 34       		.uleb128 0x34
+ 1224 0118 00       		.byte	0
+ 1225 0119 03       		.uleb128 0x3
+ 1226 011a 0E       		.uleb128 0xe
+ 1227 011b 3A       		.uleb128 0x3a
+ 1228 011c 0B       		.uleb128 0xb
+ 1229 011d 3B       		.uleb128 0x3b
+ 1230 011e 05       		.uleb128 0x5
+ 1231 011f 49       		.uleb128 0x49
+ 1232 0120 13       		.uleb128 0x13
+ 1233 0121 1C       		.uleb128 0x1c
+ 1234 0122 0B       		.uleb128 0xb
+ 1235 0123 00       		.byte	0
+ 1236 0124 00       		.byte	0
+ 1237 0125 16       		.uleb128 0x16
+ 1238 0126 34       		.uleb128 0x34
+ 1239 0127 00       		.byte	0
+ 1240 0128 03       		.uleb128 0x3
+ 1241 0129 0E       		.uleb128 0xe
+ 1242 012a 3A       		.uleb128 0x3a
+ 1243 012b 0B       		.uleb128 0xb
+ 1244 012c 3B       		.uleb128 0x3b
+ 1245 012d 05       		.uleb128 0x5
+ 1246 012e 49       		.uleb128 0x49
+ 1247 012f 13       		.uleb128 0x13
+ 1248 0130 02       		.uleb128 0x2
+ 1249 0131 18       		.uleb128 0x18
+ 1250 0132 00       		.byte	0
+ 1251 0133 00       		.byte	0
+ 1252 0134 17       		.uleb128 0x17
+ 1253 0135 34       		.uleb128 0x34
+ 1254 0136 00       		.byte	0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 38
+
+
+ 1255 0137 03       		.uleb128 0x3
+ 1256 0138 0E       		.uleb128 0xe
+ 1257 0139 3A       		.uleb128 0x3a
+ 1258 013a 0B       		.uleb128 0xb
+ 1259 013b 3B       		.uleb128 0x3b
+ 1260 013c 05       		.uleb128 0x5
+ 1261 013d 49       		.uleb128 0x49
+ 1262 013e 13       		.uleb128 0x13
+ 1263 013f 02       		.uleb128 0x2
+ 1264 0140 17       		.uleb128 0x17
+ 1265 0141 00       		.byte	0
+ 1266 0142 00       		.byte	0
+ 1267 0143 18       		.uleb128 0x18
+ 1268 0144 898201   		.uleb128 0x4109
+ 1269 0147 01       		.byte	0x1
+ 1270 0148 11       		.uleb128 0x11
+ 1271 0149 01       		.uleb128 0x1
+ 1272 014a 31       		.uleb128 0x31
+ 1273 014b 13       		.uleb128 0x13
+ 1274 014c 01       		.uleb128 0x1
+ 1275 014d 13       		.uleb128 0x13
+ 1276 014e 00       		.byte	0
+ 1277 014f 00       		.byte	0
+ 1278 0150 19       		.uleb128 0x19
+ 1279 0151 05       		.uleb128 0x5
+ 1280 0152 00       		.byte	0
+ 1281 0153 03       		.uleb128 0x3
+ 1282 0154 0E       		.uleb128 0xe
+ 1283 0155 3A       		.uleb128 0x3a
+ 1284 0156 0B       		.uleb128 0xb
+ 1285 0157 3B       		.uleb128 0x3b
+ 1286 0158 05       		.uleb128 0x5
+ 1287 0159 49       		.uleb128 0x49
+ 1288 015a 13       		.uleb128 0x13
+ 1289 015b 02       		.uleb128 0x2
+ 1290 015c 18       		.uleb128 0x18
+ 1291 015d 00       		.byte	0
+ 1292 015e 00       		.byte	0
+ 1293 015f 1A       		.uleb128 0x1a
+ 1294 0160 2E       		.uleb128 0x2e
+ 1295 0161 01       		.byte	0x1
+ 1296 0162 03       		.uleb128 0x3
+ 1297 0163 0E       		.uleb128 0xe
+ 1298 0164 3A       		.uleb128 0x3a
+ 1299 0165 0B       		.uleb128 0xb
+ 1300 0166 3B       		.uleb128 0x3b
+ 1301 0167 0B       		.uleb128 0xb
+ 1302 0168 27       		.uleb128 0x27
+ 1303 0169 19       		.uleb128 0x19
+ 1304 016a 20       		.uleb128 0x20
+ 1305 016b 0B       		.uleb128 0xb
+ 1306 016c 01       		.uleb128 0x1
+ 1307 016d 13       		.uleb128 0x13
+ 1308 016e 00       		.byte	0
+ 1309 016f 00       		.byte	0
+ 1310 0170 1B       		.uleb128 0x1b
+ 1311 0171 1D       		.uleb128 0x1d
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 39
+
+
+ 1312 0172 01       		.byte	0x1
+ 1313 0173 31       		.uleb128 0x31
+ 1314 0174 13       		.uleb128 0x13
+ 1315 0175 11       		.uleb128 0x11
+ 1316 0176 01       		.uleb128 0x1
+ 1317 0177 12       		.uleb128 0x12
+ 1318 0178 06       		.uleb128 0x6
+ 1319 0179 58       		.uleb128 0x58
+ 1320 017a 0B       		.uleb128 0xb
+ 1321 017b 59       		.uleb128 0x59
+ 1322 017c 05       		.uleb128 0x5
+ 1323 017d 00       		.byte	0
+ 1324 017e 00       		.byte	0
+ 1325 017f 1C       		.uleb128 0x1c
+ 1326 0180 05       		.uleb128 0x5
+ 1327 0181 00       		.byte	0
+ 1328 0182 31       		.uleb128 0x31
+ 1329 0183 13       		.uleb128 0x13
+ 1330 0184 00       		.byte	0
+ 1331 0185 00       		.byte	0
+ 1332 0186 1D       		.uleb128 0x1d
+ 1333 0187 898201   		.uleb128 0x4109
+ 1334 018a 01       		.byte	0x1
+ 1335 018b 11       		.uleb128 0x11
+ 1336 018c 01       		.uleb128 0x1
+ 1337 018d 31       		.uleb128 0x31
+ 1338 018e 13       		.uleb128 0x13
+ 1339 018f 00       		.byte	0
+ 1340 0190 00       		.byte	0
+ 1341 0191 1E       		.uleb128 0x1e
+ 1342 0192 26       		.uleb128 0x26
+ 1343 0193 00       		.byte	0
+ 1344 0194 49       		.uleb128 0x49
+ 1345 0195 13       		.uleb128 0x13
+ 1346 0196 00       		.byte	0
+ 1347 0197 00       		.byte	0
+ 1348 0198 1F       		.uleb128 0x1f
+ 1349 0199 34       		.uleb128 0x34
+ 1350 019a 00       		.byte	0
+ 1351 019b 03       		.uleb128 0x3
+ 1352 019c 0E       		.uleb128 0xe
+ 1353 019d 3A       		.uleb128 0x3a
+ 1354 019e 0B       		.uleb128 0xb
+ 1355 019f 3B       		.uleb128 0x3b
+ 1356 01a0 0B       		.uleb128 0xb
+ 1357 01a1 49       		.uleb128 0x49
+ 1358 01a2 13       		.uleb128 0x13
+ 1359 01a3 02       		.uleb128 0x2
+ 1360 01a4 18       		.uleb128 0x18
+ 1361 01a5 00       		.byte	0
+ 1362 01a6 00       		.byte	0
+ 1363 01a7 20       		.uleb128 0x20
+ 1364 01a8 34       		.uleb128 0x34
+ 1365 01a9 00       		.byte	0
+ 1366 01aa 03       		.uleb128 0x3
+ 1367 01ab 0E       		.uleb128 0xe
+ 1368 01ac 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 40
+
+
+ 1369 01ad 0B       		.uleb128 0xb
+ 1370 01ae 3B       		.uleb128 0x3b
+ 1371 01af 05       		.uleb128 0x5
+ 1372 01b0 49       		.uleb128 0x49
+ 1373 01b1 13       		.uleb128 0x13
+ 1374 01b2 3F       		.uleb128 0x3f
+ 1375 01b3 19       		.uleb128 0x19
+ 1376 01b4 3C       		.uleb128 0x3c
+ 1377 01b5 19       		.uleb128 0x19
+ 1378 01b6 00       		.byte	0
+ 1379 01b7 00       		.byte	0
+ 1380 01b8 21       		.uleb128 0x21
+ 1381 01b9 35       		.uleb128 0x35
+ 1382 01ba 00       		.byte	0
+ 1383 01bb 49       		.uleb128 0x49
+ 1384 01bc 13       		.uleb128 0x13
+ 1385 01bd 00       		.byte	0
+ 1386 01be 00       		.byte	0
+ 1387 01bf 22       		.uleb128 0x22
+ 1388 01c0 2E       		.uleb128 0x2e
+ 1389 01c1 01       		.byte	0x1
+ 1390 01c2 3F       		.uleb128 0x3f
+ 1391 01c3 19       		.uleb128 0x19
+ 1392 01c4 03       		.uleb128 0x3
+ 1393 01c5 0E       		.uleb128 0xe
+ 1394 01c6 3A       		.uleb128 0x3a
+ 1395 01c7 0B       		.uleb128 0xb
+ 1396 01c8 3B       		.uleb128 0x3b
+ 1397 01c9 0B       		.uleb128 0xb
+ 1398 01ca 27       		.uleb128 0x27
+ 1399 01cb 19       		.uleb128 0x19
+ 1400 01cc 3C       		.uleb128 0x3c
+ 1401 01cd 19       		.uleb128 0x19
+ 1402 01ce 01       		.uleb128 0x1
+ 1403 01cf 13       		.uleb128 0x13
+ 1404 01d0 00       		.byte	0
+ 1405 01d1 00       		.byte	0
+ 1406 01d2 23       		.uleb128 0x23
+ 1407 01d3 05       		.uleb128 0x5
+ 1408 01d4 00       		.byte	0
+ 1409 01d5 49       		.uleb128 0x49
+ 1410 01d6 13       		.uleb128 0x13
+ 1411 01d7 00       		.byte	0
+ 1412 01d8 00       		.byte	0
+ 1413 01d9 24       		.uleb128 0x24
+ 1414 01da 2E       		.uleb128 0x2e
+ 1415 01db 00       		.byte	0
+ 1416 01dc 3F       		.uleb128 0x3f
+ 1417 01dd 19       		.uleb128 0x19
+ 1418 01de 03       		.uleb128 0x3
+ 1419 01df 0E       		.uleb128 0xe
+ 1420 01e0 3A       		.uleb128 0x3a
+ 1421 01e1 0B       		.uleb128 0xb
+ 1422 01e2 3B       		.uleb128 0x3b
+ 1423 01e3 0B       		.uleb128 0xb
+ 1424 01e4 27       		.uleb128 0x27
+ 1425 01e5 19       		.uleb128 0x19
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 41
+
+
+ 1426 01e6 49       		.uleb128 0x49
+ 1427 01e7 13       		.uleb128 0x13
+ 1428 01e8 3C       		.uleb128 0x3c
+ 1429 01e9 19       		.uleb128 0x19
+ 1430 01ea 00       		.byte	0
+ 1431 01eb 00       		.byte	0
+ 1432 01ec 25       		.uleb128 0x25
+ 1433 01ed 2E       		.uleb128 0x2e
+ 1434 01ee 00       		.byte	0
+ 1435 01ef 3F       		.uleb128 0x3f
+ 1436 01f0 19       		.uleb128 0x19
+ 1437 01f1 03       		.uleb128 0x3
+ 1438 01f2 0E       		.uleb128 0xe
+ 1439 01f3 3A       		.uleb128 0x3a
+ 1440 01f4 0B       		.uleb128 0xb
+ 1441 01f5 3B       		.uleb128 0x3b
+ 1442 01f6 0B       		.uleb128 0xb
+ 1443 01f7 27       		.uleb128 0x27
+ 1444 01f8 19       		.uleb128 0x19
+ 1445 01f9 3C       		.uleb128 0x3c
+ 1446 01fa 19       		.uleb128 0x19
+ 1447 01fb 00       		.byte	0
+ 1448 01fc 00       		.byte	0
+ 1449 01fd 00       		.byte	0
+ 1450              		.section	.debug_loc,"",%progbits
+ 1451              	.Ldebug_loc0:
+ 1452              	.LLST0:
+ 1453 0000 00000000 		.4byte	.LVL0
+ 1454 0004 06000000 		.4byte	.LVL1
+ 1455 0008 0100     		.2byte	0x1
+ 1456 000a 50       		.byte	0x50
+ 1457 000b 06000000 		.4byte	.LVL1
+ 1458 000f 14000000 		.4byte	.LVL4
+ 1459 0013 0400     		.2byte	0x4
+ 1460 0015 F3       		.byte	0xf3
+ 1461 0016 01       		.uleb128 0x1
+ 1462 0017 50       		.byte	0x50
+ 1463 0018 9F       		.byte	0x9f
+ 1464 0019 14000000 		.4byte	.LVL4
+ 1465 001d 16000000 		.4byte	.LVL5
+ 1466 0021 0100     		.2byte	0x1
+ 1467 0023 50       		.byte	0x50
+ 1468 0024 16000000 		.4byte	.LVL5
+ 1469 0028 2A000000 		.4byte	.LFE57
+ 1470 002c 0400     		.2byte	0x4
+ 1471 002e F3       		.byte	0xf3
+ 1472 002f 01       		.uleb128 0x1
+ 1473 0030 50       		.byte	0x50
+ 1474 0031 9F       		.byte	0x9f
+ 1475 0032 00000000 		.4byte	0
+ 1476 0036 00000000 		.4byte	0
+ 1477              	.LLST1:
+ 1478 003a 00000000 		.4byte	.LVL0
+ 1479 003e 09000000 		.4byte	.LVL2-1
+ 1480 0042 0100     		.2byte	0x1
+ 1481 0044 51       		.byte	0x51
+ 1482 0045 09000000 		.4byte	.LVL2-1
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 42
+
+
+ 1483 0049 14000000 		.4byte	.LVL4
+ 1484 004d 0400     		.2byte	0x4
+ 1485 004f F3       		.byte	0xf3
+ 1486 0050 01       		.uleb128 0x1
+ 1487 0051 51       		.byte	0x51
+ 1488 0052 9F       		.byte	0x9f
+ 1489 0053 14000000 		.4byte	.LVL4
+ 1490 0057 19000000 		.4byte	.LVL6-1
+ 1491 005b 0100     		.2byte	0x1
+ 1492 005d 51       		.byte	0x51
+ 1493 005e 19000000 		.4byte	.LVL6-1
+ 1494 0062 2A000000 		.4byte	.LFE57
+ 1495 0066 0400     		.2byte	0x4
+ 1496 0068 F3       		.byte	0xf3
+ 1497 0069 01       		.uleb128 0x1
+ 1498 006a 51       		.byte	0x51
+ 1499 006b 9F       		.byte	0x9f
+ 1500 006c 00000000 		.4byte	0
+ 1501 0070 00000000 		.4byte	0
+ 1502              	.LLST2:
+ 1503 0074 14000000 		.4byte	.LVL4
+ 1504 0078 16000000 		.4byte	.LVL5
+ 1505 007c 0100     		.2byte	0x1
+ 1506 007e 50       		.byte	0x50
+ 1507 007f 00000000 		.4byte	0
+ 1508 0083 00000000 		.4byte	0
+ 1509              	.LLST3:
+ 1510 0087 14000000 		.4byte	.LVL4
+ 1511 008b 19000000 		.4byte	.LVL6-1
+ 1512 008f 0100     		.2byte	0x1
+ 1513 0091 51       		.byte	0x51
+ 1514 0092 19000000 		.4byte	.LVL6-1
+ 1515 0096 22000000 		.4byte	.LVL8
+ 1516 009a 0400     		.2byte	0x4
+ 1517 009c F3       		.byte	0xf3
+ 1518 009d 01       		.uleb128 0x1
+ 1519 009e 51       		.byte	0x51
+ 1520 009f 9F       		.byte	0x9f
+ 1521 00a0 00000000 		.4byte	0
+ 1522 00a4 00000000 		.4byte	0
+ 1523              	.LLST4:
+ 1524 00a8 00000000 		.4byte	.LVL10
+ 1525 00ac 04000000 		.4byte	.LVL11
+ 1526 00b0 0100     		.2byte	0x1
+ 1527 00b2 50       		.byte	0x50
+ 1528 00b3 04000000 		.4byte	.LVL11
+ 1529 00b7 08000000 		.4byte	.LFE58
+ 1530 00bb 0400     		.2byte	0x4
+ 1531 00bd F3       		.byte	0xf3
+ 1532 00be 01       		.uleb128 0x1
+ 1533 00bf 50       		.byte	0x50
+ 1534 00c0 9F       		.byte	0x9f
+ 1535 00c1 00000000 		.4byte	0
+ 1536 00c5 00000000 		.4byte	0
+ 1537              	.LLST5:
+ 1538 00c9 00000000 		.4byte	.LVL13
+ 1539 00cd 02000000 		.4byte	.LVL14
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 43
+
+
+ 1540 00d1 0100     		.2byte	0x1
+ 1541 00d3 50       		.byte	0x50
+ 1542 00d4 02000000 		.4byte	.LVL14
+ 1543 00d8 06000000 		.4byte	.LFE59
+ 1544 00dc 0400     		.2byte	0x4
+ 1545 00de F3       		.byte	0xf3
+ 1546 00df 01       		.uleb128 0x1
+ 1547 00e0 50       		.byte	0x50
+ 1548 00e1 9F       		.byte	0x9f
+ 1549 00e2 00000000 		.4byte	0
+ 1550 00e6 00000000 		.4byte	0
+ 1551              	.LLST6:
+ 1552 00ea 00000000 		.4byte	.LVL16
+ 1553 00ee 02000000 		.4byte	.LVL17
+ 1554 00f2 0100     		.2byte	0x1
+ 1555 00f4 50       		.byte	0x50
+ 1556 00f5 02000000 		.4byte	.LVL17
+ 1557 00f9 04000000 		.4byte	.LFE60
+ 1558 00fd 0400     		.2byte	0x4
+ 1559 00ff F3       		.byte	0xf3
+ 1560 0100 01       		.uleb128 0x1
+ 1561 0101 50       		.byte	0x50
+ 1562 0102 9F       		.byte	0x9f
+ 1563 0103 00000000 		.4byte	0
+ 1564 0107 00000000 		.4byte	0
+ 1565              	.LLST7:
+ 1566 010b 00000000 		.4byte	.LVL18
+ 1567 010f 2B000000 		.4byte	.LVL24-1
+ 1568 0113 0100     		.2byte	0x1
+ 1569 0115 50       		.byte	0x50
+ 1570 0116 2B000000 		.4byte	.LVL24-1
+ 1571 011a 3C000000 		.4byte	.LFE61
+ 1572 011e 0400     		.2byte	0x4
+ 1573 0120 F3       		.byte	0xf3
+ 1574 0121 01       		.uleb128 0x1
+ 1575 0122 50       		.byte	0x50
+ 1576 0123 9F       		.byte	0x9f
+ 1577 0124 00000000 		.4byte	0
+ 1578 0128 00000000 		.4byte	0
+ 1579              	.LLST8:
+ 1580 012c 00000000 		.4byte	.LVL18
+ 1581 0130 12000000 		.4byte	.LVL19
+ 1582 0134 0100     		.2byte	0x1
+ 1583 0136 51       		.byte	0x51
+ 1584 0137 12000000 		.4byte	.LVL19
+ 1585 013b 16000000 		.4byte	.LVL20
+ 1586 013f 0400     		.2byte	0x4
+ 1587 0141 F3       		.byte	0xf3
+ 1588 0142 01       		.uleb128 0x1
+ 1589 0143 51       		.byte	0x51
+ 1590 0144 9F       		.byte	0x9f
+ 1591 0145 16000000 		.4byte	.LVL20
+ 1592 0149 1A000000 		.4byte	.LVL21
+ 1593 014d 0100     		.2byte	0x1
+ 1594 014f 51       		.byte	0x51
+ 1595 0150 1A000000 		.4byte	.LVL21
+ 1596 0154 3C000000 		.4byte	.LFE61
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 44
+
+
+ 1597 0158 0100     		.2byte	0x1
+ 1598 015a 55       		.byte	0x55
+ 1599 015b 00000000 		.4byte	0
+ 1600 015f 00000000 		.4byte	0
+ 1601              	.LLST9:
+ 1602 0163 26000000 		.4byte	.LVL22
+ 1603 0167 28000000 		.4byte	.LVL23
+ 1604 016b 0700     		.2byte	0x7
+ 1605 016d 74       		.byte	0x74
+ 1606 016e 00       		.sleb128 0
+ 1607 016f 0A       		.byte	0xa
+ 1608 0170 FFFF     		.2byte	0xffff
+ 1609 0172 1A       		.byte	0x1a
+ 1610 0173 9F       		.byte	0x9f
+ 1611 0174 28000000 		.4byte	.LVL23
+ 1612 0178 3C000000 		.4byte	.LFE61
+ 1613 017c 0700     		.2byte	0x7
+ 1614 017e 74       		.byte	0x74
+ 1615 017f 01       		.sleb128 1
+ 1616 0180 0A       		.byte	0xa
+ 1617 0181 FFFF     		.2byte	0xffff
+ 1618 0183 1A       		.byte	0x1a
+ 1619 0184 9F       		.byte	0x9f
+ 1620 0185 00000000 		.4byte	0
+ 1621 0189 00000000 		.4byte	0
+ 1622              	.LLST10:
+ 1623 018d 00000000 		.4byte	.LVL27
+ 1624 0191 0C000000 		.4byte	.LVL28
+ 1625 0195 0100     		.2byte	0x1
+ 1626 0197 50       		.byte	0x50
+ 1627 0198 0C000000 		.4byte	.LVL28
+ 1628 019c 16000000 		.4byte	.LVL29
+ 1629 01a0 0400     		.2byte	0x4
+ 1630 01a2 F3       		.byte	0xf3
+ 1631 01a3 01       		.uleb128 0x1
+ 1632 01a4 50       		.byte	0x50
+ 1633 01a5 9F       		.byte	0x9f
+ 1634 01a6 16000000 		.4byte	.LVL29
+ 1635 01aa 18000000 		.4byte	.LVL30
+ 1636 01ae 0100     		.2byte	0x1
+ 1637 01b0 50       		.byte	0x50
+ 1638 01b1 18000000 		.4byte	.LVL30
+ 1639 01b5 1A000000 		.4byte	.LFE62
+ 1640 01b9 0400     		.2byte	0x4
+ 1641 01bb F3       		.byte	0xf3
+ 1642 01bc 01       		.uleb128 0x1
+ 1643 01bd 50       		.byte	0x50
+ 1644 01be 9F       		.byte	0x9f
+ 1645 01bf 00000000 		.4byte	0
+ 1646 01c3 00000000 		.4byte	0
+ 1647              	.LLST11:
+ 1648 01c7 00000000 		.4byte	.LVL31
+ 1649 01cb 0F000000 		.4byte	.LVL32-1
+ 1650 01cf 0100     		.2byte	0x1
+ 1651 01d1 50       		.byte	0x50
+ 1652 01d2 0F000000 		.4byte	.LVL32-1
+ 1653 01d6 28000000 		.4byte	.LFE63
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 45
+
+
+ 1654 01da 0400     		.2byte	0x4
+ 1655 01dc F3       		.byte	0xf3
+ 1656 01dd 01       		.uleb128 0x1
+ 1657 01de 50       		.byte	0x50
+ 1658 01df 9F       		.byte	0x9f
+ 1659 01e0 00000000 		.4byte	0
+ 1660 01e4 00000000 		.4byte	0
+ 1661              	.LLST12:
+ 1662 01e8 00000000 		.4byte	.LVL36
+ 1663 01ec 0A000000 		.4byte	.LVL37
+ 1664 01f0 0100     		.2byte	0x1
+ 1665 01f2 50       		.byte	0x50
+ 1666 01f3 0A000000 		.4byte	.LVL37
+ 1667 01f7 1E000000 		.4byte	.LFE64
+ 1668 01fb 0400     		.2byte	0x4
+ 1669 01fd F3       		.byte	0xf3
+ 1670 01fe 01       		.uleb128 0x1
+ 1671 01ff 50       		.byte	0x50
+ 1672 0200 9F       		.byte	0x9f
+ 1673 0201 00000000 		.4byte	0
+ 1674 0205 00000000 		.4byte	0
+ 1675              	.LLST13:
+ 1676 0209 00000000 		.4byte	.LVL36
+ 1677 020d 0A000000 		.4byte	.LVL37
+ 1678 0211 0100     		.2byte	0x1
+ 1679 0213 51       		.byte	0x51
+ 1680 0214 0A000000 		.4byte	.LVL37
+ 1681 0218 16000000 		.4byte	.LVL39
+ 1682 021c 0100     		.2byte	0x1
+ 1683 021e 54       		.byte	0x54
+ 1684 021f 16000000 		.4byte	.LVL39
+ 1685 0223 1E000000 		.4byte	.LFE64
+ 1686 0227 0300     		.2byte	0x3
+ 1687 0229 74       		.byte	0x74
+ 1688 022a 7F       		.sleb128 -1
+ 1689 022b 9F       		.byte	0x9f
+ 1690 022c 00000000 		.4byte	0
+ 1691 0230 00000000 		.4byte	0
+ 1692              	.LLST14:
+ 1693 0234 00000000 		.4byte	.LVL36
+ 1694 0238 0A000000 		.4byte	.LVL37
+ 1695 023c 0100     		.2byte	0x1
+ 1696 023e 52       		.byte	0x52
+ 1697 023f 0A000000 		.4byte	.LVL37
+ 1698 0243 1E000000 		.4byte	.LFE64
+ 1699 0247 0900     		.2byte	0x9
+ 1700 0249 75       		.byte	0x75
+ 1701 024a 00       		.sleb128 0
+ 1702 024b 74       		.byte	0x74
+ 1703 024c 00       		.sleb128 0
+ 1704 024d 1C       		.byte	0x1c
+ 1705 024e 76       		.byte	0x76
+ 1706 024f 00       		.sleb128 0
+ 1707 0250 22       		.byte	0x22
+ 1708 0251 9F       		.byte	0x9f
+ 1709 0252 00000000 		.4byte	0
+ 1710 0256 00000000 		.4byte	0
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 46
+
+
+ 1711              	.LLST15:
+ 1712 025a 00000000 		.4byte	.LVL40
+ 1713 025e 0A000000 		.4byte	.LVL41
+ 1714 0262 0100     		.2byte	0x1
+ 1715 0264 50       		.byte	0x50
+ 1716 0265 0A000000 		.4byte	.LVL41
+ 1717 0269 1C000000 		.4byte	.LFE65
+ 1718 026d 0400     		.2byte	0x4
+ 1719 026f F3       		.byte	0xf3
+ 1720 0270 01       		.uleb128 0x1
+ 1721 0271 50       		.byte	0x50
+ 1722 0272 9F       		.byte	0x9f
+ 1723 0273 00000000 		.4byte	0
+ 1724 0277 00000000 		.4byte	0
+ 1725              	.LLST16:
+ 1726 027b 00000000 		.4byte	.LVL40
+ 1727 027f 0A000000 		.4byte	.LVL41
+ 1728 0283 0100     		.2byte	0x1
+ 1729 0285 51       		.byte	0x51
+ 1730 0286 0A000000 		.4byte	.LVL41
+ 1731 028a 0E000000 		.4byte	.LVL42
+ 1732 028e 0100     		.2byte	0x1
+ 1733 0290 54       		.byte	0x54
+ 1734 0291 0E000000 		.4byte	.LVL42
+ 1735 0295 1C000000 		.4byte	.LFE65
+ 1736 0299 0300     		.2byte	0x3
+ 1737 029b 74       		.byte	0x74
+ 1738 029c 7F       		.sleb128 -1
+ 1739 029d 9F       		.byte	0x9f
+ 1740 029e 00000000 		.4byte	0
+ 1741 02a2 00000000 		.4byte	0
+ 1742              	.LLST17:
+ 1743 02a6 00000000 		.4byte	.LVL40
+ 1744 02aa 0A000000 		.4byte	.LVL41
+ 1745 02ae 0100     		.2byte	0x1
+ 1746 02b0 52       		.byte	0x52
+ 1747 02b1 0A000000 		.4byte	.LVL41
+ 1748 02b5 0E000000 		.4byte	.LVL42
+ 1749 02b9 0900     		.2byte	0x9
+ 1750 02bb 75       		.byte	0x75
+ 1751 02bc 00       		.sleb128 0
+ 1752 02bd 74       		.byte	0x74
+ 1753 02be 00       		.sleb128 0
+ 1754 02bf 1C       		.byte	0x1c
+ 1755 02c0 76       		.byte	0x76
+ 1756 02c1 00       		.sleb128 0
+ 1757 02c2 22       		.byte	0x22
+ 1758 02c3 9F       		.byte	0x9f
+ 1759 02c4 0E000000 		.4byte	.LVL42
+ 1760 02c8 14000000 		.4byte	.LVL43
+ 1761 02cc 0B00     		.2byte	0xb
+ 1762 02ce 75       		.byte	0x75
+ 1763 02cf 00       		.sleb128 0
+ 1764 02d0 74       		.byte	0x74
+ 1765 02d1 00       		.sleb128 0
+ 1766 02d2 1C       		.byte	0x1c
+ 1767 02d3 76       		.byte	0x76
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 47
+
+
+ 1768 02d4 00       		.sleb128 0
+ 1769 02d5 22       		.byte	0x22
+ 1770 02d6 23       		.byte	0x23
+ 1771 02d7 01       		.uleb128 0x1
+ 1772 02d8 9F       		.byte	0x9f
+ 1773 02d9 14000000 		.4byte	.LVL43
+ 1774 02dd 1C000000 		.4byte	.LFE65
+ 1775 02e1 0900     		.2byte	0x9
+ 1776 02e3 75       		.byte	0x75
+ 1777 02e4 00       		.sleb128 0
+ 1778 02e5 74       		.byte	0x74
+ 1779 02e6 00       		.sleb128 0
+ 1780 02e7 1C       		.byte	0x1c
+ 1781 02e8 76       		.byte	0x76
+ 1782 02e9 00       		.sleb128 0
+ 1783 02ea 22       		.byte	0x22
+ 1784 02eb 9F       		.byte	0x9f
+ 1785 02ec 00000000 		.4byte	0
+ 1786 02f0 00000000 		.4byte	0
+ 1787              		.section	.debug_aranges,"",%progbits
+ 1788 0000 5C000000 		.4byte	0x5c
+ 1789 0004 0200     		.2byte	0x2
+ 1790 0006 00000000 		.4byte	.Ldebug_info0
+ 1791 000a 04       		.byte	0x4
+ 1792 000b 00       		.byte	0
+ 1793 000c 0000     		.2byte	0
+ 1794 000e 0000     		.2byte	0
+ 1795 0010 00000000 		.4byte	.LFB57
+ 1796 0014 2A000000 		.4byte	.LFE57-.LFB57
+ 1797 0018 00000000 		.4byte	.LFB58
+ 1798 001c 08000000 		.4byte	.LFE58-.LFB58
+ 1799 0020 00000000 		.4byte	.LFB59
+ 1800 0024 06000000 		.4byte	.LFE59-.LFB59
+ 1801 0028 00000000 		.4byte	.LFB60
+ 1802 002c 04000000 		.4byte	.LFE60-.LFB60
+ 1803 0030 00000000 		.4byte	.LFB61
+ 1804 0034 3C000000 		.4byte	.LFE61-.LFB61
+ 1805 0038 00000000 		.4byte	.LFB62
+ 1806 003c 1A000000 		.4byte	.LFE62-.LFB62
+ 1807 0040 00000000 		.4byte	.LFB63
+ 1808 0044 28000000 		.4byte	.LFE63-.LFB63
+ 1809 0048 00000000 		.4byte	.LFB64
+ 1810 004c 1E000000 		.4byte	.LFE64-.LFB64
+ 1811 0050 00000000 		.4byte	.LFB65
+ 1812 0054 1C000000 		.4byte	.LFE65-.LFB65
+ 1813 0058 00000000 		.4byte	0
+ 1814 005c 00000000 		.4byte	0
+ 1815              		.section	.debug_ranges,"",%progbits
+ 1816              	.Ldebug_ranges0:
+ 1817 0000 14000000 		.4byte	.LBB4
+ 1818 0004 22000000 		.4byte	.LBE4
+ 1819 0008 26000000 		.4byte	.LBB7
+ 1820 000c 2A000000 		.4byte	.LBE7
+ 1821 0010 00000000 		.4byte	0
+ 1822 0014 00000000 		.4byte	0
+ 1823 0018 00000000 		.4byte	.LFB57
+ 1824 001c 2A000000 		.4byte	.LFE57
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 48
+
+
+ 1825 0020 00000000 		.4byte	.LFB58
+ 1826 0024 08000000 		.4byte	.LFE58
+ 1827 0028 00000000 		.4byte	.LFB59
+ 1828 002c 06000000 		.4byte	.LFE59
+ 1829 0030 00000000 		.4byte	.LFB60
+ 1830 0034 04000000 		.4byte	.LFE60
+ 1831 0038 00000000 		.4byte	.LFB61
+ 1832 003c 3C000000 		.4byte	.LFE61
+ 1833 0040 00000000 		.4byte	.LFB62
+ 1834 0044 1A000000 		.4byte	.LFE62
+ 1835 0048 00000000 		.4byte	.LFB63
+ 1836 004c 28000000 		.4byte	.LFE63
+ 1837 0050 00000000 		.4byte	.LFB64
+ 1838 0054 1E000000 		.4byte	.LFE64
+ 1839 0058 00000000 		.4byte	.LFB65
+ 1840 005c 1C000000 		.4byte	.LFE65
+ 1841 0060 00000000 		.4byte	0
+ 1842 0064 00000000 		.4byte	0
+ 1843              		.section	.debug_line,"",%progbits
+ 1844              	.Ldebug_line0:
+ 1845 0000 98020000 		.section	.debug_str,"MS",%progbits,1
+ 1845      0200A201 
+ 1845      00000201 
+ 1845      FB0E0D00 
+ 1845      01010101 
+ 1846              	.LASF19:
+ 1847 0000 46535F4D 		.ascii	"FS_MMC_HW_X_EnableCS\000"
+ 1847      4D435F48 
+ 1847      575F585F 
+ 1847      456E6162 
+ 1847      6C654353 
+ 1848              	.LASF21:
+ 1849 0015 46535F4D 		.ascii	"FS_MMC_HW_X_IsWriteProtected\000"
+ 1849      4D435F48 
+ 1849      575F585F 
+ 1849      49735772 
+ 1849      69746550 
+ 1850              	.LASF24:
+ 1851 0032 77705374 		.ascii	"wpState\000"
+ 1851      61746500 
+ 1852              	.LASF41:
+ 1853 003a 656D4669 		.ascii	"emFile_1_Clock_1_SetDividerRegister\000"
+ 1853      6C655F31 
+ 1853      5F436C6F 
+ 1853      636B5F31 
+ 1853      5F536574 
+ 1854              	.LASF11:
+ 1855 005e 5F5F696E 		.ascii	"__int32_t\000"
+ 1855      7433325F 
+ 1855      7400
+ 1856              	.LASF46:
+ 1857 0068 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\emFile_1_MMC_HW_SPI.c\000"
+ 1857      6E657261 
+ 1857      7465645F 
+ 1857      536F7572 
+ 1857      63655C50 
+ 1858              	.LASF16:
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 49
+
+
+ 1859 0097 646F7562 		.ascii	"double\000"
+ 1859      6C6500
+ 1860              	.LASF13:
+ 1861 009e 75696E74 		.ascii	"uint8\000"
+ 1861      3800
+ 1862              	.LASF43:
+ 1863 00a4 656D4669 		.ascii	"emFile_1_Clock_1_Start\000"
+ 1863      6C655F31 
+ 1863      5F436C6F 
+ 1863      636B5F31 
+ 1863      5F537461 
+ 1864              	.LASF33:
+ 1865 00bb 70446174 		.ascii	"pData\000"
+ 1865      6100
+ 1866              	.LASF37:
+ 1867 00c1 656D4669 		.ascii	"emFile_1_SPI0_ReadTxStatus\000"
+ 1867      6C655F31 
+ 1867      5F535049 
+ 1867      305F5265 
+ 1867      61645478 
+ 1868              	.LASF15:
+ 1869 00dc 666C6F61 		.ascii	"float\000"
+ 1869      7400
+ 1870              	.LASF3:
+ 1871 00e2 756E7369 		.ascii	"unsigned char\000"
+ 1871      676E6564 
+ 1871      20636861 
+ 1871      7200
+ 1872              	.LASF22:
+ 1873 00f0 46535F4D 		.ascii	"FS_MMC_HW_X_SetMaxSpeed\000"
+ 1873      4D435F48 
+ 1873      575F585F 
+ 1873      5365744D 
+ 1873      61785370 
+ 1874              	.LASF49:
+ 1875 0108 73706944 		.ascii	"spiData\000"
+ 1875      61746100 
+ 1876              	.LASF0:
+ 1877 0110 73686F72 		.ascii	"short unsigned int\000"
+ 1877      7420756E 
+ 1877      7369676E 
+ 1877      65642069 
+ 1877      6E7400
+ 1878              	.LASF32:
+ 1879 0123 46535F4D 		.ascii	"FS_MMC_HW_X_Read\000"
+ 1879      4D435F48 
+ 1879      575F585F 
+ 1879      52656164 
+ 1879      00
+ 1880              	.LASF51:
+ 1881 0134 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1881      52784275 
+ 1881      66666572 
+ 1881      00
+ 1882              	.LASF47:
+ 1883 0141 433A5C55 		.ascii	"C:\\Users\\acer\\Desktop\\Saura-master\\2_Psoc\\Pla"
+ 1883      73657273 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 50
+
+
+ 1883      5C616365 
+ 1883      725C4465 
+ 1883      736B746F 
+ 1884 016e 74666F72 		.ascii	"tform\\Design02.cydsn\000"
+ 1884      6D5C4465 
+ 1884      7369676E 
+ 1884      30322E63 
+ 1884      7964736E 
+ 1885              	.LASF39:
+ 1886 0183 656D4669 		.ascii	"emFile_1_SPI0_WriteTxData\000"
+ 1886      6C655F31 
+ 1886      5F535049 
+ 1886      305F5772 
+ 1886      69746554 
+ 1887              	.LASF1:
+ 1888 019d 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1888      20756E73 
+ 1888      69676E65 
+ 1888      6420696E 
+ 1888      7400
+ 1889              	.LASF14:
+ 1890 01af 75696E74 		.ascii	"uint16\000"
+ 1890      313600
+ 1891              	.LASF27:
+ 1892 01b6 46535F4D 		.ascii	"FS_MMC_HW_X_SetVoltage\000"
+ 1892      4D435F48 
+ 1892      575F585F 
+ 1892      53657456 
+ 1892      6F6C7461 
+ 1893              	.LASF6:
+ 1894 01cd 73686F72 		.ascii	"short int\000"
+ 1894      7420696E 
+ 1894      7400
+ 1895              	.LASF26:
+ 1896 01d7 64697652 		.ascii	"divResult\000"
+ 1896      6573756C 
+ 1896      7400
+ 1897              	.LASF23:
+ 1898 01e1 4D617846 		.ascii	"MaxFreq\000"
+ 1898      72657100 
+ 1899              	.LASF31:
+ 1900 01e9 46535F4D 		.ascii	"FS_MMC_HW_X_IsPresent\000"
+ 1900      4D435F48 
+ 1900      575F585F 
+ 1900      49735072 
+ 1900      6573656E 
+ 1901              	.LASF2:
+ 1902 01ff 756E7369 		.ascii	"unsigned int\000"
+ 1902      676E6564 
+ 1902      20696E74 
+ 1902      00
+ 1903              	.LASF36:
+ 1904 020c 656D4669 		.ascii	"emFile_1_isInited0\000"
+ 1904      6C655F31 
+ 1904      5F697349 
+ 1904      6E697465 
+ 1904      643000
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 51
+
+
+ 1905              	.LASF10:
+ 1906 021f 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1906      206C6F6E 
+ 1906      6720756E 
+ 1906      7369676E 
+ 1906      65642069 
+ 1907              	.LASF29:
+ 1908 0236 566D6178 		.ascii	"Vmax\000"
+ 1908      00
+ 1909              	.LASF30:
+ 1910 023b 72657375 		.ascii	"result\000"
+ 1910      6C7400
+ 1911              	.LASF8:
+ 1912 0242 7369676E 		.ascii	"signed char\000"
+ 1912      65642063 
+ 1912      68617200 
+ 1913              	.LASF35:
+ 1914 024e 46535F4D 		.ascii	"FS_MMC_HW_X_Write\000"
+ 1914      4D435F48 
+ 1914      575F585F 
+ 1914      57726974 
+ 1914      6500
+ 1915              	.LASF12:
+ 1916 0260 696E7433 		.ascii	"int32_t\000"
+ 1916      325F7400 
+ 1917              	.LASF4:
+ 1918 0268 73697A65 		.ascii	"sizetype\000"
+ 1918      74797065 
+ 1918      00
+ 1919              	.LASF44:
+ 1920 0271 656D4669 		.ascii	"emFile_1_SPI0_Start\000"
+ 1920      6C655F31 
+ 1920      5F535049 
+ 1920      305F5374 
+ 1920      61727400 
+ 1921              	.LASF9:
+ 1922 0285 6C6F6E67 		.ascii	"long long int\000"
+ 1922      206C6F6E 
+ 1922      6720696E 
+ 1922      7400
+ 1923              	.LASF34:
+ 1924 0293 4E756D42 		.ascii	"NumBytes\000"
+ 1924      79746573 
+ 1924      00
+ 1925              	.LASF5:
+ 1926 029c 63686172 		.ascii	"char\000"
+ 1926      00
+ 1927              	.LASF28:
+ 1928 02a1 566D696E 		.ascii	"Vmin\000"
+ 1928      00
+ 1929              	.LASF18:
+ 1930 02a6 44617461 		.ascii	"Data\000"
+ 1930      00
+ 1931              	.LASF38:
+ 1932 02ab 656D4669 		.ascii	"emFile_1_SPI0_ReadRxData\000"
+ 1932      6C655F31 
+ 1932      5F535049 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 52
+
+
+ 1932      305F5265 
+ 1932      61645278 
+ 1933              	.LASF25:
+ 1934 02c4 66726571 		.ascii	"freq\000"
+ 1934      00
+ 1935              	.LASF40:
+ 1936 02c9 656D4669 		.ascii	"emFile_1_SPI0_CS_Write\000"
+ 1936      6C655F31 
+ 1936      5F535049 
+ 1936      305F4353 
+ 1936      5F577269 
+ 1937              	.LASF45:
+ 1938 02e0 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 1938      4320342E 
+ 1938      392E3320 
+ 1938      32303135 
+ 1938      30333033 
+ 1939 0313 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 1939      20726576 
+ 1939      6973696F 
+ 1939      6E203232 
+ 1939      31323230 
+ 1940 0346 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 1940      66756E63 
+ 1940      74696F6E 
+ 1940      2D736563 
+ 1940      74696F6E 
+ 1941              	.LASF7:
+ 1942 036e 6C6F6E67 		.ascii	"long int\000"
+ 1942      20696E74 
+ 1942      00
+ 1943              	.LASF50:
+ 1944 0377 656D4669 		.ascii	"emFile_1_Init\000"
+ 1944      6C655F31 
+ 1944      5F496E69 
+ 1944      7400
+ 1945              	.LASF42:
+ 1946 0385 656D4669 		.ascii	"emFile_1_Clock_1_Stop\000"
+ 1946      6C655F31 
+ 1946      5F436C6F 
+ 1946      636B5F31 
+ 1946      5F53746F 
+ 1947              	.LASF17:
+ 1948 039b 556E6974 		.ascii	"Unit\000"
+ 1948      00
+ 1949              	.LASF20:
+ 1950 03a0 46535F4D 		.ascii	"FS_MMC_HW_X_DisableCS\000"
+ 1950      4D435F48 
+ 1950      575F585F 
+ 1950      44697361 
+ 1950      626C6543 
+ 1951              	.LASF48:
+ 1952 03b6 656D4669 		.ascii	"emFile_1_ReadWriteSPI\000"
+ 1952      6C655F31 
+ 1952      5F526561 
+ 1952      64577269 
+ 1952      74655350 
+ARM GAS  C:\Users\acer\AppData\Local\Temp\ccwKh1cH.s 			page 53
+
+
+ 1953              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

@@ -7,5 +7,6 @@
 #define Analog__DISABLED 1u
 #define Communication_On_Board__DISABLED 1u
 #define Com_CAN__DISABLED 1u
+#define USB__DISABLED 1u
 
 #endif /* INCLUDED_CYDISABLEDSHEETS_H */

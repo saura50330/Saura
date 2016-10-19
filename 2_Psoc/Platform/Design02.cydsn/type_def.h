@@ -14,13 +14,20 @@
 #define	TYPE_DEF_H
 typedef unsigned char _UBYTE;
 typedef unsigned char _UINT8;
+typedef unsigned char uint8;
+    
 typedef signed char _SBYTE;
 typedef signed char _SINT8;
 
-typedef unsigned int _UINT16;
-typedef signed int _SINT16;
+
+typedef unsigned short int _UINT16;
+
+    
+typedef signed short int _SINT16;
 
 typedef unsigned long int _UINT32;
+typedef unsigned long int uint32;
+    
 typedef signed long int _SINT32;
 
 

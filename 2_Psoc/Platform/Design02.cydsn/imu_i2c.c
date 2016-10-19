@@ -9,36 +9,60 @@
  *
  * ========================================
 */
+
+// read example @ http://www.lucidarme.me/?p=5057
 #include "I2C_1.h"
 #include "common.h"
+
+//PressureVal     resolution in 1 pascal / bit
+// TemperatureVal resolution is 0.1 deg c /bit
+// AltitudeVal     0.01 m resolution
+   
 #if(IMU_SENSOR==ENABLE)
-    
+#include <math.h>    
 #include "imu_i2c.h"
-#include <math.h>
+
+// I2C manager variables
+volatile uint8 stI2CMgr;
+static _UBYTE rx_Slv_add,temp_rx_slv_reg,rx_Slv_dta_lnt; // taperory value for rx function of i2c 
+_UBYTE *rx_rd_data_ptr;
+
+// IMU variables
+_UINT8 Gyro_Temp_Acc_Read_Data[14]; // stores real time acc, die temp,gyro values receved from i2c
+_SINT32 OutBuffer[3] = {0,0,0}; // stores integrated gro values
+_SINT16 InBuffer[3] = {0,0,0};  // stores temperory gyro data 
+
+// manger states
+_UINT8 st_IMU;  // keeps status of initialisation state machine
+_UINT8 st_Read; // store state machine value 
+
+// gyro globles
+ MPU9250_TypeDef MPU9250_Offset={0,0,0};  // stores ofset perameter for 3 axis of gyro
+ MPU9250_AvgTypeDef MPU9250_Filter_Gyro[3],MPU9250_Filter_Acc[3],MPU9250_Filter_Mag[3];  // buffer and index for gyro    
+_SINT16 gyro[3];
+
+//magneto
+MPU9250_TypeDef_Off MPU9250_Magn_Offset={0,0,0};
+_UINT8 Mag_Read_Data[7]; // stores magcompas data received and error status
+    
+// complex function variable for angle calculation
+ volatile float q0, q1, q2, q3; 
 
 // final values of interest
 float MotionVal[9];    // contains final gyro acc,mag values
 float angles[3];       // contains final pich yow roll
-_SINT32 PressureVal = 0, TemperatureVal = 0, AltitudeVal = 0; // stores final values of all
-  
-// complex function
-volatile float q0, q1, q2, q3; 
 
-// manger states
-static _UINT8 st_IMU;  // keeps status of initialisation state machine
-static _UINT8 st_Read; // store state machine value 
-      
-unsigned char BUF[10];
+// pressure sensor fglobles
+_SINT32 Pressure0 = MSLP; // pressure at sea level 
+_SINT32 PressureVal, TemperatureVal, AltitudeVal; // stores final values of all
+_UINT8 Alt_Read_Data[2][3]; // stores temperature data [0][] and pressure data [1][]
+_SINT16 AC1, AC2, AC3, B1, B2, MB, MC, MD, _oss;  
+_UINT16 AC4, AC5, AC6;
+_SINT32 B5, UT, UP;
 
-MPU9250_TypeDef_Off MPU9250_Magn_Offset={0,0,0};
+_UINT8 calc_count,calc_count2; // keeps counter value while calculating average
+const uint8 test_1 =0xD0;  // test register value for pressure sensor, on read shuld give data 0x55
 
-
-
-
-
- 
-uint8 stI2CMgr;
- static _UBYTE rx_Slv_add,temp_rx_slv_reg,*rx_rd_data_ptr,rx_Slv_dta_lnt; // taperory value for rx function of i2c 
 void I2C_Mgr(void) // 1ms task
 {
     static uint8 i2c_timeout;
@@ -47,7 +71,7 @@ void I2C_Mgr(void) // 1ms task
         case WAIT_FOR_TX: 
         if(0u != (I2C_1_MasterStatus() & I2C_1_MSTAT_WR_CMPLT))
         {
-         stI2CMgr=IDLE;
+            stI2CMgr=IDLE;
             i2c_timeout=0;
         }
         else  // exception handling
@@ -55,43 +79,44 @@ void I2C_Mgr(void) // 1ms task
            i2c_timeout++;
            if(i2c_timeout>MAX_WR_WAIT)
            {
-            stI2CMgr=IDLE;
+            stI2CMgr=Tx_ERR;
            }
         }
         break;
         case START_RECEIVE_SEQ_WR_REG:
-        if(0u != (I2C_1_MasterStatus() & I2C_1_MSTAT_WR_CMPLT))
-        {
-            I2C_1_MasterClearStatus();
-            I2C_1_MasterReadBuf(rx_Slv_add, rx_rd_data_ptr, rx_Slv_dta_lnt, I2C_1_MODE_REPEAT_START);
-        
-            stI2CMgr=START_RECEIVE_SEQ_RD_DATA;
-            i2c_timeout=0;
-        }
-        else  // exception handling
-        {
-           i2c_timeout++;
-           if(i2c_timeout>MAX_WR_WAIT)
-           {
-            stI2CMgr=IDLE;
-           }
-        }
-        
+                if(0u != (I2C_1_MasterStatus() & I2C_1_MSTAT_WR_CMPLT))
+                {
+                    // I2C_1_MasterClearStatus();
+                    I2C_1_MasterReadBuf(rx_Slv_add, rx_rd_data_ptr, rx_Slv_dta_lnt, I2C_1_MODE_REPEAT_START);
+                
+                    stI2CMgr=START_RECEIVE_SEQ_RD_DATA;
+                    i2c_timeout=0;
+                }
+                else  // exception handling
+                {
+                   i2c_timeout++;
+                   if(i2c_timeout>MAX_WR_WAIT)
+                   {
+                        stI2CMgr=Tx_ERR;
+                   }
+                }
+                
         break;
         case START_RECEIVE_SEQ_RD_DATA:
-         if(0u != (I2C_1_MasterStatus() & I2C_1_MSTAT_RD_CMPLT))
-        {
-          stI2CMgr=IDLE;
-          i2c_timeout=0;
-        }
-        else  // exception handling
-        {
-           i2c_timeout++;
-           if(i2c_timeout>MAX_RD_WAIT)
-           {
-            stI2CMgr=IDLE;
-           }  
-        }
+             if(0u != (I2C_1_MasterStatus() & I2C_1_MSTAT_RD_CMPLT))
+            {
+              stI2CMgr=IDLE;
+              i2c_timeout=0;
+            }
+            else  // exception handling
+            {
+               i2c_timeout++;
+               if(i2c_timeout>MAX_RD_WAIT)
+               {
+                stI2CMgr=IDLE;
+               }  
+            }
+        break;
         case WAIT_FOR_RX:
         if(0u != (I2C_1_MasterStatus() & I2C_1_MSTAT_RD_CMPLT))
         {
@@ -107,28 +132,30 @@ void I2C_Mgr(void) // 1ms task
            }  
         }
         break;
+        case Tx_ERR: break;
         case IDLE:
         default: stI2CMgr=IDLE;break;
     }
     
 }
-uint8 I2C_WRITE(_UINT8 SaveAdress,_UINT8 *wrData, _UINT8 Data_length) // sends bytes to slave
+_UBYTE I2C_WRITE(_UINT8 SaveAdress,_UINT8 *wrData, _UINT8 Data_length) // sends bytes to slave
 {
     if(stI2CMgr==IDLE)
     {
       I2C_1_MasterClearStatus(); /* Clear any previous status */
       I2C_1_MasterWriteBuf(SaveAdress,wrData, Data_length, I2C_1_MODE_COMPLETE_XFER);
-      stI2CMgr=WAIT_FOR_RX;    
+      stI2CMgr=WAIT_FOR_TX;    
 	  return(1);
     }
 	else
 	{
-	  return(0);
+	  
+        return(0);
 	}
 }
 
 
-uint8 I2C_READ(_UINT8 SaveAdress,_UINT8 SaveReg,_UINT8 *rdData, _UINT8 Data_length) // sends bytes to slave
+_UBYTE I2C_READ(_UINT8 SaveAdress,_UINT8 SaveReg,_UINT8 *rdData, _UINT8 Data_length) // sends bytes to slave
 {
   
     
@@ -152,76 +179,88 @@ uint8 I2C_READ(_UINT8 SaveAdress,_UINT8 SaveReg,_UINT8 *rdData, _UINT8 Data_leng
 	}
 }
 
-// gyro globles
- MPU9250_TypeDef MPU9250_Offset={0,0,0};  // stores ofset perameter for 3 axis of gyro
- MPU9250_AvgTypeDef MPU9250_Filter[3];  // buffer and index for gyro
- static _UINT8 Gyro_Read_Data[6]; // stores real time gyro values receved from i2c
- static _SINT32 OutBuffer[3] = {0,0,0}; // stores integrated gro values
-
-// pressure sensor fglobles
- static _UINT8 Alt_Read_Data[2][3]; // stores temperature data [0][] and pressure data [1][]
-     
-_SINT16 AC1, AC2, AC3, B1, B2, MB, MC, MD, _oss;  
- _UINT16 AC4, AC5, AC6;
- _SINT32 B5, UT, UP;
- _SINT32 Pressure0 = MSLP; // pressure at sea level
- static _SINT16 gyro[3];
 
 void MPU9250_Init(void) // should be called when os is running 50 ms task
 {
-     static _UINT8 calc_count; // keeps counter value while calculating average
     
-    // gyro variables
-    
-	_SINT16 InBuffer[3] = {0,0,0};  // stores real time combined gyro values
-    _SINT16 gyro[3];
     static _SINT32	TempGx = 0, TempGy = 0, TempGz = 0; // stores added gyrovalue for avraging purpose
 	
     // pressure sensor variables
     static _UINT8 Pres_Read_data[22]; // stores temporory pressure sensor data
     static _SINT32 Sum = 0;
-    static _UINT8 reg_count; // stores count vaue for rx register read
-    float Temp = 0.0f;
+   // static _UINT8 reg_count; // stores count vaue for rx register read
+   // float Temp = 0.0f;
     
     _UINT8 i;  // for for loop purpose
    
-      
+    static _UBYTE Gyro_Temp_Check_Data;  
 	switch(st_IMU)
 	{
-		case IMU_INIT:	
-					   if(I2C_WRITE(GYRO_ADDRESS, &Gyro_Calib_Data[0][0], 10))  // send first 10 bytes for initialisation
+		case IMU_INIT:	// below case configures gyro and accelrometer
+					    if(I2C_WRITE(GYRO_ADDRESS, &Gyro_Calib_Data[calc_count][0], 2))  // send first 10 bytes for initialisation
 						{
-						  st_IMU=IMU_CALIB_READ; 
+						    calc_count++;
+                            
+                            if(calc_count>=6)
+                            {
+                               // st_IMU=IMU_INIT_CHECK; 
+                                st_IMU=IMU_INIT_CHECK;
+                                calc_count=0;
+                            }
 						}	
-						break;
-	    case IMU_CALIB_READ: if(I2C_READ(GYRO_ADDRESS,Gyro_Reg[reg_count],&Gyro_Read_Data[reg_count],1))  // read all gyro values in Gyro_Calib_data 
-						   {
-						    if(reg_count>=5)
-                            {
-                                st_IMU=IMU_CALIB_CALC;
-                                reg_count=0;
-                            }
-                            else
-                            {
-                              reg_count=reg_count+1;
-                            }
-					       }
-						   break;
+                        // configur 20mhz as internal oscillator
+                        // gyro, accelro resolutions
+                       	break;
+                        
+        case IMU_INIT_CHECK: 
+                           // check last write data   
+                           if(I2C_READ(GYRO_ADDRESS,0x37,&Gyro_Temp_Check_Data,1))  // read all gyro values in Gyro_Calib_data 
+						   { 
+                             st_IMU=IMU_CALIB_READ;    
+                           }
+						   break;                       
+                        case IMU_CALIB_READ:/*
+                        if(I2C_READ(GYRO_ADDRESS,Gyro_Temp_Acc_Reg[calc_count2+8],&Gyro_Temp_Acc_Read_Data[calc_count2*2+8],2))  // read all gyro values in Gyro_Calib_data 
+						   { 
+                                 if(Gyro_Temp_Check_Data==BYPASS_EN)// config check ok, by reading last byte written
+                                 {
+                                    calc_count2++;
+                                    if(calc_count2>=3)
+                                    {
+                                        st_IMU=IMU_CALIB_CALC;   
+                                        calc_count2=0;
+                                        //  DiagMgr.ErrSt= clear IMU error bit
+                                    }
+                                 }                                
+                                 else
+                                 {
+                                    st_IMU=IMU_INIT;
+                                   //  DiagMgr.ErrSt= set IMU error bit
+                                 }                           
+                            }*/
+                           
+                           if(I2C_READ(GYRO_ADDRESS,Gyro_Temp_Acc_Reg[0],&Gyro_Temp_Acc_Read_Data[0],14))  // read all gyro values in Gyro_Calib_data 
+						   { 
+                             st_IMU=IMU_CALIB_CALC;   
+                            // to read temperature from raw value = =( temperature + 12412.0) / 340.0) OR (Tmp/340.00+36.53);;
+                           }
+						    break;
 		case IMU_CALIB_CALC: 
 							// read 32 gyro readings 
-						   // add them all and find average
-		                                  
-							if(stI2CMgr==IDLE)	 // if reading data is completed by I2C
-                            {
-								InBuffer[0]=(Gyro_Read_Data[1]<<8)|Gyro_Read_Data[0];
-								InBuffer[1]=(Gyro_Read_Data[3]<<8)|Gyro_Read_Data[2];
-								InBuffer[2]=(Gyro_Read_Data[5]<<8)|Gyro_Read_Data[4];
+						    // add them all and find average              
+							
+                            if(stI2CMgr==IDLE)	 // if reading data is completed by I2C
+                            { 
+                                InBuffer[0]=(Gyro_Temp_Acc_Read_Data[8]<<8)|Gyro_Temp_Acc_Read_Data[9];
+								InBuffer[1]=(Gyro_Temp_Acc_Read_Data[10]<<8)|Gyro_Temp_Acc_Read_Data[11];
+								InBuffer[2]=(Gyro_Temp_Acc_Read_Data[12]<<8)|Gyro_Temp_Acc_Read_Data[13];
 								
-								for(i = 0; i < 3; i ++)	
+                                for(i = 0; i < 3; i ++)	
 								{
-									MPU9250_CalAvgValue(&MPU9250_Filter[i].Index, MPU9250_Filter[i].AvgBuffer, InBuffer[i], OutBuffer + i);
+								   MPU9250_CalAvgValue(&MPU9250_Filter_Gyro[i].Index, MPU9250_Filter_Gyro[i].AvgBuffer, InBuffer[i], OutBuffer + i);
 								}
-								gyro[0] = *(OutBuffer + 0) - MPU9250_Offset.X;
+                                
+                                gyro[0] = *(OutBuffer + 0) - MPU9250_Offset.X;
 								gyro[1] = *(OutBuffer + 1) - MPU9250_Offset.Y;
 								gyro[2] = *(OutBuffer + 2) - MPU9250_Offset.Z;
 						        
@@ -230,7 +269,7 @@ void MPU9250_Init(void) // should be called when os is running 50 ms task
 								TempGz += gyro[2];
 						        
 								// do this 32 times
-							    if(calc_count<32)
+							    if(calc_count<31)
 								{
 								  st_IMU=IMU_CALIB_READ;
 								  calc_count++;
@@ -238,37 +277,63 @@ void MPU9250_Init(void) // should be called when os is running 50 ms task
 								else
 								{
 									calc_count=0;
-									st_IMU=IMU_CALIB_AVG;
+                                    // TODO: check the gyro offset value
+                                    // take average of all readings 
+        		                    MPU9250_Offset.X = TempGx >> 5;   // note : they are row offset values
+        		                    MPU9250_Offset.Y = TempGy >> 5;
+        		                    MPU9250_Offset.Z = TempGz >> 5;
+        		
+        		                    st_IMU=IMU_MAG;
 								}
 								
 							}
 							break;
-						 
-		case IMU_CALIB_AVG:
-        		// take average of all readings 
-        		MPU9250_Offset.X = TempGx >> 5;
-        		MPU9250_Offset.Y = TempGy >> 5;
-        		MPU9250_Offset.Z = TempGz >> 5;
-        		
-        		st_IMU=IMU_PRES;
-        		_oss = MODE_ULTRA_HIGHRES; // initialsie pressure sensor value
-    		break;
-	
+	    case IMU_MAG:
+					  if(I2C_WRITE(MAG_ADDRESS, &Mag_Calib_Data[0][0],2))   // select 14-bit output , Single measurement mode
+					  {
+						
+        		             st_IMU=READ_MAG;      
+					  }
+					 break; //MAG_ADDRESS,0x0A,0x01
+                    
+        		case READ_MAG: 
+					if(I2C_READ(MAG_ADDRESS,Mag_Reg[0], &Mag_Read_Data[0], 7))  // read all gyro values in Mag_Read_Data 
+					{				
+                         st_IMU=CALC_MAG;  
+					}
+					break;
+                    
+				case CALC_MAG: 
+					if(stI2CMgr==IDLE)	             
+					   {
+							if(Mag_Read_Data[6] & AK8963_STATUS_2_HOFL_BIT)
+                            {
+                             //Magnetic sensor overflow occurred print   
+                            }
+                            InBuffer[1]=(Mag_Read_Data[1]<<8)|Mag_Read_Data[0];   // byte seq is differant for magneto
+							InBuffer[0]=(Mag_Read_Data[3]<<8)|Mag_Read_Data[2];
+							InBuffer[2]=-((Mag_Read_Data[5]<<8)|Mag_Read_Data[4]);
+					
+							 for( i = 0; i < 3; i ++)	
+							{
+								MPU9250_CalAvgValue(&MPU9250_Filter_Mag[i].Index, MPU9250_Filter_Mag[i].AvgBuffer, InBuffer[i], OutBuffer + i);
+							} 
+                            MPU9250_Magn_Offset.X_Off_Err = *(OutBuffer + 0);
+							MPU9250_Magn_Offset.Y_Off_Err = *(OutBuffer + 1);  // TODO check what it is
+							MPU9250_Magn_Offset.Z_Off_Err = *(OutBuffer + 2);
+                            
+                            
+                             _oss = MODE_STANDARD; // initialsie pressure sensor value	 
+                              st_IMU=IMU_PRES;
+                            
+                       }     
+                            break;
 	    case IMU_PRES: 
       
             	// BMP180_ReadCalibrationData
-                if(I2C_READ(BMP180_ADDR,Pres_Reg[reg_count],&Pres_Read_data[reg_count*2],2))  // CAL_AC1 to MD see below
+                if(I2C_READ(BMP180_ADDR,Pres_Reg[0],&Pres_Read_data[0],22))  // CAL_AC1 to MD see below
             	{
-            	     if(reg_count>=10)
-                     {
-                        st_IMU=CALIB_PRES;
-                        reg_count=0;
-                     }
-                     else
-                     {
-                        reg_count=reg_count+1;
-                     }
-                    
+                        st_IMU=CALIB_PRES;    
             	}
         	break; 
             
@@ -332,7 +397,7 @@ void MPU9250_Init(void) // should be called when os is running 50 ms task
 					}
 					break;
 			
-	case READ_PRES:  
+	case READ_PRES:  // TODO: oos = 3 its high sampling rate and pressure calculation need 70 ms by sensor
 				if(I2C_READ(BMP180_ADDR, CONTROL_OUTPUT, &Alt_Read_Data[1][0],3))  // BMP180_ReadReg(CONTROL_OUTPUT, 3, &RegBuff[0]); 
 				{
 				   // read pressure
@@ -342,7 +407,7 @@ void MPU9250_Init(void) // should be called when os is running 50 ms task
 	case CALC_PRES : 
 		        if(stI2CMgr==IDLE)	               	   
 				{
-				   UP = (((_SINT32)Alt_Read_Data[1][0] << 16) + ((_SINT32)Alt_Read_Data[1][1] << 8) + ((_SINT32)Alt_Read_Data[1][2])) >> (8 -_oss); // uncompensated pressure value
+				   UP = ((((_SINT32)Alt_Read_Data[1][0] << 16) + ((_SINT32)Alt_Read_Data[1][1] << 8) + ((_SINT32)Alt_Read_Data[1][2])) >> (8 -_oss)); // uncompensated pressure value
 				   
                    BMP180_CalculateTruePressure(&PressureVal);
             	   BMP180_CalculateTrueTemperature(&TemperatureVal);
@@ -359,24 +424,25 @@ void MPU9250_Init(void) // should be called when os is running 50 ms task
                    }
                    else
                    {
-                    st_IMU=ALL_DONE;
-                    calc_count=0;
+                                PressureVal= Sum / 3;               
+                    	//Temp = (float)LOCAL_ADS_ALTITUDE / 4433000;
+                    	//Temp = (float)pow((1 - Temp), 5.255f);
+                    	//Pressure0 = (PressureVal - PRESSURE_OFFSET) / Temp;
+                        
+                        Pressure0=PressureVal; // may be solution for relative altitude
+                        q0 = 1.0f;  
+                      	q1 = 0.0f;
+                      	q2 = 0.0f;
+                      	q3 = 0.0f;
+                        st_IMU=INIT_COMP;
+                        // TODO: remove it from task once initialisation is complete
+                        
+                       calc_count=0;
                    }
                 
                 }
                 break;
-   case ALL_DONE:
-            PressureVal= Sum / 3;               
-        	Temp = (float)LOCAL_ADS_ALTITUDE / 4433000;
-        	Temp = (float)pow((1 - Temp), 5.255f);
-        	Pressure0 = (PressureVal - PRESSURE_OFFSET) / Temp;
-            q0 = 1.0f;  
-          	q1 = 0.0f;
-          	q2 = 0.0f;
-          	q3 = 0.0f;
-            st_IMU=INIT_COMP;
-            // TODO: remove it from task once initialisation is complete
-            break;
+  
     case INIT_COMP:
     case IDLE: 
     default:break;
@@ -388,141 +454,108 @@ void Read_From_ALL(void)
 {
     
     // accelrometer
-    static _UINT8 Acc_Read_Data[6]; // stores accelaration data received
-    static _SINT16 accel[3]={0,0,0}; 
-    // magnetometer
-    static _UINT8 Mag_Read_Data[6]; // stores magcompas data received
+     static _SINT16 accel[3]={0,0,0}; 
+    
     static _SINT16 magn[3];
     // pressure sens
     _SINT32 PVal,AVal, TVal;
     
-    _SINT16 InBuffer[3] = {0,0,0};  // stores temperory gyro data
-    
-    
+   
     static BMP180_AvgTypeDef BMP180_Filter[3];
-	static _UINT8 reg_count; // stores tx reg counts 
+	//static _UINT8 reg_count; // stores tx reg counts 
     
     _UBYTE i;
 			switch(st_Read)
 			{
 				case READ_GYRO: 
-					if(I2C_READ(GYRO_ADDRESS,Gyro_Reg[reg_count],&Gyro_Read_Data[reg_count],1))  // read all gyro values in Gyro_Calib_data 
-				    {
-						    if(reg_count>=5)
-                            {
-                                st_Read=CALC_GYRO;
-                                reg_count=0;
-                            }
-                            else
-                            {
-                              reg_count=reg_count+1;
-                            }
-					}
+					if(I2C_READ(GYRO_ADDRESS,Gyro_Temp_Acc_Reg[0],&Gyro_Temp_Acc_Read_Data[0],14))  // read all gyro values in Gyro_Calib_data 
+						   { 
+                             st_Read=CALC_GYRO;   
+                            // to read temperature from raw value = =( temperature + 12412.0) / 340.0) OR (Tmp/340.00+36.53);;
+                           }
+                    // TODO: check if all sensor on imu can be red in one shot in doc the is image to do that
 					break;
 				case CALC_GYRO: 
-					if(stI2CMgr==IDLE)	             
+					if(stI2CMgr==IDLE)              
 					   {
-							InBuffer[0]=(Gyro_Read_Data[1]<<8)|Gyro_Read_Data[0];
-							InBuffer[1]=(Gyro_Read_Data[3]<<8)|Gyro_Read_Data[2];
-							InBuffer[2]=(Gyro_Read_Data[5]<<8)|Gyro_Read_Data[4];
+							 // acclro meter calculation
+                            InBuffer[0]=(Gyro_Temp_Acc_Read_Data[0]<<8)|Gyro_Temp_Acc_Read_Data[1];
+							InBuffer[1]=(Gyro_Temp_Acc_Read_Data[2]<<8)|Gyro_Temp_Acc_Read_Data[3];
+							InBuffer[2]=(Gyro_Temp_Acc_Read_Data[4]<<8)|Gyro_Temp_Acc_Read_Data[5];
 					
 							for( i = 0; i < 3; i ++)	
 							{
-								MPU9250_CalAvgValue(&MPU9250_Filter[i].Index, MPU9250_Filter[i].AvgBuffer, InBuffer[i], OutBuffer + i);
+								MPU9250_CalAvgValue(&MPU9250_Filter_Acc[i].Index, MPU9250_Filter_Acc[i].AvgBuffer, InBuffer[i], OutBuffer + i);
 							}
+                           
+						   accel[0] = *(OutBuffer + 0);
+						   accel[1] = *(OutBuffer + 1);
+                           accel[2] = *(OutBuffer + 2);
+                        
+							
+							// temperatur read out : its die temeratur so not used
+                            
+                            // gyro meter calculation
+                            InBuffer[0]=(Gyro_Temp_Acc_Read_Data[8]<<8)|Gyro_Temp_Acc_Read_Data[9];
+							InBuffer[1]=(Gyro_Temp_Acc_Read_Data[10]<<8)|Gyro_Temp_Acc_Read_Data[11];
+							InBuffer[2]=(Gyro_Temp_Acc_Read_Data[12]<<8)|Gyro_Temp_Acc_Read_Data[13];
+					        for( i = 0; i < 3; i ++)	
+    						   {
+    							  MPU9250_CalAvgValue(&MPU9250_Filter_Gyro[i].Index, MPU9250_Filter_Gyro[i].AvgBuffer, InBuffer[i], OutBuffer + i);
+    						   }
+                        
 							gyro[0] = *(OutBuffer + 0) - MPU9250_Offset.X;
 							gyro[1] = *(OutBuffer + 1) - MPU9250_Offset.Y;
 							gyro[2] = *(OutBuffer + 2) - MPU9250_Offset.Z;
-							st_Read=READ_ACC;
+                            
+                           st_Read=READ_MAG;
+                           
 						}
 					 break;
-				case READ_ACC: 
-					if(I2C_READ(ACCEL_ADDRESS,Acc_Reg[reg_count], &Acc_Read_Data[reg_count],1))  // read all gyro values in Acc_Read_Data 
-					{
-                         if(reg_count>=5)
-                         {
-                            st_Read=CALC_ACC;
-                            reg_count=0;
-                         }
-                         else
-                         {
-                            reg_count=reg_count+1;
-                         }   
-						
-					}
-					break;
-				case CALC_ACC: 
-					if(stI2CMgr==IDLE)	             
-					   {
-							InBuffer[0]=(Acc_Read_Data[1]<<8)|Acc_Read_Data[0];
-							InBuffer[1]=(Acc_Read_Data[3]<<8)|Acc_Read_Data[2];
-							InBuffer[2]=(Acc_Read_Data[5]<<8)|Acc_Read_Data[4];
-					
-							for( i = 0; i < 3; i ++)	
-						   {
-							  MPU9250_CalAvgValue(&MPU9250_Filter[i].Index, MPU9250_Filter[i].AvgBuffer, InBuffer[i], OutBuffer + i);
-						   }
-						   accel[0] = *(OutBuffer + 0);
-						   accel[1] = *(OutBuffer + 1);
-						   accel[2] = *(OutBuffer + 2); 
-						   
-                           st_Read=BYPASS_GYRO;
-						}
-					  break;
-				case BYPASS_GYRO:   //  
-					 
-					  if(I2C_WRITE(GYRO_ADDRESS, &Gyro_Calib_Data[6][0],2))   //  GYRO_ADDRESS,0x37,0x02
-					  {
-							st_Read=START_MAG;  // swith to next case after 10 ms
-					  }
-					 break;
-				case START_MAG:
-					  if(I2C_WRITE(MAG_ADDRESS, &Mag_Calib_Data[0][0],2))   // read x axis mag
-					  {
-							st_Read=READ_MAG; 
-					  }
-					 break; //MAG_ADDRESS,0x0A,0x01
+           
 				case READ_MAG: 
-					if(I2C_READ(MAG_ADDRESS,Mag_Reg[reg_count], &Mag_Read_Data[reg_count], 1))  // read all gyro values in Mag_Read_Data 
-					{
-						if(reg_count>=5)
-                         {
-                            st_Read=CALC_MAG;
-                            reg_count=0;
-                         }
-                         else
-                         {
-                            reg_count=reg_count+1;
-                         } 	
-                   
+					if(I2C_READ(MAG_ADDRESS,0x00, &Mag_Read_Data[0], 1)) 
+                    //if(I2C_READ(MAG_ADDRESS,Mag_Reg[0], &Mag_Read_Data[0], 7))  // read all gyro values in Mag_Read_Data 
+					{				
+                         st_Read=CALC_MAG;  
 					}
 					break;
 				case CALC_MAG: 
 					if(stI2CMgr==IDLE)	             
 					   {
-							InBuffer[1]=(Mag_Read_Data[1]<<8)|Mag_Read_Data[0];   // byte seq is differant for magneto
+							if(Mag_Read_Data[6] & AK8963_STATUS_2_HOFL_BIT)
+                            {
+                             //Magnetic sensor overflow occurred print   
+                            }
+                            InBuffer[1]=(Mag_Read_Data[1]<<8)|Mag_Read_Data[0];   // byte seq is differant for magneto
 							InBuffer[0]=(Mag_Read_Data[3]<<8)|Mag_Read_Data[2];
 							InBuffer[2]=-((Mag_Read_Data[5]<<8)|Mag_Read_Data[4]);
 					
 							 for( i = 0; i < 3; i ++)	
 							{
-								MPU9250_CalAvgValue(&MPU9250_Filter[i].Index, MPU9250_Filter[i].AvgBuffer, InBuffer[i], OutBuffer + i);
+								MPU9250_CalAvgValue(&MPU9250_Filter_Mag[i].Index, MPU9250_Filter_Mag[i].AvgBuffer, InBuffer[i], OutBuffer + i);
 							} 
 							magn[0] = *(OutBuffer + 0)-MPU9250_Magn_Offset.X_Off_Err;
-							magn[1] = *(OutBuffer + 1)-MPU9250_Magn_Offset.Y_Off_Err;
+							magn[1] = *(OutBuffer + 1)-MPU9250_Magn_Offset.Y_Off_Err;  // TODO check what it is
 							magn[2] = *(OutBuffer + 2)-MPU9250_Magn_Offset.Z_Off_Err;
 							st_Read=SEL_TEMP;
 						}
 					  break;
 			   // altitube measurment sensor
-			   case SEL_TEMP: 
+			   case SEL_TEMP: ///TODO:  temperature measurment 1 reading per second is enough 
 					if(I2C_WRITE(BMP180_ADDR, &Alt_Calib_Data[0][0],2))  // CONTROL,READ_TEMPERATURE 
 					{
 							st_Read=READ_TEMP;
 					}
 					break;
 				case READ_TEMP: 
-					
+                   
+					/*if(I2C_READ(BMP180_ADDR,test_1, &Alt_Read_Data[0][0],1))
+					{
+                        // read pressure
+					   st_Read=CALC_TEMP;
+                    }*/
+                    
 					if(I2C_READ(BMP180_ADDR,CONTROL_OUTPUT, &Alt_Read_Data[0][0],2))
 					{
 					   // read pressure
@@ -557,7 +590,7 @@ void Read_From_ALL(void)
 			        if(stI2CMgr==IDLE)	               
 					   
 					{
-					    UP = (((_UINT32)Alt_Read_Data[0] << 16) + ((_UINT32)Alt_Read_Data[1] << 8) + ((_UINT32)Alt_Read_Data[2])) >> (8 -_oss); // uncompensated pressure value
+					    UP = (((_UINT32)Alt_Read_Data[1][0] << 16) + ((_UINT32)Alt_Read_Data[1][1] << 8) + ((_UINT32)Alt_Read_Data[1][2])) >> (8 -_oss); // uncompensated pressure value
 					    
                         BMP180_CalculateTruePressure(&PVal);
 						BMP180_CalAvgValue(&BMP180_Filter[0].Index, BMP180_Filter[0].AvgBuffer, PVal - PRESSURE_OFFSET, &PressureVal);
@@ -566,16 +599,20 @@ void Read_From_ALL(void)
 						BMP180_CalAvgValue(&BMP180_Filter[1].Index, BMP180_Filter[1].AvgBuffer, AVal, &AltitudeVal);
 
 						BMP180_CalculateTrueTemperature(&TVal);
-						BMP180_CalAvgValue(&BMP180_Filter[2].Index, BMP180_Filter[2].AvgBuffer, TVal, &TemperatureVal);
+						BMP180_CalAvgValue(&BMP180_Filter[2].Index, BMP180_Filter[2].AvgBuffer, TVal, &TemperatureVal); // TemperatureVal/0.1 = temp in deg c
 						
 						// do all angle measurments
 						MotionVal[0]=gyro[0]/32.8;
 						MotionVal[1]=gyro[1]/32.8;
-						MotionVal[2]=gyro[2]/32.8;
+						MotionVal[2]=gyro[2]/32.8;  // as sensitivity of gyro is selected as 32.8 
+                        
+                       // rawvalue_16*1000/32767 = deg/sec 
                         
 						MotionVal[3]=accel[0];
 						MotionVal[4]=accel[1];
 						MotionVal[5]=accel[2];
+                        
+                       // rawvalue_16*2/32767 = g 
                         
 						MotionVal[6]=magn[0];
 						MotionVal[7]=magn[1];
@@ -616,14 +653,18 @@ void MPU9250_CalAvgValue(_UINT8 *pIndex, _SINT16 *pAvgBuffer, _SINT16 InVal, _SI
 	uint8_t i;
 	
 	*(pAvgBuffer + ((*pIndex) ++)) = InVal;
-  	*pIndex &= 0x07;
+    // pAvgBuffer[pIndex[0]]=InVal;
+    // pIndex[0]++;
+    
+  	*pIndex &= 0x07;  // pIndex[0]=pIndex[0] & 0x07;
   	
   	*pOutVal = 0;
 	for(i = 0; i < 8; i ++) 
   	{
-    	*pOutVal += *(pAvgBuffer + i);
+    	*pOutVal += *(pAvgBuffer + i); ////      pOutVal[0]=pOutVal[0] + pAvgBuffer[i];
+        
   	}
-  	*pOutVal >>= 3;
+  	*pOutVal >>= 3; //pOutVal[0]=pOutVal[0] >> 3;
 }
 // IMU APllication layer
 //_SINT16 accel[3], gyro[3];
@@ -805,7 +846,7 @@ void BMP180_CalculateTruePressure(_SINT32 *pTruePressure)
   */
 void BMP180_CalculateAbsoluteAltitude(_SINT32 *pAltitude, _SINT32 PressureVal)
 {
-	*pAltitude = 4433000 * (1 - pow((PressureVal / (float)Pressure0), 0.1903)); 
+	*pAltitude = 4433000 * (1.0f - pow((PressureVal / (float)Pressure0), 0.1903f)); 
 }
 
 

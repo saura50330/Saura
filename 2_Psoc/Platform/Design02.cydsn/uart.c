@@ -13,8 +13,8 @@
 void Uart_Ini(void)
 {
   UART_1_Start();  
-  UART_1_EnableRxInt();
-  UART_1_EnableTxInt();
+  //UART_1_EnableRxInt();
+  //UART_1_EnableTxInt();
   
 }
 void Uart_DeIni(void)

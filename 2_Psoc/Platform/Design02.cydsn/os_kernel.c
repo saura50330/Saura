@@ -10,7 +10,7 @@
  * ========================================
 */
 #include <project.h>
-
+#include "common.h"
 #include "os_kernel_pub.h" /*private functions*/
 #include "os_kernel.h" /*private functions*/
 
@@ -110,6 +110,9 @@ inline void kernel(void)
 
 CY_ISR(Kernel_Pre_Emptiv_Timer_ISR)
 {
+    #if(IMU_SENSOR==ENABLE)
+        I2C_Mgr();
+    #endif
     // put premptive function here called every 1ms
 TMR_Os_Tmr_Pre_Emp_ReadStatusRegister(); // this is done to reset the isr
 }
@@ -342,13 +345,14 @@ void Os_Ini(void)
     
     // initialise  all ISR
     // Set ISR address in the interrupt vector table
-    ISR_Co_Op_10ms_StartEx(Co_Op_10ms_Interrupt);
-    //ISR_Pre_Emp_1ms_StartEx(Kernel_Pre_Emptiv_Timer_ISR);
-   
+     
+     I2C_1_Start();
+     ISR_Co_Op_10ms_StartEx(Co_Op_10ms_Interrupt);
+     ISR_Pre_Emp_1ms_StartEx(Kernel_Pre_Emptiv_Timer_ISR);
      TMR_Os_Tmr_Co_Op_Start();
-     //TMR_Os_Tmr_Co_Op_Stop();
+     TMR_Os_Tmr_Co_Op_Stop();
      TMR_Os_Tmr_Co_Op_Enable();
-	//TMR_Os_Tmr_Pre_Emp_Start();
+	 TMR_Os_Tmr_Pre_Emp_Start();
 }
 
 /* [] END OF FILE */

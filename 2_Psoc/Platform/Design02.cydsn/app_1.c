@@ -33,7 +33,7 @@ void app_test_led_uart_switch(void)
          {
             IMU_Command(IMU_CMD_START);
          } 
-    #endif
+      #endif
     
     Api_Led_Control(LED0,BLINK_500);
     

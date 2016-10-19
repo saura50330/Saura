@@ -63,8 +63,10 @@ const tFuncPtr Os_10ms_Task[] =
 	
 	//(void (*const)()) Uart_Manager,
 	//(void (*const)()) adc_updator,
-        
-	//(void (*const)()) Task1_10ms, 
+     #if(IMU_SENSOR==ENABLE)    
+	(void (*const)()) MPU9250_Init, 
+    (void (*const)()) Read_From_ALL,
+     #endif
 	//(void (*const)()) Task2_10ms, 
 	(void (*const)()) 0  // void zero is used for ending task 
 };
@@ -91,7 +93,8 @@ const tFuncPtr Os_10ms_Task[] =
 const tFuncPtr Os_200ms_Task[] = 
 {
 	//(void (*const)()) System_Status_Indicator, // syatwm led which blinks at differant frequency to indicate differant system status 0.4hz 1hz 2hz (1hz is normal, 0.5hz is error , 2hz to indicate system is normal and some application event accurd )
-	(void (*const)()) Led_Manager,
+	(void (*const)()) SDC_CardDetection,
+    (void (*const)()) Led_Manager,
 	(void (*const)()) 0  // void zero is used for ending task 
 };
 

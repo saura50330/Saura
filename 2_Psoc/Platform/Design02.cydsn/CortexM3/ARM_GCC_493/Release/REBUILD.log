@@ -1,3 +1,174 @@
---------------- Rebuild Started: 09/03/2016 22:43:30 Project: main.c, Configuration: ARM GCC 4.9-2015-q1-update Release ---------------
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/main.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\main.c -o .\CortexM3\ARM_GCC_493\Release\main.o
---------------- Rebuild Succeeded: 09/03/2016 22:43:30 ---------------
+--------------- Rebuild Started: 10/18/2016 23:22:36 Project: Design02, Configuration: ARM GCC 4.9-2015-q1-update Release ---------------
+Deleting file ".\CortexM3\ARM_GCC_493\Release\os_kernel.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\uart.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\dio.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\wifi.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\imu_i2c.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\bt_module.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\sd_card.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\lcd.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\main.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\app_1.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\cyfitter_cfg.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\cymetadata.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\CLK_Co_Op_Timer_Clock.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\TMR_Os_Tmr_Co_Op.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\TMR_Os_Tmr_Co_Op_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\TMR_Os_Tmr_Pre_Emp.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\TMR_Os_Tmr_Pre_Emp_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\CLK_pre_emp_timer_clock.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\ISR_Pre_Emp_1ms.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\Cm3Start.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\CyBootAsmGnu.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\CyDmac.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\CyFlash.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\CyLib.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\cyPm.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\CySpc.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\cyutils.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\UART_1.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\UART_1_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\UART_1_INT.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\UART_1_BOOT.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\UART_1_IntClock.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\System_Switch.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\System_LED.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\PWM_1.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\PWM_1_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\Clock_1.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\SERVO_1.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\SERVO_2.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\SDA_1.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\SCL_1.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\I2C_1.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\I2C_1_BOOT.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\I2C_1_INT.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\I2C_1_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\I2C_1_SLAVE.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\I2C_1_MASTER.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\ISR_Co_Op_10ms.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\emFile_1_ConfigMMC_SPI.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\emFile_1_MMC_HW_SPI.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\emFile_1_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\emFile_1_SPI0.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\emFile_1_SPI0_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\emFile_1_SPI0_INT.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\emFile_1_mosi0.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\emFile_1_Clock_1.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\emFile_1_miso0.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\emFile_1_sclk0.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\emFile_1_SPI0_CS.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\Pin_SD_Detect.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\D7.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\D6.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\D5.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\D4.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\E.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\RS.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\LCD1.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\LCD1_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\LCD1_Cntl_Port.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\Design02.hex"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\Design02.elf"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\Design02.map"
+Deleting file ".\Design02.cycdx"
+Deleting file ".\Design02.svd"
+Deleting file ".\Design02.rpt"
+Deleting file ".\Design02_timing.html"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\.deps\C_FILE.P"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\.deps\ARM_C_FILE.P"
+Deleting file ".\CortexM3\ARM_GCC_493\Release\.deps\GNU_ARM_ASM_FILE.P"
+cydsfit.exe -.appdatapath "C:\Users\acer\AppData\Local\Cypress Semiconductor\PSoC Creator\3.3" -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -p C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn\Design02.cyprj -d CY8C5888LTI-LP097 -s C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn\Generated_Source\PSoC5 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
+Elaborating Design...
+HDL Generation ...
+Synthesis ...
+Place and Route ...
+Tech mapping ...
+ADD: pft.M0040: information: The following 7 pin(s) will be assigned a location by the fitter: \emFile_1:miso0(0)\, \emFile_1:mosi0(0)\, \emFile_1:sclk0(0)\, \emFile_1:SPI0_CS(0)\, Pin_SD_Detect(0), SERVO_1(0), SERVO_2(0)
+Analog Placement ...
+Analog Routing ...
+Analog Code Generation ...
+Digital Placement ...
+Digital Routing ...
+Bitstream Generation ...
+Static timing analysis ...
+API Generation ...
+Dependency Generation ...
+Clean Temporary Files ...
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/os_kernel.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\os_kernel.c -o .\CortexM3\ARM_GCC_493\Release\os_kernel.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/uart.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\uart.c -o .\CortexM3\ARM_GCC_493\Release\uart.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/dio.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\dio.c -o .\CortexM3\ARM_GCC_493\Release\dio.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/wifi.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\wifi.c -o .\CortexM3\ARM_GCC_493\Release\wifi.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/imu_i2c.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\imu_i2c.c -o .\CortexM3\ARM_GCC_493\Release\imu_i2c.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/bt_module.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\bt_module.c -o .\CortexM3\ARM_GCC_493\Release\bt_module.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/sd_card.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\sd_card.c -o .\CortexM3\ARM_GCC_493\Release\sd_card.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/lcd.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\lcd.c -o .\CortexM3\ARM_GCC_493\Release\lcd.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/main.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\main.c -o .\CortexM3\ARM_GCC_493\Release\main.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/app_1.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\app_1.c -o .\CortexM3\ARM_GCC_493\Release\app_1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/cyfitter_cfg.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\cyfitter_cfg.c -o .\CortexM3\ARM_GCC_493\Release\cyfitter_cfg.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/cymetadata.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\cymetadata.c -o .\CortexM3\ARM_GCC_493\Release\cymetadata.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/CLK_Co_Op_Timer_Clock.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\CLK_Co_Op_Timer_Clock.c -o .\CortexM3\ARM_GCC_493\Release\CLK_Co_Op_Timer_Clock.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/TMR_Os_Tmr_Co_Op.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\TMR_Os_Tmr_Co_Op.c -o .\CortexM3\ARM_GCC_493\Release\TMR_Os_Tmr_Co_Op.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/TMR_Os_Tmr_Co_Op_PM.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\TMR_Os_Tmr_Co_Op_PM.c -o .\CortexM3\ARM_GCC_493\Release\TMR_Os_Tmr_Co_Op_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/TMR_Os_Tmr_Pre_Emp.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\TMR_Os_Tmr_Pre_Emp.c -o .\CortexM3\ARM_GCC_493\Release\TMR_Os_Tmr_Pre_Emp.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/TMR_Os_Tmr_Pre_Emp_PM.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\TMR_Os_Tmr_Pre_Emp_PM.c -o .\CortexM3\ARM_GCC_493\Release\TMR_Os_Tmr_Pre_Emp_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/CLK_pre_emp_timer_clock.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\CLK_pre_emp_timer_clock.c -o .\CortexM3\ARM_GCC_493\Release\CLK_pre_emp_timer_clock.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/ISR_Pre_Emp_1ms.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\ISR_Pre_Emp_1ms.c -o .\CortexM3\ARM_GCC_493\Release\ISR_Pre_Emp_1ms.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/Cm3Start.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\Cm3Start.c -o .\CortexM3\ARM_GCC_493\Release\Cm3Start.o
+arm-none-eabi-as.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -alh=.\CortexM3\ARM_GCC_493\Release/CyBootAsmGnu.lst -g -W -o .\CortexM3\ARM_GCC_493\Release\CyBootAsmGnu.o .\Generated_Source\PSoC5\CyBootAsmGnu.s
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/CyDmac.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\CyDmac.c -o .\CortexM3\ARM_GCC_493\Release\CyDmac.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/CyFlash.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\CyFlash.c -o .\CortexM3\ARM_GCC_493\Release\CyFlash.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/CyLib.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\CyLib.c -o .\CortexM3\ARM_GCC_493\Release\CyLib.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/cyPm.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\cyPm.c -o .\CortexM3\ARM_GCC_493\Release\cyPm.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/CySpc.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\CySpc.c -o .\CortexM3\ARM_GCC_493\Release\CySpc.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/cyutils.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\cyutils.c -o .\CortexM3\ARM_GCC_493\Release\cyutils.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/UART_1.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\UART_1.c -o .\CortexM3\ARM_GCC_493\Release\UART_1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/UART_1_PM.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\UART_1_PM.c -o .\CortexM3\ARM_GCC_493\Release\UART_1_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/UART_1_INT.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\UART_1_INT.c -o .\CortexM3\ARM_GCC_493\Release\UART_1_INT.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/UART_1_BOOT.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\UART_1_BOOT.c -o .\CortexM3\ARM_GCC_493\Release\UART_1_BOOT.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/UART_1_IntClock.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\UART_1_IntClock.c -o .\CortexM3\ARM_GCC_493\Release\UART_1_IntClock.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/System_Switch.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\System_Switch.c -o .\CortexM3\ARM_GCC_493\Release\System_Switch.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/System_LED.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\System_LED.c -o .\CortexM3\ARM_GCC_493\Release\System_LED.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/PWM_1.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\PWM_1.c -o .\CortexM3\ARM_GCC_493\Release\PWM_1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/PWM_1_PM.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\PWM_1_PM.c -o .\CortexM3\ARM_GCC_493\Release\PWM_1_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/Clock_1.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\Clock_1.c -o .\CortexM3\ARM_GCC_493\Release\Clock_1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/SERVO_1.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\SERVO_1.c -o .\CortexM3\ARM_GCC_493\Release\SERVO_1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/SERVO_2.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\SERVO_2.c -o .\CortexM3\ARM_GCC_493\Release\SERVO_2.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/SDA_1.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\SDA_1.c -o .\CortexM3\ARM_GCC_493\Release\SDA_1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/SCL_1.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\SCL_1.c -o .\CortexM3\ARM_GCC_493\Release\SCL_1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/I2C_1.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\I2C_1.c -o .\CortexM3\ARM_GCC_493\Release\I2C_1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/I2C_1_BOOT.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\I2C_1_BOOT.c -o .\CortexM3\ARM_GCC_493\Release\I2C_1_BOOT.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/I2C_1_INT.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\I2C_1_INT.c -o .\CortexM3\ARM_GCC_493\Release\I2C_1_INT.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/I2C_1_PM.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\I2C_1_PM.c -o .\CortexM3\ARM_GCC_493\Release\I2C_1_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/I2C_1_SLAVE.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\I2C_1_SLAVE.c -o .\CortexM3\ARM_GCC_493\Release\I2C_1_SLAVE.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/I2C_1_MASTER.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\I2C_1_MASTER.c -o .\CortexM3\ARM_GCC_493\Release\I2C_1_MASTER.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/ISR_Co_Op_10ms.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\ISR_Co_Op_10ms.c -o .\CortexM3\ARM_GCC_493\Release\ISR_Co_Op_10ms.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/emFile_1_ConfigMMC_SPI.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\emFile_1_ConfigMMC_SPI.c -o .\CortexM3\ARM_GCC_493\Release\emFile_1_ConfigMMC_SPI.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/emFile_1_MMC_HW_SPI.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\emFile_1_MMC_HW_SPI.c -o .\CortexM3\ARM_GCC_493\Release\emFile_1_MMC_HW_SPI.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/emFile_1_PM.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\emFile_1_PM.c -o .\CortexM3\ARM_GCC_493\Release\emFile_1_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/emFile_1_SPI0.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\emFile_1_SPI0.c -o .\CortexM3\ARM_GCC_493\Release\emFile_1_SPI0.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/emFile_1_SPI0_PM.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\emFile_1_SPI0_PM.c -o .\CortexM3\ARM_GCC_493\Release\emFile_1_SPI0_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/emFile_1_SPI0_INT.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\emFile_1_SPI0_INT.c -o .\CortexM3\ARM_GCC_493\Release\emFile_1_SPI0_INT.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/emFile_1_mosi0.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\emFile_1_mosi0.c -o .\CortexM3\ARM_GCC_493\Release\emFile_1_mosi0.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/emFile_1_Clock_1.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\emFile_1_Clock_1.c -o .\CortexM3\ARM_GCC_493\Release\emFile_1_Clock_1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/emFile_1_miso0.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\emFile_1_miso0.c -o .\CortexM3\ARM_GCC_493\Release\emFile_1_miso0.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/emFile_1_sclk0.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\emFile_1_sclk0.c -o .\CortexM3\ARM_GCC_493\Release\emFile_1_sclk0.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/emFile_1_SPI0_CS.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\emFile_1_SPI0_CS.c -o .\CortexM3\ARM_GCC_493\Release\emFile_1_SPI0_CS.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/Pin_SD_Detect.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\Pin_SD_Detect.c -o .\CortexM3\ARM_GCC_493\Release\Pin_SD_Detect.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/D7.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\D7.c -o .\CortexM3\ARM_GCC_493\Release\D7.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/D6.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\D6.c -o .\CortexM3\ARM_GCC_493\Release\D6.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/D5.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\D5.c -o .\CortexM3\ARM_GCC_493\Release\D5.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/D4.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\D4.c -o .\CortexM3\ARM_GCC_493\Release\D4.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/E.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\E.c -o .\CortexM3\ARM_GCC_493\Release\E.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/RS.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\RS.c -o .\CortexM3\ARM_GCC_493\Release\RS.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/LCD1.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\LCD1.c -o .\CortexM3\ARM_GCC_493\Release\LCD1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/LCD1_PM.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\LCD1_PM.c -o .\CortexM3\ARM_GCC_493\Release\LCD1_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\Inc\sd\emf32nOS -I.\Inc\sd -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Release/LCD1_Cntl_Port.lst -g -D NDEBUG -Wall -ffunction-sections -Os -ffat-lto-objects -c .\Generated_Source\PSoC5\LCD1_Cntl_Port.c -o .\CortexM3\ARM_GCC_493\Release\LCD1_Cntl_Port.o
+arm-none-eabi-ar.exe -rs .\CortexM3\ARM_GCC_493\Release\Design02.a .\CortexM3\ARM_GCC_493\Release\cyfitter_cfg.o .\CortexM3\ARM_GCC_493\Release\CLK_Co_Op_Timer_Clock.o .\CortexM3\ARM_GCC_493\Release\TMR_Os_Tmr_Co_Op.o .\CortexM3\ARM_GCC_493\Release\TMR_Os_Tmr_Co_Op_PM.o .\CortexM3\ARM_GCC_493\Release\TMR_Os_Tmr_Pre_Emp.o .\CortexM3\ARM_GCC_493\Release\TMR_Os_Tmr_Pre_Emp_PM.o .\CortexM3\ARM_GCC_493\Release\CLK_pre_emp_timer_clock.o .\CortexM3\ARM_GCC_493\Release\ISR_Pre_Emp_1ms.o .\CortexM3\ARM_GCC_493\Release\CyBootAsmGnu.o .\CortexM3\ARM_GCC_493\Release\CyDmac.o .\CortexM3\ARM_GCC_493\Release\CyFlash.o .\CortexM3\ARM_GCC_493\Release\CyLib.o .\CortexM3\ARM_GCC_493\Release\cyPm.o .\CortexM3\ARM_GCC_493\Release\CySpc.o .\CortexM3\ARM_GCC_493\Release\cyutils.o .\CortexM3\ARM_GCC_493\Release\UART_1.o .\CortexM3\ARM_GCC_493\Release\UART_1_PM.o .\CortexM3\ARM_GCC_493\Release\UART_1_INT.o .\CortexM3\ARM_GCC_493\Release\UART_1_BOOT.o .\CortexM3\ARM_GCC_493\Release\UART_1_IntClock.o .\CortexM3\ARM_GCC_493\Release\System_Switch.o .\CortexM3\ARM_GCC_493\Release\System_LED.o .\CortexM3\ARM_GCC_493\Release\PWM_1.o .\CortexM3\ARM_GCC_493\Release\PWM_1_PM.o .\CortexM3\ARM_GCC_493\Release\Clock_1.o .\CortexM3\ARM_GCC_493\Release\SERVO_1.o .\CortexM3\ARM_GCC_493\Release\SERVO_2.o .\CortexM3\ARM_GCC_493\Release\SDA_1.o .\CortexM3\ARM_GCC_493\Release\SCL_1.o .\CortexM3\ARM_GCC_493\Release\I2C_1.o .\CortexM3\ARM_GCC_493\Release\I2C_1_BOOT.o .\CortexM3\ARM_GCC_493\Release\I2C_1_INT.o .\CortexM3\ARM_GCC_493\Release\I2C_1_PM.o .\CortexM3\ARM_GCC_493\Release\I2C_1_SLAVE.o .\CortexM3\ARM_GCC_493\Release\I2C_1_MASTER.o .\CortexM3\ARM_GCC_493\Release\ISR_Co_Op_10ms.o .\CortexM3\ARM_GCC_493\Release\emFile_1_ConfigMMC_SPI.o .\CortexM3\ARM_GCC_493\Release\emFile_1_MMC_HW_SPI.o .\CortexM3\ARM_GCC_493\Release\emFile_1_PM.o .\CortexM3\ARM_GCC_493\Release\emFile_1_SPI0.o .\CortexM3\ARM_GCC_493\Release\emFile_1_SPI0_PM.o .\CortexM3\ARM_GCC_493\Release\emFile_1_SPI0_INT.o .\CortexM3\ARM_GCC_493\Release\emFile_1_mosi0.o .\CortexM3\ARM_GCC_493\Release\emFile_1_Clock_1.o .\CortexM3\ARM_GCC_493\Release\emFile_1_miso0.o .\CortexM3\ARM_GCC_493\Release\emFile_1_sclk0.o .\CortexM3\ARM_GCC_493\Release\emFile_1_SPI0_CS.o .\CortexM3\ARM_GCC_493\Release\Pin_SD_Detect.o .\CortexM3\ARM_GCC_493\Release\D7.o .\CortexM3\ARM_GCC_493\Release\D6.o .\CortexM3\ARM_GCC_493\Release\D5.o .\CortexM3\ARM_GCC_493\Release\D4.o .\CortexM3\ARM_GCC_493\Release\E.o .\CortexM3\ARM_GCC_493\Release\RS.o .\CortexM3\ARM_GCC_493\Release\LCD1.o .\CortexM3\ARM_GCC_493\Release\LCD1_PM.o .\CortexM3\ARM_GCC_493\Release\LCD1_Cntl_Port.o
+arm-none-eabi-ar.exe: creating .\CortexM3\ARM_GCC_493\Release\Design02.a
+arm-none-eabi-gcc.exe -Wl,--start-group -o .\CortexM3\ARM_GCC_493\Release\Design02.elf .\CortexM3\ARM_GCC_493\Release\os_kernel.o .\CortexM3\ARM_GCC_493\Release\uart.o .\CortexM3\ARM_GCC_493\Release\dio.o .\CortexM3\ARM_GCC_493\Release\wifi.o .\CortexM3\ARM_GCC_493\Release\imu_i2c.o .\CortexM3\ARM_GCC_493\Release\bt_module.o .\CortexM3\ARM_GCC_493\Release\sd_card.o .\CortexM3\ARM_GCC_493\Release\lcd.o .\CortexM3\ARM_GCC_493\Release\main.o .\CortexM3\ARM_GCC_493\Release\app_1.o .\CortexM3\ARM_GCC_493\Release\cymetadata.o .\CortexM3\ARM_GCC_493\Release\Cm3Start.o .\CortexM3\ARM_GCC_493\Release\Design02.a "C:\Program Files\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CortexM3\ARM_GCC_493\Release\CyComponentLibrary.a" -mcpu=cortex-m3 -mthumb -g -ffunction-sections -Os -l m -l emf32nosnlfn -L Generated_Source\PSoC5 -L .\Inc\sd\GCC -Wl,-Map,.\CortexM3\ARM_GCC_493\Release/Design02.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -Wl,--gc-sections -Wl,--end-group
+cyelftool.exe -C C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn\CortexM3\ARM_GCC_493\Release\Design02.elf --flash_row_size 256 --flash_size 262144
+cyelftool.exe -S C:\Users\acer\Desktop\Saura-master\2_Psoc\Platform\Design02.cydsn\CortexM3\ARM_GCC_493\Release\Design02.elf
+Flash used: 26624 of 262144 bytes (10.2 %).
+SRAM used: 7629 of 65536 bytes (11.6 %). Stack: 2048 bytes. Heap: 128 bytes.
+--------------- Rebuild Succeeded: 10/18/2016 23:24:13 ---------------
